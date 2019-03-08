@@ -8,7 +8,7 @@ import placeHolder from '../reducers/placeHolder'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 //Combines Reducers
 const rootReducer = combineReducers({
-  placeHolder: placeHolder
+  placeHolder: placeHolder  
 })
 
 //Creates Store
