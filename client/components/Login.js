@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
-
+import {connect} from 'react-redux'
+import {logInUser } from '../redux/thunks/users'
 
 class Login extends Component {
   state ={
@@ -15,18 +16,40 @@ class Login extends Component {
   }
 
   handleSubmit = async (event) => {
-    event.preventDefalt()
-
+    event.preventDefault()
+    try{
+      await this.props.logInUser({
+        userName: this.state.userName,
+        password: this.state.password
+      })
+      this.setState({
+        userName: '',
+        password: '',
+        logInErr: false
+      })
+    }catch(err){
+      console.log(err.status)
+      console.log(err)
+    }
   }
 
+  displayErrMessages(messages){
+    let finalMessage = ''
+    for (let i = 0; i < messages.length; i++){
+      finalMessage += `${i + 1}. ${messages[i]} ${'\n'}`
+    }
+      return finalMessage
+    }
+
   render(){
+    let logInErr = this.props.user.logInErr ? 'Username or Password Invalid. Please try again.' : ''
     return (
-      <form onSubmit={this.props.handleLogin}>
+      <form onSubmit={this.handleSubmit}>
       <div className="right-box">
         <h1 id="loginTitle">Log In</h1>
         <input type="text" className="loginInput" name="userName" placeholder="Username" onChange={this.handleChange} value={this.state.userName} />
         <input type="password" className="loginInput" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
-        {/* <div className="err-message">{logInErr}</div> */}
+        <div className="err-message">{logInErr}</div>
         <input type="submit" className="loginBtn" name="login-in" value="Log In" />
       </div>
     </form>
@@ -34,4 +57,15 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logInUser: (user) => dispatch(logInUser(user)),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

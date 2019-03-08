@@ -8,6 +8,7 @@ const session = require('express-session')
 const db = require('./db/database')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({db})
+const User = require('./db/models/User')
 
 //Passport Registration
 passport.serializeUser((user, done) => {

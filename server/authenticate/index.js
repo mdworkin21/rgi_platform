@@ -1,5 +1,5 @@
 const router = require('express').Router()
-// const User = require('../db/models/User')
+const User = require('../db/models/User')
 
 //Checks to see if user exists in db, and whether pw is correct. 
 

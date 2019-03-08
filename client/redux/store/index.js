@@ -7,7 +7,7 @@ import userReducer from '../reducers/users'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 // //Combines Reducers
 const rootReducer = combineReducers({
-  userReducer  
+  userReducer: userReducer
 })
 
 //Creates Store
