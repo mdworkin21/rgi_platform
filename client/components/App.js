@@ -6,7 +6,7 @@ import store from '../redux/store'
 const App = () => {
 return (
   <Provider store={store}>
-  <div>TESTING TESTING</div>
+  <div>TESTING FOR HEROKU</div>
   </Provider>
   )
 }
