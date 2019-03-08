@@ -1,3 +1,3 @@
-import placeHolder from './placeHolder'
-
-export default placeHolder
+export default function placeHolder(state = {}, action){
+  return state
+}
