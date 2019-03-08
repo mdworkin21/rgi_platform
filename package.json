@@ -17,9 +17,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
+    "passport": "^0.4.0",
     "path": "^0.12.7",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
@@ -33,7 +36,6 @@
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
