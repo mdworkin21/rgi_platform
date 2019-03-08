@@ -20,7 +20,6 @@ class Login extends Component {
   }
 
   render(){
-    console.log(this.props.handleChange, this.state)
     return (
       <form onSubmit={this.props.handleLogin}>
       <div className="right-box">
