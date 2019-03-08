@@ -1,16 +1,16 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
-import placeHolder from '../reducers/placeHolder'
+// import placeHolder from '../reducers/placeHolder'
 
-//Redux Devtools 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-//Combines Reducers
-const rootReducer = combineReducers({
-  placeHolder  
+// //Redux Devtools 
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// //Combines Reducers
+// const rootReducer = combineReducers({
+//   placeHolder  
 })
 
 //Creates Store
-const store = createStore( rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware, createLogger())))
+// const store = createStore( rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware, createLogger())))
 
-export default store
+// export default store
