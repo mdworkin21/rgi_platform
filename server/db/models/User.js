@@ -21,8 +21,8 @@ const User = db.define('users', {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    //Kind of a hack to get around Sequelize's lack of a private option
-    //This makes it so when user gets sent back to frontend, hashed pw isn't there (same with salt below)
+    //Kind of a hack to get around Sequelize's lack of privacy
+    //This makes it so when the user object gets sent back to frontend, hashed pw isn't there (same with salt and isAdmin below)
     get(){
       return () => this.getDataValue('password')
     } 
@@ -47,7 +47,7 @@ const User = db.define('users', {
 //Instance Methods
 User.prototype.checkPassword = function(userPassword) {
   return User.encryptPassword(userPassword, this.salt()) === this.password()
- 
+
 }
 
 // Class Methods
