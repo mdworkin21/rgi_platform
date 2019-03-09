@@ -8,6 +8,7 @@ const Authenticate = () => {
       <div id="login-box">
         <Signup />
         <Login />
+        <div className='or'>Or</div>
       </div>
     )
 }
