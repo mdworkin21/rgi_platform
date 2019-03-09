@@ -1,6 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 const crypto = require('crypto')
+
 //User Model
 const User = db.define('users', {
   userName: {
@@ -29,7 +30,7 @@ const User = db.define('users', {
   },
   salt: {
     type: Sequelize.STRING,
-    //See ^
+    //See above
     get(){
       return () => this.getDataValue('salt')
     } 

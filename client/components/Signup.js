@@ -8,6 +8,7 @@ import {
   checkEachField,
   individualizedErrMsg
 } from "../utilities/formValidator";
+import '../public/styles/authenticate.css'
 
 class Signup extends Component {
   state ={

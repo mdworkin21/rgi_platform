@@ -3,6 +3,7 @@ import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {logInUser } from '../redux/thunks/users'
+import '../public/styles/authenticate.css'
 
 class Login extends Component {
   state ={
