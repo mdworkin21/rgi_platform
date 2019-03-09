@@ -17,13 +17,13 @@ router.post('/checkUser', async (req, res, next) => {
     }) 
     if(!user){
       res.status(401).send('Wrong username and/or password')
-    } else if (user.password !== req.body.user.password) {
+    } else if (!user.checkPassword(req.body.user.password)) {
       res.status(401).send('Wrong username and/or password')
     } else {
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch(err){
-
+      next(err)
   }
 })
 
@@ -31,8 +31,6 @@ router.post('/newUser', async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)
     req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
-
-    // res.status(201).send(newUser)
   }catch(err){
     next(err)
   }
