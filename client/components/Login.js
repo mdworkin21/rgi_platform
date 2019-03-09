@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import {logInUser } from '../redux/thunks/users'
 
 class Login extends Component {
   state ={
     userName: '',
     password: '',
+    redirect: false
   }
 
   handleChange = (event) => {
@@ -22,11 +24,14 @@ class Login extends Component {
         userName: this.state.userName,
         password: this.state.password
       })
-      this.setState({
-        userName: '',
-        password: '',
-        logInErr: false
-      })
+      if (this.props.user.loggedIn){
+        this.setState({
+          userName: '',
+          password: '',
+          logInErr: false,
+          redirect: true
+        })
+      }
     }catch(err){
       console.log(err.status)
       console.log(err)
@@ -43,7 +48,7 @@ class Login extends Component {
 
   render(){
     let logInErr = this.props.user.logInErr ? 'Username or Password Invalid. Please try again.' : ''
-    return (
+    return this.state.redirect ? <Redirect to='/dashboard' /> : (
       <form onSubmit={this.handleSubmit}>
       <div className="right-box">
         <h1 id="loginTitle">Log In</h1>
@@ -53,7 +58,7 @@ class Login extends Component {
         <input type="submit" className="loginBtn" name="login-in" value="Log In" />
       </div>
     </form>
-    )
+    ) 
   }
 }
 

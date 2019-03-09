@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import { createNewUser, logInUser } from '../redux/thunks/users'
 import {
   formValidator,
@@ -13,7 +14,8 @@ class Signup extends Component {
     userName: '',
     email: '',
     password: '',
-    repassword: ''
+    repassword: '',
+    redirect: false
   }
 
   handleChange = (event) => {
@@ -35,7 +37,8 @@ class Signup extends Component {
         userName: '',
         email: '',
         password: '',
-        repassword: ''
+        repassword: '',
+        redirect: true
       }) 
     } catch(err){
         console.log(err)
@@ -59,7 +62,7 @@ class Signup extends Component {
     }
 
   render(){
-    return (
+    return this.state.redirect ? <Redirect to='/dashboard' /> : (
       <form  onSubmit={this.handleSubmit}>
         <div className="left-box">
           <h1>Sign Up</h1>
