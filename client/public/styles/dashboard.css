@@ -1,0 +1,7 @@
+/* Temporary style for standin sign until dashboard is filled out */
+#dashboard-container {
+  position: relative;
+  top: 50vh;
+  left: 30%;
+  font-size: 30px;
+}

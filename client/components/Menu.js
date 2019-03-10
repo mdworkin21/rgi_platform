@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import { removeUser } from '../redux/thunks/users'
+import '../public/styles/menu.css'
 
 class Menu extends Component  {
   handleClick = () => {
@@ -12,15 +13,15 @@ class Menu extends Component  {
     if (this.props.user.loggedIn){
       return (
         <div id="menu-container">
-          <div>MENU</div>
-          <div>{`Welcome, ${this.props.user.user.userName}` }</div>
-          <button onClick={this.handleClick}>Logout</button>
+          <h1>RGI Platform</h1>
+          <div id="welcome-Msg">{`Welcome, ${this.props.user.user.userName}` }</div>
+          <button className="negative ui button" id="logout-Btn"onClick={this.handleClick}>Logout</button>
         </div>
       )
     } else {
       return (
           <div id="menu-container">
-            <div>MENU</div>
+           <h1>RGI Platform</h1>
           </div>
       )
     }

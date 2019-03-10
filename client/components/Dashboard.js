@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import '../public/styles/dashboard.css'
 
 const Dashboard = (props) => {
   return props.user.loggedIn === false ? <Redirect to ='/' /> : (
-    <div>REDIRECTED TO THIS PAGE ON LOGIN</div>
+    <div id='dashboard-container'>REDIRECTED TO THIS PAGE ON LOGIN</div>
   ) 
 }
 
