@@ -6,7 +6,6 @@ import Authenticate from './Authenticate'
 import Menu from './Menu'
 import Dashboard from './Dashboard';
 
-//When you add redux, you'll need to add 
 const App = () => {
   return (
   <Provider store={store}>

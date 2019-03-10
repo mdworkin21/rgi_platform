@@ -9,7 +9,11 @@ const User = db.define('users', {
     allowNull: false,
     validate: {
       notEmpty: true
-    }
+    },
+    unique: {
+      args: true,
+      msg: 'Username already in use!'
+  }
   },
   email: {
     type: Sequelize.STRING,
@@ -17,7 +21,11 @@ const User = db.define('users', {
     validate: {
       notEmpty: true,
       isEmail: true
-    }
+    },
+    unique: {
+      args: true,
+      msg: 'Email address already in use!'
+  }
   },
   password: {
     type: Sequelize.STRING,

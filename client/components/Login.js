@@ -9,7 +9,6 @@ class Login extends Component {
   state ={
     userName: '',
     password: '',
-    redirect: false
   }
 
   handleChange = (event) => {
@@ -25,14 +24,6 @@ class Login extends Component {
         userName: this.state.userName,
         password: this.state.password
       })
-      if (this.props.user.loggedIn){
-        this.setState({
-          userName: '',
-          password: '',
-          logInErr: false,
-          redirect: true
-        })
-      }
     }catch(err){
       console.log(err.status)
       console.log(err)
@@ -49,7 +40,7 @@ class Login extends Component {
 
   render(){
     let logInErr = this.props.user.logInErr ? 'Username or Password Invalid. Please try again.' : ''
-    return this.state.redirect ? <Redirect to='/dashboard' /> : (
+    return this.props.user.loggedIn ? <Redirect to='/dashboard' /> : (
       <form onSubmit={this.handleSubmit}>
       <div className="right-box">
         <h1 id="loginTitle">Log In</h1>

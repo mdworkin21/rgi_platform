@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import { createNewUser, logInUser } from '../redux/thunks/users'
+import { createNewUser } from '../redux/thunks/users'
 import {
   formValidator,
   checkEachField,
@@ -16,7 +16,6 @@ class Signup extends Component {
     email: '',
     password: '',
     repassword: '',
-    redirect: false
   }
 
   handleChange = (event) => {
@@ -29,18 +28,11 @@ class Signup extends Component {
     event.preventDefault()
     if (checkEachField(formValidator, this.state).length < 1) {
     try{
-      await this.props.createUser({
+       await this.props.createUser({
         userName: this.state.userName,
         email: this.state.email,
         password: this.state.password
       })
-      this.setState({
-        userName: '',
-        email: '',
-        password: '',
-        repassword: '',
-        redirect: true
-      }) 
     } catch(err){
         console.log(err)
     }  
@@ -63,7 +55,7 @@ class Signup extends Component {
     }
 
   render(){
-    return this.state.redirect ? <Redirect to='/dashboard' /> : (
+    return this.props.user.loggedIn? <Redirect to='/dashboard' /> : (
       <form  onSubmit={this.handleSubmit}>
         <div className="left-box">
           <h1>Sign Up</h1>
@@ -86,7 +78,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createUser: (user) => dispatch(createNewUser(user)),
+    createUser: (user) => dispatch(createNewUser(user))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

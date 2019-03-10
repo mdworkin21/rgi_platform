@@ -1,6 +1,6 @@
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
-import { getUser, deleteUser, failedLogIn} from '../actions/users'
+import { getUser, deleteUser, failedLogIn, failedSignUp} from '../actions/users'
 
 //USER THUNK
 export const getUserFromPassport = (id) => {
@@ -8,7 +8,6 @@ export const getUserFromPassport = (id) => {
     try{
       const response = await axios.get(`/authenticate/getUser/${id}`)
       const user = response.data
-      console.log('USER', user)
       const action = getUser(user)
       dispatch(action)
     }catch(err){
@@ -29,6 +28,8 @@ export const createNewUser = (user) => {
         dispatch(getUserFromPassport(newUser.data.id))
       }
     } catch(err){
+        //I'd prefer not to use an alert here, need to change for future, okay for now.
+        alert('Sorry, username or password already taken, please try again')
         console.log(err)
     }
   }
@@ -40,7 +41,6 @@ export const logInUser = (user) => {
       const loggedInUser = await axios.post('/authenticate/checkUser', {user})
       if (loggedInUser.status === 200){
         const userIsIn = loggedInUser.data
-        console.log(userIsIn)
         const action = getUser(userIsIn)
         dispatch(action)
       } 

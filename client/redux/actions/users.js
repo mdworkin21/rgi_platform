@@ -1,17 +1,10 @@
 //USER ACTION TYPES
 export const GET_USER = 'GET_USER'
 export const GET_USER_FAIL= 'GET_USER_FAIL'
-export const NEW_USER = 'NEW_USER'
 export const DELETE_USER = 'DELETE_USER'
 
 //USER ACTION CREATORS
-export const newUser = (user) => {
-  return {
-    type: NEW_USER,
-    user
-  }
-}
-
+//Note: getUser takes care of login *and* signup
 export const getUser = (user) => {
   return {
     type: GET_USER,
