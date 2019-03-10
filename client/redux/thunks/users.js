@@ -54,7 +54,7 @@ export const logInUser = (user) => {
 export const removeUser = () => {
   return async (dispatch) => {
     try{
-      const logOut = await axios.delete('/authenticate/logout')
+      await axios.delete('/authenticate/logout')
       const action = (deleteUser())
       dispatch(action)
     }catch(err){

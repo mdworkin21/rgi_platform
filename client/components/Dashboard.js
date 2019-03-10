@@ -1,9 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
-const Dashboard = () => {
-  return (
+const Dashboard = (props) => {
+  return props.user.loggedIn === false ? <Redirect to ='/' /> : (
     <div>REDIRECTED TO THIS PAGE ON LOGIN</div>
-  )
+  ) 
 }
 
-export default Dashboard
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+} 
+
+export default connect(mapStateToProps)(Dashboard)

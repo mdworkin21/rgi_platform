@@ -13,7 +13,7 @@ export default function userReducer(state = initialState, action){
     case GET_USER_FAIL:
       return {...state,  logInErr: true}
     case DELETE_USER: 
-      return {...state, user: {} }
+      return {...state, user: {}, loggedIn: false}
     default:
       return state
   }
