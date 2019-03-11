@@ -10,8 +10,18 @@ router.get('/getUsers', async(req, res, next) => {
   }catch(err){
     next(err)
   }
-
 })
 
+
+router.delete('/deleteUser/:id', async(req, res, next) => {
+  try{
+    await User.destroy({where: {
+      id: req.params.id
+    }})
+    res.sendStatus(200)
+  }catch(err){
+    next(err)
+  }
+})
 
 module.exports = router

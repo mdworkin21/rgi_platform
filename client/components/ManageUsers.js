@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
-import {getAllUsers} from '../redux/thunks/admin'
+import {getAllUsers, deleteSingleUser} from '../redux/thunks/admin'
 
 
 class ManageUsers extends Component {
@@ -20,14 +20,16 @@ class ManageUsers extends Component {
             <tr><th>User Name</th>
             <th>Email</th>
             <th>Admin</th>
+            <th>Remove User</th>
           </tr></thead>
           <tbody>
         {this.props.users.map(el => {
           return (
-            <tr key={el.userName}>
+            <tr key={el.id}>
               <td data-label="User Name">{el.userName}</td>
               <td data-label="Email">{el.email}</td>
-              <td data-label="Admin">Nope</td>
+              <td data-label="Admin">RADIO BTN</td>
+              <td data-label="Remove"><button className="negative ui button" id="delete-Btn" onClick={() => this.props.deleteUser(el.id)}>Delete</button></td> 
             </tr>
           )
         })}
@@ -45,7 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllUsers: () => dispatch(getAllUsers())
+    getAllUsers: () => dispatch(getAllUsers()),
+    deleteUser: (id) => dispatch(deleteSingleUser(id))
   }
 }
 
