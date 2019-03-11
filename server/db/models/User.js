@@ -45,10 +45,11 @@ const User = db.define('users', {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    //Probably best to also hide who's an admin
-    get(){
-      return () => this.getDataValue('isAdmin')
-    }
+    defaultValue: false 
+    //Probably best to also hide who's an admin, but in order to edit on front, need it to be sent
+    // get(){
+    //   return () => this.getDataValue('isAdmin')
+    // }
   }
 })
 

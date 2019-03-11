@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
-import {getAllUsers, deleteSingleUser} from '../redux/thunks/admin'
+import {getAllUsers, deleteSingleUser, updateUserPermissions} from '../redux/thunks/admin'
 
 
 class ManageUsers extends Component {
@@ -12,6 +12,7 @@ class ManageUsers extends Component {
       console.log(err)
     }
   }
+
 
   render(){
     return (
@@ -28,7 +29,13 @@ class ManageUsers extends Component {
             <tr key={el.id}>
               <td data-label="User Name">{el.userName}</td>
               <td data-label="Email">{el.email}</td>
-              <td data-label="Admin">RADIO BTN</td>
+              <td data-label="Admin">
+                <div className="ui radio checkbox">
+                  <input type="radio" onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)
+} defaultChecked={el.isAdmin}/>
+                  <label></label>
+                </div>
+               </td>
               <td data-label="Remove"><button className="negative ui button" id="delete-Btn" onClick={() => this.props.deleteUser(el.id)}>Delete</button></td> 
             </tr>
           )
@@ -40,6 +47,7 @@ class ManageUsers extends Component {
 }
 
 const mapStateToProps = (state) => {
+  
   return {
     users: state.admin.users
   }
@@ -48,7 +56,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllUsers: () => dispatch(getAllUsers()),
-    deleteUser: (id) => dispatch(deleteSingleUser(id))
+    deleteUser: (id) => dispatch(deleteSingleUser(id)),
+    updateUserPerm: (id, bool) => dispatch(updateUserPermissions(id, bool))
   }
 }
 

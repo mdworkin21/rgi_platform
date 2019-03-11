@@ -12,6 +12,24 @@ router.get('/getUsers', async(req, res, next) => {
   }
 })
 
+router.put('/updateAdminPriv/:id/:value', async(req, res, next) => {
+  try{
+    const updateUser = await User.update({
+      isAdmin: req.params.value
+    },
+      {
+        where: {
+          id:  req.params.id
+        },
+        returning: true, // needed for affectedRows to be populated
+        plain: true 
+      })
+      const [, updated] = updateUser
+      res.status(202).send(updated)
+  }catch(err){
+      next(err)
+  }
+})
 
 router.delete('/deleteUser/:id', async(req, res, next) => {
   try{
