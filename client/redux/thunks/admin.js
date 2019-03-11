@@ -21,7 +21,6 @@ export const updateUserPermissions = (id, bool) => {
   return async (dispatch) => {
     try{
     const updated = await axios.put(`api/userManagement/admin/updateAdminPriv/${id}/${bool}`)
-    console.log('UP', updated.data)
     if (updated.status === 202){
       const action = updatePermissions(updated.data)
       dispatch(action)

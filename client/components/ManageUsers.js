@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import {getAllUsers, deleteSingleUser, updateUserPermissions} from '../redux/thunks/admin'
 
 
@@ -13,9 +14,8 @@ class ManageUsers extends Component {
     }
   }
 
-
   render(){
-    return (
+    return this.props.loggedIn === false ? <Redirect to ='/' /> :(
         <table className="ui celled table" style={{position: 'relative', top: '80px', left: '25%', width: '50%'}}>
           <thead>
             <tr><th>User Name</th>
@@ -31,8 +31,10 @@ class ManageUsers extends Component {
               <td data-label="Email">{el.email}</td>
               <td data-label="Admin">
                 <div className="ui checkbox">
-                  <input type="checkbox" onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)
-} defaultChecked={el.isAdmin}/>
+                  <input type="checkbox" 
+                      onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)} 
+                      defaultChecked={el.isAdmin}
+                  />
                   <label></label>
                 </div>
                </td>
@@ -47,9 +49,10 @@ class ManageUsers extends Component {
 }
 
 const mapStateToProps = (state) => {
-  
+  console.log(state)
   return {
-    users: state.admin.users
+    users: state.admin.users,
+    loggedIn: state.user.loggedIn
   }
 }
 
