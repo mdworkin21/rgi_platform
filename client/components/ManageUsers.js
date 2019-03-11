@@ -30,8 +30,8 @@ class ManageUsers extends Component {
               <td data-label="User Name">{el.userName}</td>
               <td data-label="Email">{el.email}</td>
               <td data-label="Admin">
-                <div className="ui radio checkbox">
-                  <input type="radio" onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)
+                <div className="ui checkbox">
+                  <input type="checkbox" onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)
 } defaultChecked={el.isAdmin}/>
                   <label></label>
                 </div>
