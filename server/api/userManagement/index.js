@@ -1,7 +1,7 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
-//API Routes 
-router.use('/userManagement', require('./userManagement'))
+//Granular Routes
+router.use('/admin', require('./admin'))
 
 
 //Handles 404 Errors
