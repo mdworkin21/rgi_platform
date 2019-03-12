@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {NavLink} from 'react-router-dom'
 import { removeUser } from '../redux/thunks/users'
 import '../public/styles/menu.css'
 
@@ -14,6 +15,7 @@ class Menu extends Component  {
         <div id="menu-container">
           <h1 id="title">RGI Platform</h1>
           <div id="welcome-Msg">{`Welcome, ${this.props.user.user.userName}` }</div>
+          <NavLink to='/manageusers' id='manage-users'>Manage Users</NavLink>
           <button className="negative ui button" id="logout-Btn"onClick={this.handleClick}>Logout</button>
         </div>
       )
