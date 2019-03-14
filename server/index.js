@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 //Session MiddleWare with Passport
 app.use(session({
   cookieName: 'session',
-  secret: process.env.SESSION_SECRET || 'BookHunter',
+  secret: process.env.SESSION_SECRET || 'RGI_PLATFORM',
   store: sessionStore,
   resave: false,
   saveUninitialized: false

@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const User = require('../db/models/User')
+const SignupToken = require('../db/models/SignupTokens')
 
 //Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
-  console.log('REQ', req.session)
   if (req.user){
     res.status(200).send(req.user)
   }
@@ -28,9 +28,11 @@ router.post('/checkUser', async (req, res, next) => {
   }
 })
 
+//Might be better to refactor this so a different route takes care of checking signup token, and then if successful, forwards to this route...get it working first, then we can refactor.
 router.post('/newUser', async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)
+
     req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
   }catch(err){
     if (err.name === 'SequelizeUniqueConstraintError'){

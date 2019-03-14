@@ -22,7 +22,8 @@ export const createNewUser = (user) => {
       const newUser = await axios.post('/authenticate/newUser', {
         userName: user.userName,
         email: user.email,
-        password: user.password
+        password: user.password,
+        token: user.token
       })
       if (newUser.status === 201){
         dispatch(getUserFromPassport(newUser.data.id))

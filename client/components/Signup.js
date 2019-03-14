@@ -16,6 +16,7 @@ class Signup extends Component {
     email: '',
     password: '',
     repassword: '',
+    token: ''
   }
 
   handleChange = (event) => {
@@ -31,7 +32,8 @@ class Signup extends Component {
        await this.props.createUser({
         userName: this.state.userName,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        token: this.state.token
       })
     } catch(err){
         console.log(err)
@@ -63,6 +65,7 @@ class Signup extends Component {
           <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
           <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
           <input type="password" name="repassword" placeholder="Retype Password" onChange={this.handleChange} value={this.state.repassword} />
+          <input type='text' name='token' placeholder='Sign Up Code' onChange={this.handleChange} value={this.state.token} />
           <input type="submit" name="signup-btn" value="Sign Up"/>
         </div>
       </form>    
