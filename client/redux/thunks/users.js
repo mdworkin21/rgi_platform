@@ -25,6 +25,7 @@ export const createNewUser = (user) => {
         password: user.password,
         token: user.token
       })
+  
       if (newUser.status === 201){
         dispatch(getUserFromPassport(newUser.data.id))
       }

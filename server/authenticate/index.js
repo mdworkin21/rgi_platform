@@ -2,6 +2,30 @@ const router = require('express').Router()
 const User = require('../db/models/User')
 const SignupToken = require('../db/models/SignupTokens')
 
+//Custom Middleware
+let checkSignUpCode = async (req, res, next) => {
+  try{
+    let signupIsValid = await SignupToken.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+    if(!signupIsValid){
+      res.status(401).send('Email does not exist')
+    } else if (!signupIsValid.checkSignupCode(req.body.token)) {
+      res.status(401).send('Signup code is invalid')
+    } else {
+        if(signupIsValid.role === 'admin'){
+          req.body.isAdmin = true
+        }
+      next()
+    }
+  } catch(err){
+      console.log('ERRR', err)
+      next(err)
+  }
+}
+
 //Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
   if (req.user){
@@ -28,11 +52,23 @@ router.post('/checkUser', async (req, res, next) => {
   }
 })
 
-//Might be better to refactor this so a different route takes care of checking signup token, and then if successful, forwards to this route...get it working first, then we can refactor.
-router.post('/newUser', async (req, res, next) => {
+//Allows Admin to create new signup token
+router.post('/newSignup', async (req, res, next) => {
+  try{
+    await SignupToken.create({
+      email: req.body.email,
+      signupCode: req.body.code,
+      role: req.body.role
+    })
+    res.sendStatus(201)
+  }catch(err){
+    next(err)
+  }
+})
+
+router.post('/newUser', checkSignUpCode, async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)
-
     req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
   }catch(err){
     if (err.name === 'SequelizeUniqueConstraintError'){
@@ -41,7 +77,6 @@ router.post('/newUser', async (req, res, next) => {
       res.status(401).send(errMsg)
     } else {
         next(err)
-
     }
   }
 })
@@ -56,4 +91,6 @@ router.delete('/logout', async(req, res, next) => {
   }
 })
 
+
 module.exports = router 
+

@@ -6,6 +6,7 @@ import Authenticate from './Authenticate'
 import Menu from './Menu'
 import Dashboard from './Dashboard'
 import ManageUsers from './ManageUsers'
+import AddUser from './AddUser';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path='/' component={Authenticate} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/manageusers' component={ManageUsers} />
+        <Route exact path='/adduser' component={AddUser} />
       </div>
     </Router>
   </Provider>

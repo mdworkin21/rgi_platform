@@ -22,24 +22,22 @@ const SignupToken = db.define('signupTokens', {
     get(){
       return () => this.getDataValue('signupCode')
     }
-  },
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  },
-  isMediaBuyer: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  },
-  isAnalytics: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
   }, 
+  role: {
+    type: Sequelize.STRING,
+    allowNull: false
+   },
+  salt: {
+    type: Sequelize.STRING,
+    get(){
+      return () => this.getDataValue('salt')
+    } 
+  },
 })
 
 //Instance Methods
-SignupToken.prototype.checkPassword = function(signupCode) {
-  return SignupToken.encryptPassword(signupCode, this.salt()) === this.signupCode()
+SignupToken.prototype.checkSignupCode= function(signupCode) {
+  return SignupToken.encryptsignupCode(signupCode, this.salt()) === this.signupCode()
 }
 
 // Class Methods
@@ -70,5 +68,4 @@ const setSaltAndSignupCode = (signupToken) => {
 
 SignupToken.beforeCreate( setSaltAndSignupCode)
 SignupToken.beforeUpdate( setSaltAndSignupCode)
-
 module.exports = SignupToken
