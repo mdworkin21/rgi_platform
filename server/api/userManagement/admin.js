@@ -1,7 +1,15 @@
 const router = require('express').Router()
 const {db, User} = require('../../db/models')
 
+//Protects routes from nonadmin users asking for resources, add to all routes
 
+const adminCheck = (req, res, next) => {
+  if (req.body.isAdmin){
+    next()
+  } else {
+    res.status(401).send('Unauthorizeid')
+  }
+}
 
 router.get('/getUsers', async(req, res, next) => {
   try{

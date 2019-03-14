@@ -45,7 +45,6 @@ class AddUser extends Component {
   }
 
   render() {
-    console.log(this.state)
     let roles = this.displayRoles(roles)
     return (
       <div>
