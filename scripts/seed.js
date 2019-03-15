@@ -1,15 +1,15 @@
 const db = require('../server/db/database')
 const SignupTokens = require('../server/db/models/SignupTokens')
-
+require('../secrets.js')
 
 const seed = async () => {
   try{
     //add force true when you want to seed
     await db.sync({force: true})
     let defaultUser = await SignupTokens.create({
-      email: 'test@email.com',
+      email: process.env.SEED_EMAIL,
       role: 'admin',
-      signupCode: 'testing'
+      signupCode: process.env.SEED_SIGN_UP_CODE
     })
   }catch(err){
     console.log(err)
@@ -31,7 +31,6 @@ const runSeed = async () => {
 }
 
 if (module === require.main){
-  console.log('MOD,', module, require.main)
   runSeed()
 }
 
