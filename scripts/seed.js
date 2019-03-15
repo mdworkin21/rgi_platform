@@ -32,7 +32,8 @@ const runSeed = async () => {
 }
 
 if (module === require.main){
+  console.log('MOD,', module, require.main)
   runSeed()
 }
 
-module.exports = seed 
+module.exports = {seed, runSeed} 

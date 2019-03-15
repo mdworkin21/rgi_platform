@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "seed": "node scripts/seed.js",
-    "postinstall": "webpack -p seed",
+    "postinstall": "webpack -p",
     "start-dev": "webpack -w & nodemon"
   },
   "keywords": [],
