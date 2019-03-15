@@ -8,7 +8,7 @@ const seed = require('./scripts/seed')
 //Don't use in production, dangerous!
 //To seed heroku db, put this line after db.sync line: .then(() => seed())
 db.sync({force: true})
-  .then(() => seed())
+  // .then(() => seed())
   .then(() => {
     console.log('db synced.')
     app.listen(PORT, () => {
