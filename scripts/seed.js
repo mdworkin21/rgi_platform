@@ -7,9 +7,9 @@ const seed = async () => {
     //add force true when you want to seed
     await db.sync({force: true})
     let defaultUser = await SignupTokens.create({
-      email: 'rgi@email.com',
-      role: admin,
-      signupCode: 'froppit'
+      email: 'test@email.com',
+      role: 'admin',
+      signupCode: 'testing'
     })
   }catch(err){
     console.log(err)
