@@ -8,6 +8,7 @@ const {runSeed} = require('./scripts/seed')
 //Don't use in production, dangerous!
 //To seed db with initial admin, put this line after db.sync line
 db.sync({force: true})
+  .then(() => runSeed())
   .then(() => {
     console.log('db synced.')
     app.listen(PORT, () => {
