@@ -16,7 +16,6 @@ const seed = async () => {
   }
 } 
 
-
 const runSeed = async () => {
   console.log('seeedingggg....')
   try{
@@ -36,4 +35,4 @@ if (module === require.main){
   runSeed()
 }
 
-module.exports = {seed, runSeed} 
+module.exports = seed
