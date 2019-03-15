@@ -15,7 +15,7 @@ class ManageUsers extends Component {
   }
 
   render(){
-    return this.props.loggedIn === false ? <Redirect to ='/' /> :(
+    return !this.props.admin ? <div>UNAUTHORIZED</div> : (
         <table className="ui celled table" style={{position: 'relative', top: '80px', left: '25%', width: '50%'}}>
           <thead>
             <tr><th>User Name</th>
@@ -52,7 +52,8 @@ const mapStateToProps = (state) => {
   console.log(state)
   return {
     users: state.admin.users,
-    loggedIn: state.user.loggedIn
+    loggedIn: state.user.loggedIn,
+    admin: state.user.user.isAdmin
   }
 }
 
