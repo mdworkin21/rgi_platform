@@ -52,20 +52,6 @@ router.post('/checkUser', async (req, res, next) => {
   }
 })
 
-//Allows Admin to create new signup token
-router.post('/newSignup', async (req, res, next) => {
-  try{
-    await SignupToken.create({
-      email: req.body.email,
-      signupCode: req.body.code,
-      role: req.body.role
-    })
-    res.sendStatus(201)
-  }catch(err){
-    next(err)
-  }
-})
-
 router.post('/newUser', checkSignUpCode, async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)

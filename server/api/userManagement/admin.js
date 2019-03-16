@@ -1,15 +1,6 @@
 const router = require('express').Router()
-const {db, User} = require('../../db/models')
+const {db, User, SignupToken} = require('../../db/models')
 
-//Protects routes from nonadmin users asking for resources, add to all routes
-
-const adminCheck = (req, res, next) => {
-  if (req.body.isAdmin){
-    next()
-  } else {
-    res.status(401).send('Unauthorizeid')
-  }
-}
 
 router.get('/getUsers', async(req, res, next) => {
   try{
@@ -39,7 +30,21 @@ router.put('/updateAdminPriv/:id/:value', async(req, res, next) => {
   }
 })
 
-router.delete('/deleteUser/:id', async(req, res, next) => {
+//Allows Admin to create new signup token
+router.post('/newSignup', async (req, res, next) => {
+  try{
+    await SignupToken.create({
+      email: req.body.email,
+      signupCode: req.body.code,
+      role: req.body.role
+    })
+    res.sendStatus(201)
+  }catch(err){
+    next(err)
+  }
+})
+
+router.delete('/deleteUser/:id/', async (req, res, next) => {
   try{
     await User.destroy({where: {
       id: req.params.id

@@ -4,7 +4,6 @@ const SignupTokens = require('../server/db/models/SignupTokens')
 
 const seed = async () => {
   try{
-    //add force true when you want to seed
     await db.sync({force: true})
     let defaultUser = await SignupTokens.create({
       email: process.env.SEED_EMAIL,

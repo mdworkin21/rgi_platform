@@ -1,13 +1,14 @@
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
 import { getUsers, deleteUser, updatePermissions} from '../actions/admin'
+import store from '../store'
 
 
 //ADMIN THUNKS
 export const getAllUsers = () => {
   return async (dispatch) => {
     try{
-      const response = await axios.get('api/userManagement/admin/getUsers')
+      const response = await axios.get('api/userManagement/admin/getUsers/')
       const users = response.data
       const action = getUsers(users)
       dispatch(action)

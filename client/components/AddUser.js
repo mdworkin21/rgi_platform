@@ -20,7 +20,7 @@ class AddUser extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      let newUser = await axios.post('/authenticate/newSignup', this.state)
+      let newUser = await axios.post('api/userManagement/admin/newSignup', this.state)
       if (newUser.status === 201){
         this.setState({
           role: 'false',
