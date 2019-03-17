@@ -42,7 +42,14 @@ class ManageUsers extends Component {
                   <label></label>
                 </div>
                </td>
-              <td data-label="Remove"><button disabled={disableBtn} className="negative ui button" id="delete-Btn" onClick={() => this.props.deleteUser(el.id)}>Delete</button></td> 
+              <td data-label="Remove">
+                <button disabled={disableBtn} 
+                        className="negative ui button" 
+                        id="delete-Btn" 
+                        onClick={() => this.props.deleteUser(el.id)}>
+                  Delete
+                </button>
+              </td> 
             </tr>
           )
         })}
