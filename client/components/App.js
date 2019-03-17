@@ -1,6 +1,5 @@
 import React from 'react'
 import {Router, Route, Redirect, withRouter} from 'react-router-dom'
-import store from '../redux/store'
 import Authenticate from './Authenticate'
 import Menu from './Menu'
 import Dashboard from './Dashboard'

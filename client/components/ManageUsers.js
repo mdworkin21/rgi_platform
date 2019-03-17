@@ -14,8 +14,9 @@ class ManageUsers extends Component {
     }
   }
 
+
+
   render(){
-    console.log('MANAGE', this.props.admin)
     return !this.props.admin ? <div>UNAUTHORIZED</div> : (
         <table className="ui celled table" style={{position: 'relative', top: '80px', left: '25%', width: '50%'}}>
           <thead>
@@ -26,20 +27,22 @@ class ManageUsers extends Component {
           </tr></thead>
           <tbody>
         {this.props.users.map(el => {
+          const disableBtn = el.id === this.props.id ? 'disabled' : ''
           return (
             <tr key={el.id}>
               <td data-label="User Name">{el.userName}</td>
               <td data-label="Email">{el.email}</td>
               <td data-label="Admin">
                 <div className="ui checkbox">
-                  <input type="checkbox" 
+                  <input type="checkbox"
+                      disabled={disableBtn} 
                       onClick={() => this.props.updateUserPerm(el.id, !el.isAdmin)} 
                       defaultChecked={el.isAdmin}
                   />
                   <label></label>
                 </div>
                </td>
-              <td data-label="Remove"><button className="negative ui button" id="delete-Btn" onClick={() => this.props.deleteUser(el.id)}>Delete</button></td> 
+              <td data-label="Remove"><button disabled={disableBtn} className="negative ui button" id="delete-Btn" onClick={() => this.props.deleteUser(el.id)}>Delete</button></td> 
             </tr>
           )
         })}
