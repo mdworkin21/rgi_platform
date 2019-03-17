@@ -15,6 +15,7 @@ class ManageUsers extends Component {
   }
 
   render(){
+    console.log('MANAGE', this.props.admin)
     return !this.props.admin ? <div>UNAUTHORIZED</div> : (
         <table className="ui celled table" style={{position: 'relative', top: '80px', left: '25%', width: '50%'}}>
           <thead>
@@ -49,11 +50,11 @@ class ManageUsers extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    users: state.admin.users,
+    users: state.admin.admins,
     loggedIn: state.user.loggedIn,
-    admin: state.user.user.isAdmin
+    admin: state.user.user.isAdmin,
+    id: state.user.user.id
   }
 }
 
@@ -61,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllUsers: () => dispatch(getAllUsers()),
     deleteUser: (id) => dispatch(deleteSingleUser(id)),
-    updateUserPerm: (id, bool) => dispatch(updateUserPermissions(id, bool))
+    updateUserPerm: (id, bool) => dispatch(updateUserPermissions(id, bool)),
   }
 }
 

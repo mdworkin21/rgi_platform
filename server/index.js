@@ -24,6 +24,7 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
+
 //Logging MiddleWare
 app.use(morgan('dev'))
 
@@ -37,7 +38,12 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'RGI_PLATFORM',
   store: sessionStore,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    originalMaxAge: 1000 * 60 * 60 * 24 * 7 //7 days
+  }
 }))
 
 app.use(passport.initialize())
@@ -47,14 +53,14 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, '..', '/client/public')))
 
 //Api Routes
-app.use('/authenticate', require('./authenticate'))
 app.use('/api', require('./api'))
+app.use('/authenticate', require('./authenticate'))
 
 // Redirects to homepage when no API reqs match
-app.get('*', (req, res) => {
-  console.log('HMMMMMMM')
+app.get('*',  (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/client/public/'))
 })
+
 
 //Handles 500 Errs
 app.use((err, req, res, next) => {
@@ -64,4 +70,4 @@ app.use((err, req, res, next) => {
 })
 
 
-module.exports = app
+module.exports = {app, sessionStore}

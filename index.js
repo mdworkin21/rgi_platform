@@ -1,4 +1,4 @@
-const app = require('./server')
+const {app} = require('./server')
 const PORT = process.env.PORT || 3000
 const {db} = require('./server/db/models')
 const seed = require('./scripts/seed')
@@ -14,3 +14,5 @@ db.sync()
       console.log('Server Live on Port: ', PORT)
     })
   });
+
+

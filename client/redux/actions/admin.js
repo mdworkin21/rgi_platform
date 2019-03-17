@@ -1,7 +1,7 @@
 //Action Types
 export const GET_ALL_USERS = 'GET_ALL_USERS'
 export const UPDATE_USER_PERMISSIONS = 'UPDATE_USER_PERMISSIONS'
-export const DELETE_USER = 'DELETE_USER'
+export const DELETE_SINGLE_USER = 'DELETE_SINGLE_USER'
 
 //Action Creators
 export const getUsers = (users) => {
@@ -20,7 +20,7 @@ export const updatePermissions = (user) => {
 
 export const deleteUser = (id) => {
   return {
-    type: DELETE_USER,
+    type: DELETE_SINGLE_USER,
     id
   }
 }

@@ -1,7 +1,6 @@
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
 import { getUsers, deleteUser, updatePermissions} from '../actions/admin'
-import store from '../store'
 
 
 //ADMIN THUNKS

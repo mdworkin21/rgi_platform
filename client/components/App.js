@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import {Router, Route, Redirect, withRouter} from 'react-router-dom'
 import store from '../redux/store'
 import Authenticate from './Authenticate'
 import Menu from './Menu'
@@ -8,15 +8,17 @@ import ManageUsers from './ManageUsers'
 import AddUser from './AddUser';
 import PrivateRoute from './PrivateRoute'
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history'
 
-
+//Change back to browserrouter if this doesn't work
+const history = createBrowserHistory()
 const App = (props) => {
   return (
-    <Router>
+    <Router history={history}>
       <div>
         <Menu />
         <Route exact path='/' component={Authenticate} />
-        <PrivateRoute exact path='/dashboard' component={Dashboard} authed={props.auth}/>
+        <PrivateRoute exact path='/dashboard' component={Dashboard} authed={props.auth} />
         <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={props.auth} />
         <PrivateRoute exact path='/adduser' component={AddUser} authed={props.auth}/>
       </div>
@@ -32,4 +34,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(App)
-// export default App

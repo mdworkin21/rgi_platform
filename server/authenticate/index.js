@@ -26,6 +26,20 @@ let checkSignUpCode = async (req, res, next) => {
   }
 }
 
+router.get('/', async (req, res, next)=> {
+  try{
+    console.log("TEST")
+    let user = await User.findOne({
+      where: {
+        id: req.session.password.user
+      }
+    })
+    res.status(200).send(user)
+
+  } catch(err){
+    next(err)
+  }
+})
 //Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
   if (req.user){
