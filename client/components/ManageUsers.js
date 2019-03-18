@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
 import {getAllUsers, deleteSingleUser, updateUserPermissions} from '../redux/thunks/admin'
-
+import '../public/styles/manageusers.css'
 
 class ManageUsers extends Component {
   async componentDidMount(){
@@ -14,11 +13,11 @@ class ManageUsers extends Component {
     }
   }
 
-
-
   render(){
+    console.log('Hisotry', History.length)
+
     return !this.props.admin ? <div>UNAUTHORIZED</div> : (
-        <table className="ui celled table" style={{position: 'relative', top: '80px', left: '25%', width: '50%'}}>
+        <table className="ui celled table" id="table-container">
           <thead>
             <tr><th>User Name</th>
             <th>Email</th>

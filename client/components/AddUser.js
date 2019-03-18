@@ -8,7 +8,7 @@ class AddUser extends Component {
   state = {
     role: '',
     code: '',
-    email: ''
+    email: '',
   }
 
   handleChange = (event) => {
@@ -23,15 +23,16 @@ class AddUser extends Component {
       let newUser = await axios.post('api/userManagement/admin/newSignup', this.state)
       if (newUser.status === 201){
         this.setState({
-          role: 'false',
+          role: '',
           code: '',
-          email: ''
+          email: '',
         })
       }
     }catch(err){
       console.log(err)
     }
   }
+
 
   displayRoles = () => {
     return roles.map(el => {
@@ -45,7 +46,7 @@ class AddUser extends Component {
   }
 
   render() {
-    let roles = this.displayRoles(roles)
+    const roles = this.displayRoles(roles)
     return (
       <div>
         <form className="ui form" style={{position: 'relative', top: '150px', left: '30%', width: '300px'}} onSubmit={this.handleSubmit}>

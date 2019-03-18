@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, Route, Redirect, withRouter} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Authenticate from './Authenticate'
 import Menu from './Menu'
 import Dashboard from './Dashboard'
@@ -7,13 +7,10 @@ import ManageUsers from './ManageUsers'
 import AddUser from './AddUser';
 import PrivateRoute from './PrivateRoute'
 import { connect } from 'react-redux';
-import { createBrowserHistory } from 'history'
 
-//Change back to browserrouter if this doesn't work
-const history = createBrowserHistory()
 const App = (props) => {
   return (
-    <Router history={history}>
+    <Router>
       <div>
         <Menu />
         <Route exact path='/' component={Authenticate} />
