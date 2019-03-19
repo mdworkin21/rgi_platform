@@ -23,10 +23,11 @@ class Dropdown extends Component {
         <div className={toggleDropDown}>
           {this.props.list && this.props.list.map(link => {
             return <div 
-                      onClick={this.handleClick}
-                      key={link.name} 
-                      className="link">
-                      <NavLink to={link.to}>{link.name} </NavLink></div>
+                    onClick={this.handleClick}
+                    key={link.name} 
+                    className="link">
+                    <NavLink to={link.to}>{link.name} </NavLink>
+                   </div>
           })}
           <div>
             <button className="ui negative button" id="logout-Btn" onClick={this.props.handleLogOut}>Logout</button>
