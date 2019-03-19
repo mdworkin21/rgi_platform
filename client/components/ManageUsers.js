@@ -14,8 +14,6 @@ class ManageUsers extends Component {
   }
 
   render(){
-    console.log('Hisotry', History.length)
-
     return !this.props.admin ? <div>UNAUTHORIZED</div> : (
         <table className="ui celled table" id="table-container">
           <thead>

@@ -6,7 +6,7 @@
 }
 
 #menu-container{
-  background-color: black;
+  background-color: #333;;
   position: fixed;
   left: 0%;
   color: #FFFFF0;
@@ -17,25 +17,5 @@
   top: 0%;
   flex-direction: column;
   z-index: 1;
-}
-
-#welcome-Msg {
-  position: fixed;
-  top: 3vh;
-  left: 1vw;
-  font-size: 1.5em;
-}
-
-#logout-Btn {
-  position: fixed;
-  top: 2vh;
-  right: 1vw;
-}
-
-/* Eventually will be in drop down this is temporary */
-#manage-users{
-  color: white;
-  position: relative;
-  left: -40vw;
 }
 
