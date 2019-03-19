@@ -16,7 +16,6 @@ class Dropdown extends Component {
     let toggleDropDown = this.state.isActive ? 'dropdown-content show' : 'dropdown-content'
     return (
       <div className="dropdown">
-        
         <button className="dropbtn" onClick={this.handleClick}>
           <i className="user circle icon" />
           {this.props.userName}
@@ -29,7 +28,9 @@ class Dropdown extends Component {
                       className="link">
                       <NavLink to={link.to}>{link.name} </NavLink></div>
           })}
-        <div><button className="ui button" id="logout-Btn" onClick={this.props.handleLogOut}>Logout</button></div>
+          <div>
+            <button className="ui negative button" id="logout-Btn" onClick={this.props.handleLogOut}>Logout</button>
+          </div>
         </div>
       </div>
     )
