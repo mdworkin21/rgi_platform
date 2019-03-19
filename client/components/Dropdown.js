@@ -16,7 +16,11 @@ class Dropdown extends Component {
     let toggleDropDown = this.state.isActive ? 'dropdown-content show' : 'dropdown-content'
     return (
       <div className="dropdown">
-        <button className="dropbtn" onClick={this.handleClick}>{this.props.userName}</button>
+        
+        <button className="dropbtn" onClick={this.handleClick}>
+          <i className="user circle icon" />
+          {this.props.userName}
+        </button>
         <div className={toggleDropDown}>
           {this.props.list && this.props.list.map(link => {
             return <div 
