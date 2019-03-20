@@ -18,8 +18,9 @@ const adminCheck = async (req, res, next) => {
   }
 }
 
-router.get('/getUsers', adminCheck, async(req, res, next) => {
+router.get('/getUsers', async(req, res, next) => {
   try{
+    console.log('GMMMMMMM', req)
     const allUsers = await User.findAll()
     res.status(200).send(allUsers)
   }catch(err){
@@ -27,7 +28,7 @@ router.get('/getUsers', adminCheck, async(req, res, next) => {
   }
 })
 
-router.put('/updateAdminPriv/:id/:value', adminCheck, async(req, res, next) => {
+router.put('/updateAdminPriv/:id/:value', async(req, res, next) => {
   try{
     const updateUser = await User.update({
       isAdmin: req.params.value
@@ -47,7 +48,7 @@ router.put('/updateAdminPriv/:id/:value', adminCheck, async(req, res, next) => {
 })
 
 //Allows Admin to create new signup token
-router.post('/newSignup', adminCheck, async (req, res, next) => {
+router.post('/newSignup', async (req, res, next) => {
   try{
     await SignupToken.create({
       email: req.body.email,
@@ -60,7 +61,7 @@ router.post('/newSignup', adminCheck, async (req, res, next) => {
   }
 })
 
-router.delete('/deleteUser/:id/', adminCheck, async (req, res, next) => {
+router.delete('/deleteUser/:id/', async (req, res, next) => {
   try{
     await User.destroy({where: {
       id: req.params.id
