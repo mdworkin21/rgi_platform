@@ -1,21 +1,6 @@
 const router = require('express').Router()
 const {db, User, SignupToken} = require('../../db/models')
 
-const adminCheck = async (req, res, next) => {
-  try{
-    console.log("STANDOUTTTTTTTT", req.session)
-    let userIsAdmin = await User.findOne({
-      where: {
-        id: req.session.passport.user
-      }
-    })
-    if (userIsAdmin.isAdmin){
-      next()
-    }
-  } catch(err){
-    res.sendStatus(401)
-  }
-}
 
 router.get('/getUsers', adminCheck, async (req, res, next) => {
   try{

@@ -11,6 +11,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({db})
 const User = require('./db/models/User')
 // require('../secrets')
+
 //Passport Registration
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -24,14 +25,6 @@ passport.deserializeUser(async (id, done) => {
     done(err)
   }
 })
-
-// passport.use(new LocalStrategy(
-//   function(username, password, done)
-// {
-
-// }), () => {
-
-// })
 
 //Logging MiddleWare
 app.use(morgan('dev'))
