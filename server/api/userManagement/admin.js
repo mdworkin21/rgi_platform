@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {db, User, SignupToken} = require('../../db/models')
 
 
-router.get('/getUsers', adminCheck, async (req, res, next) => {
+router.get('/getUsers', async (req, res, next) => {
   try{
     const allUsers = await User.findAll()
     res.status(200).send(allUsers)
