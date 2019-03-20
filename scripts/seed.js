@@ -1,7 +1,8 @@
 const db = require('../server/db/database')
 const SignupTokens = require('../server/db/models/SignupTokens')
-// require('../secrets.js')
 
+
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 const seed = async () => {
   try{
     await db.sync({force: true})

@@ -10,7 +10,7 @@
     "start": "nodemon index.js",
     "seed": "node scripts/seed.js",
     "postinstall": "webpack -p",
-    "start-dev": "webpack -w & nodemon"
+    "start-dev": "NODE_ENV='development' webpack -w & nodemon"
   },
   "keywords": [],
   "author": "",
