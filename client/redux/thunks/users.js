@@ -31,7 +31,7 @@ export const createNewUser = (user) => {
       }
     } catch(err){
         //I'd prefer not to use an alert here, need to change for future, okay for now.
-        alert('Sorry, username or password already taken, please try again')
+        alert(`SORRY, username or password already taken, please try again. ERRRR ${err}`)
         console.log(err)
     }
   }

@@ -73,7 +73,7 @@ router.post('/newUser', checkSignUpCode, async (req, res, next) => {
     if (err.name === 'SequelizeUniqueConstraintError'){
       let errMsg = err.errors[0].message
       //For some reason errMsg doesn't actually get sent, so I have a work around for now
-      res.status(407).send(errMsg)
+      res.status(401).send(errMsg)
     } else {
         next(err)
     }
