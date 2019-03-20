@@ -30,7 +30,7 @@ export const createNewUser = (user) => {
       const newUser = response.data
       const action = getUser(newUser)
 
-      if (reponse.status === 201){
+      if (response.status === 201){
         // dispatch(getUserFromPassport(newUser.data.id))
         dispatch(action)
       }
