@@ -40,12 +40,12 @@ let checkSignUpCode = async (req, res, next) => {
 //   }
 // })
 
-//Checks to see if user exists in db, and whether pw is correct. 
-// router.get('/getUser/:id', (req, res, next) => {
-//   if (req.user){
-//     res.status(200).send(req.user)
-//   }
-// })
+// Checks to see if user exists in db, and whether pw is correct. 
+router.get('/getUser/:id', (req, res, next) => {
+  if (req.user){
+    res.status(200).send(req.user)
+  }
+})
 
 router.post('/checkUser', async (req, res, next) => {
   try{
@@ -69,6 +69,7 @@ router.post('/checkUser', async (req, res, next) => {
 router.post('/newUser', checkSignUpCode, async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)
+    req.session.passport = newUser.id
     req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
   }catch(err){
     if (err.name === 'SequelizeUniqueConstraintError'){

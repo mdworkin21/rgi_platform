@@ -3,7 +3,7 @@ const {db, User, SignupToken} = require('../../db/models')
 
 const adminCheck = async (req, res, next) => {
   try{
-    console.log("STANDOUTTTTTTTT", req.session.passport, req.session.passport.instance.Authenticator,_deserializers)
+    console.log("STANDOUTTTTTTTT", req.session)
     let userIsAdmin = await User.findOne({
       where: {
         id: req.session.passport.user
@@ -19,7 +19,6 @@ const adminCheck = async (req, res, next) => {
 
 router.get('/getUsers', adminCheck, async (req, res, next) => {
   try{
-    console.log('REQ', req.session)
     const allUsers = await User.findAll()
     res.status(200).send(allUsers)
   }catch(err){

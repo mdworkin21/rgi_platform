@@ -4,12 +4,13 @@ const path = require('path')
 const morgan = require('morgan')
 const app = express()
 const passport = require('passport')
+const LocalStrategy = require('passport-local')
 const session = require('express-session')
 const db = require('./db/database')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({db})
 const User = require('./db/models/User')
-
+require('../secrets')
 //Passport Registration
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -24,6 +25,13 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
+// passport.use(new LocalStrategy(
+//   function(username, password, done)
+// {
+
+// }), () => {
+
+// })
 
 //Logging MiddleWare
 app.use(morgan('dev'))
