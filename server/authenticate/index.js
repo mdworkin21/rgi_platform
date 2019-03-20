@@ -28,7 +28,6 @@ let checkSignUpCode = async (req, res, next) => {
 
 router.get('/', async (req, res, next)=> {
   try{
-    console.log("TEST")
     let user = await User.findOne({
       where: {
         id: req.session.password.user

@@ -53,8 +53,8 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, '..', '/client/public')))
 
 //Api Routes
-app.use('/api', require('./api'))
 app.use('/authenticate', require('./authenticate'))
+app.use('/api', require('./api'))
 
 // Redirects to homepage when no API reqs match
 app.get('*',  (req, res) => {
