@@ -15,7 +15,7 @@ const adminCheck = async (req, res, next) => {
       next()
     }
   } catch(err){
-    res.status(409).send(userIsAdmin)
+    res.status(401).send(userIsAdmin)
   }
 }
 
