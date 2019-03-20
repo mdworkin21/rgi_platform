@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
+import '../public/styles/adduser.css'
 
 const roles = ['admin', 'mediaBuyer', 'analytics']
 
@@ -33,7 +34,6 @@ class AddUser extends Component {
     }
   }
 
-
   displayRoles = () => {
     return roles.map(el => {
       return (
@@ -48,13 +48,13 @@ class AddUser extends Component {
   render() {
     const roles = this.displayRoles(roles)
     return (
-      <div>
-        <form className="ui form" style={{position: 'relative', top: '150px', left: '30%', width: '300px'}} onSubmit={this.handleSubmit}>
-           <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
-           <input type="text" name="code" placeholder="Sign up code" onChange={this.handleChange} value={this.state.code} />
+      <div className="add-container">
+        <form className="ui form" onSubmit={this.handleSubmit}>
+           <input id="add-input-email" type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
+           <input id="add-input-signupCode" type="text" name="code" placeholder="Sign up code" onChange={this.handleChange} value={this.state.code} />
            {roles}
-           <input type="submit" name="signup-btn" value="Sign Up"/>
         </form>
+           <button onClick={this.handleSubmit} className="ui negative button" id="add-btn" type="submit">Add User</button>
       </div>
     )
   }

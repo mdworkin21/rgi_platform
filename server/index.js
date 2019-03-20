@@ -4,14 +4,13 @@ const path = require('path')
 const morgan = require('morgan')
 const app = express()
 const passport = require('passport')
-const LocalStrategy = require('passport-local')
 const session = require('express-session')
 const db = require('./db/database')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({db})
 const User = require('./db/models/User')
 
-
+//Checks env, if in dev, requires secrets
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 //Passport Registration
