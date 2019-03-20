@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {db, User, SignupToken} = require('../../db/models')
 
-const adminCheck = async (req, res, next) => {
+let adminCheck = async (req, res, next) => {
   try{
     let userIsAdmin = await User.findOne({
       where: {
@@ -18,7 +18,7 @@ const adminCheck = async (req, res, next) => {
   }
 }
 
-router.get('/getUsers', async(req, res, next) => {
+router.get('/getUsers', adminCheck, async(req, res, next) => {
   try{
     console.log('GMMMMMMM', req)
     const allUsers = await User.findAll()
