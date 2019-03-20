@@ -1,6 +1,6 @@
 const db = require('../server/db/database')
 const SignupTokens = require('../server/db/models/SignupTokens')
-require('../secrets.js')
+// require('../secrets.js')
 
 const seed = async () => {
   try{
