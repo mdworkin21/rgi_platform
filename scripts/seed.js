@@ -33,4 +33,4 @@ if (module === require.main){
   runSeed()
 }
 
-module.exports = {seed, runSeed}
+module.exports = seed
