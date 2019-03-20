@@ -20,7 +20,7 @@ const adminCheck = async (req, res, next) => {
 }
 
 //API Routes 
-router.use('/userManagement', adminCheck, require('./userManagement'))
+router.use('/userManagement', require('./userManagement'))
 
 
 //Handles 404 Errors
