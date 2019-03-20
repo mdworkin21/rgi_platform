@@ -65,7 +65,7 @@ router.post('/checkUser', async (req, res, next) => {
   }
 })
 
-router.post('/newUser', checkSignUpCode, async (req, res, next) => {
+router.post('/newUser', async (req, res, next) => {
   try{
     const newUser = await User.create(req.body)
     req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
