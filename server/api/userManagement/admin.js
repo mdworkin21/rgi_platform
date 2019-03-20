@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {db, User, SignupToken} = require('../../db/models')
 
-let adminCheck = async (req, res, next) => {
+const adminCheck = async (req, res, next) => {
   try{
     let userIsAdmin = await User.findOne({
       where: {
@@ -14,13 +14,12 @@ let adminCheck = async (req, res, next) => {
       res.sendStatus(401)
     }
   } catch(err){
-    next(err)
+    res.sendStatus(401)
   }
 }
 
-router.get('/getUsers', adminCheck, async(req, res, next) => {
+router.get('/getUsers', adminCheck, async (req, res, next) => {
   try{
-    console.log('GMMMMMMM', req)
     const allUsers = await User.findAll()
     res.status(200).send(allUsers)
   }catch(err){
