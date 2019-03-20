@@ -7,7 +7,7 @@ const adminCheck = async (req, res, next) => {
     console.log("SESSS", req.session.passport)
     userIsAdmin = await User.findOne({
       where: {
-        id: req.session.passport.user
+        id: 1
       }
     })
     console.log('USER', userIsAdmin)
