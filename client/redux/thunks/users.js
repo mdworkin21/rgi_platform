@@ -21,15 +21,18 @@ export const getUserFromPassport = (id) => {
 export const createNewUser = (user) => {
   return async(dispatch) => {
     try{
-      const newUser = await axios.post('/authenticate/newUser', {
+      const response = await axios.post('/authenticate/newUser', {
         userName: user.userName,
         email: user.email,
         password: user.password,
         token: user.token
       })
-      if (newUser.status === 201){
+      const newUser = response.data
+      const action = getUser(newUser)
+
+      if (reponse.status === 201){
         // dispatch(getUserFromPassport(newUser.data.id))
-        dispatch(getUser(newUser.data))
+        dispatch(action)
       }
     } catch(err){
         //I'd prefer not to use an alert here, need to change for future, okay for now.
