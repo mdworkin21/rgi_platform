@@ -18,7 +18,7 @@ const adminCheck = async (req, res, next) => {
   }
 }
 
-router.get('/getUsers', adminCheck, async(req, res, next) => {
+router.get('/getUsers', async(req, res, next) => {
   try{
     console.log('GMMMMMMM', req)
     const allUsers = await User.findAll()
