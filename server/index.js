@@ -10,7 +10,7 @@ const db = require('./db/database')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({db})
 const User = require('./db/models/User')
-// require('../secrets')
+require('../secrets')
 //Passport Registration
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -47,10 +47,6 @@ app.use(session({
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-  }
 }))
 
 app.use(passport.initialize())
