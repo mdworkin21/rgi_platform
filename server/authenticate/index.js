@@ -26,19 +26,19 @@ let checkSignUpCode = async (req, res, next) => {
   }
 }
 
-router.get('/', async (req, res, next)=> {
-  try{
-    let user = await User.findOne({
-      where: {
-        id: req.session.password.user
-      }
-    })
-    res.status(200).send(user)
+// router.get('/', async (req, res, next)=> {
+//   try{
+//     let user = await User.findOne({
+//       where: {
+//         id: req.session.password.user
+//       }
+//     })
+//     res.status(200).send(user)
 
-  } catch(err){
-    next(err)
-  }
-})
+//   } catch(err){
+//     next(err)
+//   }
+// })
 
 //Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
