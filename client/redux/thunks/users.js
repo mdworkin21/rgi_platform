@@ -6,6 +6,7 @@ import { getUser, deleteUser, failedLogIn, failedSignUp} from '../actions/users'
 export const getUserFromPassport = (id) => {
   return async (dispatch) => {
     try{
+      console.log('PASS', id)
       const response = await axios.get(`/authenticate/getUser/${id}`)
       const user = response.data
       const action = getUser(user)
