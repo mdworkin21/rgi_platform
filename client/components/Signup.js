@@ -57,7 +57,6 @@ class Signup extends Component {
     }
 
   render(){
-    console.log("SIGN", this.props.user.loggedIn)
     return this.props.user.loggedIn ? <Redirect to='/dashboard' /> : (
       <form  onSubmit={this.handleSubmit}>
         <div className="left-box">

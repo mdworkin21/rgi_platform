@@ -41,11 +41,11 @@ let checkSignUpCode = async (req, res, next) => {
 // })
 
 //Checks to see if user exists in db, and whether pw is correct. 
-router.get('/getUser/:id', (req, res, next) => {
-  if (req.user){
-    res.status(200).send(req.user)
-  }
-})
+// router.get('/getUser/:id', (req, res, next) => {
+//   if (req.user){
+//     res.status(200).send(req.user)
+//   }
+// })
 
 router.post('/checkUser', async (req, res, next) => {
   try{
