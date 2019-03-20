@@ -41,6 +41,7 @@ const individualizedErrMsg = (errorsArray) => {
   return messages
 }
 
+
 module.exports = {
   formValidator,
   checkEachField,

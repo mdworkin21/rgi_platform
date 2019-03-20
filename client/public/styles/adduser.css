@@ -3,14 +3,15 @@
   top: 40vh;
   left: 33vw;
   width: 35vw;
-  height: 35vh;
+  height: 33vh;
   border: 2px solid black;
 }
 
 #add-btn {
   position: relative;
   top: 5vh;
-  left: 13vw;
+  left: 7vw;
+  width: 20vw;
 }
 
 #add-input-email {

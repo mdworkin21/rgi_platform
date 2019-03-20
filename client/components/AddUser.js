@@ -49,6 +49,7 @@ class AddUser extends Component {
     const roles = this.displayRoles(roles)
     return (
       <div className="add-container">
+      <h1>Add New User</h1>
         <form className="ui form" onSubmit={this.handleSubmit}>
            <input id="add-input-email" type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
            <input id="add-input-signupCode" type="text" name="code" placeholder="Sign up code" onChange={this.handleChange} value={this.state.code} />
