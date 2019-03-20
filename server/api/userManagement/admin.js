@@ -3,6 +3,7 @@ const {db, User, SignupToken} = require('../../db/models')
 
 const adminCheck = async (req, res, next) => {
   try{
+    console.log("STANDOUTTTTTTTT", req.session)
     let userIsAdmin = await User.findOne({
       where: {
         id: req.session.passport.user
