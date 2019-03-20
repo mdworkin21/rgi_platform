@@ -12,7 +12,7 @@ const adminCheck = async (req, res, next) => {
     if (userIsAdmin.isAdmin){
       next()
     } else {
-      res.sendStatus(404)
+      res.sendStatus(401)
     }
   } catch(err){
     next(err)
@@ -20,7 +20,7 @@ const adminCheck = async (req, res, next) => {
 }
 
 //API Routes 
-router.use('/userManagement', require('./userManagement'))
+router.use('/userManagement', adminCheck, require('./userManagement'))
 
 
 //Handles 404 Errors
