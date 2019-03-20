@@ -3,10 +3,11 @@ import axios from 'axios'
 import { getUser, deleteUser, failedLogIn, failedSignUp} from '../actions/users'
 
 //USER THUNK
+
+//No longer know if this thunk is needed
 export const getUserFromPassport = (id) => {
   return async (dispatch) => {
     try{
-      console.log('PASS', id)
       const response = await axios.get(`/authenticate/getUser/${id}`)
       const user = response.data
       const action = getUser(user)
@@ -26,9 +27,9 @@ export const createNewUser = (user) => {
         password: user.password,
         token: user.token
       })
-      console.log("ERR", newUser.status)
       if (newUser.status === 201){
-        dispatch(getUserFromPassport(newUser.data.id))
+        // dispatch(getUserFromPassport(newUser.data.id))
+        dispatch(getUser(newUser.data))
       }
     } catch(err){
         //I'd prefer not to use an alert here, need to change for future, okay for now.

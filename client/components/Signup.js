@@ -11,7 +11,7 @@ import {
 import '../public/styles/authenticate.css'
 
 class Signup extends Component {
-  state ={
+  state = {
     userName: '',
     email: '',
     password: '',

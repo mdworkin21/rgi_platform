@@ -39,6 +39,7 @@ router.get('/', async (req, res, next)=> {
     next(err)
   }
 })
+
 //Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
   if (req.user){
