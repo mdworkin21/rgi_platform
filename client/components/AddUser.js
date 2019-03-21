@@ -61,5 +61,4 @@ class AddUser extends Component {
   }
 }
 
-
 export default AddUser

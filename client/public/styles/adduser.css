@@ -1,6 +1,6 @@
 .add-container {
   position: relative;
-  top: 40vh;
+  top: 25vh;
   left: 33vw;
   width: 35vw;
   height: 33vh;
@@ -9,7 +9,7 @@
 
 #add-btn {
   position: relative;
-  top: 5vh;
+  top: 4.8vh;
   left: 7vw;
   width: 20vw;
 }
@@ -25,4 +25,8 @@
 .ui.radio.checkbox {
   position: relative;
   left: 8vw;
+}
+
+.ui.negative.button{
+  border-radius: 0px;
 }
