@@ -1,0 +1,33 @@
+.modal-container { 
+  background-color: #333;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  opacity: .85;
+  z-index: 1;
+}
+
+.modal-content-container {
+display: inline;
+position: absolute;
+top: 30vh;
+left: 29%;
+width: 42vw;
+height: 37vh;
+border: 2px solid black;
+background-color: white;
+box-shadow: 0 3px 7px;
+z-index: 2;
+}
+
+h2 {
+  position: relative;
+  left: 25%;
+}
+
+.close-modal-btn {
+  position: relative;
+  top: 22vh;
+  left: 14vw;
+  width: 12.5vw;
+}

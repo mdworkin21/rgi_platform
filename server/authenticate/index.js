@@ -35,7 +35,6 @@ router.get('/getUser/:id', (req, res, next) => {
 
 router.post('/checkUser', async (req, res, next) => {
   try{
-    console.log('BBODY', req.body)
     const user = await User.findOne({
       where: {
         userName: req.body.user.userName
