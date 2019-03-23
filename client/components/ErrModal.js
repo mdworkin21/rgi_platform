@@ -6,7 +6,6 @@ import { closeModal } from '../redux/actions/users';
 
 class ErrModal extends Component {
   handleClick = () => {
-    console.log('CLICK')
     this.props.resetModal()
   }
   render(){
@@ -16,7 +15,7 @@ class ErrModal extends Component {
         <div className="modal-content-container"> 
         <div className="modal-content">
           <h2>Sorry, there's been an error</h2>
-          <p>List Errs here</p>
+          <p>{this.props.errors}</p>
         </div>
         <button onClick={this.handleClick} className="ui negative button close-modal-btn"> Close</button>
       </div>
@@ -25,17 +24,10 @@ class ErrModal extends Component {
   }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
     resetModal: () => dispatch(closeModal())
   }
 }
-const mapStateToProps = (state) => {
-  console.log('state', state.user.logInErr)
-  return {
-    err: state.user.logInErr
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ErrModal)
+export default connect(null, mapDispatchToProps)(ErrModal)

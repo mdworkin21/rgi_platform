@@ -8,7 +8,7 @@ import '../public/styles/authenticate.css'
 const Authenticate = (props) => {
     return (
       <React.Fragment>
-        {props.err ? <ErrModal/> : ''}
+        {props.err ? <ErrModal errors={'THIS WILL BE FROM STORE'}/> : ''}
         <div id="login-box">
         <Signup />
         <Login />

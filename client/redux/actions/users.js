@@ -5,6 +5,7 @@ export const DELETE_USER = 'DELETE_USER'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 //USER ACTION CREATORS
 //Note: getUser takes care of login *and* signup
+
 export const getUser = (user) => {
   return {
     type: GET_USER,
