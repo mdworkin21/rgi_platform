@@ -11,9 +11,9 @@ let checkSignUpCode = async (req, res, next) => {
       }
     })
     if(!signupIsValid){
-      res.status(401).send('Email does not exist')
+      res.sendStatus(404)
     } else if (!signupIsValid.checkSignupCode(req.body.token)) {
-      res.status(401).send('Signup code is invalid')
+      res.sendStatus(401)
     } else {
         if(signupIsValid.role === 'admin'){
           req.body.isAdmin = true
@@ -21,7 +21,6 @@ let checkSignUpCode = async (req, res, next) => {
       next()
     }
   } catch(err){
-      console.log('ERRR', err)
       next(err)
   }
 }
@@ -41,9 +40,9 @@ router.post('/checkUser', async (req, res, next) => {
       }
     }) 
     if(!user){
-      res.status(401).send('Wrong username and/or password')
+      res.sendStatus(401)
     } else if (!user.checkPassword(req.body.user.password)) {
-      res.status(401).send('Wrong username and/or password')
+      res.sendStatus(401)
     } else {
       req.login(user, err => (err ? next(err) : res.json(user)))
     }

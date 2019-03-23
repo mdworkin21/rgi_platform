@@ -6,9 +6,10 @@ import ErrModal from './ErrModal'
 import '../public/styles/authenticate.css'
  
 const Authenticate = (props) => {
+  console.log("PROPS", props)
     return (
       <React.Fragment>
-        {props.err ? <ErrModal errors={'THIS WILL BE FROM STORE'}/> : ''}
+        {props.err ? <ErrModal errors={props.errMessage}/> : ''}
         <div id="login-box">
         <Signup />
         <Login />
@@ -21,7 +22,8 @@ const Authenticate = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    err: state.user.logInErr
+    err: state.user.logInErr,
+    errMessage: state.user.errMsg
   }
 }
 
