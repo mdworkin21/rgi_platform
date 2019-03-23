@@ -15,7 +15,7 @@ class ErrModal extends Component {
         <div className="modal-content-container"> 
         <div className="modal-content">
           <h2>Sorry, there's been an error</h2>
-          <p>{this.props.errors}</p>
+          <h3 className="err-message">{this.props.errors}</h3>
         </div>
         <button onClick={this.handleClick} className="ui negative button close-modal-btn"> Close</button>
       </div>
