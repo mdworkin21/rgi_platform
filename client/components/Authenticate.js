@@ -6,7 +6,6 @@ import ErrModal from './ErrModal'
 import '../public/styles/authenticate.css'
  
 const Authenticate = (props) => {
-  console.log("PROPS", props)
     return (
       <React.Fragment>
         {props.err ? <ErrModal errors={props.errMessage}/> : ''}

@@ -26,10 +26,11 @@
   width: 12.5vw;
 }
 
+
 .err-message{
   position: relative;
-  top: 1vh;
-  left: 28%;
+  top: 3vh;
+  left: 25%;
 }
 
 h2 {
