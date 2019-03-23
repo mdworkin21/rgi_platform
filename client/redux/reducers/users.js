@@ -1,4 +1,4 @@
-import {GET_USER, DELETE_USER,  GET_USER_FAIL} from '../actions/users'
+import {GET_USER, DELETE_USER,  GET_USER_FAIL, CLOSE_MODAL} from '../actions/users'
 
 const initialState = {
   user: {},
@@ -14,7 +14,12 @@ export default function userReducer(state = initialState, action){
       return {...state,  logInErr: true}
     case DELETE_USER: 
       return {...state, user: {}, loggedIn: false}
+    case CLOSE_MODAL: {
+      return {...state, logInErr: false}
+    }
     default:
       return state
   }
  }
+
+ 

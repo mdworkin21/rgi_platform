@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import '../public/styles/errmodal.css'
+import { closeModal } from '../redux/actions/users';
 
 
 class ErrModal extends Component {
   handleClick = () => {
     console.log('CLICK')
+    this.props.resetModal()
   }
   render(){
     return (
@@ -23,6 +25,12 @@ class ErrModal extends Component {
   }
 }
 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetModal: () => dispatch(closeModal())
+  }
+}
 const mapStateToProps = (state) => {
   console.log('state', state.user.logInErr)
   return {
@@ -30,4 +38,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ErrModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ErrModal)

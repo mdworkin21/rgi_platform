@@ -1,13 +1,14 @@
 import React from 'react' 
+import { connect } from 'react-redux'
 import Signup from './Signup'
 import Login from './Login'
 import ErrModal from './ErrModal'
 import '../public/styles/authenticate.css'
  
-const Authenticate = () => {
+const Authenticate = (props) => {
     return (
       <React.Fragment>
-        <ErrModal/>
+        {props.err ? <ErrModal/> : ''}
         <div id="login-box">
         <Signup />
         <Login />
@@ -17,7 +18,14 @@ const Authenticate = () => {
     )
 }
 
-export default Authenticate
+
+const mapStateToProps = (state) => {
+  return {
+    err: state.user.logInErr
+  }
+}
+
+export default connect(mapStateToProps)(Authenticate)
 
 
 
