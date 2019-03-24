@@ -20,24 +20,25 @@
 }
 
 .close-modal-btn {
-  position: relative;
-  top: 22vh;
+  position: absolute;
+  top: 30vh;
   left: 14vw;
   width: 12.5vw;
 }
 
 .modal-content {
   display: flex;
-  flex-direction: column;
+  width: 25vw;
 }
 
 .err-message{
   position: relative;
   top: 3vh;
-  left: 25%;
+  left: 30%;
+  word-wrap: break-word;
 }
 
 h2 {
-  position: relative;
+  position: absolute;
   left: 25%;
 }
