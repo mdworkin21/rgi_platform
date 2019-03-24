@@ -9,6 +9,7 @@ import {
   individualizedErrMsg
 } from "../utilities/formValidator";
 import '../public/styles/authenticate.css'
+import { signUpErr } from '../redux/actions/users';
 
 class Signup extends Component {
   state = {
@@ -43,8 +44,7 @@ class Signup extends Component {
       checkEachField(formValidator, this.state)
     );
     const finalMessage = this.displayErrMessages(messages)
-    //Placeholder for now
-    alert(finalMessage)
+    this.props.errMessage(finalMessage)
   }
 }
 
@@ -68,7 +68,7 @@ class Signup extends Component {
           <input type='text' name='token' placeholder='Sign Up Code' onChange={this.handleChange} value={this.state.token} />
           <input type="submit" name="signup-btn" value="Sign Up"/>
         </div>
-      </form>    
+      </form>  
     )
   }
 }
@@ -81,7 +81,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createUser: (user) => dispatch(createNewUser(user))
+    createUser: (user) => dispatch(createNewUser(user)),
+    errMessage: (msg) => dispatch(signUpErr(msg))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

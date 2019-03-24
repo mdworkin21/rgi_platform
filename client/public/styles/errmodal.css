@@ -26,6 +26,10 @@
   width: 12.5vw;
 }
 
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
 
 .err-message{
   position: relative;

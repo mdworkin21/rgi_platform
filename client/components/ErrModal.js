@@ -8,6 +8,7 @@ class ErrModal extends Component {
   handleClick = () => {
     this.props.resetModal()
   }
+
   render(){
     return (
       <React.Fragment>
