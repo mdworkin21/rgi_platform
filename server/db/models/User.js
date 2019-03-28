@@ -57,7 +57,13 @@ const User = db.define('users', {
 //Instance Methods
 User.prototype.checkPassword = function(userPassword) {
   return User.encryptPassword(userPassword, this.salt()) === this.password()
+}
 
+User.prototype.updatePassword = function(password){
+  const newSalt = User.generateSalt()
+  const newPassword = User.encryptPassword(password, newSalt)
+  return [newSalt, newPassword]
+  
 }
 
 // Class Methods
@@ -86,6 +92,6 @@ const setSaltAndPassword = (user) => {
 }
 
 User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
+// User.beforeUpdate(setSaltAndPassword)
 
 module.exports = User

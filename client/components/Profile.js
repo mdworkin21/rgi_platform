@@ -10,7 +10,7 @@ class Profile extends Component {
     userName: '',
     email: '',
     password: '',
-    rePassword: ''
+    repassword: ''
   }
 
   handleChange = (event) => {
@@ -19,30 +19,44 @@ class Profile extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
-
+    try{
+      let updatedUser = await axios.put(`/api/userManagement/user/${this.props.id}`, this.state)
+      if (updatedUser.status === 202){
+        this.setState({
+          password: '',
+          repassword: ''
+        })
+      }
+    } catch(err){
+      console.log(err)
+    }
   }
+
   async componentDidMount(){
-    let user = await axios.get(`/api/userManagement/user/${this.props.id}`)
-    console.log("USER", user.data)
-    let userInfo = user.data
-   this.setState({
-     userName: userInfo.userName,
-     email: userInfo.email,
-   })
+    try{
+      const user = await axios.get(`/api/userManagement/user/${this.props.id}`)
+      const userInfo = user.data
+      this.setState({
+        userName: userInfo.userName,
+        email: userInfo.email,
+      })
+    }catch(err){
+      console.log(err)
+    }
   }
 
   render(){
     return (
-      <form  onSubmit={this.handleSubmit}>
+      <form  onSubmit={this.handleSubmit} style={{position: 'relative', top: '15vh',left: '38%'}}>
       <div className="left-box">
-        <h1>Sign Up</h1>
+        <h1>Profile</h1>
         <input type="text" name="userName" placeholder="Username" onChange={this.handleChange} value={this.state.userName} />
         <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
         <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
         <input type="password" name="repassword" placeholder="Retype Password" onChange={this.handleChange} value={this.state.repassword} />
-        <input type="submit" name="signup-btn" value="Sign Up"/>
+        <input type="submit" name="save-btn" value="Save"/>
       </div>
     </form>  
     )
@@ -50,7 +64,6 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE', state, state.user.user.id)
   return {
     id: state.user.user.id
   }

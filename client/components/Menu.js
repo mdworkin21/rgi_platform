@@ -17,8 +17,6 @@ const dropMenuConfig = {
   ]
 }
 
-
-
 class Menu extends Component  {
   handleLogOut = () => {
     this.props.logOutUser()
