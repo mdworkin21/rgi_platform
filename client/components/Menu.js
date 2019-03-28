@@ -43,7 +43,6 @@ class Menu extends Component  {
             list={dropMenuConfig.loggedIn} 
             handleLogOut={this.handleLogOut}
           />
-           <button className="negative ui button" id="logout-Btn"onClick={this.handleLogOut}>Logout</button>
           </div>
       )
     } else {
