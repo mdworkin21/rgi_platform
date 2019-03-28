@@ -4,6 +4,7 @@ export const GET_USER_FAIL= 'GET_USER_FAIL'
 export const DELETE_USER = 'DELETE_USER'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const SIGNUP_ERR = 'SIGNUP_ERR'
+export const UPDATE_USER = 'UPDATE_USER'
 //USER ACTION CREATORS
 //Note: getUser takes care of login *and* signup
 //Note: This should be refactored so that errs are in own reducer
@@ -38,5 +39,12 @@ export const signUpErr = (err) => {
   return {
     type: SIGNUP_ERR,
     err
+  }
+}
+
+export const updateUser = (userInfo) => {
+  return {
+    type: UPDATE_USER,
+    userInfo
   }
 }

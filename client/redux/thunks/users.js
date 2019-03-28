@@ -1,7 +1,8 @@
 import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
-import { getUser, deleteUser, failedLogIn, signUpErr} from '../actions/users'
+import { getUser, deleteUser, failedLogIn, signUpErr, updateUser} from '../actions/users'
 import {errMessages} from '../../utilities/errMessages'
+
 //USER THUNK
 export const getUserFromPassport = (id) => {
   return async (dispatch) => {
@@ -54,6 +55,20 @@ export const logInUser = (user) => {
     }
   }
 }
+
+export const updateUserInfo = (id, userInfo) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/api/userManagement/user/${id}`, userInfo)
+      const updatedUser = response.data
+      const action = updateUser(updatedUser)
+      dispatch(action)
+    } catch(err){
+       console.log(err)
+    }
+  }
+}
+
 
 export const removeUser = () => {
   return async (dispatch) => {

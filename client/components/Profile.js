@@ -3,6 +3,7 @@ import regeneratorRuntime, { async } from "regenerator-runtime";
 import axios from 'axios'
 import {connect} from 'react-redux'
 import '../public/styles/authenticate.css'
+import { updateUserInfo } from '../redux/thunks/users';
 
 
 class Profile extends Component {
@@ -22,13 +23,12 @@ class Profile extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     try{
-      let updatedUser = await axios.put(`/api/userManagement/user/${this.props.id}`, this.state)
-      if (updatedUser.status === 202){
-        this.setState({
-          password: '',
-          repassword: ''
-        })
-      }
+      await this.props.updateUserInformation(this.props.id, this.state)
+      this.setState({
+        password: '',
+        repassword: ''
+      })
+      
     } catch(err){
       console.log(err)
     }
@@ -69,4 +69,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Profile)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserInformation: (id, userInfo) => dispatch(updateUserInfo(id, userInfo))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
