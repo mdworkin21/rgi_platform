@@ -41,9 +41,13 @@ const individualizedErrMsg = (errorsArray) => {
   return messages
 }
 
+const comparePasswords = (password, retypedPassword) => {
+  return password === retypedPassword
+}
 
 module.exports = {
   formValidator,
   checkEachField,
-  individualizedErrMsg
+  individualizedErrMsg,
+  comparePasswords
 }

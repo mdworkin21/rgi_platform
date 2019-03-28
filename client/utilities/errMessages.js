@@ -6,5 +6,9 @@ export const errMessages = {
   },
   login: {
     401: "Wrong username and/or password"
+  },
+  updateProfile: {
+    match: "Retyped password does not match password",
+    length: "Password must be at least 8 characters long"
   }
 }
