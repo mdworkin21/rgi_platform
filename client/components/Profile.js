@@ -24,9 +24,10 @@ class Profile extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
-    
+    //First check to make sure password and retyped match
     if (comparePasswords(this.state.password, this.state.repassword)){
-      if(this.state.password.length >= 8){
+      //Then check to make sure password is long enough
+      if(this.state.password.length >= 8 || this.state.password === ''){
         try{
           await this.props.updateUserInformation(this.props.id, this.state)
           this.setState({
@@ -68,6 +69,10 @@ class Profile extends Component {
   }
 
   render(){
+    //Weak form of email validation, needs to be made strong
+    let isEmail = this.state.email.indexOf('@') !== -1
+    //Hides save button so users cannot accidentally (or on purpose) erase their email or username, button only appears when both fields are filled in.
+    let hideBtn = this.state.userName !== '' && (this.state.email !== '' && isEmail) ? false : true
     return (
       <React.Fragment>
         {this.props.err ? <ErrModal errors={this.props.errMessages}/> : ''}
@@ -78,7 +83,7 @@ class Profile extends Component {
             <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
             <input type="password" name="password" placeholder="New Password" onChange={this.handleChange} value={this.state.password} />
             <input type="password" name="repassword" placeholder="Retype New Password" onChange={this.handleChange} value={this.state.repassword} />
-            <input type="submit" name="save-btn" value="Save"/>
+            <input hidden={hideBtn} type="submit" name="save-btn" value="Save"/>
           </div>
         </form>  
       </React.Fragment>
@@ -102,3 +107,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+
+
+//Refactoring note: Might be better to just create a different form validator for this page, since we put a bunch of form validation logic above (we did this b/c we couldn't easily carry over form validation from sign up. Probaly best to refactor, but this works for now)
