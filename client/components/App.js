@@ -5,6 +5,7 @@ import Menu from './Menu'
 import Dashboard from './Dashboard'
 import ManageUsers from './ManageUsers'
 import AddUser from './AddUser';
+import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
 import { connect } from 'react-redux';
 
@@ -17,6 +18,7 @@ const App = (props) => {
         <PrivateRoute exact path='/dashboard' component={Dashboard} authed={props.auth} />
         <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={props.auth} />
         <PrivateRoute exact path='/adduser' component={AddUser} authed={props.auth}/>
+        <PrivateRoute exact path='/profile' component={Profile} authed={props.auth}/>
       </div>
     </Router>
   )

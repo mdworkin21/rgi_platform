@@ -9,9 +9,12 @@ import ManageUsers from './ManageUsers';
 const dropMenuConfig = {
   admin : [
       {to: '/manageusers', id: 'manage-users', name: 'Manage Users'},
-      {to: '/adduser', id: 'add-user', name: 'Add User'}
+      {to: '/adduser', id: 'add-user', name: 'Add User'},
+      {to: '/profile', id: 'profile', name: 'Profile'}
     ],
-  loggedIn: []
+  loggedIn: [
+    {to: '/profile', id: 'profile', name: 'Profile'}
+  ]
 }
 
 
@@ -37,7 +40,11 @@ class Menu extends Component  {
       return (
         <div id="menu-container">
            <h1>RGI Platform</h1>
-           <div id="welcome-Msg">{`Welcome, ${this.props.user.user.userName}` }</div>
+           <Dropdown 
+            userName={this.props.user.user.userName} 
+            list={dropMenuConfig.loggedIn} 
+            handleLogOut={this.handleLogOut}
+          />
            <button className="negative ui button" id="logout-Btn"onClick={this.handleLogOut}>Logout</button>
           </div>
       )

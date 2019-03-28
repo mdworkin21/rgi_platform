@@ -18,7 +18,7 @@ class ErrModal extends Component {
           <h2>Sorry, there's been an error.</h2>
           <h3 className="err-message">{this.props.errors}</h3>
         </div>
-        <button onClick={this.handleClick} className="ui negative button close-modal-btn"> Close</button>
+        <button onClick={this.handleClick} className="ui negative button close-modal-btn">Close</button>
       </div>
       </React.Fragment>
     )
