@@ -1,14 +1,14 @@
 import regeneratorRuntime, {async} from "regenerator-runtime";
 import axios from 'axios'
-import {createCampaign, getCampaign, deleteCampaign, editCampaign} from '../../actions/campaigns/taboola'
+import {createTaboolaCampaign, getCampaign, deleteCampaign, editCampaign} from '../../actions/campaigns/taboola'
 
 //Thunks
-export const createNewCampaign = () => {
+export const createNewTabCampaign = () => {
   return async (dispatch) => {
     try {
       const response = await axios.post('api/campaignManagement/taboola/createCampaign', 'TEST')
       const campaignName = response.data
-      const action = createCampaign(campaignName)
+      const action = createTaboolaCampaign(campaignName)
       dispatch(action)
     } catch(err) {
         console.log(err)

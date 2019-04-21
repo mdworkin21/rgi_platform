@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from './Button'
 import '../public/styles/dashboard.css'
-import { createNewCampaign } from '../redux/thunks/campaigns/taboola';
+import { createNewTabCampaign } from '../redux/thunks/campaigns/taboola';
 
 class Dashboard extends Component {
 
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createTabCampaign: (name) => dispatch(createNewCampaign(name))
+    createTabCampaign: (name) => dispatch(createNewTabCampaign(name))
   }
 }
 

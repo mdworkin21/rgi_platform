@@ -1,6 +1,6 @@
 //Action Types
 
-export const CREATE_NEW_CAMPAIGN = 'CREATE_NEW_CAMPAIGN'
+export const CREATE_NEW_TABOOLA_CAMPAIGN = 'CREATE_NEW_TABOOLA_CAMPAIGN'
 export const GET_CAMPAIGN = 'GET_CAMPAIGN'
 export const DELETE_CAMPAIGN = 'DELETE_CAMPAIGN'
 export const EDIT_CAMPAIGN = 'EDIT_CAMPAIGN'
@@ -9,9 +9,9 @@ export const EDIT_CAMPAIGN = 'EDIT_CAMPAIGN'
 //Action Creators
 //Not sure if this has payload or what it should be, ask mike
 //Payloads probably need to change for rest as well
-export const createCampaign = (name) => {
+export const createTaboolaCampaign = (name) => {
   return {
-    type: CREATE_NEW_CAMPAIGN,
+    type: CREATE_NEW_TABOOLA_CAMPAIGN,
     name
 
   }
