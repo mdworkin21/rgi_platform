@@ -1,6 +1,7 @@
 import regeneratorRuntime, {async} from "regenerator-runtime"
 import axios from 'axios'
-import { getUser, deleteUser, failedLogIn, signUpErr, updateUser} from '../actions/users'
+import { getUser, deleteUser, updateUser} from '../actions/users'
+import {failedLogIn, signUpErr} from '../actions/applicationLevel'
 import {errMessages} from '../../utilities/errMessages'
 
 //USER THUNK
@@ -44,6 +45,7 @@ export const logInUser = (user) => {
       const loggedInUser = await axios.post('/authenticate/checkUser', {user})
       if (loggedInUser.status === 200){
         const userIsIn = loggedInUser.data
+        console.log("WHY", userIsIn)
         const action = getUser(userIsIn)
         dispatch(action)
       } 

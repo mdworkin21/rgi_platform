@@ -34,16 +34,16 @@ class Menu extends Component  {
           />
         </div>
       )
-    } else if (this.props.user.loggedIn){
-      return (
-        <div id="menu-container">
-           <h1>RGI Platform</h1>
-           <Dropdown 
-            userName={this.props.user.user.userName} 
-            list={dropMenuConfig.loggedIn} 
-            handleLogOut={this.handleLogOut}
-          />
-          </div>
+    } else if (this.props.applicationLevel.loggedIn){
+        return (
+          <div id="menu-container">
+            <h1>RGI Platform</h1>
+            <Dropdown 
+              userName={this.props.user.user.userName} 
+              list={dropMenuConfig.loggedIn} 
+              handleLogOut={this.handleLogOut}
+            />
+            </div>
       )
     } else {
       return (
@@ -66,6 +66,7 @@ class Menu extends Component  {
 
 const mapStateToProps = (state) => {
   return {
+    applicationLevel: state.applicationLevel.loggedIn,
     user: state.user,
     admin: state.user.user.isAdmin
   }

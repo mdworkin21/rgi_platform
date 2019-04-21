@@ -57,7 +57,7 @@ class Signup extends Component {
     }
 
   render(){
-    return this.props.user.loggedIn ? <Redirect to='/dashboard' /> : (
+    return this.props.applicationLevel.loggedIn ? <Redirect to='/dashboard' /> : (
       <form  onSubmit={this.handleSubmit}>
         <div className="left-box">
           <h1>Sign Up</h1>
@@ -75,6 +75,7 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    applicationLevel: state.applicationLevel,
     user: state.user
   }
 }

@@ -21,8 +21,8 @@ const Authenticate = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    err: state.user.logInErr,
-    errMessage: state.user.errMsg
+    err: state.applicationLevel.logInErr,
+    errMessage: state.applicationLevel.errMsg
   }
 }
 

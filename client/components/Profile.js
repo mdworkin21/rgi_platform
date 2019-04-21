@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
   //Note, when you redo reducers, you'll want to change type of err you throw
   return {
     id: state.user.user.id,
-    err: state.user.logInErr,
+    err: state.applicationLevel.logInErr,
     errMessages: state.user.errMsg
   }
 }

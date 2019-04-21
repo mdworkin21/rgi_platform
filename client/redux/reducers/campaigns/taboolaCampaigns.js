@@ -8,7 +8,7 @@ const initialState = {
 }
 
 
-export default function TaboolaCampaignReducer(state = initialState, action){
+export default function taboolaCampaignReducer(state = initialState, action){
   switch(action.type){
     case CREATE_NEW_TABOOLA_CAMPAIGN:
       return {...state, campaignID: action.name}

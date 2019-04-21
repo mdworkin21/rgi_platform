@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import '../public/styles/errmodal.css'
-import { closeModal } from '../redux/actions/users';
+import { closeModal } from '../redux/actions/applicationLevel';
 
 
 class ErrModal extends Component {

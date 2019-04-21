@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from './Button'
-import '../public/styles/dashboard.css'
 import { createNewTabCampaign } from '../redux/thunks/campaigns/taboola';
+import '../public/styles/dashboard.css'
 
 class Dashboard extends Component {
 
   handleCreateCampaign = async () => {
     try {
-      this.props.createTabCampaign()
+      await this.props.createTabCampaign()
     } catch(err) {
         console.log(err)
     }
@@ -22,7 +22,7 @@ class Dashboard extends Component {
         <div id='dashboard-container'>REDIRECTED TO THIS PAGE ON LOGIN</div>
       </React.Fragment>
     ) 
-}
+  }
 }
 
 

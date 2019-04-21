@@ -1,9 +1,9 @@
 //USER ACTION TYPES
 export const GET_USER = 'GET_USER'
-export const GET_USER_FAIL= 'GET_USER_FAIL'
+// export const GET_USER_FAIL= 'GET_USER_FAIL'
 export const DELETE_USER = 'DELETE_USER'
-export const CLOSE_MODAL = 'CLOSE_MODAL'
-export const SIGNUP_ERR = 'SIGNUP_ERR'
+// export const CLOSE_MODAL = 'CLOSE_MODAL'
+// export const SIGNUP_ERR = 'SIGNUP_ERR'
 export const UPDATE_USER = 'UPDATE_USER'
 //USER ACTION CREATORS
 //Note: getUser takes care of login *and* signup
@@ -16,12 +16,12 @@ export const getUser = (user) => {
   }
 }
 
-export const failedLogIn = (err) => {
-  return {
-    type: GET_USER_FAIL,
-    err
-  }
-}
+// export const failedLogIn = (err) => {
+//   return {
+//     type: GET_USER_FAIL,
+//     err
+//   }
+// }
 
 export const deleteUser = () => {
   return {
@@ -29,18 +29,18 @@ export const deleteUser = () => {
   }
 }
 
-export const closeModal = () => {
-  return {
-    type: CLOSE_MODAL
-  }
-}
+// export const closeModal = () => {
+//   return {
+//     type: CLOSE_MODAL
+//   }
+// }
 
-export const signUpErr = (err) => {
-  return {
-    type: SIGNUP_ERR,
-    err
-  }
-}
+// export const signUpErr = (err) => {
+//   return {
+//     type: SIGNUP_ERR,
+//     err
+//   }
+// }
 
 export const updateUser = (userInfo) => {
   return {

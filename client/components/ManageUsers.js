@@ -59,7 +59,7 @@ class ManageUsers extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.admin.admins,
-    loggedIn: state.user.loggedIn,
+    loggedIn: state.applicationLevel.loggedIn,
     admin: state.user.user.isAdmin,
     id: state.user.user.id
   }

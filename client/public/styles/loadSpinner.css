@@ -1,0 +1,42 @@
+/* Mobile */
+#load-spinner{
+  position: relative;
+  top: 4em;
+  height: 8vh;
+  margin-top: 2em;
+  padding-bottom: 4em;
+}
+
+/* Medium Screens */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { 
+  #load-spinner{
+    position: relative;
+    top: 3em;
+    height: 8vh;
+    margin-top: 8em;
+    padding-top: 2em;
+  }
+}
+
+
+/* Large Screens */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { 
+  #load-spinner{
+    position: relative;
+    top: .7em;
+    height: 8vh;
+    margin-top: 7em;
+    padding-bottom: 4em;
+  }
+}
+
+/* Extra Large Screen */
+@media only screen and (min-width: 90.063em) { 
+  #load-spinner{
+    position: relative;
+    top: 2em;
+    height: 8vh;
+    margin-top: 8em;
+    padding-bottom: 4em;
+  }
+}
