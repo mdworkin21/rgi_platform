@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 import userReducer from '../reducers/users'
 import adminReducer from '../reducers/admin'
+import TaboolaCampaignReducer from '../reducers/campaigns/taboolaCampaigns'
 
 
 // //Redux Devtools 
@@ -10,7 +11,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 // //Combines Reducers
 const rootReducer = combineReducers({
   user: userReducer,
-  admin: adminReducer
+  admin: adminReducer,
+  taboolaCampaigns: TaboolaCampaignReducer
 })
 
 //Creates Store

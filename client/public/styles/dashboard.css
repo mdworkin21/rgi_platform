@@ -5,3 +5,9 @@
   left: 30%;
   font-size: 30px;
 }
+
+#create-campaign-btn {
+  position: relative;
+  top: 34vh;
+  left: 89%;
+}

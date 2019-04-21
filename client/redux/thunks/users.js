@@ -1,4 +1,4 @@
-import regeneratorRuntime, { async } from "regenerator-runtime";
+import regeneratorRuntime, {async} from "regenerator-runtime"
 import axios from 'axios'
 import { getUser, deleteUser, failedLogIn, signUpErr, updateUser} from '../actions/users'
 import {errMessages} from '../../utilities/errMessages'
