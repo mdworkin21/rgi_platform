@@ -16,7 +16,6 @@ router.put('/:id', async (req, res, next) => {
     let updatedUser
     if (req.body.password === ''){
       updatedUser = await User.update({
-        userName: req.body.userName,
         email: req.body.email,
       }, 
         {
@@ -31,7 +30,6 @@ router.put('/:id', async (req, res, next) => {
       const user = await User.findByPk(req.params.id)
       const [newSalt, newPassword] = user.updatePassword(req.body.password)
       updatedUser = await User.update({
-        userName: req.body.userName,
         email: req.body.email,
         password: newPassword,
         salt: newSalt

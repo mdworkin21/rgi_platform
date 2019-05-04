@@ -1,10 +1,10 @@
 export const errMessages = {
   newUser: {
     404: "Email not found",
-    409: "Email and/or username already registered",
+    409: "Email already registered",
   },
   login: {
-    401: "Wrong username and/or password"
+    401: "Wrong email and/or password"
   },
   updateProfile: {
     match: "Retyped password does not match password",

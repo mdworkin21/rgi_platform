@@ -18,7 +18,7 @@ class Dropdown extends Component {
       <div className="dropdown">
         <button className="dropbtn" onClick={this.handleClick}>
           <i className="large user circle icon" />
-          {this.props.userName}
+          {this.props.email}
         </button>
         <div className={toggleDropDown}>
           {this.props.list && this.props.list.map(link => {

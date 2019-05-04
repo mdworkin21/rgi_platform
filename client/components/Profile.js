@@ -59,7 +59,6 @@ class Profile extends Component {
       const user = await axios.get(`/api/userManagement/user/${this.props.id}`)
       const userInfo = user.data
       this.setState({
-        userName: userInfo.userName,
         email: userInfo.email,
       })
     }catch(err){
@@ -70,8 +69,8 @@ class Profile extends Component {
   render(){
     //Weak form of email validation, needs to be made strong
     let isEmail = this.state.email.indexOf('@') !== -1
-    //Hides save button so users cannot accidentally (or on purpose) erase their email or username, button only appears when both fields are filled in.
-    let hideBtn = this.state.userName !== '' && (this.state.email !== '' && isEmail) ? false : true
+    //Hides save button so users cannot accidentally (or on purpose) erase their email, button only appears when both fields are filled in.
+    let hideBtn = this.state.email !== '' && isEmail ? false : true
     return (
       <React.Fragment>
         {this.props.err ? <ErrModal errors={this.props.errMessages}/> : ''}

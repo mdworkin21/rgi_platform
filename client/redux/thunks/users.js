@@ -18,34 +18,12 @@ export const getUserFromPassport = (id) => {
   }
 }
 
-// export const createNewUser = (user) => {
-//   return async(dispatch) => {
-//     try{
-//       const response = await axios.post('/authenticate/newUser', {
-//         userName: user.userName,
-//         email: user.email,
-//         password: user.password,
-//         token: user.token
-//       })    
-//       if (response.status === 201){
-//         dispatch(getUserFromPassport(response.data.id))
-//       }
-//     } catch(err){
-//         const errCode = err.toString().slice(-3)
-//         const errMsg = errMessages.newUser[errCode]
-//         dispatch(signUpErr(errMsg))
-//         console.log(err)
-//     }
-//   }
-// }
-
 export const logInUser = (user) => {
   return async (dispatch) => {
     try{
       const loggedInUser = await axios.post('/authenticate/checkUser', {user})
       if (loggedInUser.status === 200){
         const userIsIn = loggedInUser.data
-        console.log("WHY", userIsIn)
         const action = getUser(userIsIn)
         dispatch(action)
       } 
