@@ -1,7 +1,5 @@
 import {CREATE_NEW_TABOOLA_CAMPAIGN, GET_CAMPAIGN, DELETE_CAMPAIGN, EDIT_CAMPAIGN} from '../../actions/campaigns/taboola'
 
-
-
 const initialState = {
   campaignName: '',
   campaignID: ''
