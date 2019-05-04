@@ -4,7 +4,6 @@ export const DELETE_USER = 'DELETE_USER'
 export const UPDATE_USER = 'UPDATE_USER'
 
 //USER ACTION CREATORS
-//Note: getUser takes care of login *and* signup
 export const getUser = (user) => {
   return {
     type: GET_USER,

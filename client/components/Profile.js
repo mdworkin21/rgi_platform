@@ -10,7 +10,6 @@ import '../public/styles/authenticate.css'
 
 class Profile extends Component {
   state = {
-    userName: '',
     email: '',
     password: '',
     repassword: ''
@@ -79,7 +78,6 @@ class Profile extends Component {
         <form  onSubmit={this.handleSubmit} style={{position: 'relative', top: '15vh',left: '38%'}}>
           <div className="left-box">
             <h1>Profile</h1>
-            <input type="text" name="userName" placeholder="Username" onChange={this.handleChange} value={this.state.userName} />
             <input type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
             <input type="password" name="password" placeholder="New Password" onChange={this.handleChange} value={this.state.password} />
             <input type="password" name="repassword" placeholder="Retype New Password" onChange={this.handleChange} value={this.state.repassword} />

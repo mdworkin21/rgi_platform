@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {db, User, SignupToken} = require('../../db/models')
+const {db, User} = require('../../db/models')
 
 
 router.get('/getUsers', async (req, res, next) => {
@@ -30,17 +30,19 @@ router.put('/updateAdminPriv/:id/:value', async(req, res, next) => {
   }
 })
 
-//Allows Admin to create new signup token
+//Allows Admin to create new user
 router.post('/newSignup', async (req, res, next) => {
   try{
-    await SignupToken.create({
-      email: req.body.email,
-      signupCode: req.body.code,
-      role: req.body.role
-    })
-    res.sendStatus(201)
+    const newUser = await User.create(req.body)
+    res.sendStatus(201);
   }catch(err){
-    next(err)
+    if (err.name === 'SequelizeUniqueConstraintError'){
+      let errMsg = err.errors[0].message
+      //For some reason errMsg doesn't actually get sent, so I have a work around for now
+      res.status(401).send(errMsg)
+    } else {
+        next(err)
+    }
   }
 })
 

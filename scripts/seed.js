@@ -1,16 +1,16 @@
 const db = require('../server/db/database')
-const SignupTokens = require('../server/db/models/SignupTokens')
+const User = require('../server/db/models/User')
 
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 const seed = async () => {
   try{
     await db.sync({force: true})
-    let defaultUser = await SignupTokens.create({
-      email: process.env.SEED_EMAIL,
-      role: 'admin',
-      signupCode: process.env.SEED_SIGN_UP_CODE
-    })
+      await User.create({
+        email: process.env.SEED_EMAIL,
+        isAdmin: true,
+        password: process.env.SEED_ADMIN_PASSWORD
+      })
   }catch(err){
     console.log(err)
   }

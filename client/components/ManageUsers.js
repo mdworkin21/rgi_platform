@@ -17,17 +17,17 @@ class ManageUsers extends Component {
     return !this.props.admin ? <div>UNAUTHORIZED</div> : (
         <table className="ui celled table" id="table-container">
           <thead>
-            <tr><th>User Name</th>
-            <th>Email</th>
-            <th>Admin</th>
-            <th>Remove User</th>
-          </tr></thead>
+            <tr>
+              <th>Email</th>
+              <th>Admin</th>
+              <th>Remove User</th>
+            </tr>
+          </thead>
           <tbody>
         {this.props.users.map(el => {
           const disableBtn = el.id === this.props.id ? 'disabled' : ''
           return (
             <tr key={el.id}>
-              <td data-label="User Name">{el.userName}</td>
               <td data-label="Email">{el.email}</td>
               <td data-label="Admin">
                 <div className="ui checkbox">

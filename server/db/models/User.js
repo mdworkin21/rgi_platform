@@ -4,17 +4,6 @@ const crypto = require('crypto')
 
 //User Model
 const User = db.define('users', {
-  userName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    },
-    unique: {
-      args: true,
-      msg: 'Username already in use!'
-  }
-  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,

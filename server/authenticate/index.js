@@ -1,29 +1,5 @@
 const router = require('express').Router()
 const User = require('../db/models/User')
-const SignupToken = require('../db/models/SignupTokens')
-
-//Custom Middleware
-let checkSignUpCode = async (req, res, next) => {
-  try{
-    let signupIsValid = await SignupToken.findOne({
-      where: {
-        email: req.body.email
-      }
-    })
-    if(!signupIsValid){
-      res.sendStatus(404)
-    } else if (!signupIsValid.checkSignupCode(req.body.token)) {
-      res.sendStatus(401)
-    } else {
-        if(signupIsValid.role === 'admin'){
-          req.body.isAdmin = true
-        }
-      next()
-    }
-  } catch(err){
-      next(err)
-  }
-}
 
 // Checks to see if user exists in db, and whether pw is correct. 
 router.get('/getUser/:id', (req, res, next) => {
@@ -36,7 +12,7 @@ router.post('/checkUser', async (req, res, next) => {
   try{
     const user = await User.findOne({
       where: {
-        userName: req.body.user.userName
+        email: req.body.user.email
       }
     }) 
     if(!user){
@@ -48,21 +24,6 @@ router.post('/checkUser', async (req, res, next) => {
     }
   } catch(err){
       next(err)
-  }
-})
-
-router.post('/newUser', checkSignUpCode, async (req, res, next) => {
-  try{
-    const newUser = await User.create(req.body)
-    req.login(newUser, err => (err ? next(err) : res.status(201).send(newUser)))
-  }catch(err){
-    if (err.name === 'SequelizeUniqueConstraintError'){
-      let errMsg = err.errors[0].message
-      //For some reason errMsg doesn't actually get sent, so I have a work around for now
-      res.status(401).send(errMsg)
-    } else {
-        next(err)
-    }
   }
 })
 

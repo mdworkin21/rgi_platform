@@ -7,7 +7,7 @@ import '../public/styles/authenticate.css'
 
 class Login extends Component {
   state ={
-    userName: '',
+    email: '',
     password: '',
   }
 
@@ -21,7 +21,7 @@ class Login extends Component {
     event.preventDefault()
     try{
       await this.props.logInUser({
-        userName: this.state.userName,
+        email: this.state.email,
         password: this.state.password
       })
     }catch(err){
@@ -43,7 +43,7 @@ class Login extends Component {
       <form onSubmit={this.handleSubmit}>
       <div className="right-box">
         <h1 id="loginTitle">Log In</h1>
-        <input type="text" className="loginInput" name="userName" placeholder="Username" onChange={this.handleChange} value={this.state.userName} />
+        <input type="text" className="loginInput" name="email" placeholder="email" onChange={this.handleChange} value={this.state.email} />
         <input type="password" className="loginInput" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
         <input type="submit" className="loginBtn" name="login-in" value="Log In" />
       </div>
