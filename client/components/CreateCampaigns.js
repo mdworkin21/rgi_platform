@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { createNewTabCampaign } from '../redux/thunks/campaigns/taboola';
-import '../public/styles/CreateCampaigns.css'
+import '../public/styles/createCampaigns.css'
 
 
 class CreateCampaigns extends Component {
