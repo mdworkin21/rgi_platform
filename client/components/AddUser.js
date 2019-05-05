@@ -40,7 +40,12 @@ class AddUser extends Component {
            <input id="add-input-email" type="text" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} />
            <input id="add-input-password" type="text" name="password" placeholder="Temporary Password" onChange={this.handleChange} value={this.state.password} />
            <div className="ui checkbox">
-              <input type="checkbox" name="isAdmin" onClick={() => this.setState({isAdmin: !this.state.isAdmin})} value={this.state.isAdmin}/>
+              <input type="checkbox" 
+                     name="isAdmin" 
+                     onChange={() => this.setState({isAdmin: !this.state.isAdmin})} 
+                     value={this.state.isAdmin} 
+                     checked={this.state.isAdmin}
+                />
               <label>{'Admin'}</label>
            </div>
 

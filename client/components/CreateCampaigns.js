@@ -6,6 +6,8 @@ import '../public/styles/CreateCampaigns.css'
 
 class CreateCampaigns extends Component {
 
+  //This handler, and jsx below is just a placeholder
+  //Replace with components/buttons/logic to implement flow
   handleCreateCampaign = async () => {
     try {
       await this.props.createTabCampaign()
