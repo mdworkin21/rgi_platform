@@ -1,0 +1,16 @@
+.create-campaign-menu-wrapper {
+  position: relative;
+  left: 1vw;
+  top: 4vh;
+  width: 76vw;
+}
+
+
+.create-campaign-wrapper {
+  position: relative;
+  left: 13vw;
+  top: 28vh;
+  width: 78vw;
+  height: 50vh;
+  border: 1px black solid;
+}

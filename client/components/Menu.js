@@ -10,10 +10,13 @@ const dropMenuConfig = {
   admin : [
       {to: '/manageusers', id: 'manage-users', name: 'Manage Users'},
       {to: '/adduser', id: 'add-user', name: 'Add User'},
-      {to: '/profile', id: 'profile', name: 'Profile'}
+      {to: '/profile', id: 'profile', name: 'Profile'},
+      {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'}
     ],
   loggedIn: [
-    {to: '/profile', id: 'profile', name: 'Profile'}
+    {to: '/profile', id: 'profile', name: 'Profile'},
+    {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'}
+
   ]
 }
 

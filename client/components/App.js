@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { connect } from 'react-redux';
 import Authenticate from './Authenticate'
 import Menu from './Menu'
 import Dashboard from './Dashboard'
@@ -7,7 +8,7 @@ import ManageUsers from './ManageUsers'
 import AddUser from './AddUser';
 import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
-import { connect } from 'react-redux';
+import CreateCampaigns from './CreateCampaigns';
 
 const App = (props) => {
   return (
@@ -19,6 +20,8 @@ const App = (props) => {
         <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={props.auth} />
         <PrivateRoute exact path='/adduser' component={AddUser} authed={props.auth}/>
         <PrivateRoute exact path='/profile' component={Profile} authed={props.auth}/>
+        <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={props.auth}/>
+
       </div>
     </Router>
   )
