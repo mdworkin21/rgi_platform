@@ -1,5 +1,5 @@
 //Put Taboola API Functions here
-let TABOOLA_ACCOUNTS = {
+const TABOOLA_ACCOUNTS = {
   sportschew: 'sportschew-sc',
   blitzlift: 'blitzlift-sc',
   dogsome: 'ifroppit-dogsome-sc',
@@ -20,7 +20,7 @@ function taboola_getAccountDetails(){
 
   let auth_response = UrlFetchApp.fetch("https://backstage.taboola.com/backstage/api/1.0/ifroppit/advertisers/", params);
   
-  Logger.log(auth_response);
+  console.log(auth_response);
   return JSON.parse(auth_response);
 }
 
@@ -29,7 +29,7 @@ function taboola_getTokenStatus(){
   let token = PropertiesService.getScriptProperties().getProperty("taboola_token");
 
   if(token === null){
-    Logger.log(token);
+    console.log(token);
     return null;
   }
   
@@ -49,7 +49,7 @@ function taboola_setToken() {
   let tokenStatus = taboola_getTokenStatus();
   
   if(tokenStatus === 200){
-    Logger.log("Existing token is valid");
+    console.log("Existing token is valid");
     return PropertiesService.getScriptProperties().getProperty("taboola_token");
   }
   
@@ -68,7 +68,7 @@ function taboola_setToken() {
   let auth_response = UrlFetchApp.fetch("https://backstage.taboola.com/backstage/oauth/token?client_id=" + client_id + "&client_secret=" + client_secret + "&grant_type=client_credentials", params);
   let authObj = JSON.parse(auth_response);
   let token = authObj.access_token;
-  Logger.log('Token: ' + token);
+  console.log('Token: ' + token);
   
   PropertiesService.getScriptProperties().setProperty("taboola_token", token);
   
@@ -92,14 +92,14 @@ function taboola_getTokenDetails(){
     return 401;
   }
   
-  Logger.log(JSON.parse(auth_response));
+  console.log(JSON.parse(auth_response));
   return JSON.parse(auth_response);
 }
 
 function taboola_getTokenExpiry(){
   let details = taboola_getTokenDetails();
   let expiry = details['expires_in'] / 60 / 60;
-  Logger.log("Expires In: [%s] hours.", expiry.toFixed(2));
+  console.log("Expires In: [%s] hours.", expiry.toFixed(2));
 }
 
 function taboola_getDictionary(){
@@ -113,7 +113,7 @@ function taboola_getDictionary(){
   };
   
   let auth_response = UrlFetchApp.fetch("https://backstage.taboola.com/backstage/api/1.0/blitzlift-sc/dictionary/audience_segments", params);
-  Logger.log(auth_response);
+  console.log(auth_response);
   
 }
 module.exports = {
