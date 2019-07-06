@@ -13,7 +13,7 @@ const TaboolaToken = db.define('taboolaTokens', {
     type: Sequelize.DATE,
     allowNull: false,
     validate: {
-      notEmpty: tue
+      notEmpty: true
     }
   }
 })
