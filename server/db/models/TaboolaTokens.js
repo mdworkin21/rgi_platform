@@ -10,7 +10,7 @@ const TaboolaToken = db.define('taboolaTokens', {
     }
 },
   expirationDate: {
-    type: Sequelize.DATE,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true

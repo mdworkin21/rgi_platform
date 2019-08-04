@@ -19,7 +19,8 @@ class Login extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
-    try{
+
+    try {
       await this.props.logInUser({
         email: this.state.email,
         password: this.state.password
