@@ -12,7 +12,7 @@ const testData = {
   "spending_limit_model": "MONTHLY",
   "marketing_objective": "DRIVE_WEBSITE_TRAFFIC"
   }
-  
+   
   
 
 const getTokenFromDB = async (req, res, next) => {
