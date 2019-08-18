@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { createNewTabCampaign } from '../redux/thunks/campaigns/taboola';
 import '../public/styles/createCampaigns.css'
-
+import NewCampaign from './NewCampaign'
 
 class CreateCampaigns extends Component {
 
@@ -18,13 +18,14 @@ class CreateCampaigns extends Component {
 
   render(){
     return (
-        <div className='create-campaign-wrapper'>
-          <div className='ui tabular menu create-campaign-menu-wrapper'>
-            <a className="active item"> Home </a>
-            <button className="item" onClick={this.handleCreateCampaign}> Taboola </button>
-            <a className="item"> Outbrain </a>
-          </div>
-        </div>
+        // <div className='create-campaign-wrapper'>
+        //   <div className='ui tabular menu create-campaign-menu-wrapper'>
+        //     <a className="active item"> Home </a>
+        //     <button className="item" onClick={this.handleCreateCampaign}> Taboola </button>
+        //     <a className="item"> Outbrain </a>
+        //   </div>
+        // </div>
+        <NewCampaign />
     )
   }
 }
