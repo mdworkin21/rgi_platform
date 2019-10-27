@@ -1,13 +1,16 @@
 const router = require('express').Router()
 const axios = require('axios')
 const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
-const token = require('../tokenManagement/taboola')
+const {setToken} = require('../tokenManagement/taboola')
 //Remember to require in taboola utilities
 require('../../../secrets')
 
+
+
+const token = setToken();  
+
 const init_createCampaign = (campaignData) => {
 
-  const token = token.setToken();  
   const account = campaignData.account;
   let campaign = createCampaign(campaignData);
   if(campaign['http_status'] == 400){
@@ -34,6 +37,16 @@ const init_createCampaign = (campaignData) => {
   return campaignId;
 }
 
+
+router.post('/createCampaign', async (req, res, next) => {
+  try {
+    console.log('REQ', req.body)
+
+  } catch(e){
+    next(e)
+  }
+
+})
 const createCampaign = async (campaignData) => {
 
   // const example_json = {

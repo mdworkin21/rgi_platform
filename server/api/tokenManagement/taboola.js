@@ -17,7 +17,7 @@ const getTokenFromDB = async () => {
     }
 }
 
-const taboola_getTokenStatus = async () => {
+const getTokenStatus = async () => {
   let getToken = await getTokenFromDB()
 
   let headers =  {
@@ -40,7 +40,7 @@ const taboola_getTokenStatus = async () => {
  
 const setToken = async () => {
   try {
-    let validToken = await taboola_getTokenStatus()
+    let validToken = await getTokenStatus()
 
     if (!validToken){
       let newToken = await axios.post(`https://backstage.taboola.com/backstage/oauth/token?client_id=${process.env.TAB_CLIENT_ID}&client_secret=${process.env.TAB_CLIENT_SECRET}&grant_type=client_credentials`)

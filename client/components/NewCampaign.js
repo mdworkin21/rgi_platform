@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 const campaignType = [
 'taboolaDesktop',
@@ -23,7 +24,7 @@ const campaignConfiguration = [
   'url',
   'desktopCPC',
   'mobileCPC',
-  'taboolarDailyCap',
+  'taboolaDailyCap',
   'outbrainDailyCap'
 ]
 
@@ -59,9 +60,12 @@ class NewCampaign extends Component {
   }
 
   //This will be async
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
     console.log('CLICK!')
+    try {
+      let campaignData = await axios.post('/api/campaignManagement/taboola/createCampaign', this.state)
+    } catch(e){}
   }
 
   handleCheckBox = (event) => {
@@ -87,7 +91,7 @@ class NewCampaign extends Component {
           })}
         </form>
 
-        <form id='campaign-type'>
+        <form id='campaign-type' onSubmit={this.handleSubmit}>
         {campaignType.map(type => {
           return (
             <div key={type} className='ui checkbox'>
@@ -102,6 +106,7 @@ class NewCampaign extends Component {
             )
           })
         }
+        <button type='submit'>SUBBMIT</button>
         </form>  
       </div>
     )
