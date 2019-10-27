@@ -23,7 +23,7 @@ const init_createCampaign = (campaignData) => {
   
   // create the correct number of campaign items
   for(var i = 0; i < items.length; i++){
-    var item = taboola_createItem(account, campaignId, items[i].url);
+    var item = createItem(account, campaignId, items[i].url);
     items[i].response = item;
   }
   
@@ -119,7 +119,7 @@ const checkItemStatus = async (account, item) => {
     })
     if(response.status === "CRAWLING"){
       // if item is still CRAWLING, recursively check status
-      taboola_checkItemStatus(account, item);
+      checkItemStatus(account, item);
     } else {
       return true;
     }

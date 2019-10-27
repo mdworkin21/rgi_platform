@@ -1,35 +1,59 @@
-const router = require('express').Router()
 const axios = require('axios')
-const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
-//Remember to require in taboola utilities
+const {TaboolaToken} = require('../../db')
+const Sequelize = require('sequelize')
 require('../../../secrets')
+//Remember to require in taboola utilities
 
-const getTokenFromDB = async (req, res, next) => {
+const getTokenFromDB = async () => {
     try {
-      let token = await TaboolaToken.max('id')
-      if (Number(token.expirationDate) > 0){
-        next()
-      } else {
-        console.log('TEMP')
-        //pass to request token middleware
-      }
+      let token = await TaboolaToken.findAll({
+        group: ['id'],
+        order: Sequelize.literal('max(id) DESC')
+      })
+
+      return token[0].dataValues  
     } catch(err){
-      res.sendStatus(401)
+      console.error('Error: ', err)
     }
 }
 
-const setToken = async (req, res, next) => {
-  try { 
-    let getToken = await axios.post(`https://backstage.taboola.com/backstage/oauth/token?client_id=${process.env.TAB_CLIENT_ID}&client_secret=${process.env.TAB_CLIENT_SECRET}&grant_type=client_credentials`)
+const taboola_getTokenStatus = async () => {
+  let getToken = await getTokenFromDB()
 
-    // getoken = JSON.parse(getoken)
-    console.log("GET TOKEN", getToken.data.access_token)
-    //process api response, put into object, token, expirationDate, and extra json)
-    // res.status(200).send(newToken)
-    return getToken.data.access_token
-    // let newToken = await TaboolaToken.create({
-    //   // token: gettoken,
-    //   // expirationDate: getTokenEXP
-    // })
-  } catch (e) {}
+  let headers =  {
+    headers: {
+    Authorization: 'Bearer ' + getToken.token
+    }}
+
+    try {
+      let auth_response = await axios.get("https://backstage.taboola.com/backstage/api/1.0/ifroppit/advertisers/", headers);
+      if (auth_response.status === 200){
+        return getToken.token;
+      } else {
+        return false
+      }
+    } catch(e) {
+        console.error(e.response.status)
+        return false
+  }  
 }
+ 
+const setToken = async () => {
+  try {
+    let validToken = await taboola_getTokenStatus()
+
+    if (!validToken){
+      let newToken = await axios.post(`https://backstage.taboola.com/backstage/oauth/token?client_id=${process.env.TAB_CLIENT_ID}&client_secret=${process.env.TAB_CLIENT_SECRET}&grant_type=client_credentials`)
+
+      if (newToken.status === 200){
+        let newTokenSet = await TaboolaToken.create({
+          token: newToken.data.access_token
+        })
+      }
+    } else {
+      return validToken
+    }
+  } catch(e) {}
+}
+
+module.exports = {getTokenFromDB, setToken}

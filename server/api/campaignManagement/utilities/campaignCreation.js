@@ -41,28 +41,31 @@ const createItemArray = (campaignData) => {
 
 // create utm_campaign URL parameter
 const createCampaignUTM = (campaignData) => {
-  if(campaignData.platform === "taboola"){
-    let platform = 't';
-  } else if(campaignData.platform === "outbrain"){
-    let platform = 'o';
-  } else if(campaignData.platform === "yahoo"){
-    let platform = 'y';
+  let platform;
+  let targeting;
+
+  if (campaignData.platform === "taboola"){
+    platform = 't';
+  } else if (campaignData.platform === "outbrain"){
+    platform = 'o';
+  } else if (campaignData.platform === "yahoo"){
+    platform = 'y';
   }
   
   const device = campaignData.device === "desktop" ? '' : '9';
   
-  if(campaignData.targeting === "MSN"){
-    let targeting = 'm';
+  if (campaignData.targeting === "MSN"){
+    targeting = 'm';
   } else if (campaignData.targeting === "ESPN"){
-    let targeting = 'e';
+    targeting = 'e';
   } else if (campaignData.targeting === "FOX"){
-    let targeting = 'f';
+    targeting = 'f';
   } else if (campaignData.targeting === "BLACKLIST"){
-    let targeting = 'b';
+    targeting = 'b';
   } else if (campaignData.targeting === "PREMIUM"){
-    let targeting = 'p';
+    targeting = 'p';
   } else {
-    let targeting = '';
+    targeting = '';
   }
   
   return platform + device + targeting + campaignData.campaign;
@@ -130,18 +133,20 @@ function getBrandingText(site){
 
 // create campaign name structure by site and targeting
 const createCampaignName = (campaignData) => {
+  let site;
+  
   if(campaignData.site.indexOf('sportschew') > -1){
-    let site = 'SC';
+    site = 'SC';
   } else if(campaignData.site.indexOf('blitzlift') > -1){
-    let site = 'BL';
+    site = 'BL';
   } else if(campaignData.site.indexOf('dogsome') > -1){
-    let site = 'DS';
+    site = 'DS';
   } else if(campaignData.site.indexOf('insidetonight') > -1){
-    let site = 'IT';
+    site = 'IT';
   } else if(campaignData.site.indexOf('popularhealth') > -1){
-    let site = 'PH';
+    site = 'PH';
   } else if(campaignData.site.indexOf('hopeshared') > -1){
-    let site = 'HS';
+    site = 'HS';
   }
   
   let type = '';

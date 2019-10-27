@@ -1,5 +1,6 @@
 const db = require('../server/db/database')
 const User = require('../server/db/models/User')
+const TaboolaToken = require('../server/db/models/TaboolaTokens')
 
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
@@ -10,6 +11,14 @@ const seed = async () => {
         email: process.env.SEED_EMAIL,
         isAdmin: true,
         password: process.env.SEED_ADMIN_PASSWORD
+      })
+
+      await TaboolaToken.create({
+        token: '123abc'
+      }),
+
+      await TaboolaToken.create({
+        token: '123444abc'
       })
   }catch(err){
     console.log(err)
