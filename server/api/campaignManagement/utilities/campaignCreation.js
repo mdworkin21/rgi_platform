@@ -2,8 +2,8 @@ const createItemArray = (campaignData) => {
   
   const items = [];
   const url = campaignData.url;
-  const images = campaignData.imageURLs;
-  const headlines = campaignData.headlines;
+  let images = campaignData.imageURLs;
+  let headlines = campaignData.headlines;
   const campaignUTM = createCampaignUTM(campaignData);
 
   // if OB & obTag is enabled, add tag to all headlines
@@ -173,4 +173,12 @@ const createCampaignName = (campaignData) => {
     }
   }
   return site + ' - ' + campaignData.campaign + ' - ' + type + (campaignData.device === "desktop" ? "Desktop" : "Mobile");
+}
+
+module.exports = {
+  createCampaignUTM,
+  createCampaignName,
+  createItemArray,
+  getBrandingText,
+  createTrackingCode
 }
