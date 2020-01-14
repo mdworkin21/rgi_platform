@@ -1,7 +1,7 @@
 const axios = require('axios')
 const {TaboolaToken} = require('../../db')
 const Sequelize = require('sequelize')
-require('../../../secrets')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 //Remember to require in taboola utilities
 
 const getTokenFromDB = async () => {
@@ -27,7 +27,7 @@ const getTokenStatus = async () => {
 
     try {
       let auth_response = await axios.get("https://backstage.taboola.com/backstage/api/1.0/ifroppit/advertisers/", headers);
-      
+
       if (auth_response.status === 200){
         return getToken.token;
       } else {

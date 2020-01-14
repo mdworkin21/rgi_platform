@@ -4,7 +4,7 @@ const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db
 const {setToken} = require('../tokenManagement/taboola')
 const CampaignQueue = require('../campaignManagement/utilities/campaignQueue')
 //Remember to require in taboola utilities
-require('../../../secrets')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 
 let campaignQueue = new CampaignQueue()
 console.log('Camoaign', campaignQueue)
