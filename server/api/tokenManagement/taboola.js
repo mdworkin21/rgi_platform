@@ -27,6 +27,7 @@ const getTokenStatus = async () => {
 
     try {
       let auth_response = await axios.get("https://backstage.taboola.com/backstage/api/1.0/ifroppit/advertisers/", headers);
+      
       if (auth_response.status === 200){
         return getToken.token;
       } else {
