@@ -106,7 +106,7 @@ class NewCampaign extends Component {
             )
           })
         }
-        <button type='submit'>SUBBMIT</button>
+        <button type='submit'>SUBMIT</button>
         </form>  
       </div>
     )
