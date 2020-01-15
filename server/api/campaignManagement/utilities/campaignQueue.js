@@ -33,6 +33,17 @@ class CampaignQueue{
     }
     return removedHead
   }
+
+  length(){
+    let counter = 0
+    let current = this.head
+    while(current){
+      counter++
+      current = current.next
+    }
+
+    return counter
+  }
 }
 
 module.exports = CampaignQueue

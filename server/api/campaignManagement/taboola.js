@@ -50,6 +50,8 @@ router.post('/createCampaign', async (req, res, next) => {
     }
 
     console.log('Camoaign', campaignQueue)
+    console.log('Length', campaignQueue.length())
+
   } catch(e){
     next(e)
   }

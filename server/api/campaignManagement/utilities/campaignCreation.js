@@ -133,6 +133,7 @@ function getBrandingText(site){
 
 // create campaign name structure by site and targeting
 const createCampaignName = (campaignData) => {
+  console.log('DATA', campaignData)
   let site;
   
   if(campaignData.site.indexOf('sportschew') > -1){
@@ -172,6 +173,13 @@ const createCampaignName = (campaignData) => {
         break;
     }
   }
+
+  let device = (campaignData.device === "desktop" ? "Desktop" : "Mobile")
+
+  // console.log('site', site )
+  // console.log('campdata', campaignData.campaign)
+  // console.log('device', device)
+
   return site + ' - ' + campaignData.campaign + ' - ' + type + (campaignData.device === "desktop" ? "Desktop" : "Mobile");
 }
 

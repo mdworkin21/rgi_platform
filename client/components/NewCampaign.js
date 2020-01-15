@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {createCampaignName} from '../../server/api/campaignManagement/utilities/campaignCreation'
+import { createCampaignArray } from '../utilities/createCampaignConfig'
+import '../public/styles/newCampaign.css'
 
 const campaignType = [
   'ob_tag_enabled',
@@ -32,7 +33,6 @@ class NewCampaign extends Component {
   state = {
       campaign_name: '',
       url: '',
-      ob_tag_enabled: false,
       ob_tag: '',
       cpc_taboola_desktop: '',
       cpc_taboola_mobile: '',
@@ -40,6 +40,7 @@ class NewCampaign extends Component {
       cpc_outbrain_mobile: '',
       daily_cap_taboola: '',
       daily_cap_outbrain: '',
+      ob_tag_enabled: false,
       type_taboola_desktop: false,
       type_taboola_mobile: false,
       type_taboola_desktop_safe: false,
@@ -51,41 +52,6 @@ class NewCampaign extends Component {
       type_outbrain_mobile_premium: false
   }
 
-  createCampaignArray = (data) => {
-    const arr = []
-
-    // loop through keys to find campaign types
-    for(let key in data){
-      // only continue if key is a campaign type and is true 
-      if(key.indexOf('type_') !== 0 || data[key]) continue
-      let type = key.split('_')
-      console.log(type)
-      let obj = {
-        is_admin: this.props.admin,
-        campaign_name: data.campaign_name,
-        url: data.url,
-        site: data.url.replace(/.*\:\/\/|\..*/g,''),
-        platform: type[1],
-        device: type[2],
-        targeting: type[3] ? type[3] : "",
-        cpc: data[`cpc_${type[1]}_${type[2]}`],
-        daily_cap: data[`daily_cap_${type[1]}`]
-      }
-
-      obj.name = createCampaignName(obj)
-
-      // if outbrain and ob_tag enabled, add tag to object
-      if(obj.platform === 'outbrain'){
-        obj.ob_tag = data.ob_tag_enabled ? data.ob_tag_enabled : false
-      }
-
-      arr.push(obj);
-    }
-
-    console.log(arr);
-
-  }
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -95,9 +61,9 @@ class NewCampaign extends Component {
   //This will be async
   handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('CLICK!')
     try {
-      let campaignData = await axios.post('/api/campaignManagement/taboola/createCampaign', this.state)
+      let data = createCampaignArray(this.state)
+      let campaignData = await axios.post('/api/campaignManagement/taboola/createCampaign', data)
     } catch(e){}
   }
 
@@ -108,7 +74,7 @@ class NewCampaign extends Component {
   }
   render(){
     return (
-      <div>
+      <div className='form-container'>
         <form onSubmit={this.handleSubmit} id='campaign-configuration'>
           <div>Media Buyer:</div>
           {campaignConfiguration.map(config => {
@@ -139,7 +105,7 @@ class NewCampaign extends Component {
             )
           })
         }
-        <button type='submit'>SUBMIT</button>
+        <button type='submit' id='campaign-submit-btn'>SUBMIT</button>
         </form>  
       </div>
     )

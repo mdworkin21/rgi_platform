@@ -1,0 +1,35 @@
+.form-container {
+  position: relative;
+  left: 10vw;
+  top: 18vh;
+  display: flex;
+  flex-direction: row;
+}
+
+#campaign-configuration {
+  position: relative;
+  left: 16vw;
+  top: 4vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  height: 50vh;
+}
+
+#campaign-type {
+  position: relative;
+  left: 38vw;
+  top: 14vh;
+  display: flex;
+  flex-direction: column;
+  height: 22vh;
+  width: 19vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+}
+
+#campaign-submit-btn {
+  position: relative;
+  top: 1vh;
+}
