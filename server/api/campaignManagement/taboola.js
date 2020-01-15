@@ -7,7 +7,6 @@ const CampaignQueue = require('../campaignManagement/utilities/campaignQueue')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 
 let campaignQueue = new CampaignQueue()
-console.log('Camoaign', campaignQueue)
 
 const token = setToken();  
 
