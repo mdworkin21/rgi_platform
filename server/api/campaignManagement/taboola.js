@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 
 const token = setToken();  
 
+// Process campaign creation. Create campaign > create items > update items
 const init_createCampaign = (campaignData) => {
 
   const account = campaignData.account;
@@ -20,9 +21,9 @@ const init_createCampaign = (campaignData) => {
   
   var campaignId = campaign.id;
 
-  console.log('Campaign created: ' + campaignId + ' - ' + JSON.stringify(campaign));
+  // console.log('Campaign created: ' + campaignId + ' - ' + JSON.stringify(campaign));
   var items = createItemArray(campaignData);
-  console.log('Item array created: ' + JSON.stringify(items));
+  // console.log('Item array created: ' + JSON.stringify(items));
   
   // create the correct number of campaign items
   for(var i = 0; i < items.length; i++){
@@ -163,17 +164,18 @@ const createPayload = (campaignData) => {
     }
   }
   
-  if(campaignData.targeting === "BLACKLIST"){
-    payload["publisher_targeting"] = {
-      "type": "EXCLUDE",
-      "value": ["msn-msn", "msn-defaulthomepage", "foxnews-foxnews", "msn-msn-home", "msn-display-us", "msn-windowsapps-news-us", "espnappsnetwork-espnandroid", "espnnetwork-espn", "foxnews-androidapp", "msn-windowsapps-news-us-home", "foxnews-foxbusiness", "msn-windowsapps-money-us", "msn-windowsapps-money-us-home", "msn-msn-es", "msn-windowsapps-sports-us", "msn-chromeextension", "msn-hotmailoutlook-us", "msn-ie11-france", "msn-mahjong-js-us", "msn-netherlands", "msn-can", "msn-uae", "msn-uk", "msn-ie11-hungary", "msn-windowsapps-sports-us-win8", "msn-edgedefaulthomepage-uk", "msn-france", "msn-ie11-uk", "msn-ie11-poland", "msn-uk-home", "msn-australia", "msn-india-homepage-hi", "msn-windowsapps-news-us-android", "msn-malaysia-home", "msn-edgedefaulthomepage-colombia", "msn-germany", "msn-ie11-portugal", "msn-malaysia", "msn-ie11-czechrepublic", "msn-ie11-australia", "msn-edgedefaulthomepage-russia", "espnnetwork-cricinfo", "msn-jp", "msn-edgedefaulthomepage-japan", "msn-casualgames-msngamescom", "msn-australia-home", "msn-latam", "msn-ie", "msn-en-ww", "msn-spain", "msn-hotmailoutlook-uk", "msn-germany-home", "msn-edgedefaulthomepage-newzealand", "msn-edgedefaulthomepage-philippines", "foxnews-iosapp", "msn-windowsapps-sports-us-win8-home", "msn-southafrica", "msn-casualgames-microsoftsolitairecollection-js-us", "msn-display-can", "msn-edgedefaulthomepage-portugal", "espnnetwork-espnfcbrazil", "msn-uae-home", "msn-hotmailoutlook-canada", "msn-phillipines-home", "msn-outlook-denmark", "msn-outlook-austria-en", "msn-windowsapps-news-france-ios", "msn-outlook-thailand-en", "msn-windowsapps-news-canada-ios", "msn-ie11-russia", "espnnetwork-espnglobal", "msn-outlook-finland-en", "espnfantasynetwork-tournamentchallenge", "msn-edgedefaulthomepage-india", "msn-latam-home", "msn-ie11-turkey", "msn-display-france", "msn-display-japan", "msn-outlook-hongkong-en", "msn-edgedefaulthomepage-malaysia", "msn-casualgames-microsoftmahjong", "msn-outlook-ecuador", "espnappsnetwork-espncricinfoandroid", "espnappsnetwork-espnios", "msn-ie11-spain", "msn-greece", "msn-windowsapps-news-india-home", "msn-outlook-dominicanrepublic", "msn-portugal-home", "msn-casualgames-microsoftsolitairecollection-france", "msn-denmark", "msn-korea", "msn-display-uk", "msn-hotmailoutlook-france", "msn-newzealand", "msn-edgedefaulthomepage-korea", "msn-spain-home", "msn-outlook-southafrica", "msn-korea-home", "msn-ie11-netherlands", "msn-india-hi", "espnfantasynetwork-espn", "msn-edgedefaulthomepage-turkey", "msn-edgedefaulthomepage-france", "msn-indonesia", "msn-portugal", "msn-outlook-mexico", "msn-ie11-thailand", "msn-outlook-india-en", "msn-chile", "msn-ie11-austria", "msn-ie11-latinamericas", "msn-edgedefaulthomepage-mexico", "msn-edgedefaulthomepage-latinamericas", "msn-ie11-en-ww", "msn-edgedefaulthomepage-en-ww", "msn-ie11-mexico", "msn-outlook-australia", "msn-windowsapps-news-japan-ios", "msn-outlook-poland", "msn-brazil-home", "msn-outlook-turkey-en", "msn-edgedefaulthomepage-thailand", "msn-france-home", "msn-phillipines", "msn-windowsapps-news-russia", "msn-italy-home", "msn-outlook-spain-es", "msn-turkey", "msn-casualgames-microsoftmahjong-canada", "msn-argentina", "msn-outlook-philippines", "msn-singapore-home", "msn-edgedefaulthomepage-peru", "msn-outlook-ae-en", "msn-windowsapps-news-korea", "msn-italy", "msn-brazil", "msn-outlook-korea", "msn-edgedefaulthomepage-israel", "msn-mahjong-js-gb", "msn-ie11-ireland", "msn-can-home", "msn-windowsapps-sports-us-home", "msn-hungary", "msn-chromeextension-usspanish", "msn-newzealand-home", "msn-mahjong-js-ca", "msn-outlook-guatemala", "msn-outlook-taiwan", "msn-edgedefaulthomepage-poland", "msn-austria", "msn-netherlands-home", "espnnetwork-undefeated", "msn-outlook-hongkong", "msn-outlook-costarica", "msn-windowsapps-news-us-es-win8", "msn-turkey-home", "msn-il", "msn-singapore", "msn-outlook-german-de", "msn-outlook-malaysia", "msn-hotmailoutlook-netherlands", "msn-edgedefaulthomepage-canada", "msn-mahjong-js-japan", "msn-ie11-southafrica", "msn-india-home", "msn-ie11-greece", "msn-ie11-singapore", "msn-ie11-japan", "msn-edgedefaulthomepage-germany", "msn-edgedefaulthomepage-spain"]
-    }
-  }
-  //Logger.log(JSON.stringify(payload));
+  //// OUTDATED STRATEGY. NO LONGER CREATING BLACKLIST CAMPAIGNS
+  // if(campaignData.targeting === "BLACKLIST"){
+  //   payload["publisher_targeting"] = {
+  //     "type": "EXCLUDE",
+  //     "value": ["msn-msn", "msn-defaulthomepage", "foxnews-foxnews", "msn-msn-home", "msn-display-us", "msn-windowsapps-news-us", "espnappsnetwork-espnandroid", "espnnetwork-espn", "foxnews-androidapp", "msn-windowsapps-news-us-home", "foxnews-foxbusiness", "msn-windowsapps-money-us", "msn-windowsapps-money-us-home", "msn-msn-es", "msn-windowsapps-sports-us", "msn-chromeextension", "msn-hotmailoutlook-us", "msn-ie11-france", "msn-mahjong-js-us", "msn-netherlands", "msn-can", "msn-uae", "msn-uk", "msn-ie11-hungary", "msn-windowsapps-sports-us-win8", "msn-edgedefaulthomepage-uk", "msn-france", "msn-ie11-uk", "msn-ie11-poland", "msn-uk-home", "msn-australia", "msn-india-homepage-hi", "msn-windowsapps-news-us-android", "msn-malaysia-home", "msn-edgedefaulthomepage-colombia", "msn-germany", "msn-ie11-portugal", "msn-malaysia", "msn-ie11-czechrepublic", "msn-ie11-australia", "msn-edgedefaulthomepage-russia", "espnnetwork-cricinfo", "msn-jp", "msn-edgedefaulthomepage-japan", "msn-casualgames-msngamescom", "msn-australia-home", "msn-latam", "msn-ie", "msn-en-ww", "msn-spain", "msn-hotmailoutlook-uk", "msn-germany-home", "msn-edgedefaulthomepage-newzealand", "msn-edgedefaulthomepage-philippines", "foxnews-iosapp", "msn-windowsapps-sports-us-win8-home", "msn-southafrica", "msn-casualgames-microsoftsolitairecollection-js-us", "msn-display-can", "msn-edgedefaulthomepage-portugal", "espnnetwork-espnfcbrazil", "msn-uae-home", "msn-hotmailoutlook-canada", "msn-phillipines-home", "msn-outlook-denmark", "msn-outlook-austria-en", "msn-windowsapps-news-france-ios", "msn-outlook-thailand-en", "msn-windowsapps-news-canada-ios", "msn-ie11-russia", "espnnetwork-espnglobal", "msn-outlook-finland-en", "espnfantasynetwork-tournamentchallenge", "msn-edgedefaulthomepage-india", "msn-latam-home", "msn-ie11-turkey", "msn-display-france", "msn-display-japan", "msn-outlook-hongkong-en", "msn-edgedefaulthomepage-malaysia", "msn-casualgames-microsoftmahjong", "msn-outlook-ecuador", "espnappsnetwork-espncricinfoandroid", "espnappsnetwork-espnios", "msn-ie11-spain", "msn-greece", "msn-windowsapps-news-india-home", "msn-outlook-dominicanrepublic", "msn-portugal-home", "msn-casualgames-microsoftsolitairecollection-france", "msn-denmark", "msn-korea", "msn-display-uk", "msn-hotmailoutlook-france", "msn-newzealand", "msn-edgedefaulthomepage-korea", "msn-spain-home", "msn-outlook-southafrica", "msn-korea-home", "msn-ie11-netherlands", "msn-india-hi", "espnfantasynetwork-espn", "msn-edgedefaulthomepage-turkey", "msn-edgedefaulthomepage-france", "msn-indonesia", "msn-portugal", "msn-outlook-mexico", "msn-ie11-thailand", "msn-outlook-india-en", "msn-chile", "msn-ie11-austria", "msn-ie11-latinamericas", "msn-edgedefaulthomepage-mexico", "msn-edgedefaulthomepage-latinamericas", "msn-ie11-en-ww", "msn-edgedefaulthomepage-en-ww", "msn-ie11-mexico", "msn-outlook-australia", "msn-windowsapps-news-japan-ios", "msn-outlook-poland", "msn-brazil-home", "msn-outlook-turkey-en", "msn-edgedefaulthomepage-thailand", "msn-france-home", "msn-phillipines", "msn-windowsapps-news-russia", "msn-italy-home", "msn-outlook-spain-es", "msn-turkey", "msn-casualgames-microsoftmahjong-canada", "msn-argentina", "msn-outlook-philippines", "msn-singapore-home", "msn-edgedefaulthomepage-peru", "msn-outlook-ae-en", "msn-windowsapps-news-korea", "msn-italy", "msn-brazil", "msn-outlook-korea", "msn-edgedefaulthomepage-israel", "msn-mahjong-js-gb", "msn-ie11-ireland", "msn-can-home", "msn-windowsapps-sports-us-home", "msn-hungary", "msn-chromeextension-usspanish", "msn-newzealand-home", "msn-mahjong-js-ca", "msn-outlook-guatemala", "msn-outlook-taiwan", "msn-edgedefaulthomepage-poland", "msn-austria", "msn-netherlands-home", "espnnetwork-undefeated", "msn-outlook-hongkong", "msn-outlook-costarica", "msn-windowsapps-news-us-es-win8", "msn-turkey-home", "msn-il", "msn-singapore", "msn-outlook-german-de", "msn-outlook-malaysia", "msn-hotmailoutlook-netherlands", "msn-edgedefaulthomepage-canada", "msn-mahjong-js-japan", "msn-ie11-southafrica", "msn-india-home", "msn-ie11-greece", "msn-ie11-singapore", "msn-ie11-japan", "msn-edgedefaulthomepage-germany", "msn-edgedefaulthomepage-spain"]
+  //   }
+  // }
+
   return payload;
 }
 
-module.exports = {
+const taboola = {
   init_createCampaign,
   createCampaign,
   createItem,
@@ -181,3 +183,5 @@ module.exports = {
   checkItemStatus,
   createPayload
 }
+
+module.exports = taboola
