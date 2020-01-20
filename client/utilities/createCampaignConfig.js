@@ -22,7 +22,7 @@ export const createCampaignArray = (data) => {
 
     // if outbrain and ob_tag enabled, add tag to campaignObject
     if(campaignObj.platform === 'outbrain'){
-      campaignObj.ob_tag = data.ob_tag_enabled ? data.ob_tag_enabled : false
+      campaignObj.ob_tag = data.ob_tag_enabled ? data.ob_tag : false
     }
 
     campaignArr.push(campaignObj);
