@@ -4,6 +4,7 @@ const CampaignQueue = require('../campaignManagement/utilities/campaignQueue')
 const uploadImage = require('./utilities/imageManagement')
 const taboola = require('./taboola')
 const outbrain = require('./outbrain')
+const {createCampaignArray} = require('./utilities/campaignCreation')
 
 let campaignQueue = new CampaignQueue()
 
@@ -14,6 +15,7 @@ router.post('/createCampaign', async (req, res, next) => {
     // uploadImage()
     
     const campaigns = createCampaignArray(req.body)
+
     console.log('REQ', req.body)
     for (let i = 0; i < campaigns.length; i++){
       campaignQueue.enqueue(campaigns[i])
@@ -27,7 +29,7 @@ router.post('/createCampaign', async (req, res, next) => {
 
       switch(current.value.platform){
         case 'taboola':
-          taboola.init_createCampaign(current)
+          taboola.init_createCampaign(current.value)
           break
         case 'outbrain':
           // outbrain.init_createCampaign(current)

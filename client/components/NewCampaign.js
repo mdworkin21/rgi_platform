@@ -35,7 +35,7 @@ const campaignConfiguration = [
 class NewCampaign extends Component {
   state = {
       campaign_name: '',
-      url: '',
+      url: 'blitzlift.com',
       ob_tag: '',
       cpc_taboola_desktop: '',
       cpc_taboola_mobile: '',
@@ -70,14 +70,11 @@ class NewCampaign extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      let data = createCampaignArray(this.state)
-      let creatives = {
-        images: this.state.images,
-        headlines: this.state.headlines
-      }
+      // let data = createCampaignArray(this.state)
+     
 
-      console.log('DATA', data)
-      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', {data, creatives})
+      // console.log('DATA', data)
+      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
     } catch(e){}
   }
 
@@ -103,7 +100,6 @@ class NewCampaign extends Component {
   }
 
   render(){
-    console.log("ASDSAD", this.state)
     return (
       <div className='form-container'>
         <form onSubmit={this.handleSubmit} id='campaign-configuration'>

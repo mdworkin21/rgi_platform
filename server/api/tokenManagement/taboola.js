@@ -2,8 +2,8 @@ const axios = require('axios')
 const {TaboolaToken} = require('../../db')
 const Sequelize = require('sequelize')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
-//Remember to require in taboola utilities
 
+//Remember to require in taboola utilities
 const getTokenFromDB = async () => {
     try {
       let token = await TaboolaToken.findAll({

@@ -13,7 +13,7 @@ const createCampaignArray = (data) => {
       site: data.url.replace(/.*\:\/\/|\..*/g, ''),
       platform: type[1],
       device: type[2],
-      targeting: type[3] ? type[3] : '',
+      targeting: type[3] ? type[3].toUpperCase() : '',
       cpc: data[`cpc_${type[1]}_${type[2]}`],
       daily_cap: data[`daily_cap_${type[1]}`],
       images: data.images,
@@ -76,6 +76,9 @@ const determineCampaignTypeString = (campaignData) => {
       case 'BLACKLIST':
         type = 'Blacklist - ';
         break;
+      case 'SAFE':
+        type='[SAFE] - '
+        break;
     }
   }
   return type
@@ -137,7 +140,7 @@ const createCampaignUTM = (campaignData) => {
   
   const device = campaignData.device === "desktop" ? '' : '9';
   
-  if (campaignData.targeting === "MSN"){
+  if (campaignData.targeting === "MSN" || campaignData.targeting === "SAFE"){
     targeting = 'm';
   } else if (campaignData.targeting === "ESPN"){
     targeting = 'e';
@@ -151,7 +154,7 @@ const createCampaignUTM = (campaignData) => {
     targeting = '';
   }
   
-  return platform + device + targeting + campaignData.campaign;
+  return platform + device + targeting + campaignData.campaign_name;
 }
 
 // create URL tracking code by vendor
@@ -224,7 +227,7 @@ const createCampaignName = (campaignData) => {
 }
 
 module.exports = {
-  createCampaignName
+  createCampaignName,
   createCampaignUTM,
   createItemArray,
   getBrandingText,

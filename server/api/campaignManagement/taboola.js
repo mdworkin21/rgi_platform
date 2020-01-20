@@ -3,20 +3,23 @@ const axios = require('axios')
 const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
 const {setToken} = require('../tokenManagement/taboola')
 const {ACCOUNTS, getAccount} = require('../accountManagement/taboola')
-const {createCampaignName,  createCampaignUTM, getBrandingText, createTrackingCode} = require('./campaignCreation')
+const {createCampaignName,  createCampaignUTM, getBrandingText, createTrackingCode} = require('./utilities/campaignCreation')
 
 //Remember to require in taboola utilities
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 
 
-const token = setToken();  
+
+let token;
 
 // Process campaign creation. Create campaign > create items > update items
-const init_createCampaign = (campaignData) => {
+const init_createCampaign = async (campaignData) => {
+  token = await setToken(); 
 
   const account = getAccount(campaignData.site, campaignData.device)
-  let campaignPayload = createPayload(campaignData)
-  let campaign = createCampaign(campaignPayload)
+  let campaignPayload =  createPayload(campaignData)
+  let campaign = await createCampaign(account, campaignPayload)
+
   if(campaign['http_status'] == 400){
     console.log("Error!", campaign);
     return;
@@ -42,8 +45,7 @@ const init_createCampaign = (campaignData) => {
   return campaignId;
 }
 
-const createCampaign = async (payload) => {
-
+const createCampaign = async (account, payload) => {
   // const example_json = {
   //   "name": "API_TEST_0001",
   //   "branding_text": "BlitzLift",
@@ -53,16 +55,17 @@ const createCampaign = async (payload) => {
   //   "marketing_objective": "DRIVE_WEBSITE_TRAFFIC"
   // }
 
+  console.log('Token', token)
+
   try {
     const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns`,
       payload, 
       {
         headers: {
-        Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + token
         }
       })
-    
-    // console.log("RESPONSE", response)
+    console.log('RESPONSE', response)
     return response
     
   } catch(e) {
@@ -79,7 +82,7 @@ const createItem = async (account, campaignId, url) => {
       payload, 
       { 
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + tokens
         }
     })
 
