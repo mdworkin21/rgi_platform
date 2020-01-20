@@ -18,13 +18,6 @@ class CreateCampaigns extends Component {
 
   render(){
     return (
-        // <div className='create-campaign-wrapper'>
-        //   <div className='ui tabular menu create-campaign-menu-wrapper'>
-        //     <a className="active item"> Home </a>
-        //     <button className="item" onClick={this.handleCreateCampaign}> Taboola </button>
-        //     <a className="item"> Outbrain </a>
-        //   </div>
-        // </div>
         <NewCampaign />
     )
   }

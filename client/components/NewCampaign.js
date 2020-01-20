@@ -52,6 +52,7 @@ class NewCampaign extends Component {
       type_outbrain_mobile_premium: false
   }
 
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value

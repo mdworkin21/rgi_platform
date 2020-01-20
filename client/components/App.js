@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { connect } from 'react-redux';
 import Authenticate from './Authenticate'
@@ -9,24 +9,35 @@ import AddUser from './AddUser';
 import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
 import CreateCampaigns from './CreateCampaigns';
+import {getUserFromPassport} from '../redux/thunks/users'
 
-const App = (props) => {
-  return (
-    <Router>
-      <div>
-        <Menu />
-        <Route exact path='/' component={Authenticate} />
-        <PrivateRoute exact path='/dashboard' component={Dashboard} authed={props.auth} />
-        <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={props.auth} />
-        <PrivateRoute exact path='/adduser' component={AddUser} authed={props.auth}/>
-        <PrivateRoute exact path='/profile' component={Profile} authed={props.auth}/>
-        <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={props.auth}/>
-
-      </div>
-    </Router>
-  )
+class App extends Component {
+  componentDidMount = async () => {
+   await this.props.setUser() 
+  }
+  
+  render(){
+    return (
+      <Router>
+        <div>
+          <Menu />
+          <Route exact path='/' component={Authenticate} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} authed={this.props.auth} />
+          <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={this.props.auth} />
+          <PrivateRoute exact path='/adduser' component={AddUser} authed={this.props.auth}/>
+          <PrivateRoute exact path='/profile' component={Profile} authed={this.props.auth}/>
+          <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={this.props.auth}/>
+        </div>
+      </Router>
+    )
+  }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: () => dispatch(getUserFromPassport())
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -34,4 +45,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -90,7 +90,3 @@ export const createCampaignName = (campaignData) => {
 }
 
 
-// Question
-// FROM createArr - Is this regex necessary? Aside from determineSite name, will it be used server side for something else?
-  //       site: data.url.replace(/.*\:\/\/|\..*/g, ''),
-

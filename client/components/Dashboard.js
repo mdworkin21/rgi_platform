@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import {Redirect} from 'react-router-dom'
 import { createNewTabCampaign } from '../redux/thunks/campaigns/taboola';
 import '../public/styles/dashboard.css'
+import {getUserFromPassport} from '../redux/thunks/users'
 
 class Dashboard extends Component {
+  componentDidMount = async () => {
+    await this.props.setUser()
+   }
+
   render(){
     return (
       <React.Fragment>
@@ -22,7 +26,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createTabCampaign: (name) => dispatch(createNewTabCampaign(name))
+    createTabCampaign: (name) => dispatch(createNewTabCampaign(name)),
+    setUser: () => dispatch(getUserFromPassport())
   }
 }
 

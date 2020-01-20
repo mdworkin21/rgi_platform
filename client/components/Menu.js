@@ -23,7 +23,7 @@ const dropMenuConfig = {
 class Menu extends Component  {
   handleLogOut = () => {
     this.props.logOutUser()
-  }
+}
 
   menuToDisplay = () => {
     if (this.props.admin){

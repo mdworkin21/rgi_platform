@@ -5,10 +5,10 @@ import {failedLogIn, signUpErr} from '../actions/applicationLevel'
 import {errMessages} from '../../utilities/errMessages'
 
 //USER THUNK
-export const getUserFromPassport = (id) => {
+export const getUserFromPassport = () => {
   return async (dispatch) => {
     try{
-      const response = await axios.get(`/authenticate/getUser/${id}`)
+      const response = await axios.get(`/authenticate/getUser`)
       const user = response.data
       const action = getUser(user)
       dispatch(action)

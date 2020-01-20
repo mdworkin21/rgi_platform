@@ -34,6 +34,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
+
 //Session MiddleWare with Passport
 app.use(session({
   cookieName: 'session',
@@ -65,6 +66,5 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal Server Err. Whoops!')
 })
-
 
 module.exports = {app, sessionStore}
