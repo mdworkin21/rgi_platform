@@ -1,15 +1,98 @@
+const createCampaignArray = (data) => {
+  const campaignArr = []
+  // loop through keys to find campaign types
+
+  for(let key in data){
+    // only continue if key is a campaign type and is true 
+    if(key.indexOf('type_') !== 0 || !data[key]) continue
+
+    let type = key.split('_')
+    let campaignObj = {
+      campaign_name: data.campaign_name,
+      url: data.url,
+      site: data.url.replace(/.*\:\/\/|\..*/g, ''),
+      platform: type[1],
+      device: type[2],
+      targeting: type[3] ? type[3] : '',
+      cpc: data[`cpc_${type[1]}_${type[2]}`],
+      daily_cap: data[`daily_cap_${type[1]}`],
+      images: data.images,
+      headlines: data.headlines
+    }
+
+    campaignObj.name = createCampaignName(campaignObj)
+
+    // if outbrain and ob_tag enabled, add tag to campaignObject
+    if(campaignObj.platform === 'outbrain'){
+      campaignObj.ob_tag = data.ob_tag_enabled ? data.ob_tag : false
+    }
+
+    campaignArr.push(campaignObj);
+  }
+
+  return campaignArr
+}
+
+const determineSiteInitials = (siteName) => {
+  let site;
+
+  if(siteName.indexOf('sportschew') > -1){
+    site = 'SC';
+  } else if(siteName.indexOf('blitzlift') > -1){
+    site = 'BL';
+  } else if(siteName.indexOf('dogsome') > -1){
+    site = 'DS';
+  } else if(siteName.indexOf('insidetonight') > -1){
+    site = 'IT';
+  } else if(siteName.indexOf('popularhealth') > -1){
+    site = 'PH';
+  } else if(siteName.indexOf('hopeshared') > -1){
+    site = 'HS';
+  }
+
+  return site;
+}
+
+const determineCampaignTypeString = (campaignData) => {
+  let type = '';
+
+  // if premium for Outbrain
+  if(campaignData.targeting === 'PREMIUM'){
+    type = 'Premium - ';
+  }
+    // if MSN for Taboola or Outbrain
+  else if(campaignData.targeting === 'MSN'){
+    type = 'TGT_M - ';
+  }
+  // if platform is Taboola
+  else if(campaignData.platform === 'taboola'){
+    switch(campaignData.targeting){
+      case 'ESPN':
+        type = 'TGT_E - ';
+        break;
+      case 'FOX':
+        type = 'TGT_F - ';
+        break;
+      case 'BLACKLIST':
+        type = 'Blacklist - ';
+        break;
+    }
+  }
+  return type
+}
+
 const createItemArray = (campaignData) => {
   
   const items = [];
   const url = campaignData.url;
-  let images = campaignData.imageURLs;
+  let images = campaignData.images;
   let headlines = campaignData.headlines;
   const campaignUTM = createCampaignUTM(campaignData);
 
   // if OB & obTag is enabled, add tag to all headlines
-  if(campaignData.platform === 'outbrain' && campaignData.options.obTag){
+  if(campaignData.platform === 'outbrain' && campaignData.ob_tag){
     headlines = headlines.map(function(e){
-      return '[' + campaignData.options.obTag + '] ' + e;
+      return '[' + campaignData.ob_tag + '] ' + e;
     })
   }
     
@@ -131,62 +214,20 @@ function getBrandingText(site){
   }
 }
 
-// create campaign name structure by site and targeting
 const createCampaignName = (campaignData) => {
-  console.log('DATA', campaignData)
-  let site;
-  
-  if(campaignData.site.indexOf('sportschew') > -1){
-    site = 'SC';
-  } else if(campaignData.site.indexOf('blitzlift') > -1){
-    site = 'BL';
-  } else if(campaignData.site.indexOf('dogsome') > -1){
-    site = 'DS';
-  } else if(campaignData.site.indexOf('insidetonight') > -1){
-    site = 'IT';
-  } else if(campaignData.site.indexOf('popularhealth') > -1){
-    site = 'PH';
-  } else if(campaignData.site.indexOf('hopeshared') > -1){
-    site = 'HS';
-  }
-  
-  let type = '';
-  // if premium for Outbrain
-  if(campaignData.targeting === 'PREMIUM'){
-    type = 'Premium - ';
-  }
-    // if MSN for Taboola or Outbrain
-  else if(campaignData.targeting === 'MSN'){
-    type = 'TGT_M - ';
-  }
-  // if platform is Taboola
-  else if(campaignData.platform === 'taboola'){
-    switch(campaignData.targeting){
-      case 'ESPN':
-        type = 'TGT_E - ';
-        break;
-      case 'FOX':
-        type = 'TGT_F - ';
-        break;
-      case 'BLACKLIST':
-        type = 'Blacklist - ';
-        break;
-    }
-  }
+  const site = determineSiteInitials(campaignData.site)
+  const type = determineCampaignTypeString(campaignData)
+  const device = campaignData.device === "desktop" ? "Desktop" : "Mobile"
+  const campaign = campaignData.campaign_name
 
-  let device = (campaignData.device === "desktop" ? "Desktop" : "Mobile")
-
-  // console.log('site', site )
-  // console.log('campdata', campaignData.campaign)
-  // console.log('device', device)
-
-  return site + ' - ' + campaignData.campaign + ' - ' + type + (campaignData.device === "desktop" ? "Desktop" : "Mobile");
+  return site + ' - ' + campaign + ' - ' + type + device;
 }
 
 module.exports = {
+  createCampaignName
   createCampaignUTM,
-  createCampaignName,
   createItemArray,
   getBrandingText,
-  createTrackingCode
+  createTrackingCode,
+  createCampaignArray
 }

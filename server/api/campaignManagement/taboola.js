@@ -2,6 +2,8 @@ const router = require('express').Router()
 const axios = require('axios')
 const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
 const {setToken} = require('../tokenManagement/taboola')
+const {ACCOUNTS, getAccount} = require('../accountManagement/taboola')
+const {createCampaignName,  createCampaignUTM, getBrandingText, createTrackingCode} = require('./campaignCreation')
 
 //Remember to require in taboola utilities
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
@@ -12,13 +14,15 @@ const token = setToken();
 // Process campaign creation. Create campaign > create items > update items
 const init_createCampaign = (campaignData) => {
 
-  const account = campaignData.account;
-  let campaign = createCampaign(campaignData);
+  const account = getAccount(campaignData.site, campaignData.device)
+  let campaignPayload = createPayload(campaignData)
+  let campaign = createCampaign(campaignPayload)
   if(campaign['http_status'] == 400){
     console.log("Error!", campaign);
     return;
   }
   
+  return;
   var campaignId = campaign.id;
 
   // console.log('Campaign created: ' + campaignId + ' - ' + JSON.stringify(campaign));
@@ -38,7 +42,7 @@ const init_createCampaign = (campaignData) => {
   return campaignId;
 }
 
-const createCampaign = async (campaignData) => {
+const createCampaign = async (payload) => {
 
   // const example_json = {
   //   "name": "API_TEST_0001",
@@ -51,7 +55,7 @@ const createCampaign = async (campaignData) => {
 
   try {
     const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns`,
-      campaignData.payload, 
+      payload, 
       {
         headers: {
         Authorization: 'Bearer ' + token
