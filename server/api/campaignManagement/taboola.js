@@ -2,11 +2,10 @@ const router = require('express').Router()
 const axios = require('axios')
 const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
 const {setToken} = require('../tokenManagement/taboola')
-const CampaignQueue = require('../campaignManagement/utilities/campaignQueue')
+
 //Remember to require in taboola utilities
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
 
-let campaignQueue = new CampaignQueue()
 
 const token = setToken();  
 
@@ -38,24 +37,6 @@ const init_createCampaign = (campaignData) => {
   return campaignId;
 }
 
-
-
-router.post('/createCampaign', async (req, res, next) => {
-  try {
-    console.log('REQ', req.body)
-
-    for (let i = 0; i < req.body.length; i++){
-      campaignQueue.enqueue(req.body[i])
-    }
-
-    console.log('Camoaign', campaignQueue)
-    console.log('Length', campaignQueue.length())
-
-  } catch(e){
-    next(e)
-  }
-
-})
 const createCampaign = async (campaignData) => {
 
   // const example_json = {
@@ -192,4 +173,11 @@ const createPayload = (campaignData) => {
   return payload;
 }
 
-module.exports = router
+module.exports = {
+  init_createCampaign,
+  createCampaign,
+  createItem,
+  updateItem,
+  checkItemStatus,
+  createPayload
+}

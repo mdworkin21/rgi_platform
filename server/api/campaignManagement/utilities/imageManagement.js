@@ -1,9 +1,6 @@
 const Client = require('ssh2-sftp-client');
 const fs = require('fs');
 
-const file = '';
-
-uploadToFtp();
 
 function uploadToFtp(){
   let sftp = new Client();
@@ -22,4 +19,8 @@ function uploadToFtp(){
       console.log(err, 'catch error');
       sftp.end();
   });
+}
+
+module.export = {
+  uploadToFtp
 }

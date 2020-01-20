@@ -1,14 +1,19 @@
 const router = require('express').Router()
 const User = require('../db/models/User')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 
-// Checks to see if user exists in db, and whether pw is correct. 
+// Req.user is populated by Passport.js 
+//This checks to see if user exists and has an active session.
 router.get('/getUser', (req, res, next) => {
-  if (req.user){ 
-    res.status(200).send(req.user)
-  }
+  try{ 
+    if (req.user){ 
+      res.status(200).send(req.user)
+    }
+  } catch(e){ next(e)}
 })
 
-router.post('/checkUser', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   try{
     const user = await User.findOne({
       where: {

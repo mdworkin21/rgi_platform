@@ -21,7 +21,7 @@ export const getUserFromPassport = () => {
 export const logInUser = (user) => {
   return async (dispatch) => {
     try{
-      const loggedInUser = await axios.post('/authenticate/checkUser', {user})
+      const loggedInUser = await axios.post('/authenticate/login', {user})
       if (loggedInUser.status === 200){
         const userIsIn = loggedInUser.data
         const action = getUser(userIsIn)

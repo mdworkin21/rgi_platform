@@ -3,6 +3,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import { createCampaignArray } from '../utilities/createCampaignConfig'
 import '../public/styles/newCampaign.css'
+import {NavLink} from 'react-router-dom'
+
 
 const campaignType = [
   'ob_tag_enabled',
@@ -64,7 +66,7 @@ class NewCampaign extends Component {
     event.preventDefault()
     try {
       let data = createCampaignArray(this.state)
-      let campaignData = await axios.post('/api/campaignManagement/taboola/createCampaign', data)
+      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', data)
     } catch(e){}
   }
 
@@ -108,6 +110,8 @@ class NewCampaign extends Component {
         }
         <button type='submit' id='campaign-submit-btn'>SUBMIT</button>
         </form>  
+
+      <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink>
       </div>
     )
   }

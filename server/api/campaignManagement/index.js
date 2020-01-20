@@ -20,8 +20,7 @@ const loggedInCheck = async (req, res, next) => {
 }
 
 //Granular Routes
-router.use('/taboola', loggedInCheck, require('./taboola'))
-// router.use('/outbrain', loggedInCheck, require('./outbrain'))
+router.use('/processCampaignQueue', loggedInCheck, require('./processCampaignQueue'))
 
 
 //Handles 404 Errors

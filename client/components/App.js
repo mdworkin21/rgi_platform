@@ -9,6 +9,7 @@ import AddUser from './AddUser';
 import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
 import CreateCampaigns from './CreateCampaigns';
+import CreativeAssets from './CreativeAssets'
 import {getUserFromPassport} from '../redux/thunks/users'
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <PrivateRoute exact path='/adduser' component={AddUser} authed={this.props.auth}/>
           <PrivateRoute exact path='/profile' component={Profile} authed={this.props.auth}/>
           <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={this.props.auth}/>
+          <PrivateRoute exact path='/creatives' component={CreativeAssets} authed={this.props.auth}/>
         </div>
       </Router>
     )

@@ -6,7 +6,7 @@ import {createTaboolaCampaign, getCampaign, deleteCampaign, editCampaign} from '
 export const createNewTabCampaign = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('api/campaignManagement/taboola/createCampaign', 'TEST')
+      const response = await axios.post('api/campaignManagement/processCampaignQueue/createCampaign')
       const campaignName = response.data
       const action = createTaboolaCampaign(campaignName)
       dispatch(action)
