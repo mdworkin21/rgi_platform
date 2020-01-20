@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { createCampaignArray } from '../utilities/createCampaignConfig'
-import '../public/styles/newCampaign.css'
 import {NavLink} from 'react-router-dom'
+import '../public/styles/creativeAssets.css'
+import '../public/styles/newCampaign.css'
 
 
 const campaignType = [
@@ -51,7 +52,11 @@ class NewCampaign extends Component {
       type_outbrain_mobile: false, 
       type_outbrain_desktop_msn: false,
       type_outbrain_desktop_premium: false,
-      type_outbrain_mobile_premium: false
+      type_outbrain_mobile_premium: false,
+      headlineValue: '',
+      imageValue: '',
+      headlines: [],
+      images: []
   }
 
 
@@ -66,7 +71,13 @@ class NewCampaign extends Component {
     event.preventDefault()
     try {
       let data = createCampaignArray(this.state)
-      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', data)
+      let creatives = {
+        images: this.state.images,
+        headlines: this.state.headlines
+      }
+
+      console.log('DATA', data)
+      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', {data, creatives})
     } catch(e){}
   }
 
@@ -75,7 +86,24 @@ class NewCampaign extends Component {
       [event.target.name]: !this.state[event.target.name]
     })
   }
+
+  handleAddImageHeadline = (event) => {
+    event.preventDefault()
+    if (event.target.name === 'headline'){
+      this.setState({
+        headlines: [...this.state.headlines, this.state.headlineValue],
+        headlineValue: ''
+      })
+    } else if (event.target.name === 'image'){
+      this.setState({
+        images: [...this.state.images, this.state.imageValue],
+        imageValue: ''
+      })
+    }
+  }
+
   render(){
+    console.log("ASDSAD", this.state)
     return (
       <div className='form-container'>
         <form onSubmit={this.handleSubmit} id='campaign-configuration'>
@@ -111,7 +139,28 @@ class NewCampaign extends Component {
         <button type='submit' id='campaign-submit-btn'>SUBMIT</button>
         </form>  
 
-      <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink>
+
+        <div id='creative-assets-container'>
+        {/* <NavLink to='create-campaigns'>CLICK TO MOVE BACK</NavLink> */}
+          <input 
+            type='text' 
+            name='headlineValue'
+            value={this.state.headlineValue} 
+            placeholder= 'Headline'
+            onChange={this.handleChange}/>
+           <button onClick={this.handleAddImageHeadline} name='headline'> Add Headline </button>
+
+          <input 
+            type='text' 
+            name='imageValue'
+            value={this.state.imageValue} 
+            placeholder='Image Url'
+            onChange={this.handleChange}
+            />
+
+            <button onClick={this.handleAddImageHeadline} name='image'>ADD Image</button> 
+      </div>
+      {/* <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink> */}
       </div>
     )
   }

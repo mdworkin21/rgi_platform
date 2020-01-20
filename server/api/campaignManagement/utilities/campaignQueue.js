@@ -6,7 +6,7 @@ class Node{
   }
 }
 
-class CampaignQueue{
+class CampaignQueue {
   constructor(){
     this.head = null;
     this.tail = null

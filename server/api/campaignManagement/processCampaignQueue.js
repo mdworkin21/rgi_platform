@@ -14,13 +14,17 @@ router.post('/createCampaign', async (req, res, next) => {
     // uploadImage()
     
     console.log('REQ', req.body)
-    for (let i = 0; i < req.body.length; i++){
-      campaignQueue.enqueue(req.body[i])
+    for (let i = 0; i < req.body.data.length; i++){
+      campaignQueue.enqueue(req.body.data[i])
     }
 
-    while(queue.length() > 0){
-      let current = queue.dequeue()
-      switch(current.platform){
+    console.log('Campaign', campaignQueue)
+    console.log('Length', campaignQueue.length())
+
+    while(campaignQueue.length() > 0){
+      let current = campaignQueue.dequeue()
+
+      switch(current.value.platform){
         case 'taboola':
           taboola.init_createCampaign(current)
           break
@@ -31,10 +35,6 @@ router.post('/createCampaign', async (req, res, next) => {
           break
       }
     }
-    
-
-    console.log('Campaign', campaignQueue)
-    console.log('Length', campaignQueue.length())
 
   } catch(e){
     next(e)
