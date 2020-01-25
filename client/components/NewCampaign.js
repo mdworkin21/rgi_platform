@@ -5,7 +5,7 @@ import { createCampaignArray } from '../utilities/createCampaignConfig'
 import {NavLink} from 'react-router-dom'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
-
+import {saveCampaignSettings} from '../redux/actions/campaigns/campaignConfiguration'
 
 const campaignType = [
   'ob_tag_enabled',
@@ -52,13 +52,13 @@ class NewCampaign extends Component {
       type_outbrain_mobile: false, 
       type_outbrain_desktop_msn: false,
       type_outbrain_desktop_premium: false,
-      type_outbrain_mobile_premium: false,
-      headlineValue: '',
-      imageValue: '',
-      headlines: [],
-      images: []
+      type_outbrain_mobile_premium: false
   }
 
+  componentDidMount = () => {
+    const campaignConfig = this.props.campaignConfig
+    this.setState(campaignConfig)
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -70,11 +70,9 @@ class NewCampaign extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      // let data = createCampaignArray(this.state)
-     
+      let campaignData = await this.props.saveCampaignConfig(this.state)
+      // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
 
-      // console.log('DATA', data)
-      let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
     } catch(e){}
   }
 
@@ -100,6 +98,7 @@ class NewCampaign extends Component {
   }
 
   render(){
+    console.log('PROPS', this.props, this.state)
     return (
       <div className='form-container'>
         <form onSubmit={this.handleSubmit} id='campaign-configuration'>
@@ -110,7 +109,7 @@ class NewCampaign extends Component {
               key={config}
               type='text' 
               name={config}
-              value={this.state.config} 
+              value={this.state[config]} 
               placeholder={config}
               onChange={this.handleChange}/>
             )
@@ -119,6 +118,7 @@ class NewCampaign extends Component {
 
         <form id='campaign-type' onSubmit={this.handleSubmit}>
         {campaignType.map(type => {
+          console.log("TYPE", type, ':', this.state[type])
           return (
             <div key={type} className='ui checkbox'>
               <input 
@@ -126,37 +126,17 @@ class NewCampaign extends Component {
               name={type}
               value={this.state[type]}
               onChange={this.handleCheckBox}
+              defaultChecked={this.props.campaignConfig[type]}
               />
               <label>{type}</label>
             </div>
             )
           })
         }
-        <button type='submit' id='campaign-submit-btn'>SUBMIT</button>
+        <button type='submit' id='campaign-submit-btn'>Save Settings</button>
         </form>  
 
-
-        <div id='creative-assets-container'>
-        {/* <NavLink to='create-campaigns'>CLICK TO MOVE BACK</NavLink> */}
-          <input 
-            type='text' 
-            name='headlineValue'
-            value={this.state.headlineValue} 
-            placeholder= 'Headline'
-            onChange={this.handleChange}/>
-           <button onClick={this.handleAddImageHeadline} name='headline'> Add Headline </button>
-
-          <input 
-            type='text' 
-            name='imageValue'
-            value={this.state.imageValue} 
-            placeholder='Image Url'
-            onChange={this.handleChange}
-            />
-
-            <button onClick={this.handleAddImageHeadline} name='image'>ADD Image</button> 
-      </div>
-      {/* <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink> */}
+        <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink>
       </div>
     )
   }
@@ -164,8 +144,15 @@ class NewCampaign extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    admin: state.user.user.isAdmin
+    admin: state.user.user.isAdmin,
+    campaignConfig: state.campaignConfiguration.campaignConfiguration
   }
 }
 
-export default connect(mapStateToProps)(NewCampaign)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveCampaignConfig: (campaignConfig) => dispatch(saveCampaignSettings(campaignConfig)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCampaign)

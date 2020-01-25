@@ -5,6 +5,7 @@ import userReducer from '../reducers/users'
 import adminReducer from '../reducers/admin'
 import taboolaCampaignReducer from '../reducers/campaigns/taboolaCampaigns'
 import applicationLevelReducer from '../reducers/applicationLevel'
+import campaignConfigurationReducer from '../reducers/campaigns/campaignConfiguration'
 
 
 // //Redux Devtools 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   admin: adminReducer,
   taboolaCampaigns: taboolaCampaignReducer,
-  applicationLevel: applicationLevelReducer
+  applicationLevel: applicationLevelReducer,
+  campaignConfiguration: campaignConfigurationReducer
 })
 
 //Creates Store
