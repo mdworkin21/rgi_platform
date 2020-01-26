@@ -30,7 +30,7 @@ class Dropdown extends Component {
                    </div>
           })}
           <div>
-            <button className="ui negative button" id="logout-Btn" onClick={this.props.handleLogOut}>Logout</button>
+            <button className="ui button" id="logout-Btn" onClick={this.props.handleLogOut}>Logout</button>
           </div>
         </div>
       </div>

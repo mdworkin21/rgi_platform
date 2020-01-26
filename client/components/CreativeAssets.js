@@ -1,17 +1,26 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
 import '../public/styles/creativeAssets.css'
+
 
 class CreativeAssests extends Component {
   state = {
-    headline: '',
-    image: ''
+    headlines: [''],
+    images: ['']
   }
 
-  handleChange = (event) => {
+  
+  handleText = (i) => (event) => {
+    let headlines = [...this.state.headlines]
+    headlines[i] = event.target.value
     this.setState({
-      [event.target.name]: event.target.value
+      headlines
     })
+  }
+
+  handleAddTextbox = () => {
+    this.setState({ headlines: [...this.state.headlines, '']});
   }
 
   handleSubmit = async (event) => {
@@ -25,23 +34,35 @@ class CreativeAssests extends Component {
 
   render(){
     return(
-      <div id='creative-assets-container'>
-        <NavLink to='create-campaigns'>CLICK TO MOVE BACK</NavLink>
-        <form>
-          <input 
-            type='text' 
-            name='headline'
-            value={this.state.headline} 
-            placeholder= 'Headline'
-            onChange={this.handleChange}/>
+      <div> 
+        <div id='creative-assets-container'>
+          <NavLink to='create-campaigns'>CLICK TO MOVE BACK</NavLink>
+          { this.state.headlines.map((headline, i) => {
+            return(
+              <div key={'headline' + '_' + i}>
+                <input 
+                  type='text' 
+                  name={i}
+                  value={this.state.headlines[i]} 
+                  placeholder= 'Headline'
+                  onChange={this.handleText(i)}/>
+              </div>
+            )}
+          )}
+          <button onClick={this.handleAddTextbox}>Add</button>
 
-          <input 
+      </div>
+
+        }
+
+
+        {/* <form><input 
             type='text' 
             name='image'
             value={this.state.image} 
             placeholder='Image Url'
             onChange={this.handleChange}/>
-        </form>
+        </form> */}
       </div>
     )
   }
@@ -53,4 +74,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default CreativeAssests
+export default  connect(mapStateToProps)(CreativeAssests)

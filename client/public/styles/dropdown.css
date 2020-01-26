@@ -65,5 +65,6 @@ a:hover{
 
 #logout-Btn {
   min-width: 164px;
-  border-radius: unset
+  border-radius: unset;
+  background-color: #f9f9f9;
 }

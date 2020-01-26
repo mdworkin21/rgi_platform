@@ -3,7 +3,7 @@ import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTING
 
 const initialState = {
   campaign_name: '',
-  url: 'blitzlift.com',
+  url: '',
   ob_tag: '',
   cpc_taboola_desktop: '',
   cpc_taboola_mobile: '',
