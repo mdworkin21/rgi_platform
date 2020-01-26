@@ -20,7 +20,7 @@
 #campaign-type {
   position: relative;
   left: 38vw;
-  top: 14vh;
+  top: 10vh;
   display: flex;
   flex-direction: column;
   height: 22vh;
@@ -29,7 +29,34 @@
   padding: 8px;
 }
 
-#campaign-submit-btn {
+.campaign-btn {
   position: relative;
-  top: 1vh;
+  top: 3vh;
+  height: 5vh;
+  margin: 5px;
+  width: 10vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.button-container {
+  position: relative;
+  top: 59vh;
+  right: 18vw;
+  display: flex;
+  flex-direction: row;
+  height: 12vh;
+  width: 26vw;
+}
+
+#ob-tag {
+  position: relative;
+  left: 19vw;
+  top: 40vh;
+  display: flex;
+  flex-direction: column;
+  width: 19vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  height: 11vh;
 }

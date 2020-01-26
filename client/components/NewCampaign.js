@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { createCampaignArray } from '../utilities/createCampaignConfig'
 import {NavLink} from 'react-router-dom'
-import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
-import {saveCampaignSettings} from '../redux/actions/campaigns/campaignConfiguration'
+import {saveCampaignSettings, clearCampaignSettings} from '../redux/actions/campaigns/campaignConfiguration'
 
 const campaignType = [
-  'ob_tag_enabled',
   'type_taboola_desktop',
   'type_taboola_mobile',
   'type_taboola_desktop_safe',
@@ -23,36 +20,35 @@ const campaignType = [
 const campaignConfiguration = [
   'campaign_name',
   'url',
-  'ob_tag',
   'cpc_taboola_desktop',
   'cpc_taboola_mobile',
+  'daily_cap_taboola',
   'cpc_outbrain_desktop',
   'cpc_outbrain_mobile',
-  'daily_cap_taboola',
   'daily_cap_outbrain'
 ]
 
 class NewCampaign extends Component {
   state = {
-      campaign_name: '',
-      url: 'blitzlift.com',
-      ob_tag: '',
-      cpc_taboola_desktop: '',
-      cpc_taboola_mobile: '',
-      cpc_outbrain_desktop: '',
-      cpc_outbrain_mobile: '',
-      daily_cap_taboola: '',
-      daily_cap_outbrain: '',
-      ob_tag_enabled: false,
-      type_taboola_desktop: false,
-      type_taboola_mobile: false,
-      type_taboola_desktop_safe: false,
-      type_taboola_mobile_safe: false,
-      type_outbrain_desktop: false,
-      type_outbrain_mobile: false, 
-      type_outbrain_desktop_msn: false,
-      type_outbrain_desktop_premium: false,
-      type_outbrain_mobile_premium: false
+    campaign_name: '',
+    url: 'blitzlift.com',
+    ob_tag: '',
+    cpc_taboola_desktop: '',
+    cpc_taboola_mobile: '',
+    cpc_outbrain_desktop: '',
+    cpc_outbrain_mobile: '',
+    daily_cap_taboola: '',
+    daily_cap_outbrain: '',
+    ob_tag_enabled: false,
+    type_taboola_desktop: false,
+    type_taboola_mobile: false,
+    type_taboola_desktop_safe: false,
+    type_taboola_mobile_safe: false,
+    type_outbrain_desktop: false,
+    type_outbrain_mobile: false, 
+    type_outbrain_desktop_msn: false,
+    type_outbrain_desktop_premium: false,
+    type_outbrain_mobile_premium: false
   }
 
   componentDidMount = () => {
@@ -66,14 +62,15 @@ class NewCampaign extends Component {
     })
   }
 
-  //This will be async
-  handleSubmit = async (event) => {
-    event.preventDefault()
-    try {
-      let campaignData = await this.props.saveCampaignConfig(this.state)
+  handleSave = () => {
+      this.props.saveCampaignConfig(this.state)
       // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
+  }
 
-    } catch(e){}
+  handleClear = async () => {
+    await this.props.clearCampaignConfig()
+    const campaignConfig = this.props.campaignConfig
+    this.setState(campaignConfig)
   }
 
   handleCheckBox = (event) => {
@@ -82,26 +79,10 @@ class NewCampaign extends Component {
     })
   }
 
-  handleAddImageHeadline = (event) => {
-    event.preventDefault()
-    if (event.target.name === 'headline'){
-      this.setState({
-        headlines: [...this.state.headlines, this.state.headlineValue],
-        headlineValue: ''
-      })
-    } else if (event.target.name === 'image'){
-      this.setState({
-        images: [...this.state.images, this.state.imageValue],
-        imageValue: ''
-      })
-    }
-  }
-
   render(){
-    console.log('PROPS', this.props, this.state)
     return (
       <div className='form-container'>
-        <form onSubmit={this.handleSubmit} id='campaign-configuration'>
+        <form id='campaign-configuration'>
           <div>Media Buyer:</div>
           {campaignConfiguration.map(config => {
             return(
@@ -116,27 +97,50 @@ class NewCampaign extends Component {
           })}
         </form>
 
-        <form id='campaign-type' onSubmit={this.handleSubmit}>
+        <form id='campaign-type'>
         {campaignType.map(type => {
-          console.log("TYPE", type, ':', this.state[type])
           return (
             <div key={type} className='ui checkbox'>
               <input 
               type='checkbox'
               name={type}
-              value={this.state[type]}
               onChange={this.handleCheckBox}
-              defaultChecked={this.props.campaignConfig[type]}
+              checked={this.state[type]}
               />
               <label>{type}</label>
             </div>
             )
           })
         }
-        <button type='submit' id='campaign-submit-btn'>Save Settings</button>
-        </form>  
+        </form> 
 
-        <NavLink to='/creatives'>CLICK TO MOVE ON</NavLink>
+        <form id='ob-tag'>
+          <input 
+            type='text' 
+            name='ob_tag'
+            value={this.state.ob_tag} 
+            placeholder='ob_tag'
+            onChange={this.handleChange}
+          />
+
+          <div className='ui checkbox'>
+            <input
+              type='checkbox'
+              name='ob_tag_enabled'
+              onChange={this.handleCheckBox}
+              checked={this.state['ob_tag_enabled']}
+            />
+            <label>ob tag</label>
+          </div>
+        </form> 
+
+        {/* Put in own component use in creative component also */}
+        <div className='button-container'>
+          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
+          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear Settings</button>
+          <button className='campaign-btn'><NavLink to='/creatives'>Next</NavLink></button>
+        </div>
+
       </div>
     )
   }
@@ -145,13 +149,15 @@ class NewCampaign extends Component {
 const mapStateToProps = (state) => {
   return {
     admin: state.user.user.isAdmin,
-    campaignConfig: state.campaignConfiguration.campaignConfiguration
+    campaignConfig: state.campaignConfiguration
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     saveCampaignConfig: (campaignConfig) => dispatch(saveCampaignSettings(campaignConfig)),
+    clearCampaignConfig: () => dispatch(clearCampaignSettings()),
+
   }
 }
 
