@@ -138,7 +138,7 @@ class NewCampaign extends Component {
         <div className='button-container'>
           <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
           <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear Settings</button>
-          <button className='campaign-btn'><NavLink to='/creatives'>Next</NavLink></button>
+          <button className='campaign-btn'><NavLink to='/creatives'>Headlines/Images</NavLink></button>
         </div>
 
       </div>

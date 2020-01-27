@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import '../public/styles/creativeAssets.css'
+import '../public/styles/newCampaign.css'
+
 
 
 class CreativeAssests extends Component {
@@ -51,7 +53,15 @@ class CreativeAssests extends Component {
           )}
           <button onClick={this.handleAddTextbox}>Add</button>
 
+       {/* Put in own component use in creative component also */}
+       <div className='button-container-2'>
+          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
+          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear Settings</button>
+          <button className='campaign-btn'><NavLink to='/create-campaigns'>Campaign Configuration</NavLink></button>
+        </div>
       </div>
+
+
 
         }
 

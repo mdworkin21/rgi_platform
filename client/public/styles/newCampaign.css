@@ -49,6 +49,16 @@
   width: 26vw;
 }
 
+.button-container-2 {
+  left: 20vw;
+  position: absolute;
+  top: 32vh;
+  display: flex;
+  flex-direction: row;
+  height: 12vh;
+  width: 26vw;
+}
+
 #ob-tag {
   position: relative;
   left: 19vw;
@@ -59,4 +69,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   padding: 8px;
   height: 11vh;
+}
+
+
+
+@media only screen  and (min-width : 1224px) {
+  
 }
