@@ -29,7 +29,8 @@ router.post('/createCampaign', async (req, res, next) => {
 
       switch(current.value.platform){
         case 'taboola':
-          taboola.init_createCampaign(current.value)
+          return
+          // taboola.init_createCampaign(current.value)
           break
         case 'outbrain':
           // outbrain.init_createCampaign(current)

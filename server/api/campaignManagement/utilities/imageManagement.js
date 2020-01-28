@@ -2,7 +2,7 @@ const Client = require('ssh2-sftp-client');
 const fs = require('fs');
 
 
-function uploadToFtp(){
+function uploadToFtp(file){
   let sftp = new Client();
   sftp.connect({
       host: process.env.FTP_HOST,
@@ -10,7 +10,7 @@ function uploadToFtp(){
       username: process.env.FTP_USER,
       password: process.env.FTP_PW
   }).then(() => {
-      sftp.put(file, '');
+      sftp.put(file, );
   }).then((a) => {
     console.log(a);
       console.log('ads.txt files uploaded');
@@ -20,6 +20,7 @@ function uploadToFtp(){
       sftp.end();
   });
 }
+
 
 module.export = {
   uploadToFtp

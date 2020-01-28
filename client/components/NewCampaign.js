@@ -52,6 +52,7 @@ class NewCampaign extends Component {
   }
 
   componentDidMount = () => {
+    console.log('CAMP', campaignConfig)
     const campaignConfig = this.props.campaignConfig
     this.setState(campaignConfig)
   }
@@ -78,6 +79,7 @@ class NewCampaign extends Component {
       [event.target.name]: !this.state[event.target.name]
     })
   }
+
 
   render(){
     return (
@@ -134,6 +136,7 @@ class NewCampaign extends Component {
           </div>
         </form> 
 
+
         {/* Put in own component use in creative component also */}
         <div className='button-container'>
           <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
@@ -147,9 +150,10 @@ class NewCampaign extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('STATE', state)
   return {
     admin: state.user.user.isAdmin,
-    campaignConfig: state.campaignConfiguration
+    campaignConfig: state.campaignConfiguration.campaignConfig
   }
 }
 
