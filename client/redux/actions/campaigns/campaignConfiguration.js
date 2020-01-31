@@ -8,6 +8,7 @@ export const SUBMIT_CAMPAIGN_SETTINGS = 'SUBMIT_CAMPAIGN_SETTINGS'
 export const GET_CAMPAIGN_SETTINGS = 'GET_CAMPAIGN_SETTINGS'
 export const SAVE_HEADLINES = 'SAVE_HEADLINES'
 export const CLEAR_HEADLINES = 'CLEAR_HEADLINES'
+export const DELETE_HEADLINE = 'DELETE_HEADLINE'
 
 //Action Creators
 export const saveCampaignSettings = (campaignConfig) => {
@@ -50,6 +51,12 @@ export const clearHeadlines = () => {
   }
 }
 
-
+export const deleteHeadline = (headline) => {
+  console.log("ACT", headline)
+  return {
+    type: DELETE_HEADLINE,
+    headline
+  }
+}
 
 

@@ -1,4 +1,4 @@
-import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES} from '../../actions/campaigns/campaignConfiguration'
+import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE} from '../../actions/campaigns/campaignConfiguration'
 
 
 const initialState = {
@@ -29,7 +29,6 @@ const initialState = {
 export default function campaignConfigurationReducer(state = initialState, action){
   switch(action.type){
     case SAVE_CAMPAIGN_SETTINGS:
-      console.log("ACT", action.campaignConfig)
       return {...state, campaignConfig: action.campaignConfig}
     case CLEAR_CAMPAIGN_SETTINGS: 
       return {...state, campaignConfig: initialState.campaignConfig}
@@ -41,6 +40,15 @@ export default function campaignConfigurationReducer(state = initialState, actio
       return {...state, headlines: action.headlines}
     case CLEAR_HEADLINES:
       return {...state, headlines: initialState.headlines}
+    case DELETE_HEADLINE:
+      let headlines =  state.headlines.filter((el, i) => {
+        return i !== action.headline })
+
+        if (headlines.length === 0){
+        return {...state, headlines: initialState.headlines}
+      } else {
+        return {...state, headlines: headlines}
+      }
     default: 
       return state
   }

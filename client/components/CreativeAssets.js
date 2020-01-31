@@ -1,7 +1,7 @@
 import React, {Component, useCallback} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {saveHeadlines, clearHeadlines} from '../redux/actions/campaigns/campaignConfiguration'
+import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
 import Dropzone from './ImageDrop'
@@ -49,6 +49,14 @@ class CreativeAssests extends Component {
     this.setState({headlines: ['']})
   }
 
+  //This works, might be a betterway
+  // If you delete one w/o saving, both get erased. Bug not feature
+  handleDeleteHeadline = (i)=> async (event) => {
+    await this.props.deleteHeadline(i)
+    let headlines = this.props.headlines
+    this.setState({headlines: headlines})
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault()
     try {
@@ -63,14 +71,21 @@ class CreativeAssests extends Component {
      
   }
 
+
   render(){
     return(
       <div> 
         <div id='creative-assets-container'>
           { this.state.headlines.map((headline, i) => {
-            console.log("REMOVE", this.state.headlines[i])
             return(
               <div key={'headline' + '_' + i}>
+                
+                <i 
+                  className="delete basic icon" 
+                  name={i} 
+                  onClick={this.handleDeleteHeadline(i)}>
+                </i>
+                
                 <input 
                   type='text' 
                   name={i}
@@ -121,7 +136,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveHeadlines: (headlines) => dispatch(saveHeadlines(headlines)),
     clearHeadlines: () => dispatch(clearHeadlines()),
-
+    deleteHeadline: (headline) => dispatch(deleteHeadline(headline))
   }
 }
 
