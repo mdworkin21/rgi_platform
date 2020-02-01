@@ -23,7 +23,7 @@ const initialState = {
     type_outbrain_desktop_premium: false,
     type_outbrain_mobile_premium: false,
   },
-  headlines: ['']
+  headlines: [{counter: 0, value: ''}]
 }
 
 export default function campaignConfigurationReducer(state = initialState, action){
@@ -41,14 +41,14 @@ export default function campaignConfigurationReducer(state = initialState, actio
     case CLEAR_HEADLINES:
       return {...state, headlines: initialState.headlines}
     case DELETE_HEADLINE:
-      let headlines =  state.headlines.filter((el, i) => {
-        return i !== action.headline })
+      let headlines =  state.headlines.filter((el) => {
+        return el.counter !== action.headline })
 
         if (headlines.length === 0){
-        return {...state, headlines: initialState.headlines}
-      } else {
-        return {...state, headlines: headlines}
-      }
+          return {...state, headlines: initialState.headlines}
+        } else {
+          return {...state, headlines: headlines}
+        }
     default: 
       return state
   }

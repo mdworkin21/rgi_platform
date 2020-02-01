@@ -14,8 +14,9 @@ class CreativeAssests extends Component {
   }
 
   state = {
-    headlines: [''],
-    images: ['']
+    headlines: [{counter: 0, value: ''}],
+    images: [''],
+    headlineCounter: 0
   }
 
   componentDidMount = () => {
@@ -28,14 +29,19 @@ class CreativeAssests extends Component {
   
   handleText = (i) => (event) => {
     let headlines = [...this.state.headlines]
-    headlines[i] = event.target.value
+    headlines[i].value = event.target.value
     this.setState({
       headlines
     })
   }
 
   handleAddTextbox = () => {
-    this.setState({ headlines: [...this.state.headlines, '']});
+    let counter = this.state.headlineCounter + 1
+    let newHeadline = {counter: counter, value: ''}
+    let updatedHeadlines = [...this.state.headlines, newHeadline]
+    
+    this.props.saveHeadlines(updatedHeadlines)
+    this.setState({ headlines: updatedHeadlines, headlineCounter:  counter});
   }
 
   handleSave = () => {
@@ -78,18 +84,18 @@ class CreativeAssests extends Component {
         <div id='creative-assets-container'>
           { this.state.headlines.map((headline, i) => {
             return(
-              <div key={'headline' + '_' + i}>
+              <div key={'headline' + '_' + headline.counter}>
                 
                 <i 
                   className="delete basic icon" 
-                  name={i} 
-                  onClick={this.handleDeleteHeadline(i)}>
+                  name={headline.counter} 
+                  onClick={this.handleDeleteHeadline(headline.counter)}>
                 </i>
                 
                 <input 
                   type='text' 
                   name={i}
-                  value={this.state.headlines[i]} 
+                  value={this.state.headlines[i].value} 
                   placeholder= 'Headline'
                   onChange={this.handleText(i)}/>
               </div>
@@ -102,9 +108,9 @@ class CreativeAssests extends Component {
 
        {/* Put in own component use in creative component also */}
        <div className='button-container-2'>
-          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
-          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear Settings</button>
-          <button className='campaign-btn'><NavLink to='/create-campaigns'>Campaign Configuration</NavLink></button>
+          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save</button>
+          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear</button>
+          <button className='campaign-btn'><NavLink to='/create-campaigns'>Campaign</NavLink></button>
         </div>
 
         

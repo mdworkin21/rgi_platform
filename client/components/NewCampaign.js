@@ -139,9 +139,9 @@ class NewCampaign extends Component {
 
         {/* Put in own component use in creative component also */}
         <div className='button-container'>
-          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save Settings</button>
-          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear Settings</button>
-          <button className='campaign-btn'><NavLink to='/creatives'>Headlines/Images</NavLink></button>
+          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save</button>
+          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear</button>
+          <button className='campaign-btn'><NavLink to='/creatives'>Creatives</NavLink></button>
         </div>
 
       </div>
