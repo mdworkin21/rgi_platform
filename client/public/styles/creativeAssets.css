@@ -12,3 +12,8 @@
   top: -5vh;
   left: 40vw;
 }
+
+#delete-headline{
+  position: relative;
+  left: 10vw;
+}

@@ -4,7 +4,9 @@ import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
-import Dropzone from './ImageDrop'
+import Images from './Images'
+import {useDropzone} from 'react-dropzone'
+
 
 
 class CreativeAssests extends Component {
@@ -74,6 +76,7 @@ class CreativeAssests extends Component {
 
     onDrop = (file) => {
     // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
+    console.log("DROPPPPPP")
      
   }
 
@@ -88,6 +91,7 @@ class CreativeAssests extends Component {
                 
                 <i 
                   className="delete basic icon" 
+                  id='delete-headline'
                   name={headline.counter} 
                   onClick={this.handleDeleteHeadline(headline.counter)}>
                 </i>
@@ -104,7 +108,7 @@ class CreativeAssests extends Component {
           <button onClick={this.handleAddTextbox}>Add</button>
 
       
-      <Dropzone onDrop={this.onDrop} accept={"image/*"} />
+      <Images />
 
        {/* Put in own component use in creative component also */}
        <div className='button-container-2'>
@@ -130,7 +134,6 @@ class CreativeAssests extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log("PROPSTATE", state.campaignConfiguration.headlines)
   return {
     admin: state.user.user.isAdmin,
     headlines: state.campaignConfiguration.headlines
