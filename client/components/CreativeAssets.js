@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
-import Images from './Images'
-import {useDropzone} from 'react-dropzone'
 
 
 class CreativeAssests extends Component {
@@ -21,7 +19,6 @@ class CreativeAssests extends Component {
   }
 
   componentDidMount = () => {
-    console.log("HEAD", this.props.headlines)
     let headlines = this.props.headlines 
     this.setState({
       headlines
@@ -108,8 +105,6 @@ class CreativeAssests extends Component {
           <button onClick={this.handleAddTextbox}>Add</button>
 
       
-      {/* <Images /> */}
-
        {/* Put in own component use in creative component also */}
        <div className='button-container-2'>
           <button type='click' onClick={this.handleSave} className='campaign-btn'>Save</button>
