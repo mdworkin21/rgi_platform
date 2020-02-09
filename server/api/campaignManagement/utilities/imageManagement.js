@@ -13,7 +13,7 @@ async function uploadToFtp(file){
       username: process.env.FTP_USER,
       password: process.env.FTP_PW
   }).then(() => {
-      sftp.put(image, 'public_html/creatives/' + 'TEST NEW');
+      sftp.put(image);
   }).then((a) => {
     console.log(a);
       console.log('ads.txt files uploaded');
