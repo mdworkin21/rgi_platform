@@ -8,7 +8,6 @@ import Images from './Images'
 import {useDropzone} from 'react-dropzone'
 
 
-
 class CreativeAssests extends Component {
   constructor(props){
     super(props)
@@ -84,6 +83,7 @@ class CreativeAssests extends Component {
   render(){
     return(
       <div> 
+        <h1>Creatives</h1>
         <div id='creative-assets-container'>
           { this.state.headlines.map((headline, i) => {
             return(
@@ -108,7 +108,7 @@ class CreativeAssests extends Component {
           <button onClick={this.handleAddTextbox}>Add</button>
 
       
-      <Images />
+      {/* <Images /> */}
 
        {/* Put in own component use in creative component also */}
        <div className='button-container-2'>

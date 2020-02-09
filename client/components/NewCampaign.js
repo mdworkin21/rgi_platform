@@ -52,7 +52,6 @@ class NewCampaign extends Component {
   }
 
   componentDidMount = () => {
-    console.log('CAMP', campaignConfig)
     const campaignConfig = this.props.campaignConfig
     this.setState(campaignConfig)
   }
@@ -150,7 +149,6 @@ class NewCampaign extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE', state)
   return {
     admin: state.user.user.isAdmin,
     campaignConfig: state.campaignConfiguration.campaignConfig

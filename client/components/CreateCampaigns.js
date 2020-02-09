@@ -18,7 +18,10 @@ class CreateCampaigns extends Component {
 
   render(){
     return (
-        <NewCampaign />
+        <div>
+          <h1>Campaign Configuration</h1>
+          <NewCampaign />
+        </div>
     )
   }
 }
