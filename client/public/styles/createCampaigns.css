@@ -14,3 +14,8 @@
   height: 50vh;
   border: 1px black solid;
 }
+
+#campaign-config-heading {
+  position: absolute;
+  left: 13vw;
+}

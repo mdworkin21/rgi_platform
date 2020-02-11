@@ -137,7 +137,13 @@ class NewCampaign extends Component {
         </form> 
 
 
-        <CampaignBtns handleSave={this.handleSave} handleClear={this.handleClear} to={'/creatives'} pageName={'Creatives'} styleClass={'button-container'}/>
+        <CampaignBtns 
+          handleSave={this.handleSave} 
+          handleClear={this.handleClear} 
+          to={'/creatives'} 
+          pageName={'Creatives'} 
+          styleClass={'button-container'}
+        />
       </div>
     )
   }

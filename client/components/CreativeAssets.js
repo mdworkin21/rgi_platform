@@ -5,7 +5,14 @@ import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/ca
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
 import CampaignBtns from './CampaignBtns'
+import Image from './Image'
 
+let testImages = [
+  "https://s.hdnux.com/photos/65/50/72/14061202/5/gallery_medium.jpg",
+  "https://cdn.vox-cdn.com/thumbor/Zlvd88Wrxb18FmiqZYmdmzMoSEM=/0x0:3000x2000/1200x800/filters:focal(0x0:3000x2000)/cdn.vox-cdn.com/uploads/chorus_image/image/49546013/GettyImages-77502576.0.jpg",
+  "https://www.si.com/.image/t_share/MTY4MTAyNDY4NzU1NzkzMTY5/joe-montana-tall-trophy-inlinejpg.jpg",
+  "https://cdn-s3.si.com/s3fs-public/brett-favre-sportsman-of-the-year.jpg"
+  ]
 
 class CreativeAssests extends Component {
   constructor(props){
@@ -15,8 +22,9 @@ class CreativeAssests extends Component {
 
   state = {
     headlines: [{counter: 0, value: ''}],
-    images: [''],
-    headlineCounter: 0
+    images: [{counter: 0, value: ''}],
+    headlineCounter: 0,
+    imageCounter: 0
   }
 
   componentDidMount = () => {
@@ -81,11 +89,11 @@ class CreativeAssests extends Component {
   render(){
     return(
       <div> 
-        <h1>Creatives</h1>
+        <h1 id='creatives-heading'>Creatives</h1>
         <div id='creative-assets-container'>
           { this.state.headlines.map((headline, i) => {
             return(
-              <div key={'headline' + '_' + headline.counter}>
+              <div className='headline-container' key={'headline' + '_' + headline.counter}>
                 
                 <i 
                   className="delete basic icon" 
@@ -94,7 +102,8 @@ class CreativeAssests extends Component {
                   onClick={this.handleDeleteHeadline(headline.counter)}>
                 </i>
                 
-                <input 
+                <input
+                  className='headline-input' 
                   type='text' 
                   name={i}
                   value={this.state.headlines[i].value} 
@@ -105,14 +114,22 @@ class CreativeAssests extends Component {
           )}
           <button onClick={this.handleAddTextbox}>Add</button>
 
-        {/* <form><input 
-            type='text' 
-            name='image'
-            value={this.state.image} 
-            placeholder='Image Url'
-            onChange={this.handleChange}/>
-          </form> */}
-          <CampaignBtns handleSave={this.handleSave} handleClear={this.handleClear} to={'/create-campaigns'} pageName={'Campaigns'} styleClass={'button-container-2'}/>
+      
+          {/* Will need to update map logic when we have real data */}
+          <div id="img-container">
+            {testImages.map(el => {
+              console.log('ELLLL', el)
+              return <Image imgSrc={el} key={el}/>
+            })}
+          </div>
+
+          <CampaignBtns 
+            handleSave={this.handleSave} 
+            handleClear={this.handleClear} 
+            to={'/create-campaigns'} 
+            pageName={'Campaigns'} 
+            styleClass={'button-container-2'}
+          />
       </div>
       </div>
     )
