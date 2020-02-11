@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import '../public/styles/newCampaign.css'
 import {saveCampaignSettings, clearCampaignSettings} from '../redux/actions/campaigns/campaignConfiguration'
+import CampaignBtns from './CampaignBtns'
 
 const campaignType = [
   'type_taboola_desktop',
@@ -136,13 +137,7 @@ class NewCampaign extends Component {
         </form> 
 
 
-        {/* Put in own component use in creative component also */}
-        <div className='button-container'>
-          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save</button>
-          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear</button>
-          <button className='campaign-btn'><NavLink to='/creatives'>Creatives</NavLink></button>
-        </div>
-
+        <CampaignBtns handleSave={this.handleSave} handleClear={this.handleClear} to={'/creatives'} pageName={'Creatives'} styleClass={'button-container'}/>
       </div>
     )
   }

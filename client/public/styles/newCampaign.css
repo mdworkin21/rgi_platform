@@ -40,9 +40,9 @@
 }
 
 .button-container {
-  position: relative;
+  position: absolute;
   top: 59vh;
-  right: 23vw;
+  left: 30.50vw;
   display: flex;
   flex-direction: row;
   height: 12vh;
@@ -50,7 +50,7 @@
 }
 
 .button-container-2 {
-  left: 17.25vw;
+  left: 20.50vw;
   position: absolute;
   top: 32vh;
   display: flex;

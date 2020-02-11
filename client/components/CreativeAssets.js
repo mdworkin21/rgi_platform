@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
+import CampaignBtns from './CampaignBtns'
 
 
 class CreativeAssests extends Component {
@@ -104,23 +105,14 @@ class CreativeAssests extends Component {
           )}
           <button onClick={this.handleAddTextbox}>Add</button>
 
-      
-       {/* Put in own component use in creative component also */}
-       <div className='button-container-2'>
-          <button type='click' onClick={this.handleSave} className='campaign-btn'>Save</button>
-          <button type='click' className='campaign-btn' onClick={this.handleClear}>Clear</button>
-          <button className='campaign-btn'><NavLink to='/create-campaigns'>Campaign</NavLink></button>
-        </div>
-
-        
-
         {/* <form><input 
             type='text' 
             name='image'
             value={this.state.image} 
             placeholder='Image Url'
             onChange={this.handleChange}/>
-        </form> */}
+          </form> */}
+          <CampaignBtns handleSave={this.handleSave} handleClear={this.handleClear} to={'/create-campaigns'} pageName={'Campaigns'} styleClass={'button-container-2'}/>
       </div>
       </div>
     )
