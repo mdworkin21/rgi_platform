@@ -9,6 +9,10 @@ export const GET_CAMPAIGN_SETTINGS = 'GET_CAMPAIGN_SETTINGS'
 export const SAVE_HEADLINES = 'SAVE_HEADLINES'
 export const CLEAR_HEADLINES = 'CLEAR_HEADLINES'
 export const DELETE_HEADLINE = 'DELETE_HEADLINE'
+export const SAVE_IMAGES = 'SAVE_IMAGES'
+export const CLEAR_IMAGES = 'CLEAR_IMAGES'
+export const DELETE_IMAGE = 'DELETE_IMAGE'
+
 
 //Action Creators
 export const saveCampaignSettings = (campaignConfig) => {
@@ -52,10 +56,29 @@ export const clearHeadlines = () => {
 }
 
 export const deleteHeadline = (headline) => {
-  console.log("ACT", headline)
   return {
     type: DELETE_HEADLINE,
     headline
+  }
+}
+
+export const saveImages = (images) => {
+  return {
+    type: SAVE_IMAGES,
+    images
+  }
+}
+
+export const clearImages = () => {
+  return {
+    type: CLEAR_IMAGES
+  }
+}
+
+export const deleteImage = (image) => {
+  return {
+    type: DELETE_IMAGE,
+    image
   }
 }
 

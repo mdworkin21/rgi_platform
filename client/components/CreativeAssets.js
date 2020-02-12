@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {saveHeadlines, clearHeadlines, deleteHeadline} from '../redux/actions/campaigns/campaignConfiguration'
+import {saveHeadlines, clearHeadlines, deleteHeadline, saveImages, clearImages, deleteImage} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
 import CampaignBtns from './CampaignBtns'
@@ -22,18 +22,41 @@ class CreativeAssests extends Component {
 
   state = {
     headlines: [{counter: 0, value: ''}],
-    images: [{counter: 0, value: ''}],
+    images: [],
     headlineCounter: 0,
-    imageCounter: 0
+    image: ''
   }
 
   componentDidMount = () => {
     let headlines = this.props.headlines 
+    let images = this.props.images
+
     this.setState({
-      headlines
+      headlines,
+      images
+    })
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
     })
   }
   
+  handleAddImages = (event) => {
+    event.preventDefault()
+    let images = this.state.image.split(',')
+
+    for (let i = 0; i < images.length; i++){
+      images[i] = images[i].trim()
+    }
+    let updatedImages = [...this.state.images, ...images]
+
+    this.setState({
+      images: updatedImages
+    })
+  }
+
   handleText = (i) => (event) => {
     let headlines = [...this.state.headlines]
     headlines[i].value = event.target.value
@@ -53,13 +76,20 @@ class CreativeAssests extends Component {
 
   handleSave = () => {
     this.props.saveHeadlines(this.state.headlines)
+    this.props.saveImages(this.state.images)
+
+
     // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
 }
 
   handleClear = async () => {
     await this.props.clearHeadlines()
-    // const headlines = [...this.props.headlines, '']
-    this.setState({headlines: ['']})
+    await this.props.clearImages()
+
+    this.setState({
+      headlines: [{counter: 0, value: ''}],
+      images: []
+    })
   }
 
   //This works, might be a betterway
@@ -73,7 +103,7 @@ class CreativeAssests extends Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      console.log("CLICK")
+      // console.log("CLICK")
       // let data = createCampaignArray(this.state)
       // let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', data)
     } catch(e){}
@@ -81,12 +111,13 @@ class CreativeAssests extends Component {
 
     onDrop = (file) => {
     // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
-    console.log("DROPPPPPP")
+    // console.log("DROPPPPPP")
      
   }
 
 
   render(){
+    console.log('THIS STATE', this.state)
     return(
       <div> 
         <h1 id='creatives-heading'>Creatives</h1>
@@ -117,11 +148,22 @@ class CreativeAssests extends Component {
       
           {/* Will need to update map logic when we have real data */}
           <div id="img-container">
-            {testImages.map(el => {
-              console.log('ELLLL', el)
+            {this.state.images.map(el => {
+              console.log("ELLL", el)
               return <Image imgSrc={el} key={el}/>
             })}
           </div>
+
+          <form onSubmit={this.handleAddImages}>
+            <input 
+              className='headline-input' 
+              type='text' 
+              name='image'
+              value={this.state.image} 
+              placeholder= 'Image URLs'
+              onChange={this.handleChange}
+            />
+          </form>
 
           <CampaignBtns 
             handleSave={this.handleSave} 
@@ -140,7 +182,9 @@ class CreativeAssests extends Component {
 const mapStateToProps = (state) => {
   return {
     admin: state.user.user.isAdmin,
-    headlines: state.campaignConfiguration.headlines
+    headlines: state.campaignConfiguration.headlines,
+    images: state.campaignConfiguration.images
+
   }
 }
 
@@ -149,7 +193,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveHeadlines: (headlines) => dispatch(saveHeadlines(headlines)),
     clearHeadlines: () => dispatch(clearHeadlines()),
-    deleteHeadline: (headline) => dispatch(deleteHeadline(headline))
+    deleteHeadline: (headline) => dispatch(deleteHeadline(headline)),
+    saveImages: (images) => dispatch(saveImages(images)),
+    clearImages: () => dispatch(clearImages()),
+    deleteImage: (image) => dispatch(deleteImage(image))
   }
 }
 

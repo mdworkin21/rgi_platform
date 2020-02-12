@@ -1,4 +1,4 @@
-import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE} from '../../actions/campaigns/campaignConfiguration'
+import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES} from '../../actions/campaigns/campaignConfiguration'
 
 
 const initialState = {
@@ -23,7 +23,8 @@ const initialState = {
     type_outbrain_desktop_premium: false,
     type_outbrain_mobile_premium: false,
   },
-  headlines: [{counter: 0, value: ''}]
+  headlines: [{counter: 0, value: ''}],
+  images: []
 }
 
 export default function campaignConfigurationReducer(state = initialState, action){
@@ -48,6 +49,19 @@ export default function campaignConfigurationReducer(state = initialState, actio
           return {...state, headlines: initialState.headlines}
         } else {
           return {...state, headlines: headlines}
+        }
+    case SAVE_IMAGES:
+      return {...state, images: action.images}
+    case CLEAR_IMAGES:
+      return {...state, images: initialState.images}
+    case DELETE_IMAGE:
+      let images =  state.imgages.filter((el) => {
+        return el.counter !== action.image })
+
+        if (images.length === 0){
+          return {...state, images: initialState.images}
+        } else {
+          return {...state, images: images}
         }
     default: 
       return state

@@ -19,3 +19,20 @@
   position: absolute;
   left: 13vw;
 }
+
+
+@media only screen and (min-width : 980px) {
+  #campaign-config-heading {
+    position: absolute;
+    left: 16vw;
+  }
+  
+}
+
+@media only screen and (min-width : 1400px) {
+  #campaign-config-heading {
+    position: absolute;
+    left: 13vw;
+  }
+  
+}

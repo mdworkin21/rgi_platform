@@ -32,3 +32,17 @@
   left: 13vw;
 }
 
+@media only screen and (min-width : 980px) {
+  #creatives-heading {
+    position: absolute;
+    left: 16vw;
+  }
+  
+}
+
+@media only screen and (min-width : 1400px) {
+  #creatives-heading {
+    position: absolute;
+    left: 13vw;
+  }
+}
