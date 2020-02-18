@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 import '../public/styles/newCampaign.css'
 import {saveCampaignSettings, clearCampaignSettings} from '../redux/actions/campaigns/campaignConfiguration'
 import CampaignBtns from './CampaignBtns'
+import {campaignValidator} from  '../utilities/formValidator'
 
 const campaignType = [
   'type_taboola_desktop',
@@ -80,6 +81,30 @@ class NewCampaign extends Component {
     })
   }
 
+  handleSubmitCampaign = async (event) => {
+    try {
+      event.preventDefault()
+      //Compile campaign object
+      let campaignConfig= this.props.campaignConfiguration
+      let images = this.props.images
+      let headlines = this.props.headlines.map( headline => {return headline.value})
+      let campaign = {campaignConfig, images, headlines}
+      
+      //Check validity
+      let campaignErrs = campaignValidator(campaign)
+      console.log('asd', campaignErrs)
+      let isCampaignValid = campaignErrs.length === 0 
+
+      if (isCampaignValid){
+        console.log('GMMMMMM')
+        let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
+      } else {
+        console.log('ISSSS', campaignErrs)
+        
+      }
+    } catch(e){}
+  }
+
 
   render(){
     return (
@@ -138,6 +163,7 @@ class NewCampaign extends Component {
 
 
         <CampaignBtns 
+          handleSubmitCampaign={this.handleSubmitCampaign}
           handleSave={this.handleSave} 
           handleClear={this.handleClear} 
           to={'/creatives'} 
@@ -152,7 +178,9 @@ class NewCampaign extends Component {
 const mapStateToProps = (state) => {
   return {
     admin: state.user.user.isAdmin,
-    campaignConfig: state.campaignConfiguration.campaignConfig
+    headlines: state.campaignConfiguration.headlines,
+    images: state.campaignConfiguration.images,
+    campaignConfiguration: state.campaignConfiguration.campaignConfig
   }
 }
 

@@ -1,5 +1,6 @@
 const campaignValidator = (obj) => {
   const {campaignConfig } = obj
+  console.log('CAM', campaignConfig)
   let errors = []
   let keys = Object.keys(campaignConfig)
 
