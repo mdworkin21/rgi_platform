@@ -13,7 +13,8 @@ router.post('/createCampaign', async (req, res, next) => {
 
     //WIll call this to upload images to FTP
     // uploadImage()
-    
+    console.log("REQ", req.body)
+    return
     const campaigns = createCampaignArray(req.body)
 
     console.log('REQ', req.body)

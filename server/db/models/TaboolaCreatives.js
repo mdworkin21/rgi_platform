@@ -1,21 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 
-const TaboolaCreative = db.define('taboolaCreatives', {
-  taboolaID: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  }, 
-  status: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
+const Creatives = db.define('creatives', {
   imageURL: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -32,4 +18,4 @@ const TaboolaCreative = db.define('taboolaCreatives', {
   }
 } )
 
-module.exports = TaboolaCreative
+module.exports = Creatives

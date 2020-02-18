@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline, saveImages, clearImages, deleteImage} from '../redux/actions/campaigns/campaignConfiguration'
@@ -6,6 +8,7 @@ import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
 import CampaignBtns from './CampaignBtns'
 import Image from './Image'
+import {campaignValidator} from  '../utilities/formValidator'
 
 let testImages = [
   "https://s.hdnux.com/photos/65/50/72/14061202/5/gallery_medium.jpg",
@@ -100,12 +103,26 @@ class CreativeAssests extends Component {
     this.setState({headlines: headlines})
   }
 
-  handleSubmit = async (event) => {
-    event.preventDefault()
+  handleSubmitCampaign = async (event) => {
     try {
-      // console.log("CLICK")
-      // let data = createCampaignArray(this.state)
-      // let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', data)
+      event.preventDefault()
+      //Compile campaign object
+      let campaignConfig= this.props.campaignConfiguration
+      let images = this.props.images
+      let headlines = this.props.headlines.map( headline => {return headline.value})
+      let campaign = {campaignConfig, images, headlines}
+
+      //Check validity
+      let campaignErrs = campaignValidator(campaign)
+      let isCampaignValid = campaignErrs.length === 0 
+
+      if (isCampaignValid){
+        console.log('GMMMMMM')
+        let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
+      } else {
+        console.log('ISSSS', campaignErrs)
+        
+      }
     } catch(e){}
   }
 
@@ -146,10 +163,8 @@ class CreativeAssests extends Component {
           <button onClick={this.handleAddTextbox}>Add</button>
 
       
-          {/* Will need to update map logic when we have real data */}
           <div id="img-container">
             {this.state.images.map(el => {
-              console.log("ELLL", el)
               return <Image imgSrc={el} key={el}/>
             })}
           </div>
@@ -166,6 +181,7 @@ class CreativeAssests extends Component {
           </form>
 
           <CampaignBtns 
+            handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
             handleClear={this.handleClear} 
             to={'/create-campaigns'} 
@@ -183,8 +199,8 @@ const mapStateToProps = (state) => {
   return {
     admin: state.user.user.isAdmin,
     headlines: state.campaignConfiguration.headlines,
-    images: state.campaignConfiguration.images
-
+    images: state.campaignConfiguration.images,
+    campaignConfiguration: state.campaignConfiguration.campaignConfig
   }
 }
 

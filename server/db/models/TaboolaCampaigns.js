@@ -1,7 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 
-const TaboolaCampaign = db.define('taboolaCampaigns', {
+const CampaignConfig = db.define('CampaignConfigs', {
   taboolaID: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -25,4 +25,4 @@ const TaboolaCampaign = db.define('taboolaCampaigns', {
   }
 })
 
-module.exports = TaboolaCampaign
+module.exports = CampaignConfig

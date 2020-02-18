@@ -15,12 +15,11 @@
   display: flex;
   left: 34vw;
   bottom: 12vh;
-  height: 60vh;
+  height: 47vh;
   width: 35vw;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   padding: 32px;
 }
-
 
 
 .headline-input {
@@ -37,7 +36,6 @@
     position: absolute;
     left: 16vw;
   }
-  
 }
 
 @media only screen and (min-width : 1400px) {
