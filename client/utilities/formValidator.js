@@ -1,8 +1,9 @@
 const campaignValidator = (obj) => {
-  const {campaignConfig } = obj
-  console.log('CAM', campaignConfig)
+  const {campaignConfig, images, headlines} = obj
   let errors = []
   let keys = Object.keys(campaignConfig)
+  let headlineValues = headlines.map(el => {return el.value})
+
 
   // check for campaigns name
   if(campaignConfig.campaign_name === ''){
@@ -56,7 +57,26 @@ const campaignValidator = (obj) => {
     errors.push("Must add mobile cpc for 'outbrain'")
   }
 
+  //Check images annd headlines
+  imageValidator(images, errors)
+  headlineValidator(headlineValues, errors)
+
   return errors
+}
+
+const headlineValidator = (headlinesArr, errs) => {
+  if(!headlinesArr[0] !== ''){
+    errs.push('Must have at least one headline')
+  }
+
+  return errs
+}
+
+const imageValidator = (imagesArr, errs) => {
+  if(!imagesArr.length){
+    errs.push('Must have at least one image')
+  }
+  return errs
 }
 
 const formValidator = (obj, key) => {

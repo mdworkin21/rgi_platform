@@ -92,14 +92,13 @@ class NewCampaign extends Component {
       
       //Check validity
       let campaignErrs = campaignValidator(campaign)
-      console.log('asd', campaignErrs)
       let isCampaignValid = campaignErrs.length === 0 
 
       if (isCampaignValid){
-        console.log('GMMMMMM')
         let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
+        console.log('SENT', campaignData)
       } else {
-        console.log('ISSSS', campaignErrs)
+        console.log('ERRR', campaignErrs)
         
       }
     } catch(e){}
