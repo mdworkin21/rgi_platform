@@ -136,50 +136,51 @@ class CreativeAssests extends Component {
   render(){
     console.log('THIS STATE', this.state)
     return(
-      <div> 
+      <React.Fragment> 
         <h1 id='creatives-heading'>Creatives</h1>
         <div id='creative-assets-container'>
-          { this.state.headlines.map((headline, i) => {
-            return(
-              <div className='headline-container' key={'headline' + '_' + headline.counter}>
-                
-                <i 
-                  className="delete basic icon" 
-                  id='delete-headline'
-                  name={headline.counter} 
-                  onClick={this.handleDeleteHeadline(headline.counter)}>
-                </i>
-                
-                <input
-                  className='headline-input' 
-                  type='text' 
-                  name={i}
-                  value={this.state.headlines[i].value} 
-                  placeholder= 'Headline'
-                  onChange={this.handleText(i)}/>
-              </div>
+          <div className='headline-container'>
+            { this.state.headlines.map((headline, i) => {
+              return(
+                <div className='headline' key={'headline' + '_' + headline.counter}>
+                  
+                  <i 
+                    className="delete basic icon" 
+                    id='delete-headline'
+                    name={headline.counter} 
+                    onClick={this.handleDeleteHeadline(headline.counter)}>
+                  </i>
+                  
+                  <input
+                    id='headline-input' 
+                    type='text' 
+                    name={i}
+                    value={this.state.headlines[i].value} 
+                    placeholder= 'Headline'
+                    onChange={this.handleText(i)}/>
+                </div>
+              )}
             )}
-          )}
+          </div>
           <button onClick={this.handleAddTextbox}>Add</button>
 
-      
-          <div id="img-container">
-            {this.state.images.map(el => {
-              return <Image imgSrc={el} key={el}/>
-            })}
-          </div>
-
-          <form onSubmit={this.handleAddImages}>
+          <form id='add-image-form' onSubmit={this.handleAddImages}>
             <input 
-              className='headline-input' 
+              id='image-input' 
               type='text' 
               name='image'
               value={this.state.image} 
               placeholder= 'Image URLs'
               onChange={this.handleChange}
             />
-          </form>
 
+          <div id="img-container" className='ui grid stackable'>
+            {this.state.images.map(el => {
+              return <Image imgSrc={el} key={el}/>
+            })}
+          </div>
+
+          </form>
           <CampaignBtns 
             handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
@@ -189,7 +190,7 @@ class CreativeAssests extends Component {
             styleClass={'button-container-2'}
           />
       </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
