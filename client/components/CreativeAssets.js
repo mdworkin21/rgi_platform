@@ -56,7 +56,8 @@ class CreativeAssests extends Component {
     let updatedImages = [...this.state.images, ...images]
 
     this.setState({
-      images: updatedImages
+      images: updatedImages,
+      image: ''
     })
   }
 
@@ -80,10 +81,7 @@ class CreativeAssests extends Component {
   handleSave = () => {
     this.props.saveHeadlines(this.state.headlines)
     this.props.saveImages(this.state.images)
-
-
-    // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
-}
+  }
 
   handleClear = async () => {
     await this.props.clearHeadlines()
@@ -95,12 +93,16 @@ class CreativeAssests extends Component {
     })
   }
 
-  //This works, might be a betterway
-  // If you delete one w/o saving, both get erased. Bug not feature
   handleDeleteHeadline = (i)=> async (event) => {
     await this.props.deleteHeadline(i)
     let headlines = this.props.headlines
     this.setState({headlines: headlines})
+  }
+
+  handleDeleteImage = (i) => async (event) => {
+    await this.props.deleteImage(i)
+    let images = this.props.images
+    this.setState({images: images})
   }
 
   handleSubmitCampaign = async (event) => {
@@ -126,15 +128,8 @@ class CreativeAssests extends Component {
     } catch(e){}
   }
 
-    onDrop = (file) => {
-    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
-    // console.log("DROPPPPPP")
-     
-  }
-
 
   render(){
-    console.log('THIS STATE', this.state)
     return(
       <React.Fragment> 
         <h1 id='creatives-heading'>Creatives</h1>
@@ -175,12 +170,24 @@ class CreativeAssests extends Component {
             />
 
           <div id="img-container" className='ui grid stackable'>
-            {this.state.images.map(el => {
-              return <Image imgSrc={el} key={el}/>
+            {this.state.images.map((imgUrl, i) => {
+              return (
+                <div key={imgUrl}>
+                   <i 
+                    className="delete basic icon" 
+                    id='delete-image'
+                    name={i} 
+                    value={this.state.images[i]}
+                    onClick={this.handleDeleteImage(i)}>
+                  </i>
+                  <Image imgSrc={imgUrl}/>
+                </div>
+              )
             })}
           </div>
 
           </form>
+
           <CampaignBtns 
             handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
@@ -217,4 +224,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default  connect(mapStateToProps,mapDispatchToProps)(CreativeAssests)
+export default connect(mapStateToProps,mapDispatchToProps)(CreativeAssests)
