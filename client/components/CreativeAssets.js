@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline, saveImages, clearImages, deleteImage} from '../redux/actions/campaigns/campaignConfiguration'
@@ -6,6 +8,7 @@ import '../public/styles/creativeAssets.css'
 import '../public/styles/newCampaign.css'
 import CampaignBtns from './CampaignBtns'
 import Image from './Image'
+import {campaignValidator} from  '../utilities/formValidator'
 
 let testImages = [
   "https://s.hdnux.com/photos/65/50/72/14061202/5/gallery_medium.jpg",
@@ -53,7 +56,8 @@ class CreativeAssests extends Component {
     let updatedImages = [...this.state.images, ...images]
 
     this.setState({
-      images: updatedImages
+      images: updatedImages,
+      image: ''
     })
   }
 
@@ -77,10 +81,7 @@ class CreativeAssests extends Component {
   handleSave = () => {
     this.props.saveHeadlines(this.state.headlines)
     this.props.saveImages(this.state.images)
-
-
-    // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
-}
+  }
 
   handleClear = async () => {
     await this.props.clearHeadlines()
@@ -92,80 +93,104 @@ class CreativeAssests extends Component {
     })
   }
 
-  //This works, might be a betterway
-  // If you delete one w/o saving, both get erased. Bug not feature
   handleDeleteHeadline = (i)=> async (event) => {
     await this.props.deleteHeadline(i)
     let headlines = this.props.headlines
     this.setState({headlines: headlines})
   }
 
-  handleSubmit = async (event) => {
-    event.preventDefault()
-    try {
-      // console.log("CLICK")
-      // let data = createCampaignArray(this.state)
-      // let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', data)
-    } catch(e){}
+  // currently deletes everything if not saved. Bug
+  handleDeleteImage = (i) => async (event) => {
+    await this.props.deleteImage(i)
+    let images = this.props.images
+    this.setState({images: images})
   }
 
-    onDrop = (file) => {
-    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
-    // console.log("DROPPPPPP")
-     
+  handleSubmitCampaign = async (event) => {
+    try {
+      event.preventDefault()
+      //Compile campaign object
+      let campaignConfig= this.props.campaignConfiguration
+      let images = this.props.images
+      let headlines = this.props.headlines.map( headline => {return headline.value})
+      let campaign = {campaignConfig, images, headlines}
+
+      //Check validity
+      let campaignErrs = campaignValidator(campaign)
+      let isCampaignValid = campaignErrs.length === 0 
+
+      if (isCampaignValid){
+        console.log('GMMMMMM')
+        let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
+      } else {
+        console.log('ISSSS', campaignErrs)
+        
+      }
+    } catch(e){}
   }
 
 
   render(){
-    console.log('THIS STATE', this.state)
     return(
-      <div> 
+      <React.Fragment> 
         <h1 id='creatives-heading'>Creatives</h1>
         <div id='creative-assets-container'>
-          { this.state.headlines.map((headline, i) => {
-            return(
-              <div className='headline-container' key={'headline' + '_' + headline.counter}>
-                
-                <i 
-                  className="delete basic icon" 
-                  id='delete-headline'
-                  name={headline.counter} 
-                  onClick={this.handleDeleteHeadline(headline.counter)}>
-                </i>
-                
-                <input
-                  className='headline-input' 
-                  type='text' 
-                  name={i}
-                  value={this.state.headlines[i].value} 
-                  placeholder= 'Headline'
-                  onChange={this.handleText(i)}/>
-              </div>
+          <div className='headline-container'>
+            { this.state.headlines.map((headline, i) => {
+              return(
+                <div className='headline' key={'headline' + '_' + headline.counter}>
+                  <i 
+                    className="delete basic icon" 
+                    id='delete-headline'
+                    name={headline.counter} 
+                    onClick={this.handleDeleteHeadline(headline.counter)}>
+                  </i>
+                  <input
+                    id='headline-input' 
+                    type='text' 
+                    name={i}
+                    value={this.state.headlines[i].value} 
+                    placeholder= 'Headline'
+                    onChange={this.handleText(i)}/>
+                </div>
+              )}
             )}
-          )}
+          </div>
           <button onClick={this.handleAddTextbox}>Add</button>
 
-      
-          {/* Will need to update map logic when we have real data */}
-          <div id="img-container">
-            {this.state.images.map(el => {
-              console.log("ELLL", el)
-              return <Image imgSrc={el} key={el}/>
-            })}
-          </div>
-
-          <form onSubmit={this.handleAddImages}>
+          <form id='add-image-form' onSubmit={this.handleAddImages}>
             <input 
-              className='headline-input' 
+              id='image-input' 
               type='text' 
               name='image'
               value={this.state.image} 
               placeholder= 'Image URLs'
               onChange={this.handleChange}
-            />
+              />
+              {/* <button type='button' onClick={this.handleAddImages} className='ui button'>Add Image</button> */}
+          
+
+          <div id="img-container" className='ui grid stackable'>
+            {this.state.images.map((imgUrl, i) => {
+              return (
+                <div key={imgUrl}>
+                   <i 
+                    className="delete basic icon" 
+                    id='delete-image'
+                    name={i} 
+                    value={this.state.images[i]}
+                    onClick={this.handleDeleteImage(i)}>
+                  </i>
+                  <Image imgSrc={imgUrl}/>
+                </div>
+              )
+            })}
+          </div>
+
           </form>
 
           <CampaignBtns 
+            handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
             handleClear={this.handleClear} 
             to={'/create-campaigns'} 
@@ -173,7 +198,7 @@ class CreativeAssests extends Component {
             styleClass={'button-container-2'}
           />
       </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -183,8 +208,8 @@ const mapStateToProps = (state) => {
   return {
     admin: state.user.user.isAdmin,
     headlines: state.campaignConfiguration.headlines,
-    images: state.campaignConfiguration.images
-
+    images: state.campaignConfiguration.images,
+    campaignConfiguration: state.campaignConfiguration.campaignConfig
   }
 }
 
@@ -200,4 +225,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default  connect(mapStateToProps,mapDispatchToProps)(CreativeAssests)
+export default connect(mapStateToProps,mapDispatchToProps)(CreativeAssests)

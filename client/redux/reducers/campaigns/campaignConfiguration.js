@@ -55,8 +55,8 @@ export default function campaignConfigurationReducer(state = initialState, actio
     case CLEAR_IMAGES:
       return {...state, images: initialState.images}
     case DELETE_IMAGE:
-      let images =  state.imgages.filter((el) => {
-        return el.counter !== action.image })
+      let images =  state.images.filter((el, i) => {
+        return i !== action.image })
 
         if (images.length === 0){
           return {...state, images: initialState.images}

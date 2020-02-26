@@ -5,7 +5,7 @@ import '../public/styles/image.css'
 const Image = (props) => {
   const {imgSrc} = props
   return (
-       <img className='image' src={imgSrc}></img>
+        <img className='image' src={imgSrc}></img>
   )
 }
 
