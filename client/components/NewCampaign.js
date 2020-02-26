@@ -9,13 +9,17 @@ import CampaignBtns from './CampaignBtns'
 const campaignType = [
   'type_taboola_desktop',
   'type_taboola_mobile',
+  'type_taboola_tablet',
   'type_taboola_desktop_safe',
   'type_taboola_mobile_safe',
+  'type_taboola_tablet_safe',
   'type_outbrain_desktop',
   'type_outbrain_mobile',
+  'type_outbrain_tablet',
   'type_outbrain_desktop_msn',
   'type_outbrain_desktop_premium',
   'type_outbrain_mobile_premium'
+  'type_outbrain_tablet_premium'
 ]
 
 const campaignConfiguration = [
