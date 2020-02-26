@@ -99,6 +99,7 @@ class CreativeAssests extends Component {
     this.setState({headlines: headlines})
   }
 
+  // currently deletes everything if not saved. Bug
   handleDeleteImage = (i) => async (event) => {
     await this.props.deleteImage(i)
     let images = this.props.images
@@ -138,14 +139,12 @@ class CreativeAssests extends Component {
             { this.state.headlines.map((headline, i) => {
               return(
                 <div className='headline' key={'headline' + '_' + headline.counter}>
-                  
                   <i 
                     className="delete basic icon" 
                     id='delete-headline'
                     name={headline.counter} 
                     onClick={this.handleDeleteHeadline(headline.counter)}>
                   </i>
-                  
                   <input
                     id='headline-input' 
                     type='text' 
@@ -167,7 +166,9 @@ class CreativeAssests extends Component {
               value={this.state.image} 
               placeholder= 'Image URLs'
               onChange={this.handleChange}
-            />
+              />
+              {/* <button type='button' onClick={this.handleAddImages} className='ui button'>Add Image</button> */}
+          
 
           <div id="img-container" className='ui grid stackable'>
             {this.state.images.map((imgUrl, i) => {
