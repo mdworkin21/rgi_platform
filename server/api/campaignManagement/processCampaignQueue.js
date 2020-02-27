@@ -10,13 +10,9 @@ let campaignQueue = new CampaignQueue()
 
 router.post('/createCampaign', async (req, res, next) => {
   try {
-
-    //WIll call this to upload images to FTP
-    // uploadImage()
-    
+ 
     const campaigns = createCampaignArray(req.body)
     
-    console.log('REQ', req.body)
     for (let i = 0; i < campaigns.length; i++){
       campaignQueue.enqueue(campaigns[i])
     }
@@ -26,12 +22,12 @@ router.post('/createCampaign', async (req, res, next) => {
     
     while(campaignQueue.length() > 0){
       let current = campaignQueue.dequeue()
-      
+
       switch(current.value.platform){
-        case 'taboola':
-          console.log("TAB")
-          return
-          // taboola.init_createCampaign(current.value)
+        case 'taboola':          
+          await taboola.init_createCampaign(current.value)
+          res.status(200).send('YAY')
+
           break
           case 'outbrain':
           console.log('OUT')
@@ -41,10 +37,8 @@ router.post('/createCampaign', async (req, res, next) => {
               break
             }
           }
-          console.log("REQ", req.body)
-
   } catch(e){
-    next(e)
+      next(e)
   }
 
 })

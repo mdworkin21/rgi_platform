@@ -2,7 +2,6 @@ const campaignValidator = (obj) => {
   const {campaignConfig, images, headlines} = obj
   let errors = []
   let keys = Object.keys(campaignConfig)
-  let headlineValues = headlines.map(el => {return el.value})
 
 
   // check for campaigns name
@@ -59,13 +58,13 @@ const campaignValidator = (obj) => {
 
   //Check images annd headlines
   imageValidator(images, errors)
-  headlineValidator(headlineValues, errors)
+  headlineValidator(headlines, errors)
 
   return errors
 }
 
 const headlineValidator = (headlinesArr, errs) => {
-  if(!headlinesArr[0] !== ''){
+  if( headlinesArr[0] === ''){
     errs.push('Must have at least one headline')
   }
 

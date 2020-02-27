@@ -19,8 +19,10 @@ const campaignType = [
   'type_outbrain_tablet',
   'type_outbrain_desktop_msn',
   'type_outbrain_desktop_premium',
-  'type_outbrain_mobile_premium'
-  'type_outbrain_tablet_premium'
+  'type_outbrain_mobile_premium',
+  'type_outbrain_tablet_premium',
+  'content',
+  'search'
 ]
 
 const campaignConfiguration = [
@@ -31,7 +33,10 @@ const campaignConfiguration = [
   'daily_cap_taboola',
   'cpc_outbrain_desktop',
   'cpc_outbrain_mobile',
-  'daily_cap_outbrain'
+  'daily_cap_outbrain',
+  'branding_text',
+  'country',
+  'taboola_account'
 ]
 
 class NewCampaign extends Component {

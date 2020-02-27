@@ -3,7 +3,7 @@ const axios = require('axios')
 const {db, TaboolaCampaigns, TaboolaCreatives, TaboolaToken} = require('../../db')
 const {setToken} = require('../tokenManagement/taboola')
 const {ACCOUNTS, getAccount} = require('../accountManagement/taboola')
-const {createCampaignName,  createCampaignUTM, getBrandingText, createTrackingCode} = require('./utilities/campaignCreation')
+const {createCampaignName,  createCampaignUTM, getBrandingText, createTrackingCode, createItemArray} = require('./utilities/campaignCreation')
 
 //Remember to require in taboola utilities
 if (process.env.NODE_ENV !== 'production') require('../../../secrets')
@@ -18,15 +18,17 @@ const init_createCampaign = async (campaignData) => {
 
   const account = getAccount(campaignData.site, campaignData.device)
   let campaignPayload =  createPayload(campaignData)
+  // var items = createItemArray(campaignData);
+  // console.log("ITEMS", items, 'DATA', campaignData)
+  
   let campaign = await createCampaign(account, campaignPayload)
 
-  if(campaign['http_status'] == 400){
+  if(campaign.data.http_status === 400){
     console.log("Error!", campaign);
     return;
   }
   
-  return;
-  var campaignId = campaign.id;
+  var campaignId = campaign.data.id;
 
   // console.log('Campaign created: ' + campaignId + ' - ' + JSON.stringify(campaign));
   var items = createItemArray(campaignData);
@@ -34,13 +36,14 @@ const init_createCampaign = async (campaignData) => {
   
   // create the correct number of campaign items
   for(var i = 0; i < items.length; i++){
-    var item = createItem(account, campaignId, items[i].url);
+    var item = await createItem(account, campaignId, items[i].url);
+
     items[i].response = item;
   }
   
   for(var x = 0; x < items.length; x++){
-    checkItemStatus(account, items[x]);
-    updateItem(account, items[x]);
+    await checkItemStatus(account, items[x]);
+    await updateItem(account, items[x]);
   }
   return campaignId;
 }
@@ -82,7 +85,7 @@ const createItem = async (account, campaignId, url) => {
       payload, 
       { 
         headers: {
-          Authorization: 'Bearer ' + tokens
+          Authorization: 'Bearer ' + token
         }
     })
 
@@ -100,7 +103,7 @@ const updateItem = async (account, item) => {
   }
 
   try {
-    const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns/${item.response.campaign_id}/items/${item.response.id}`,
+    const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns/${item.response.data.campaign_id}/items/${item.response.data.id}`,
       payload, 
       { 
         headers: {
@@ -121,16 +124,16 @@ const checkItemStatus = async (account, item) => {
   }
   
   try {
-    const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns/${item.response.campaign_id}/items/${item.response.id}`,
+    const response = await axios.post(`https://backstage.taboola.com/backstage/api/1.0/${account}/campaigns/${item.response.data.campaign_id}/items/${item.response.data.id}`,
       payload, 
       { 
         headers: {
           Authorization: 'Bearer ' + token
         }
     })
-    if(response.status === "CRAWLING"){
+    if(response.data.status === "CRAWLING"){
       // if item is still CRAWLING, recursively check status
-      checkItemStatus(account, item);
+      await checkItemStatus(account, item);
     } else {
       return true;
     }

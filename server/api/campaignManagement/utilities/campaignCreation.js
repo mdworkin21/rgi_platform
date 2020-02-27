@@ -1,25 +1,25 @@
 const createCampaignArray = (data) => {
+  const {campaignConfig} = data 
   const campaignArr = []
   // loop through keys to find campaign types
-
-  for(let key in data){
+  for(let key in campaignConfig){
     // only continue if key is a campaign type and is true 
-    if(key.indexOf('type_') !== 0 || !data[key]) continue
-
+    if(key.indexOf('type_') !== 0 || !campaignConfig[key]) continue
+    
     let type = key.split('_')
     let campaignObj = {
-      campaign_name: data.campaign_name,
-      url: data.url,
-      site: data.url.replace(/.*\:\/\/|\..*/g, ''),
+      campaign_name: campaignConfig.campaign_name,
+      url: campaignConfig.url,
+      site: campaignConfig.url.replace(/.*\:\/\/|\..*/g, ''),
       platform: type[1],
       device: type[2],
       targeting: type[3] ? type[3].toUpperCase() : '',
-      cpc: data[`cpc_${type[1]}_${type[2]}`],
-      daily_cap: data[`daily_cap_${type[1]}`],
+      cpc: campaignConfig[`cpc_${type[1]}_${type[2]}`],
+      daily_cap: campaignConfig[`daily_cap_${type[1]}`],
       images: data.images,
       headlines: data.headlines
     }
-
+    
     campaignObj.name = createCampaignName(campaignObj)
 
     // if outbrain and ob_tag enabled, add tag to campaignObject

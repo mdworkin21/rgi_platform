@@ -112,7 +112,7 @@ class CreativeAssests extends Component {
       //Compile campaign object
       let campaignConfig= this.props.campaignConfiguration
       let images = this.props.images
-      let headlines = this.props.headlines.map( headline => {return headline.value})
+      let headlines = this.props.headlines.map( headline =>  {return headline.value})
       let campaign = {campaignConfig, images, headlines}
 
       //Check validity
