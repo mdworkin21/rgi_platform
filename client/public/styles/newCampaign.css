@@ -84,14 +84,13 @@
   width: 100%;
   position: relative;
   left: 0vw;
-  font-family: "Arial Black", Gadget, sans-serif;
-  font-weight: 400;
+  font-family: "Arial", Gadget, sans-serif;
 }
 
 #campaign-configuration {
   position: relative;
-  left: 15vw;
-  top: 7vh;
+  left: 15.5vw;
+  top: 9vh;
   display: inline-flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
@@ -153,3 +152,8 @@
 #gen-form-labels {
   margin-bottom: 3vh;
 }
+
+#selection-container {
+  overflow-y: scroll;
+}
+

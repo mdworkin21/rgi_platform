@@ -228,7 +228,7 @@ const generalConfiguration = [
   { HTMLtype: 'input', label: 'Branding Text: ', value: 'branding_text', id: 'branding-text', classes:'config-inputs'}, 
   { HTMLtype: 'radio', label: 'Search: ', value: 'search', id: 'search', classes:'radios'}, 
   { HTMLtype: 'radio', label: 'Content: ', value: 'content', id: 'content', classes:'radios'}, 
-  { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'dropdown'}, 
+  { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'custom-dropdown'}, 
   
 ]
 
@@ -254,7 +254,10 @@ class NewCampaign extends Component {
     type_outbrain_mobile: false, 
     type_outbrain_desktop_msn: false,
     type_outbrain_desktop_premium: false,
-    type_outbrain_mobile_premium: false
+    type_outbrain_mobile_premium: false,
+    selectedOption: '',
+    content: false,
+    search: false
   }
 
   componentDidMount = () => {
@@ -283,6 +286,14 @@ class NewCampaign extends Component {
   handleCheckBox = (event) => {
     this.setState({
       [event.target.name]: !this.state[event.target.name]
+    })
+  }
+
+  handleRadio = (event) => {
+    this.setState({
+      selectedOption: event.target.name,
+      [event.target.name]: !this.state[event.target.name]
+
     })
   }
 
@@ -334,18 +345,20 @@ class NewCampaign extends Component {
                     <input 
                     type='radio'
                     name={config.value}
+                    value={config.value}
                     onChange={this.handleCheckBox}
-                    checked={this.state[config.value]}
+                    checked={this.state.selectedOption === config.value}
+                    onClick={this.handleRadio}
                     />
                   </div>
                 )
             } else if (config.HTMLtype === 'dropdown'){
                 return (
-                  <div key={config.value} className={`ui selection simple dropdown ${config.classes}`} id={config.id}>
+                  <div key={config.value} className={`ui selection simple dropdown `} id={config.id}>
                     <input type="hidden" name="country"/>
-                      <i className="dropdown icon"></i>
+                      <i className="dropdown icon "></i>
                       <div className="default text">Select Country</div>
-                      <div className="menu">
+                      <div className="menu" id='selection-container'>
                         <div className="item" data-value="af"><i className="af flag"></i>Afghanistan</div>
                         <div className="item" data-value="ax"><i className="ax flag"></i>Aland Islands</div>
                         <div className="item" data-value="al"><i className="al flag"></i>Albania</div>
