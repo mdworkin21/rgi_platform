@@ -11,6 +11,8 @@ import PrivateRoute from './PrivateRoute'
 import CreateCampaigns from './CreateCampaigns';
 import CreativeAssets from './CreativeAssets'
 import {getUserFromPassport} from '../redux/thunks/users'
+import '../public/styles/app.css'
+
 
 class App extends Component {
   componentDidMount = async () => {
@@ -20,7 +22,7 @@ class App extends Component {
   render(){
     return (
       <Router>
-        <div>
+        <div id='router-container'>
           <Menu />
           <Route exact path='/' component={Authenticate} />
           <PrivateRoute exact path='/dashboard' component={Dashboard} authed={this.props.auth} />

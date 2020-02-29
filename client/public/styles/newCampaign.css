@@ -1,4 +1,4 @@
-.form-container {
+/* .form-container {
   position: relative;
   left: 10vw;
   top: 18vh;
@@ -75,4 +75,76 @@
 
 @media only screen  and (min-width : 1224px) {
   
+} */
+
+
+/* flex-direction: row; */
+.form-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  left: 0vw
+}
+
+#campaign-configuration {
+  position: relative;
+  left: 15vw;
+  top: 7vh;
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  height: 22vh;
+  width: 39vw;
+}
+
+.config-inputs {
+  width: 13vw;
+}
+
+#media-buyer {
+  position: relative;
+  left: 30vw;
+  width: 8vw;
+}
+
+#url{
+  position: absolute;
+  width: 8vw;
+  bottom: 2vh;
+}
+
+#campaign_name {
+  position: relative;
+  
+
+}
+
+#country{
+  position: relative;
+  z-index: 1;
+  flex-direction: column;
+  width: 11vw;
+  height: 1vh;
+  left: 27vw;
+  bottom: 4vh;
+}
+
+#branding-text{
+  position: relative;
+  left: 0vw;
+  top: 0vh
+}
+
+.radios{
+  position: absolute;
+  top: 8vh;
+}
+
+#content{
+  right: 1vw;
+}
+
+#search{
+  right: 6vw;
 }

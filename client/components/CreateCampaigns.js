@@ -18,7 +18,7 @@ class CreateCampaigns extends Component {
 
   render(){
     return (
-        <div>
+        <div id='create-campaign-menu-wrapper'>
           <h1 id='campaign-config-heading'>Campaign Configuration</h1>
           <NewCampaign />
         </div>
