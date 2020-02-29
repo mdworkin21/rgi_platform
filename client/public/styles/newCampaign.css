@@ -83,7 +83,9 @@
   height: 100%;
   width: 100%;
   position: relative;
-  left: 0vw
+  left: 0vw;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-weight: 400;
 }
 
 #campaign-configuration {
@@ -99,7 +101,7 @@
 }
 
 .config-inputs {
-  width: 13vw;
+  width: 18vw;
 }
 
 #media-buyer {
@@ -110,14 +112,18 @@
 
 #url{
   position: absolute;
-  width: 8vw;
-  bottom: 2vh;
+  top: 0.5vh;
 }
 
-#campaign_name {
+#campaign-name {
   position: relative;
-  
+  top: 1.5vh;
+}
 
+#branding-text{
+  position: relative;
+  left: 0vw;
+  top: 2.5vh
 }
 
 #country{
@@ -127,18 +133,13 @@
   width: 11vw;
   height: 1vh;
   left: 27vw;
-  bottom: 4vh;
+  bottom: 1vh;
 }
 
-#branding-text{
-  position: relative;
-  left: 0vw;
-  top: 0vh
-}
 
 .radios{
   position: absolute;
-  top: 8vh;
+  top: 10vh;
 }
 
 #content{
@@ -147,4 +148,8 @@
 
 #search{
   right: 6vw;
+}
+
+#gen-form-labels {
+  margin-bottom: 3vh;
 }

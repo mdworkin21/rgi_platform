@@ -225,7 +225,7 @@ const generalConfiguration = [
   { HTMLtype: 'input', label: 'Media Buyer: ', value: 'media_buyer', id: 'media-buyer', classes:'config-inputs'},
   { HTMLtype: 'input', label: 'URL: ', value: 'url', id: 'url', classes:'config-inputs'}, 
   { HTMLtype: 'input', label: 'Campaign Name: ', value: 'campaign_name', id: 'campaign-name', classes:'config-inputs'}, 
-  { HTMLtype: 'input', label: 'Branding Text: ', value: 'branding_text', id: 'branding_text', classes:'config-inputs'}, 
+  { HTMLtype: 'input', label: 'Branding Text: ', value: 'branding_text', id: 'branding-text', classes:'config-inputs'}, 
   { HTMLtype: 'radio', label: 'Search: ', value: 'search', id: 'search', classes:'radios'}, 
   { HTMLtype: 'radio', label: 'Content: ', value: 'content', id: 'content', classes:'radios'}, 
   { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'dropdown'}, 
@@ -319,7 +319,7 @@ class NewCampaign extends Component {
             if(config.HTMLtype === 'input'){
               return(
                 <div key={config.value} id={config.id} className={config.classes}>
-                  <label>{config.label}</label>
+                  <label id='gen-form-labels'> {config.label}</label>
                   <input 
                   type='text' 
                   name={config.value}
@@ -330,7 +330,7 @@ class NewCampaign extends Component {
             } else if (config.HTMLtype === 'radio'){
                 return (
                   <div key={config.value} className={`ui radio ${config.classes}`} id={config.id}>
-                    <label>{config.label}</label>
+                    <label id='gen-form-labels'> {config.label}</label>
                     <input 
                     type='radio'
                     name={config.value}
