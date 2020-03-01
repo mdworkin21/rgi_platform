@@ -229,8 +229,20 @@ const generalConfiguration = [
   { HTMLtype: 'radio', label: 'Search: ', value: 'search', id: 'search', classes:'radios'}, 
   { HTMLtype: 'radio', label: 'Content: ', value: 'content', id: 'content', classes:'radios'}, 
   { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'custom-dropdown'}, 
-  
 ]
+
+const countries = [
+  {value: 'Afghanistan', class: 'af'},
+  {value: 'Aland Islands', class: 'ax'},
+  {value: 'Albania', class: 'al'},
+  {value: 'Algeria', class: 'dz'},
+  {value: 'American Samoa', class: 'as'},
+  {value: 'Andorra', class: 'ad'},
+  {value: 'Angola', class: 'ao'},
+  {value: 'Anguilla', class: 'ai'},
+  {value: 'Antigua', class: 'ag'}
+]
+
 
 class NewCampaign extends Component {
   state = {
@@ -257,7 +269,8 @@ class NewCampaign extends Component {
     type_outbrain_mobile_premium: false,
     selectedOption: '',
     content: false,
-    search: false
+    search: false,
+    country: 'Select Country'
   }
 
   componentDidMount = () => {
@@ -272,9 +285,7 @@ class NewCampaign extends Component {
   }
 
   handleSave = () => {
-    console.log("SAVE")
-      this.props.saveCampaignConfig(this.state)
-      // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
+    this.props.saveCampaignConfig(this.state)
   }
 
   handleClear = async () => {
@@ -286,6 +297,13 @@ class NewCampaign extends Component {
   handleCheckBox = (event) => {
     this.setState({
       [event.target.name]: !this.state[event.target.name]
+    })
+  }
+
+  handleSelectCountry = (event) => {
+    console.log('event', event)
+    this.setState({
+      country: event.currentTarget.textContent
     })
   }
 
@@ -322,6 +340,7 @@ class NewCampaign extends Component {
 
 
   render(){
+    console.log('STATE ', this.state)
     return (
       <div className='form-container'>
         <form id='campaign-configuration' className='ui form'>
@@ -343,12 +362,12 @@ class NewCampaign extends Component {
                   <div key={config.value} className={`ui radio ${config.classes}`} id={config.id}>
                     <label id='gen-form-labels'> {config.label}</label>
                     <input 
-                    type='radio'
-                    name={config.value}
-                    value={config.value}
-                    onChange={this.handleCheckBox}
-                    checked={this.state.selectedOption === config.value}
-                    onClick={this.handleRadio}
+                      type='radio'
+                      name={config.value}
+                      value={config.value}
+                      onChange={this.handleCheckBox}
+                      checked={this.state.selectedOption === config.value}
+                      onClick={this.handleRadio}
                     />
                   </div>
                 )
@@ -357,17 +376,21 @@ class NewCampaign extends Component {
                   <div key={config.value} className={`ui selection simple dropdown `} id={config.id}>
                     <input type="hidden" name="country"/>
                       <i className="dropdown icon "></i>
-                      <div className="default text">Select Country</div>
+                      <div className="default text">{this.state.country}</div>
                       <div className="menu" id='selection-container'>
-                        <div className="item" data-value="af"><i className="af flag"></i>Afghanistan</div>
-                        <div className="item" data-value="ax"><i className="ax flag"></i>Aland Islands</div>
-                        <div className="item" data-value="al"><i className="al flag"></i>Albania</div>
-                        <div className="item" data-value="dz"><i className="dz flag"></i>Algeria</div>
-                        <div className="item" data-value="as"><i className="as flag"></i>American Samoa</div>
-                        <div className="item" data-value="ad"><i className="ad flag"></i>Andorra</div>
-                        <div className="item" data-value="ao"><i className="ao flag"></i>Angola</div>
-                        <div className="item" data-value="ai"><i className="ai flag"></i>Anguilla</div>
-                        <div className="item" data-value="ag"><i className="ag flag"></i>Antigua</div>
+                        {countries.map(country => {
+                            return (
+                            <div 
+                              key={country.value} 
+                              className="item"  
+                              data-value={`${country.class}`} 
+                              onClick={this.handleSelectCountry} 
+                              name={country.value} 
+                              value={this.state.country}>
+                                <i className={`${country.class} flag`}></i>{country.value}
+                          </div>
+                            )
+                        })}
                       </div>
                     </div>
                 )

@@ -157,3 +157,42 @@
   overflow-y: scroll;
 }
 
+@media (max-width: 1500px){
+  #campaign-configuration {
+    position: relative;
+    left: 18.5vw;
+    top: 11vh;
+    display: inline-flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    padding: 8px;
+    height: 27vh;
+    width: 43vw;
+  }
+
+  #country {
+    position: relative;
+    z-index: 1;
+    flex-direction: column;
+    width: 11vw;
+    height: 1vh;
+    left: 28vw;
+    bottom: 2.5vh;
+ }
+
+  #media-buyer {
+    position: relative;
+    left: 33.5vw;
+    width: 8vw;
+ }
+
+.radios {
+  position: absolute;
+  top: 12vh;
+}
+
+#search {
+   right: 7vw;
+  }
+}
+
