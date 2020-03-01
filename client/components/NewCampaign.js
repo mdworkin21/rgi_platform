@@ -203,23 +203,6 @@ import {campaignValidator} from  '../utilities/formValidator'
 
 // export default connect(mapStateToProps, mapDispatchToProps)(NewCampaign)
 
-const campaignType = [
-  'type_taboola_desktop',
-  'type_taboola_mobile',
-  'type_taboola_tablet',
-  'type_taboola_desktop_safe',
-  'type_taboola_mobile_safe',
-  'type_taboola_tablet_safe',
-  'type_outbrain_desktop',
-  'type_outbrain_mobile',
-  'type_outbrain_tablet',
-  'type_outbrain_desktop_msn',
-  'type_outbrain_desktop_premium',
-  'type_outbrain_mobile_premium',
-  'type_outbrain_tablet_premium',
-  'content',
-  'search'
-]
 
 const generalConfiguration = [
   { HTMLtype: 'input', label: 'Media Buyer: ', value: 'media_buyer', id: 'media-buyer', classes:'config-inputs'},
@@ -230,6 +213,62 @@ const generalConfiguration = [
   { HTMLtype: 'radio', label: 'Content: ', value: 'content', id: 'content', classes:'radios'}, 
   { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'custom-dropdown'}, 
 ]
+
+const platformConfiguration = {
+    Taboola: [
+      {
+        device: 'Desktop',
+        fields: [
+          {value: 'type_taboola_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'type_taboola_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
+        ],
+      },
+      {
+        device: 'Tablet',
+        fields: [
+          {value: 'type_taboola_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'type_taboola_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
+        ],
+      },
+      {
+        device: 'Mobile',
+        fields: [
+          {value: 'type_taboola_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'type_taboola_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
+          {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
+        ],
+      },
+    ],
+    Outbrain:[
+      {
+        device: 'Desktop',
+        fields: [
+          {value: 'type_outbrain_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
+          {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: ''},
+          {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: ''}
+        ],
+      },
+      {
+        device: 'Tablet',
+        fields: [
+          {value: 'type_outbrain_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
+          {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: ''},
+          {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: ''}
+        ],
+      },
+      {
+        device: 'Mobile',
+        fields: [
+          {value: 'type_outbrain_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
+          {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: ''},
+          {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: ''}
+        ],
+      },
+    ]
+     
+}
 
 const countries = [
   {value: 'Afghanistan', class: 'af'},
@@ -243,7 +282,7 @@ const countries = [
   {value: 'Antigua', class: 'ag'}
 ]
 
-
+//Need to make sure reducer is up to date with this state (see last few properties)
 class NewCampaign extends Component {
   state = {
     campaign_name: '',
@@ -252,15 +291,19 @@ class NewCampaign extends Component {
     media_buyer: '',
     ob_tag: '',
     cpc_taboola_desktop: '',
+    cpc_taboola_tablet: '',
     cpc_taboola_mobile: '',
     cpc_outbrain_desktop: '',
+    cpc_outbrain_tablet: '',
     cpc_outbrain_mobile: '',
     daily_cap_taboola: '',
     daily_cap_outbrain: '',
     ob_tag_enabled: false,
     type_taboola_desktop: false,
+    type_taboola_tablet: false,
     type_taboola_mobile: false,
     type_taboola_desktop_safe: false,
+    type_taboola_tablet_safe: false,
     type_taboola_mobile_safe: false,
     type_outbrain_desktop: false,
     type_outbrain_mobile: false, 
@@ -270,11 +313,13 @@ class NewCampaign extends Component {
     selectedOption: '',
     content: false,
     search: false,
-    country: 'Select Country'
+    country: 'Select Country',
+    platformConfigure: 'Taboola',
+    taboola_account: ''
   }
 
   componentDidMount = () => {
-    const campaignConfig = this.props.campaignConfig
+    const campaignConfig = this.props.campaignConfiguration
     this.setState(campaignConfig)
   }
 
@@ -290,7 +335,7 @@ class NewCampaign extends Component {
 
   handleClear = async () => {
     await this.props.clearCampaignConfig()
-    const campaignConfig = this.props.campaignConfig
+    const campaignConfig = this.props.campaignConfiguration
     this.setState(campaignConfig)
   }
 
@@ -300,8 +345,13 @@ class NewCampaign extends Component {
     })
   }
 
+  handleActivatePlatformConfig = (event) => {
+    this.setState({
+      platformConfigure: event.currentTarget.textContent
+    })
+  }
+
   handleSelectCountry = (event) => {
-    console.log('event', event)
     this.setState({
       country: event.currentTarget.textContent
     })
@@ -332,10 +382,76 @@ class NewCampaign extends Component {
         let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
         console.log('SENT', campaignData)
       } else {
-        console.log('ERRR', campaignErrs)
-        
+        console.error('Campaign Validation Errors:', campaignErrs)
       }
     } catch(e){}
+  }
+
+  renderPlatformConfigure = () => {
+    if (this.state.platformConfigure === 'Taboola'){
+      return (
+        <div id='platform-config-device'>
+          {platformConfiguration.Taboola.map(config => {
+            return (
+              <div key={config.device} className='platform-obj'>
+                <h3>{config.device}</h3>
+                {config.fields.map(field => {
+                  if (field.HTMLtype === 'checkbox'){
+                    return (
+                      <div key={field.value} className={`ui checkbox ${field.classes}`} id={`type-${field.label}`}>
+                        <input 
+                        type="checkbox" 
+                        name={field.value}
+                        onChange={this.handleCheckBox} 
+                        checked={this.state[field.value]}
+                        />
+                        <label>{field.label}</label>
+                      </div>
+                    )
+                  } else if (field.HTMLtype === 'text'){
+                      return (
+                        <div key={field.value} className={field.classes} id='platform-input-container'>
+                          <label> {field.label}</label>
+                          <input 
+                          type='text' 
+                          name={field.value}
+                          value={this.state[field.value]} 
+                          onChange={this.handleChange}
+                          id='platform-input'
+                          />
+
+                        </div>
+                      )
+                    }
+                  })}
+              </div>
+              ) 
+            })
+          }
+
+          <div className='config-by-platform'>
+            <div>
+              <h3>Taboola Account</h3>
+            <input
+              placeholder='Need to make drop down'
+            />
+            </div>
+            <div>
+              <h3>Taboola Settings</h3>
+              <label>Daily Cap</label>
+              <input
+                type='text'
+                name='daily_cap_taboola'
+                value={this.state.daily_cap_taboola}
+                onChange={this.handleChange}
+                id='tab-daily-cap'
+              />
+            </div>
+        </div>
+
+          </div>
+      )
+    }
   }
 
 
@@ -399,6 +515,18 @@ class NewCampaign extends Component {
         </form>
 
 
+         
+        <div id='platform-setting-container'>
+          <div id='platform-tabs'>
+            <span name='taboola' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Taboola</span>
+            <span name='outbrain' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Outbrain</span>
+            <span name='rev_content' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Rev Content</span>
+            <span name='yahoo' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Yahoo</span>
+          </div>
+          <div id='platform-config-sub-container'>
+            {this.renderPlatformConfigure()}
+          </div>
+        </div>
 
 
 
@@ -411,15 +539,14 @@ class NewCampaign extends Component {
 
 
 
-
-        {/* <CampaignBtns 
+        <CampaignBtns 
           handleSubmitCampaign={this.handleSubmitCampaign}
           handleSave={this.handleSave} 
           handleClear={this.handleClear} 
           to={'/creatives'} 
           pageName={'Creatives'} 
           styleClass={'button-container'}
-        /> */}
+        />
       </div>
     )
   }

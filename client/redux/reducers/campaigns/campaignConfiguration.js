@@ -22,6 +22,9 @@ const initialState = {
     type_outbrain_desktop_msn: false,
     type_outbrain_desktop_premium: false,
     type_outbrain_mobile_premium: false,
+    content: false,
+    search: false,
+    country: 'Select Country'
   },
   headlines: [{counter: 0, value: ''}],
   images: []

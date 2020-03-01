@@ -26,7 +26,7 @@ class Menu extends Component  {
     if (this.props.admin){
       return (
         <div id="menu-container">
-          <h1 id="title">RGI</h1>
+          <h1 id="title"><img src='redGoboLogo.png' id='red-gobo-logo'/></h1>
           <div className= 'nav-link-container'>
             {dropMenuConfig.admin.map(el => {
               return <Navigatelink key={el.id} to={el.to} name={el.name} id="menu-links" icon={el.icon}/>
