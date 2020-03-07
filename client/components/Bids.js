@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import CampaignBtns from './CampaignBtns'
-
+import '../public/styles/bids.css'
 
 const bids = [
   {name: 'fake_data_1', allowed: true},
@@ -21,6 +21,12 @@ class Bids extends Component {
     fake_data_6: false
   }
 
+  handleCheckBox = (event) => {
+    this.setState({
+      [event.target.name]: !this.state[event.target.name]
+    })
+  }
+
   render(){
     return(
       <div id='bid-component-container'>
@@ -31,7 +37,10 @@ class Bids extends Component {
               <div key={bid.name} className='individual-bid'>
                 <h2>{bid.name}</h2>
                 <input type="checkbox"
-                checked={this.state[bid.name]} />
+                checked={this.state[bid.name]} 
+                onChange={this.handleCheckBox} 
+                className='checkbox-allowed'
+                />
               </div>
             )
           })}

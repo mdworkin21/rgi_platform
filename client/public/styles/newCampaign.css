@@ -160,39 +160,83 @@
 #platform-setting-container {
   position: relative;
   display: inline-flex;
-  flex-direction: column;
-  width: 61vw;
-  top: 39vh;
+  flex-direction: row;
+  width: 50%;
+  top: 34%;
   right: 17vw;
-  height: 37vh;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  height: 41vh;
 }
 
-#platform-tabs{
-  display: flex;
-  height: 5vh;
-  width: 100%;
-  flex-direction: row;
-}
-
-.individual-platform-tab {
-  flex-grow: 1; 
-  flex-basis: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  cursor: pointer;
-}
-
-#platform-config-sub-container {
-  width: 90%;
+/* Logos */
+.platform-logos{
   position: relative;
-  left: 2vw;
-  top: 8vh;
+  height: 25%;
+  width: 35%;
+  margin-left: 33%;
+  margin-top: 3%;
+  margin-bottom: 0%;
 }
 
-#platform-config-device {
+/* img#Taboola{}
+img#Outbrain{}
+img#Yahoo{} */
+img#Rev-Content{
+  height: 40%;
+  width: 50%;
+  margin-left: 28%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+}
+
+.platform-obj-container{
+  position: relative;
+  height: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  margin-right: 2vw;
+  width: 17%;
+}
+
+.platform-obj {
+  /* align-self: auto;
+  flex-shrink: 0; */
+  flex: 1 0 auto;  /* margin: 0px 10px 0px 10px; */
+  padding: 0;
+  margin: 0;
+}
+
+.platform-input-container{
   display: flex;
   flex-direction: row;
+  position: relative;
+  margin-top: 1vh;
+}
+
+.platform-obj-device-elements{
+  margin-bottom: 2%;
+  font-weight: bold;
+}
+
+.ui.segment {
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin: 0;
+  padding: 1%;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+  height: 2%;
+}
+#platform-config-device {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.cpc-label{
+  font-family: "Arial", Gadget, sans-serif;
+  font-weight: initial;
 }
 
 .campaign-type{
@@ -202,26 +246,19 @@
 
 .campaign-cpc {
   position: relative;
-  top: 2vh;
-  left: 1vw;
-  width: 2vw;
-  margin-right: 10vw;
+  top: 0%;
+  margin-left: 2%;
+  display: inline;
 }
 
 #type-safe {
-  left: 5vw;
+  right: 2vw;
   height: 1vh;
 }
 
 #type-regular{
-  right: 8vh;
-  height: 1vh;
-
-}
-
-h3 {
-  top: 2vh;
-  margin-top: 0;
+    right: 8vw;
+    height: 1vh;
 }
 
 .config-by-platform {
@@ -232,15 +269,11 @@ h3 {
   padding-right: 3vw;
 }
 
-
-
-.platform-obj {
-  border-right: solid;
-  border-right-width: thin;
-  text-align: center;
-  align-content: center;
-  padding-right: 2vw;
-  margin-right: .5vw;
+.platform-input {
+  /* width: 3vw;
+  position: relative;
+  top: 0vh; */
+  padding: 0vw;
 }
 
 /* Campaign Buttons */
@@ -274,6 +307,22 @@ h3 {
   width: 26vw;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Laptop Screen */
 @media (max-width: 1500px){
   #campaign-configuration {
     position: relative;
@@ -336,15 +385,26 @@ h3 {
     text-align: center;
     align-content: center;
     width: 14vw;
+    flex-shrink: 0;
   }
 
   #platform-input-container{
     position: relative;
     left: 0vw;
+    display: inline-flex;
+    
   }
 
-  #platform-input {
+  .platform-input {
     width: 8vw;
+    position: relative;
+    top: 0vh;
+  }
+
+  .platform-obj-device-elements{
+    /* flex-direction: column; */
+    margin-bottom: 2%;
+
   }
 
   .config-by-platform {

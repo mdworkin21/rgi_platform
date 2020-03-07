@@ -7,203 +7,6 @@ import {saveCampaignSettings, clearCampaignSettings} from '../redux/actions/camp
 import CampaignBtns from './CampaignBtns'
 import {campaignValidator} from  '../utilities/formValidator'
 
-// const campaignType = [
-//   'type_taboola_desktop',
-//   'type_taboola_mobile',
-//   'type_taboola_tablet',
-//   'type_taboola_desktop_safe',
-//   'type_taboola_mobile_safe',
-//   'type_taboola_tablet_safe',
-//   'type_outbrain_desktop',
-//   'type_outbrain_mobile',
-//   'type_outbrain_tablet',
-//   'type_outbrain_desktop_msn',
-//   'type_outbrain_desktop_premium',
-//   'type_outbrain_mobile_premium',
-//   'type_outbrain_tablet_premium',
-//   'content',
-//   'search'
-// ]
-
-// const campaignConfiguration = [
-//   'campaign_name',
-//   'url',
-//   'cpc_taboola_desktop',
-//   'cpc_taboola_mobile',
-//   'daily_cap_taboola',
-//   'cpc_outbrain_desktop',
-//   'cpc_outbrain_mobile',
-//   'daily_cap_outbrain',
-//   'branding_text',
-//   'country',
-//   'taboola_account'
-// ]
-
-// class NewCampaign extends Component {
-//   state = {
-//     campaign_name: '',
-//     url: '',
-//     ob_tag: '',
-//     cpc_taboola_desktop: '',
-//     cpc_taboola_mobile: '',
-//     cpc_outbrain_desktop: '',
-//     cpc_outbrain_mobile: '',
-//     daily_cap_taboola: '',
-//     daily_cap_outbrain: '',
-//     ob_tag_enabled: false,
-//     type_taboola_desktop: false,
-//     type_taboola_mobile: false,
-//     type_taboola_desktop_safe: false,
-//     type_taboola_mobile_safe: false,
-//     type_outbrain_desktop: false,
-//     type_outbrain_mobile: false, 
-//     type_outbrain_desktop_msn: false,
-//     type_outbrain_desktop_premium: false,
-//     type_outbrain_mobile_premium: false
-//   }
-
-//   componentDidMount = () => {
-//     const campaignConfig = this.props.campaignConfig
-//     this.setState(campaignConfig)
-//   }
-
-//   handleChange = (event) => {
-//     this.setState({
-//       [event.target.name]: event.target.value
-//     })
-//   }
-
-//   handleSave = () => {
-//     console.log("SAVE")
-//       this.props.saveCampaignConfig(this.state)
-//       // await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', this.state)
-//   }
-
-//   handleClear = async () => {
-//     await this.props.clearCampaignConfig()
-//     const campaignConfig = this.props.campaignConfig
-//     this.setState(campaignConfig)
-//   }
-
-//   handleCheckBox = (event) => {
-//     this.setState({
-//       [event.target.name]: !this.state[event.target.name]
-//     })
-//   }
-
-//   handleSubmitCampaign = async (event) => {
-//     try {
-//       event.preventDefault()
-//       //Compile campaign object
-//       let campaignConfig= this.props.campaignConfiguration
-//       let images = this.props.images
-//       let headlines = this.props.headlines.map( headline => {return headline.value})
-//       let campaign = {campaignConfig, images, headlines}
-      
-//       //Check validity
-//       let campaignErrs = campaignValidator(campaign)
-//       let isCampaignValid = campaignErrs.length === 0 
-
-//       if (isCampaignValid){
-//         let campaignData = await axios.post('/api/campaignManagement/processCampaignQueue/createCampaign', campaign)
-//         console.log('SENT', campaignData)
-//       } else {
-//         console.log('ERRR', campaignErrs)
-        
-//       }
-//     } catch(e){}
-//   }
-
-
-//   render(){
-//     return (
-//       <div className='form-container'>
-//         <form id='campaign-configuration'>
-//           <div>Media Buyer:</div>
-//           {campaignConfiguration.map(config => {
-//             return(
-//               <input 
-//               key={config}
-//               type='text' 
-//               name={config}
-//               value={this.state[config]} 
-//               placeholder={config}
-//               onChange={this.handleChange}/>
-//             )
-//           })}
-//         </form>
-
-//         <form id='campaign-type'>
-//         {campaignType.map(type => {
-//           return (
-//             <div key={type} className='ui checkbox'>
-//               <input 
-//               type='checkbox'
-//               name={type}
-//               onChange={this.handleCheckBox}
-//               checked={this.state[type]}
-//               />
-//               <label>{type}</label>
-//             </div>
-// //             )
-// //           })
-// //         }
-//         </form> 
-
-//         <form id='ob-tag'>
-//           <input 
-//             type='text' 
-//             name='ob_tag'
-//             value={this.state.ob_tag} 
-//             placeholder='ob_tag'
-//             onChange={this.handleChange}
-//           />
-
-//           <div className='ui checkbox'>
-//             <input
-//               type='checkbox'
-//               name='ob_tag_enabled'
-//               onChange={this.handleCheckBox}
-//               checked={this.state['ob_tag_enabled']}
-//             />
-//             <label>ob tag</label>
-//           </div>
-//         </form> 
-
-
-//         <CampaignBtns 
-//           handleSubmitCampaign={this.handleSubmitCampaign}
-//           handleSave={this.handleSave} 
-//           handleClear={this.handleClear} 
-//           to={'/creatives'} 
-//           pageName={'Creatives'} 
-//           styleClass={'button-container'}
-//         />
-//       </div>
-//     )
-//   }
-// }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     admin: state.user.user.isAdmin,
-//     headlines: state.campaignConfiguration.headlines,
-//     images: state.campaignConfiguration.images,
-//     campaignConfiguration: state.campaignConfiguration.campaignConfig
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     saveCampaignConfig: (campaignConfig) => dispatch(saveCampaignSettings(campaignConfig)),
-//     clearCampaignConfig: () => dispatch(clearCampaignSettings()),
-
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(NewCampaign)
-
-
 const generalConfiguration = [
   { HTMLtype: 'input', label: 'Media Buyer: ', value: 'media_buyer', id: 'media-buyer', classes:'config-inputs'},
   { HTMLtype: 'input', label: 'URL: ', value: 'url', id: 'url', classes:'config-inputs'}, 
@@ -214,61 +17,138 @@ const generalConfiguration = [
   { HTMLtype: 'dropdown', label: 'Country ', value: 'country', id: 'country', classes:'custom-dropdown'}, 
 ]
 
-const platformConfiguration = {
-    Taboola: [
-      {
-        device: 'Desktop',
-        fields: [
-          {value: 'type_taboola_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'type_taboola_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
-        ],
+//Create function to create this array of objects, lots of repeated info, can be made dry
+const platformConfiguration = [
+    { 
+      platform: 'Taboola',
+      logo: 'taboola_logo.png',
+      platform_specific_config: {
+        'taboola_accounts': {
+          label: 'Taboola Account',
+          options: ['value1', 'value2']
+        },
+        daily_cap: {
+          label: 'Taboola Daily Cap',
+          cap: '30'
+        }
       },
-      {
-        device: 'Tablet',
-        fields: [
-          {value: 'type_taboola_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'type_taboola_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
-        ],
-      },
-      {
-        device: 'Mobile',
-        fields: [
-          {value: 'type_taboola_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'type_taboola_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'},
-          {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'}
-        ],
-      },
-    ],
-    Outbrain:[
-      {
-        device: 'Desktop',
-        fields: [
-          {value: 'type_outbrain_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
-          {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: ''},
-          {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: ''}
-        ],
-      },
-      {
-        device: 'Tablet',
-        fields: [
-          {value: 'type_outbrain_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
-          {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: ''},
-          {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: ''}
-        ],
-      },
-      {
-        device: 'Mobile',
-        fields: [
-          {value: 'type_outbrain_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: ''},
-          {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: ''},
-          {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: ''}
-        ],
-      },
-    ]
-     
-}
+      devices: [
+        {
+          device: 'Desktop',
+          fields: [
+            {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_taboola_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Tablet',
+          fields: [
+            {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_taboola_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Mobile',
+          fields: [
+            {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_taboola_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        }
+      ]},
+    {
+      platform: 'Outbrain',
+      logo: 'Outbrain-Logo.png',
+      platform_specific_config: '',
+      devices:[
+        {
+          device: 'Desktop',
+          fields: [
+            {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_outbrain_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Tablet',
+          fields: [
+            {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_outbrain_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Mobile',
+          fields: [
+            {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_outbrain_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        }
+      ]},
+    {
+      platform: 'Yahoo',
+      logo: 'yahoo_logo.png',
+      platform_specific_config: '',
+      devices:[
+        {
+          device: 'Desktop',
+          fields: [
+            {value: 'cpc_yahoo_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_yahoo_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Tablet',
+          fields: [
+            {value: 'cpc_yahoo_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_yahoo_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Mobile',
+          fields: [
+            {value: 'cpc_yahoo_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_yahoo_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        }
+      ]},
+    {
+      platform: 'Rev-Content',
+      logo: 'revContent_logo.png',
+      platform_specific_config: '',
+      devices:[
+        {
+          device: 'Desktop',
+          fields: [
+            {value: 'cpc_revContent_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_revContent_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Tablet',
+          fields: [
+            {value: 'cpc_revContent_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_revContent_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        },
+        {
+          device: 'Mobile',
+          fields: [
+            {value: 'cpc_revContent_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+            {value: 'type_revContent_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+          ],
+        }
+      ]} 
+  ]
 
 const countries = [
   {value: 'Afghanistan', class: 'af'},
@@ -314,7 +194,6 @@ class NewCampaign extends Component {
     content: false,
     search: false,
     country: 'Select Country',
-    platformConfigure: 'Taboola',
     taboola_account: ''
   }
 
@@ -387,71 +266,86 @@ class NewCampaign extends Component {
     } catch(e){}
   }
 
+  renderPlatformSpecificConfig = (platformObj) => {
+    if (platformObj.platform === 'Taboola'){
+      return (
+      <div className='ui segment platform-obj'>
+        <div>
+          <h3>Taboola Accounts</h3>
+            <input placeholder='Need to make drop down'/>
+        </div>
+        <div>
+          <h3>Taboola Settings</h3>
+          <label>Daily Cap</label>
+          <input
+            type='text'
+            name='daily_cap_taboola'
+            value={this.state.daily_cap_taboola}
+            onChange={this.handleChange}
+            id='tab-daily-cap'
+          />
+        </div>
+      </div>)
+    }
+  }
+ 
   renderPlatformConfigure = () => {
-    if (this.state.platformConfigure === 'Taboola'){
       return (
         <div id='platform-config-device'>
-          {platformConfiguration.Taboola.map(config => {
+          {platformConfiguration.map(platform => {
             return (
-              <div key={config.device} className='platform-obj'>
-                <h3>{config.device}</h3>
-                {config.fields.map(field => {
-                  if (field.HTMLtype === 'checkbox'){
-                    return (
-                      <div key={field.value} className={`ui checkbox ${field.classes}`} id={`type-${field.label}`}>
-                        <input 
-                        type="checkbox" 
-                        name={field.value}
-                        onChange={this.handleCheckBox} 
-                        checked={this.state[field.value]}
-                        />
-                        <label>{field.label}</label>
-                      </div>
-                    )
-                  } else if (field.HTMLtype === 'text'){
-                      return (
-                        <div key={field.value} className={field.classes} id='platform-input-container'>
-                          <label> {field.label}</label>
-                          <input 
-                          type='text' 
-                          name={field.value}
-                          value={this.state[field.value]} 
-                          onChange={this.handleChange}
-                          id='platform-input'
-                          />
+              <div key={platform.platform} className='platform-obj-container'>
+                <img src={platform.logo} className='platform-logos' id={platform.platform}/>
+                {platform.devices.map(config => {
+                  return(
+                    <div key={config.device} className='ui segment platform-obj'>
+                      <label className='platform-obj-device-elements'>{config.device}</label>
+                      <div className='platform-input-container'>
+                        {config.fields.map(field => {
+                          if (field.HTMLtype === 'text'){
+                            return (
+                              <div key={field.value} className={`${field.classes} platform-obj-device-elements`} id='platform-input-container'>
+                                <label className='cpc-label'> {field.label}</label>
+                                <input 
+                                type='text' 
+                                name={field.value}
+                                value={this.state[field.value]} 
+                                onChange={this.handleChange}
+                                className='platform-input'
+                                />
+                              </div>
+                            )
+                          } else if (field.HTMLtype === 'checkbox'){
+                              return (
+                                <div key={field.value} className={`ui checkbox ${field.classes}`} id={`type-${field.label}`}>
+                                  <input 
+                                  type="checkbox" 
+                                  name={field.value}
+                                  onChange={this.handleCheckBox} 
+                                  checked={this.state[field.value]}
+                                  />
+                                  <label>{field.label}</label>
+                                </div>
+                              )
+                            } 
+                            
+                            
+                            
+                          })}
 
-                        </div>
-                      )
-                    }
-                  })}
+                      </div>
+                    </div>
+                  )
+                })}
+                 {this.renderPlatformSpecificConfig(platform)}
               </div>
               ) 
             })
           }
-
-          <div className='config-by-platform'>
-            <div>
-              <h3>Taboola Account</h3>
-            <input
-              placeholder='Need to make drop down'
-            />
-            </div>
-            <div>
-              <h3>Taboola Settings</h3>
-              <label>Daily Cap</label>
-              <input
-                type='text'
-                name='daily_cap_taboola'
-                value={this.state.daily_cap_taboola}
-                onChange={this.handleChange}
-                id='tab-daily-cap'
-              />
-            </div>
-        </div>
-
+          
           </div>
       )
-    }
+    
   }
 
 
@@ -515,29 +409,9 @@ class NewCampaign extends Component {
         </form>
 
 
-         
         <div id='platform-setting-container'>
-          <div id='platform-tabs'>
-            <span name='taboola' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Taboola</span>
-            <span name='outbrain' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Outbrain</span>
-            <span name='rev_content' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Rev Content</span>
-            <span name='yahoo' onClick={this.handleActivatePlatformConfig} className='individual-platform-tab'>Yahoo</span>
-          </div>
-          <div id='platform-config-sub-container'>
             {this.renderPlatformConfigure()}
-          </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
         <CampaignBtns 
           handleSubmitCampaign={this.handleSubmitCampaign}

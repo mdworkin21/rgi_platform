@@ -1,0 +1,14 @@
+#bid-component-container {
+  display: flex;
+  position: relative;
+  top: 19vh;
+  height: 10vw;
+}
+
+/* .checkbox-allowed{
+  display: flex;
+  position: relative;
+  top: 19vh;
+  left: 10vw;
+} */
+
