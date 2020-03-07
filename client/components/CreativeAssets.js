@@ -193,8 +193,10 @@ class CreativeAssests extends Component {
             handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
             handleClear={this.handleClear} 
-            to={'/create-campaigns'} 
-            pageName={'Campaigns'} 
+            link1={'/create-campaigns'} 
+            link2={'/bids'}
+            pageName1={'Campaigns'} 
+            pageName2={'Bids'}
             styleClass={'button-container-2'}
           />
       </div>

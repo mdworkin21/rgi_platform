@@ -543,8 +543,10 @@ class NewCampaign extends Component {
           handleSubmitCampaign={this.handleSubmitCampaign}
           handleSave={this.handleSave} 
           handleClear={this.handleClear} 
-          to={'/creatives'} 
-          pageName={'Creatives'} 
+          link1={'/creatives'} 
+          link2={'/bids'}
+          pageName1={'Creatives'} 
+          pageName2={'Bids'}
           styleClass={'button-container'}
         />
       </div>

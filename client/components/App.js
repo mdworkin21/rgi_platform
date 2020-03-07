@@ -10,8 +10,10 @@ import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
 import CreateCampaigns from './CreateCampaigns';
 import CreativeAssets from './CreativeAssets'
+import Bids from './Bids'
 import {getUserFromPassport} from '../redux/thunks/users'
 import '../public/styles/app.css'
+import DragDrop from './DragDrop';
 
 
 class App extends Component {
@@ -31,6 +33,9 @@ class App extends Component {
           <PrivateRoute exact path='/profile' component={Profile} authed={this.props.auth}/>
           <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={this.props.auth}/>
           <PrivateRoute exact path='/creatives' component={CreativeAssets} authed={this.props.auth}/>
+          <PrivateRoute exact path='/bids' component={Bids} authed={this.props.auth}/>
+          <PrivateRoute exact path='/dragdrop' component={DragDrop} authed={this.props.auth}/>
+
         </div>
       </Router>
     )

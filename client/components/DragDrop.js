@@ -16,9 +16,13 @@ class DragDrop extends Component {
   // }
 
   render(){
+    console.log('uhhh')
     return (
-
-      <div></div>
+      <div id='dragdrop'>
+        <h1>TEST</h1>
+      </div>
     )
   }
 }
+
+export default DragDrop

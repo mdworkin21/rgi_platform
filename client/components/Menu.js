@@ -9,7 +9,8 @@ const dropMenuConfig = {
       {to: '/manageusers', id: 'manage-users', name: 'Manage Users', icon: 'big users icon link icon'},
       {to: '/adduser', id: 'add-user', name: 'Add User', icon: 'big add user basic icon'},
       {to: '/profile', id: 'profile', name: 'Profile'},
-      {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'}
+      {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'},
+      {to: '/dragdrop', id: 'dragdrop', name: 'Drag Drop'}
     ],
   loggedIn: [
     {to: '/profile', id: 'profile', name: 'Profile'},
@@ -39,7 +40,7 @@ class Menu extends Component  {
     } else if (this.props.user.loggedIn){
         return (
           <div id="menu-container">
-            <h1>RGI</h1>
+            <h1 id="title"><img src='redGoboLogo.png' id='red-gobo-logo'/></h1>
             <div className= 'nav-link-container'>
               {dropMenuConfig.loggedIn.map(el => {
                  return <Navigatelink key={el.id} to={el.to} name={el.name} id="menu-links"/>
@@ -52,7 +53,7 @@ class Menu extends Component  {
     } else {
       return (
           <div id="menu-container">
-           <h1>RGI</h1>
+           <h1 id="title"><img src='redGoboLogo.png' id='red-gobo-logo'/></h1>
           </div>
       )
     }
