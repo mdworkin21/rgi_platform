@@ -93,7 +93,7 @@
 #tab-platform-specific {
   display: inline-flex;
   flex-direction: row;
-  height: 7vh;
+  height: 5.5vh;
 }
 
 #tab-accounts-container {
@@ -113,13 +113,15 @@
 #tab-daily-cap-label{
   font-family: "Arial", Gadget, sans-serif;
   font-weight: initial;
-  margin-top: 21%;
+  margin-top: 18%;
+  margin-right: 7%;
   font-size: 1.15em;
 }
 
 #tab-daily-cap {
   width: 34%;
-  margin-top: 20%;
+  margin-top: 18%;
+  margin-right: 3%;
   height: 40%;
 }
 

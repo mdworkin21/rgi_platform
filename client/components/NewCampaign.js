@@ -187,6 +187,7 @@ class NewCampaign extends Component {
     type_taboola_mobile_safe: false,
     taboola_account: '',
     daily_cap_taboola: '',
+    TaboolaSelectAll: false,
     //Outbrain
     daily_cap_outbrain: '',
     cpc_outbrain_desktop: '',
@@ -200,7 +201,8 @@ class NewCampaign extends Component {
     type_outbrain_tablet_premium: false,
     type_outbrain_desktop_msn: false,
     type_outbrain_desktop_premium: false,
-    type_outbrain_mobile_premium: false
+    type_outbrain_mobile_premium: false,
+    OutbrainSelectAll: false
   }
 
   componentDidMount = () => {
@@ -248,6 +250,17 @@ class NewCampaign extends Component {
       [event.target.name]: !this.state[event.target.name]
 
     })
+  }
+
+  handleSelectAllCheckBox = (event) => {
+    let name = `type_${event.target.name.toLowerCase()}`
+    let boxesToCheck = Object.keys(this.state).filter(key => key.indexOf(name) >-1)
+
+    for (let i = 0; i < boxesToCheck.length; i++){
+      this.setState({
+        [boxesToCheck[i]]: !this.state[boxesToCheck[i]]
+      })
+    }
   }
 
   handleSubmitCampaign = async (event) => {
@@ -321,7 +334,6 @@ class NewCampaign extends Component {
             </form> 
           </div>
         )
-
     }
   }
  
@@ -333,6 +345,16 @@ class NewCampaign extends Component {
               <div key={platform.platform} className='platform-obj-container'>
                 <div className='logo-container' >
                   <img src={platform.logo}  className='platform-logos' id={platform.platform}/>
+                </div>
+                <div key={platform.platform} className='select-all-checkbox'>
+                  <label>Select All: </label>
+                  <input 
+                  type="checkbox" 
+                  name={platform.platform}
+                  onChange={this.handleSelectAllCheckBox} 
+                  checked={this.state[`${platform.platform}selectAll`]}
+                  className='ui checkbox'
+                  />
                 </div>
                 {platform.devices.map(config => {
                   return(
