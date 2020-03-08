@@ -369,15 +369,15 @@ img#Rev-Content{
 @media (max-width: 1500px){
   #campaign-configuration {
     position: relative;
-    left: 17.5vw;
-    top: 8.5vh;
+    left: 15.5vw;
+    top: 5.5vh;
     display: inline-flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     padding: 8px;
-    height: 27vh;
+    height: 24vh;
     width: 43vw;
-  }
+}
 
   #country {
     position: relative;
@@ -404,73 +404,35 @@ img#Rev-Content{
     right: 7vw;
   }
 
+  #type-regular {
+    right: 10vw;
+    height: 1vh;
+  }
+
+  #type-safe {
+    right: 3vw;
+    height: 1vh;
+  }
+
   #platform-setting-container {
+    position: relative;
     display: inline-flex;
-    width: 54vw;
-    position: relative;
-    top: 39.5vh;
-    right: 15vw;
-    height: 42vh;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  }
-
-  .campaign-cpc {
-    position: relative;
-    top: 2vh;
-    left: 1vw;
-    width: 0vw;
-    margin-right: 10vw;
-  }
-
-  .platform-obj {
-    border-right: solid;
-    border-right-width: thin;
-    text-align: center;
-    align-content: center;
-    width: 14vw;
-    flex-shrink: 0;
-  }
-
-  #platform-input-container{
-    position: relative;
-    left: 0vw;
-    display: inline-flex;
-    
-  }
-
-  .platform-input {
-    width: 8vw;
-    position: relative;
-    top: 0vh;
-  }
-
-  .platform-obj-device-elements{
-    /* flex-direction: column; */
-    margin-bottom: 2%;
-
-  }
-
-  .config-by-platform {
-    display: inline;
-    position: relative;
-    left: 1vw;
-    top: 0vh;
-    padding-right: 3vw;
-  }
-
-  #tab-daily-cap{
-    width: 8vw;
+    flex-direction: row;
+    width: 50%;
+    top: 34%;
+    right: 22vw;
+    height: 50vh;
   }
 
   /* Campaignn Buttons */
   .button-container {
-    position: absolute;
-    top: 84vh;
-    left: 38.5vw;
-    display: flex;
-    flex-direction: row;
-    height: 12vh;
-    width: 26vw;
-}
-}
+      position: absolute;
+      top: 84vh;
+      left: 38.5vw;
+      display: flex;
+      flex-direction: row;
+      height: 12vh;
+      width: 26vw;
+  }
+} 
 
