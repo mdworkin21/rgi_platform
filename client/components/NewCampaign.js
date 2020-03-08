@@ -120,7 +120,7 @@ const platformConfiguration = [
       ]},
     {
       platform: 'Rev-Content',
-      logo: 'revContent_logo.png',
+      logo: 'revContetnt_logo.png',
       platform_specific_config: '',
       devices:[
         {
@@ -271,19 +271,23 @@ class NewCampaign extends Component {
   renderPlatformSpecificConfig = (platformObj) => {
     if (platformObj.platform === 'Taboola'){
       return (
-      <div className='ui segment platform-obj'>
-        <div>
-          <h3> Accounts</h3>
-            <input placeholder='Need to make drop down'/>
+      <div className='ui segment platform-obj' id='tab-platform-specific'>
+        <div id='tab-accounts-container'>
+          <label className=''> Accounts:</label>
+          <select id='tab-accout-dropdown' className={`ui selection simple dropdown `} placeholder='Need to make drop down'>
+            <option>1</option>
+            <option>2</option>
+          </select>
         </div>
-        <div>
-          <label>Daily Cap</label>
+        <div id='tab-daily-cap-container'>
+          <label id='tab-daily-cap-label'>Daily Cap:</label>
           <input
             type='text'
             name='daily_cap_taboola'
             value={this.state.daily_cap_taboola}
             onChange={this.handleChange}
             id='tab-daily-cap'
+            className='platform-input'
           />
         </div>
       </div>)
@@ -296,7 +300,9 @@ class NewCampaign extends Component {
           {platformConfiguration.map(platform => {
             return (
               <div key={platform.platform} className='platform-obj-container'>
-                <img src={platform.logo} className='platform-logos' id={platform.platform}/>
+                <div className='logo-container' >
+                  <img src={platform.logo}  className='platform-logos' id={platform.platform}/>
+                </div>
                 {platform.devices.map(config => {
                   return(
                     <div key={config.device} className='ui segment platform-obj'>

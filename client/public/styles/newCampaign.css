@@ -164,26 +164,68 @@
   width: 50%;
   top: 34%;
   right: 17vw;
-  height: 41vh;
+  height: 50vh;
 }
 
+#tab-platform-specific {
+  display: inline-flex;
+  flex-direction: row;
+  height: 7vh;
+}
+
+#tab-accounts-container {
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  /* width: 46%; */
+}
+
+#tab-daily-cap-container{
+  width: 80%;
+  display: inline-flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+#tab-daily-cap-label{
+  font-family: "Arial", Gadget, sans-serif;
+  font-weight: initial;
+  margin-left: 5%;
+  margin-top: 21%;
+  margin-right: 10%;
+  font-size: 1.25em;
+}
+
+#tab-daily-cap {
+  width: 34%;
+  margin-top: 20%;
+  height: 40%;
+}
+
+#tab-accout-dropdown{
+  min-width: 5em;
+}
 /* Logos */
-.platform-logos{
+.platform-logos {
   position: relative;
-  height: 25%;
+  height: 48%;
   width: 35%;
   margin-left: 33%;
   margin-top: 3%;
   margin-bottom: 0%;
 }
 
+.logo-container{
+  height: 10%;
+}
+
 /* img#Taboola{}
 img#Outbrain{}
 img#Yahoo{} */
 img#Rev-Content{
-  height: 40%;
-  width: 50%;
-  margin-left: 28%;
+  height: 80%;
+  width: 52%;
+  margin-left: 21%;
   margin-top: 0%;
   margin-bottom: 0%;
   padding-bottom: 0%;
@@ -191,7 +233,7 @@ img#Rev-Content{
 
 .platform-obj-container{
   position: relative;
-  height: fit-content;
+  height: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   margin-right: 2vw;
   width: 17%;
@@ -226,8 +268,9 @@ img#Rev-Content{
   padding: 1%;
   border-radius: .28571429rem;
   border: 1px solid rgba(34,36,38,.15);
-  height: 2%;
+  height: 25%;
 }
+
 #platform-config-device {
   display: inline-flex;
   flex-direction: row;

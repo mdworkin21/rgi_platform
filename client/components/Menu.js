@@ -10,11 +10,12 @@ const dropMenuConfig = {
       {to: '/adduser', id: 'add-user', name: 'Add User', icon: 'big add user basic icon'},
       {to: '/profile', id: 'profile', name: 'Profile'},
       {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'},
+      {to: '/creatives', id: 'creatives', name: 'Creatives'},
+      {to: '/bids', id: 'bids', name: 'Bids'},
       {to: '/dragdrop', id: 'dragdrop', name: 'Drag Drop'}
     ],
   loggedIn: [
     {to: '/profile', id: 'profile', name: 'Profile'},
-    {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'}
   ]
 }
 
