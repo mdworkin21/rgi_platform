@@ -67,7 +67,8 @@ const platformConfiguration = [
           device: 'Desktop',
           fields: [
             {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
-            {value: 'type_outbrain_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_desktop_msn', label: 'msn', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_desktop_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
@@ -75,7 +76,7 @@ const platformConfiguration = [
           device: 'Tablet',
           fields: [
             {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
-            {value: 'type_outbrain_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_tablet_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
@@ -83,7 +84,7 @@ const platformConfiguration = [
           device: 'Mobile',
           fields: [
             {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
-            {value: 'type_outbrain_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_mobile_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         }
@@ -170,33 +171,36 @@ class NewCampaign extends Component {
     url: '',
     branding_text: '',
     media_buyer: '',
-    ob_tag: '',
+    content: false,
+    search: false,
+    country: 'Select Country',
+    selectedOption: '',
     // Taboola
     cpc_taboola_desktop: '',
     cpc_taboola_tablet: '',
     cpc_taboola_mobile: '',
-    cpc_outbrain_desktop: '',
-    cpc_outbrain_tablet: '',
-    cpc_outbrain_mobile: '',
-    daily_cap_taboola: '',
-    daily_cap_outbrain: '',
-    ob_tag_enabled: false,
     type_taboola_desktop: false,
     type_taboola_tablet: false,
     type_taboola_mobile: false,
     type_taboola_desktop_safe: false,
     type_taboola_tablet_safe: false,
     type_taboola_mobile_safe: false,
+    taboola_account: '',
+    daily_cap_taboola: '',
+    //Outbrain
+    daily_cap_outbrain: '',
+    cpc_outbrain_desktop: '',
+    cpc_outbrain_tablet: '',
+    cpc_outbrain_mobile: '',
+    ob_tag: '',
+    ob_tag_enabled: false,
     type_outbrain_desktop: false,
     type_outbrain_mobile: false, 
+    type_outbrain_tablet: false,
+    type_outbrain_tablet_premium: false,
     type_outbrain_desktop_msn: false,
     type_outbrain_desktop_premium: false,
-    type_outbrain_mobile_premium: false,
-    selectedOption: '',
-    content: false,
-    search: false,
-    country: 'Select Country',
-    taboola_account: ''
+    type_outbrain_mobile_premium: false
   }
 
   componentDidMount = () => {
@@ -272,13 +276,6 @@ class NewCampaign extends Component {
     if (platformObj.platform === 'Taboola'){
       return (
       <div className='ui segment platform-obj' id='tab-platform-specific'>
-        <div id='tab-accounts-container'>
-          <label className=''> Accounts:</label>
-          <select id='tab-accout-dropdown' className={`ui selection simple dropdown `} placeholder='Need to make drop down'>
-            <option>1</option>
-            <option>2</option>
-          </select>
-        </div>
         <div id='tab-daily-cap-container'>
           <label id='tab-daily-cap-label'>Daily Cap:</label>
           <input
@@ -290,6 +287,14 @@ class NewCampaign extends Component {
             className='platform-input'
           />
         </div>
+        <div id='tab-accounts-container'>
+          <label className=''> Accounts:</label>
+          <select id='tab-accout-dropdown' className={`ui selection simple dropdown `} placeholder='Need to make drop down'>
+            <option>1</option>
+            <option>2</option>
+          </select>
+        </div>
+        
       </div>)
     }
   }

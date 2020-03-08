@@ -1,82 +1,5 @@
-/* .form-container {
-  position: relative;
-  left: 10vw;
-  top: 18vh;
-  display: flex;
-  flex-direction: row;
-}
-
-#campaign-configuration {
-  position: relative;
-  left: 16vw;
-  top: 4vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  padding: 8px;
-  height: 50vh;
-}
-
-#campaign-type {
-  position: relative;
-  left: 38vw;
-  top: 10vh;
-  display: flex;
-  flex-direction: column;
-  height: 22vh;
-  width: 19vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  padding: 8px;
-}
-
-.campaign-btn {
-  position: relative;
-  top: 3vh;
-  height: 5vh;
-  margin: 5px;
-  width: 10vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-}
-
-.button-container {
-  position: absolute;
-  top: 59vh;
-  left: 30.50vw;
-  display: flex;
-  flex-direction: row;
-  height: 12vh;
-  width: 26vw;
-}
-
-.button-container-2 {
-  left: 20.50vw;
-  position: absolute;
-  top: 62vh;
-  display: flex;
-  flex-direction: row;
-  height: 12vh;
-  width: 26vw;
-}
-
-#ob-tag {
-  position: relative;
-  left: 19vw;
-  top: 40vh;
-  display: flex;
-  flex-direction: column;
-  width: 19vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  padding: 8px;
-  height: 11vh;
-}
-
-
-
-@media only screen  and (min-width : 1224px) {
-  
+/* @media only screen  and (min-width : 1224px) {
 } */
-
 /* ReFactor -- Large Screen out*/
 .form-container {
   height: 100%;
@@ -190,10 +113,8 @@
 #tab-daily-cap-label{
   font-family: "Arial", Gadget, sans-serif;
   font-weight: initial;
-  margin-left: 5%;
   margin-top: 21%;
-  margin-right: 10%;
-  font-size: 1.25em;
+  font-size: 1.15em;
 }
 
 #tab-daily-cap {
@@ -203,7 +124,7 @@
 }
 
 #tab-accout-dropdown{
-  min-width: 5em;
+  min-width: 7.5em;
 }
 /* Logos */
 .platform-logos {
@@ -300,8 +221,18 @@ img#Rev-Content{
 }
 
 #type-regular{
-    right: 8vw;
-    height: 1vh;
+  right: 8vw;
+  height: 1vh;
+}
+
+#type-msn{
+  right: 9.5vw;
+  height: 1vh;
+}
+
+#type-premium{
+  right: 3vw;
+  height: 1vh;
 }
 
 .config-by-platform {
@@ -420,9 +351,9 @@ img#Rev-Content{
     flex-direction: row;
     width: 50%;
     top: 34%;
-    right: 22vw;
+    right: 24.5vw;
     height: 50vh;
-  }
+}
 
   /* Campaignn Buttons */
   .button-container {
