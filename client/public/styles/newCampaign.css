@@ -126,6 +126,30 @@
 #tab-accout-dropdown{
   min-width: 7.5em;
 }
+
+/* Outbrain */
+#ob-platform-specific{
+  height: 0%;
+  /* margin-top: 0%; */
+}
+
+#ob-tag{
+  display: inline-flex;
+  flex-direction: row;
+}
+
+#ob-tag-textbox{
+  max-width: 50%;
+}
+
+#ob-tag-checkbox{
+  margin-top: 0%;
+}
+
+#ob-tag-label{
+  margin-top: 0%;
+}
+
 /* Logos */
 .platform-logos {
   position: relative;
@@ -161,9 +185,7 @@ img#Rev-Content{
 }
 
 .platform-obj {
-  /* align-self: auto;
-  flex-shrink: 0; */
-  flex: 1 0 auto;  /* margin: 0px 10px 0px 10px; */
+  flex: 1 0 auto;
   padding: 0;
   margin: 0;
 }
@@ -336,15 +358,24 @@ img#Rev-Content{
   }
 
   #type-regular {
-    right: 10vw;
+    right: 11vw;
     height: 1vh;
-  }
+}
 
   #type-safe {
     right: 3vw;
     height: 1vh;
   }
 
+  #type-msn {
+    right: 12.75vw;
+    height: 1vh;
+  }
+
+  #type-premium {
+    right: 4vw;
+    height: 1vh;
+}
   #platform-setting-container {
     position: relative;
     display: inline-flex;

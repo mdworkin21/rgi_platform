@@ -296,6 +296,32 @@ class NewCampaign extends Component {
         </div>
         
       </div>)
+    } else if (platformObj.platform === 'Outbrain'){
+        return(
+          <div className='platform-obj' id='ob-platform-specific'>
+            <label id='ob-tag-label'>Outbrain Tag</label>
+            <form id='ob-tag'>
+              <input 
+                type='text' 
+                name='ob_tag'
+                value={this.state.ob_tag} 
+                onChange={this.handleChange}
+                id='ob-tag-textbox'
+              />
+              <div className='ui checkbox'>
+                <input
+                  type='checkbox'
+                  name='ob_tag_enabled'
+                  onChange={this.handleCheckBox}
+                  checked={this.state['ob_tag_enabled']}
+                  id='ob-tag-checkbox'
+                />
+                <label>ob tag</label>
+              </div>
+            </form> 
+          </div>
+        )
+
     }
   }
  
@@ -340,9 +366,6 @@ class NewCampaign extends Component {
                                 </div>
                               )
                             } 
-                            
-                            
-                            
                           })}
 
                       </div>
