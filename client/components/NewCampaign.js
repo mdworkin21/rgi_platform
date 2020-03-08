@@ -165,11 +165,13 @@ const countries = [
 //Need to make sure reducer is up to date with this state (see last few properties)
 class NewCampaign extends Component {
   state = {
+    // General
     campaign_name: '',
     url: '',
     branding_text: '',
     media_buyer: '',
     ob_tag: '',
+    // Taboola
     cpc_taboola_desktop: '',
     cpc_taboola_tablet: '',
     cpc_taboola_mobile: '',
@@ -271,11 +273,10 @@ class NewCampaign extends Component {
       return (
       <div className='ui segment platform-obj'>
         <div>
-          <h3>Taboola Accounts</h3>
+          <h3> Accounts</h3>
             <input placeholder='Need to make drop down'/>
         </div>
         <div>
-          <h3>Taboola Settings</h3>
           <label>Daily Cap</label>
           <input
             type='text'

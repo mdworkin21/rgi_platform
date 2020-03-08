@@ -1,14 +1,37 @@
 #bid-component-container {
   display: flex;
   position: relative;
-  top: 19vh;
-  height: 10vw;
+  height: 100%;
+  width: 90%;
+  left: 10%;
+
 }
 
-/* .checkbox-allowed{
-  display: flex;
+#bid-container{
   position: relative;
-  top: 19vh;
-  left: 10vw;
-} */
+  margin-left: 6%;
+  margin-top: 10%;
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  width: 25%;
+  overflow: auto;
+  height: 51%;
+}
 
+.individual-bid {
+   display: inline-flex;
+   flex-direction: row;
+   border-bottom: solid 30% black;
+   padding-top: 5%;
+}
+
+.bid-checkbox {
+  position: relative;
+  margin-left: 80%;
+  padding-top: 5%;
+}
+
+/* #campaign-config-heading {
+  position: relative;
+} */

@@ -13,12 +13,12 @@ const bids = [
 
 class Bids extends Component {
   state ={
-    fake_data_1: false,
-    fake_data_2: false,
-    fake_data_3: false,
-    fake_data_4: false,
-    fake_data_5: false,
-    fake_data_6: false
+    fake_data_1: true,
+    fake_data_2: true,
+    fake_data_3: true,
+    fake_data_4: true,
+    fake_data_5: true,
+    fake_data_6: true
   }
 
   handleCheckBox = (event) => {
@@ -30,16 +30,17 @@ class Bids extends Component {
   render(){
     return(
       <div id='bid-component-container'>
+        <h1 id='campaign-config-heading'>Bids</h1>
         <div id='bid-container'>
           {bids.map(bid => {
-            console.log('DID IT HAPPEN???', bid.name, bid.allowed)
             return (
               <div key={bid.name} className='individual-bid'>
-                <h2>{bid.name}</h2>
+                <p>{bid.name}</p>
                 <input type="checkbox"
                 checked={this.state[bid.name]} 
                 onChange={this.handleCheckBox} 
-                className='checkbox-allowed'
+                className='ui checkbox bid-checkbox'
+                name={bid.name}
                 />
               </div>
             )
