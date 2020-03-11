@@ -3,35 +3,67 @@
   position: relative;
   height: 100%;
   width: 90%;
-  left: 10%;
+  margin-left: 10%;
 
 }
 
-#bid-container{
+#bid-container {
   position: relative;
-  margin-left: 6%;
-  margin-top: 10%;
+  margin-left: 0%;
+  margin-top: 0%;
   display: inline-flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  width: 25%;
+  width: 100%;
   overflow: auto;
-  height: 51%;
+  height: 100%;
 }
+
 
 .individual-bid {
    display: inline-flex;
    flex-direction: row;
-   border-bottom: solid 30% black;
    padding-top: 5%;
+   width: 100%;
 }
 
-.bid-checkbox {
+/* .bid-checkbox {
   position: relative;
   margin-left: 80%;
   padding-top: 5%;
+} */
+
+#campaign-config-heading {
+  position: relative;
+
 }
 
-/* #campaign-config-heading {
+#bid-table-container {
   position: relative;
-} */
+  top: 20%;
+  margin-left: 10%;
+  width: 22%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.bid-table-header-row{
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#bid-table-head-row-name{
+  flex-grow: 1;
+}
+
+#bid-table-head-row-checkbox{
+  flex-grow: .07;
+}
+
+.bid-name{
+  flex-grow: 1;
+}
+
+.bid-checkbox{
+  flex-grow: .25;
+}

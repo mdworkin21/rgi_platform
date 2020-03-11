@@ -32,19 +32,34 @@ class Bids extends Component {
       <div id='bid-component-container'>
         <h1 id='campaign-config-heading'>Bids</h1>
         <div id='bid-container'>
-          {bids.map(bid => {
-            return (
-              <div key={bid.name} className='individual-bid'>
-                <p>{bid.name}</p>
-                <input type="checkbox"
-                checked={this.state[bid.name]} 
-                onChange={this.handleCheckBox} 
-                className='ui checkbox bid-checkbox'
-                name={bid.name}
-                />
-              </div>
-            )
-          })}
+        <table className="ui celled table" id="bid-table-container">
+          <thead >
+              <tr className='bid-table-header-row'>
+                <th id='bid-table-head-row-name'>Bid</th>
+                <th id='bid-table-head-row-checkbox'>On/Off</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bids.map(bid => {
+                return (
+                  <tr key={bid.name} className='individual-bid'>
+                    <td data-label='Bid' className='bid-name'>{bid.name}</td>
+                    <td data-label='On/Off' className='bid-checkbox'>
+                      <div className='bid-table-head-row'>
+                        <input type="checkbox"
+                        checked={this.state[bid.name]} 
+                        onChange={this.handleCheckBox} 
+                        className='ui checkbox bid-checkbox'
+                        name={bid.name}
+                        />
+                      </div>
+                      <label></label>
+                    </td>
+                  </tr>
+                )
+              })}
+          </tbody>
+          </table>
         </div>
 
         <CampaignBtns 
