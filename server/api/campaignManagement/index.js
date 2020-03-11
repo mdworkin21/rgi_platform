@@ -22,6 +22,7 @@ const loggedInCheck = async (req, res, next) => {
 //Granular Routes
 router.use('/processCampaignQueue', loggedInCheck, require('./processCampaignQueue'))
 router.use('/outbrain', loggedInCheck, require('./outbrain'))
+router.use('/uploadImage', loggedInCheck, require('./uploadImage'))
 
 
 //Handles 404 Errors
