@@ -2,25 +2,23 @@ const Client = require('ssh2-sftp-client');
 const fs = require('fs');
 
 
-  
-async function uploadToFtp(file){
-  let image = await fs.readdir(file)
+async function uploadImage(file){
   let sftp = new Client();
-  console.log("IMAGE", image)
+  console.log("IMAGE", file)
   sftp.connect({
       host: process.env.FTP_HOST,
       port: process.env.FTP_PORT,
       username: process.env.FTP_USER,
       password: process.env.FTP_PW
   }).then(() => {
-      sftp.put(image);
+      sftp.put(file);
   }).then((a) => {
     console.log(a);
-      console.log('ads.txt files uploaded');
-      // sftp.end();
+      console.log('file uploaded');
+      sftp.end();
   }).catch((err) => {
       console.log(err, 'catch error');
-      sftp.end();
+      // sftp.end();
   });
 }
 
@@ -33,6 +31,6 @@ let txtfiles = [];
 
 
 
-module.export = {
-  uploadToFtp
+module.exports = {
+  uploadImage
 }
