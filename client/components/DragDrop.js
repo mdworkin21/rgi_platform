@@ -12,11 +12,13 @@ class DragDrop extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
     // let file = this.state.image[0];
 
-    axios.post('api/campaignManagement/uploadImage/uploadImage', {image: this.state.image})
+    let uploadedImage = await axios.post('api/campaignManagement/uploadImage/uploadImage', {image: this.state.image})
+
+    console.log('UPSS', uploadedImage)
     console.log(this.state);
   }
 

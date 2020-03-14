@@ -5,7 +5,7 @@ const fs = require('fs');
 async function uploadImage(file){
   let sftp = new Client();
   console.log("IMAGE", file)
-  sftp.connect({
+  await sftp.connect({
       host: process.env.FTP_HOST,
       port: process.env.FTP_PORT,
       username: process.env.FTP_USER,
