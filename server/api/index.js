@@ -3,6 +3,7 @@ const router = require('express').Router();
 //API Routes 
 router.use('/userManagement', require('./userManagement'))
 router.use('/campaignManagement', require('./campaignManagement'))
+router.use('/dataIngestion', require('./dataIngestion'))
 
 
 //Handles 404 Errors

@@ -194,9 +194,9 @@ class CreativeAssests extends Component {
             handleSave={this.handleSave} 
             handleClear={this.handleClear} 
             link1={'/create-campaigns'} 
-            link2={'/bids'}
+            link2={'/blocks'}
             pageName1={'Campaigns'} 
-            pageName2={'Bids'}
+            pageName2={'Blocks'}
             styleClass={'button-container-2'}
           />
       </div>

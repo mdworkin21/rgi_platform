@@ -1,4 +1,4 @@
-import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES} from '../../actions/campaigns/campaignConfiguration'
+import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES, SAVE_BLOCKS, CLEAR_BLOCKS, DELETE_BLOCK } from '../../actions/campaigns/campaignConfiguration'
 
 
 const initialState = {
@@ -40,7 +40,8 @@ const initialState = {
     type_outbrain_mobile_premium: false
   },
   headlines: [{counter: 0, value: ''}],
-  images: []
+  images: [],
+  blocks: [{publisher_id: '', country: ''}]
 }
 
 export default function campaignConfigurationReducer(state = initialState, action){
@@ -78,6 +79,19 @@ export default function campaignConfigurationReducer(state = initialState, actio
           return {...state, images: initialState.images}
         } else {
           return {...state, images: images}
+        }
+    case SAVE_BLOCKS:
+      return {...state, blocks: [...blocks, action.blocks]}
+    case CLEAR_BLOCKS:
+      return {...state, blocks: initialState.blocks}
+    case DELETE_BLOCK:
+      let blocks =  state.blocks.filter((el, i) => {
+        return i !== action.block })
+
+        if (blocks.length === 0){
+          return {...state, blocks: initialState.blocks}
+        } else {
+          return {...state, block: blocks}
         }
     default: 
       return state
