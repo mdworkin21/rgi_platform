@@ -37,7 +37,7 @@ const countryCodes= {
   MX: 'Mexico'
 }
 
-let records = loadCSV(process.env.BLOCKS)
+// let records = loadCSV(process.env.BLOCKS)
 
 // --- End CSV IMPORT ---
 
@@ -60,7 +60,7 @@ const seed = async () => {
         token: '123444abc'
       },
       
-      await Blocks.bulkCreate(records)
+      // await Blocks.bulkCreate(records)
 
       )
   }catch(err){
