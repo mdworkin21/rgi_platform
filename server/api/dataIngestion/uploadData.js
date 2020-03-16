@@ -27,15 +27,20 @@ function loadCSV(filename){
 
 router.post('/uploadBlocks', async (req, res, next) => {
 	try {
-    console.log('REQ Body', req.body)
-
-    // let records = loadCSV(`${process.env.HOME}/Desktop/${req.body.file}`)
-    console.log('RECORDS', records)
-    // const blocks = await Blocks.bulkCreate(records)
-		res.status(200).send('blocks')
+    const blocks = await Blocks.bulkCreate(req.body)
+		res.status(200).send(blocks)
 	} catch(e) {
 		next(e)
 	}
 })
 
+
+router.get('/getBlocks', async (req, res, next) => {
+	try {
+    const blocks = await Blocks.findAll()
+		res.status(200).send(blocks)
+	} catch(e) {
+		next(e)
+	}
+})
 module.exports = router
