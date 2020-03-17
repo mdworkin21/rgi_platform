@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import axios from 'axios'
 import CampaignBtns from './CampaignBtns'
 import DragDrop from './DragDrop'
-
 import {saveBlocks, clearBlocks, deleteBlock} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/blocks.css'
 
@@ -16,34 +16,55 @@ const blocks = [
 ]
 
 const countries = [
-  {value: 'All', class: ''},
-  {value: 'Afghanistan', class: 'af'},
-  {value: 'Aland Islands', class: 'ax'},
-  {value: 'Albania', class: 'al'},
-  {value: 'Algeria', class: 'dz'},
-  {value: 'American Samoa', class: 'as'},
-  {value: 'Andorra', class: 'ad'},
-  {value: 'Angola', class: 'ao'},
-  {value: 'Anguilla', class: 'ai'},
-  {value: 'Antigua', class: 'ag'}
+  {country: 'All', country_abbr: ''},
+  {country: 'Austrailia', country_abbr: 'AU'},
+  {country: 'Brazil', country_abbr: 'BR'},
+  {country: 'Canada', country_abbr: 'CA'},
+  {country: 'France', country_abbr: 'FR'},
+  {country: 'Germany', country_abbr: 'DE'},
+  {country: 'Ghana', country_abbr: 'GH'},
+  {country: 'Ireland', country_abbr: 'IE'},
+  {country: 'India', country_abbr: 'IN'},
+  {country: 'Italy', country_abbr: 'IT'},
+  {country: 'Japan', country_abbr: 'JP'},
+  {country: 'Mexico', country_abbr: 'MX'},
+  {country: 'Neatherlannds', country_abbr: 'NL'},
+  {country: 'New Zealand', country_abbr: 'NZ'},
+  {country: 'Poland', country_abbr: 'PL'},
+  {country: 'Singapore', country_abbr: 'SG'},
+  {country: 'South Africa', country_abbr: 'ZA'},
+  {country: 'Spain', country_abbr: 'ES'},
+  {country: 'Sweden', country_abbr: 'SE'},
+  {country: 'United Kingdom', country_abbr: 'UK'},
+  {country: 'United States', country_abbr: 'US'}
 ]
 
 class Blocks extends Component {
   state ={
-    blocks: [{publisher_id: '', country: {value: '', class:''}}]
+    blocks: []
   }
 
-  componentDidMount = () => {
-    let temporaryBlocks = blocks
+  componentDidMount = async () => {
+    let blocks = await axios.get('api/dataIngestion/uploadData/getBlocks') 
+
+    let parsedBlocks = blocks.data.map(block => {
+      return {
+        publisher_id: block.publisher_id,
+        country: block.country,
+        country_abbr: block.country_abbr
+      }
+    })
 
     this.setState({
-      blocks: temporaryBlocks
+      blocks: parsedBlocks
     })
   }
 
   handleSelectCountry = (i) => (event) => {
     let blocks = [...this.state.blocks]
-    blocks[i].country.value = event.target.value
+    blocks[i].country = event.target.value
+    blocks[i].country_abbr = countries.filter(country => country.country === event.target.value)[0].country_abbr
+
     this.setState({
       blocks
     })
@@ -57,7 +78,6 @@ class Blocks extends Component {
     console.log('ASDASD', this.state)
     return(
       <div id='block-component-container'>
-        <DragDrop />
         <h1 id='campaign-config-heading'>Bids</h1>
         <div id='block-container'>
         <table className="ui celled table" id="block-table-container">
@@ -70,23 +90,23 @@ class Blocks extends Component {
             <tbody>
               {this.state.blocks.map((block, i) => {
                 return (
-                  <tr key={block.publisher_id} className='individual-block'>
+                  <tr key={`${block.publisher_id}_${block.country}`} className='individual-block'>
                     <td data-label='Block' className='block-name'>{block.publisher_id}</td>
                     <td data-label='Modifier' className='block-checkbox'>
                       <div className='block-table-head-row'>
                         <select type="ui dropdown"
-                        value={this.state.blocks[i].country.value} 
+                        value={this.state.blocks[i].country} 
                         onChange={this.handleSelectCountry(i)} 
-                        name={block.country.value}
+                        name={block.country}
                         className={`ui selection simple dropdown block-checkbox `} 
-                        >
+                        >{block.country}
                         {countries.map((nation) => {
                           return (
                             <option 
-                              name={nation.value} 
-                              value={nation.value} 
-                              key={nation.value} 
-                            >{nation.value}</option>
+                              name={nation.country} 
+                              value={nation.country} 
+                              key={nation.country} 
+                            >{nation.country}</option>
                           )
                         })} 
                         </select>

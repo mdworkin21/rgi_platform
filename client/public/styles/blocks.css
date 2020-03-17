@@ -39,11 +39,13 @@
 
 #block-table-container {
   position: relative;
-  top: 20%;
-  margin-left: 10%;
-  width: 22%;
+  top: 10%;
+  margin-left: 4%;
+  width: 30%;
   display: inline-flex;
   flex-direction: column;
+  height: 68%;
+  overflow: auto;
 }
 
 .block-table-header-row{
