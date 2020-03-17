@@ -99,7 +99,7 @@ class Blocks extends Component {
                         onChange={this.handleSelectCountry(i)} 
                         name={block.country}
                         className={`ui selection simple dropdown block-checkbox `} 
-                        >{block.country}
+                        >{this.state.blocks[i].country}
                         {countries.map((nation) => {
                           return (
                             <option 
