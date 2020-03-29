@@ -37,7 +37,7 @@ const countryCodes= {
   MX: 'Mexico'
 }
 
-let records = loadCSV(process.env.BIDS)
+// let records = loadCSV(process.env.BIDS)
 
 // --- End CSV IMPORT ---
 
