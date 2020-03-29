@@ -1,4 +1,4 @@
-#block-component-container {
+#bid-component-container {
   display: flex;
   position: relative;
   height: 100%;
@@ -7,7 +7,7 @@
 
 }
 
-#block-container {
+#bid-container {
   position: relative;
   margin-left: 0%;
   margin-top: 0%;
@@ -19,14 +19,14 @@
 }
 
 
-.individual-block {
+.individual-bid {
    display: inline-flex;
    flex-direction: row;
    padding-top: 5%;
    width: 100%;
 }
 
-/* .block-checkbox {
+/* .bid-checkbox {
   position: relative;
   margin-left: 80%;
   padding-top: 5%;
@@ -37,7 +37,7 @@
 
 }
 
-#block-table-container {
+#bid-table-container {
   position: relative;
   top: 10%;
   margin-left: 4%;
@@ -48,24 +48,24 @@
   overflow: auto;
 }
 
-.block-table-header-row{
+.bid-table-header-row{
   display: inline-flex;
   flex-direction: row;
   width: 100%;
 }
 
-#block-table-head-row-name{
+#bid-table-head-row-name{
   flex-grow: 1;
 }
 
-#block-table-head-row-checkbox{
+#bid-table-head-row-checkbox{
   flex-grow: .07;
 }
 
-.block-name{
+.bid-name{
   flex-grow: 1;
 }
 
-.block-checkbox{
+.bid-checkbox{
   flex-grow: .25;
 }

@@ -475,9 +475,9 @@ class NewCampaign extends Component {
           handleSave={this.handleSave} 
           handleClear={this.handleClear} 
           link1={'/creatives'} 
-          link2={'/blocks'}
+          link2={'/bids'}
           pageName1={'Creatives'} 
-          pageName2={'Blocks'}
+          pageName2={'Bids'}
           styleClass={'button-container'}
         />
       </div>

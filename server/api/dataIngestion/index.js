@@ -4,7 +4,6 @@ const {db, User} = require('../../db/models')
 //NOT DRY, Using this check elsewhere, maybe put all security checks in a util folder and then require in
 const loggedInCheck = async (req, res, next) => {
   try{
-
     //Checks for someone logged in through UI
     if (req.session.passport){
       let userIsLoggedIn = await User.findOne({
@@ -30,7 +29,7 @@ const loggedInCheck = async (req, res, next) => {
 
 
 //Granular Routes
-router.use('/uploadData', loggedInCheck, require('./uploadData'))
+router.use('/dataPipeline', loggedInCheck, require('./dataPipeline'))
 
 
 //Handles 404 Errors

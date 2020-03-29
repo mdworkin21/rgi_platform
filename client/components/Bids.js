@@ -3,17 +3,9 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import CampaignBtns from './CampaignBtns'
 import DragDrop from './DragDrop'
-import {saveBlocks, clearBlocks, deleteBlock} from '../redux/actions/campaigns/campaignConfiguration'
-import '../public/styles/blocks.css'
-
-const blocks = [
-  {publisher_id: 'fake_data_1', country: {value: 'All', class: ''}},
-  {publisher_id: 'fake_data_2', country: {value: 'All', class: ''}},
-  {publisher_id: 'fake_data_3', country: {value: 'All', class: ''}},
-  {publisher_id: 'fake_data_4', country: {value: 'All', class: ''}},
-  {publisher_id: 'fake_data_5', country: {value: 'All', class: ''}},
-  {publisher_id: 'fake_data_6', country: {value: 'All', class: ''}}
-]
+import {saveBids, clearBids, deleteBid} from '../redux/actions/campaigns/campaignConfiguration'
+import '../public/styles/bids.css'
+import { getAllBids } from '../redux/thunks/campaigns/campaignConfiguration'
 
 const countries = [
   {country: 'All', country_abbr: ''},
@@ -39,67 +31,73 @@ const countries = [
   {country: 'United States', country_abbr: 'US'}
 ]
 
-class Blocks extends Component {
+class Bids extends Component {
   state ={
-    blocks: []
+    bids: []
   }
 
   componentDidMount = async () => {
-    let blocks = await axios.get('api/dataIngestion/uploadData/getBlocks') 
+    let bids
 
-    let parsedBlocks = blocks.data.map(block => {
+    if (this.props.bids.length > 1){
+      bids = this.props.bids
+    } else {
+      await this.props.getBids()
+    }
+
+    bids = this.props.bids.map(bid => {
       return {
-        publisher_id: block.publisher_id,
-        country: block.country,
-        country_abbr: block.country_abbr
+        publisher_id: bid.publisher_id,
+        country: bid.country,
+        country_abbr: bid.country_abbr
       }
     })
 
     this.setState({
-      blocks: parsedBlocks
+      bids: bids
     })
   }
 
   handleSelectCountry = (i) => (event) => {
-    let blocks = [...this.state.blocks]
-    blocks[i].country = event.target.value
-    blocks[i].country_abbr = countries.filter(country => country.country === event.target.value)[0].country_abbr
+    let bids = [...this.state.bids]
+    bids[i].country = event.target.value
+    bids[i].country_abbr = countries.filter(country => country.country === event.target.value)[0].country_abbr
 
     this.setState({
-      blocks
+      bids
     })
   }
 
   handleSave = () => {
-    this.props.saveBlocks(this.state.blocks)
+    this.props.saveBids(this.state.bids)
   }  
 
   render(){
     console.log('ASDASD', this.state)
     return(
-      <div id='block-component-container'>
+      <div id='bid-component-container'>
         <h1 id='campaign-config-heading'>Bids</h1>
-        <div id='block-container'>
-        <table className="ui celled table" id="block-table-container">
+        <div id='bid-container'>
+        <table className="ui celled table" id="bid-table-container">
           <thead >
-              <tr className='block-table-header-row'>
-                <th id='block-table-head-row-name'>Bid</th>
-                <th id='block-table-head-row-checkbox'>Modifier</th>
+              <tr className='bid-table-header-row'>
+                <th id='bid-table-head-row-name'>Bid</th>
+                <th id='bid-table-head-row-checkbox'>Modifier</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.blocks.map((block, i) => {
+              {this.state.bids.map((bid, i) => {
                 return (
-                  <tr key={`${block.publisher_id}_${block.country}`} className='individual-block'>
-                    <td data-label='Block' className='block-name'>{block.publisher_id}</td>
-                    <td data-label='Modifier' className='block-checkbox'>
-                      <div className='block-table-head-row'>
+                  <tr key={`${bid.publisher_id}_${bid.country}`} className='individual-bid'>
+                    <td data-label='Bid' className='bid-name'>{bid.publisher_id}</td>
+                    <td data-label='Modifier' className='bid-checkbox'>
+                      <div className='bid-table-head-row'>
                         <select type="ui dropdown"
-                        value={this.state.blocks[i].country} 
+                        value={this.state.bids[i].country} 
                         onChange={this.handleSelectCountry(i)} 
-                        name={block.country}
-                        className={`ui selection simple dropdown block-checkbox `} 
-                        >{this.state.blocks[i].country}
+                        name={bid.country}
+                        className={`ui selection simple dropdown bid-checkbox `} 
+                        >{this.state.bids[i].country}
                         {countries.map((nation) => {
                           return (
                             <option 
@@ -122,7 +120,7 @@ class Blocks extends Component {
 
         <CampaignBtns 
         handleSubmitCampaign={this.handleSubmitCampaign}
-        handleSave={this.handleSave} 
+        // handleSave={this.props.saveBids} 
         handleClear={this.handleClear} 
         link1={'/creatives'} 
         link2={'/create-campaigns'}
@@ -141,18 +139,19 @@ const mapStateToProps = (state) => {
     headlines: state.campaignConfiguration.headlines,
     images: state.campaignConfiguration.images,
     campaignConfiguration: state.campaignConfiguration.campaignConfig,
-    blocks: state.campaignConfiguration.blocks
+    bids: state.campaignConfiguration.bids
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    saveBlocks: (headlines) => dispatch(saveBlocks(blocks)),
-    clearBlocks: () => dispatch(clearBlocks()),
-    deleteBlock: (headline) => dispatch(deleteBlock(block)),  
+    getBids: () => dispatch(getAllBids()),
+    saveBids: (bids) => dispatch(saveBids(bids)),
+    clearBids: () => dispatch(clearBids()),
+    deleteBid: (bid) => dispatch(deleteBid(bid)),  
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Blocks)
+export default connect(mapStateToProps, mapDispatchToProps)(Bids)

@@ -4,7 +4,9 @@ const User = require('./User')
 const TaboolaCreative = require('./TaboolaCreatives')
 const TaboolaCampaign = require('./TaboolaCampaigns')
 const TaboolaToken = require('./TaboolaTokens')
-const Blocks = require('./Blocks')
+const Bid = require('./Bid')
+const Country = require('./Country')
+
 
 module.exports = {
   db,
@@ -12,5 +14,6 @@ module.exports = {
   TaboolaCreative,
   TaboolaCampaign,
   TaboolaToken,
-  Blocks
+  Bid,
+  Country
 }

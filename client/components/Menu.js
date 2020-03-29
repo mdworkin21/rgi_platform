@@ -11,7 +11,7 @@ const dropMenuConfig = {
       {to: '/profile', id: 'profile', name: 'Profile'},
       {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'},
       {to: '/creatives', id: 'creatives', name: 'Creatives'},
-      {to: '/blocks', id: 'blocks', name: 'Blocks'},
+      {to: '/bids', id: 'bids', name: 'Bids'},
       {to: '/dragdrop', id: 'dragdrop', name: 'Drag Drop'}
     ],
   loggedIn: [

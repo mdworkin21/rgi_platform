@@ -1,7 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 
-const Blocks = db.define('blocks', {
+const Bid = db.define('bid', {
   publisher_id: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -25,4 +25,4 @@ const Blocks = db.define('blocks', {
   }
 } )
 
-module.exports = Blocks
+module.exports = Bid

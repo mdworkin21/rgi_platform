@@ -1,12 +1,12 @@
 const db = require('../server/db/database')
 const fs = require('fs')
 const User = require('../server/db/models/User')
-const {TaboolaToken, Blocks} = require('../server/db/models/')
+const {TaboolaToken, Bid} = require('../server/db/models/')
 
 
 
 // --- START CSV IMPORT ____ 
-//This loadCSV function should be put in utilities, and generalized for other CSVs, right now it just works for Blocks.csv (locally)-- still need to figure out production strategy
+//This loadCSV function should be put in utilities, and generalized for other CSVs, right now it just works for Bids.csv (locally)-- still need to figure out production strategy
 // Primary function in file, will load and parse cvs file
 function loadCSV(filename){
   let data = fs.readFileSync(filename, {encoding: 'utf-8'})
@@ -33,11 +33,11 @@ const countryCodes= {
   x: 'All',
   AU: 'Austrailia',
   IN: 'India',
-  JP: 'Japan',
+  JP: 'Japan', 
   MX: 'Mexico'
 }
 
-// let records = loadCSV(process.env.BLOCKS)
+let records = loadCSV(process.env.BIDS)
 
 // --- End CSV IMPORT ---
 
@@ -60,7 +60,7 @@ const seed = async () => {
         token: '123444abc'
       },
       
-      // await Blocks.bulkCreate(records)
+      await Bid.bulkCreate(records)
 
       )
   }catch(err){

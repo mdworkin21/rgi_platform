@@ -11,9 +11,15 @@ export const DELETE_HEADLINE = 'DELETE_HEADLINE'
 export const SAVE_IMAGES = 'SAVE_IMAGES'
 export const CLEAR_IMAGES = 'CLEAR_IMAGES'
 export const DELETE_IMAGE = 'DELETE_IMAGE'
-export const SAVE_BLOCKS = 'SAVE_BLOCKS'
-export const CLEAR_BLOCKS = 'CLEAR_BLOCKS'
-export const DELETE_BLOCK = 'DELETE_BLOCK'
+export const SAVE_BIDS = 'SAVE_BIDS'
+export const CLEAR_BIDS = 'CLEAR_BIDS'
+export const DELETE_BID = 'DELETE_BID'
+export const GET_BIDS = 'GET_BIDS'
+export const CREATE_BID = 'CREATE_BID'
+export const GET_COUNTRIES = 'GET_COUNTRIES'
+export const ADD_COUNTRY = 'ADD_COUNTRY'
+export const DELETE_COUNTRY = 'DELETE_COUNTRY'
+
 
 //Action Creators
 export const saveCampaignSettings = (campaignConfig) => {
@@ -83,23 +89,58 @@ export const deleteImage = (image) => {
   }
 }
 
-export const saveBlocks = (blocks) => {
+export const saveBids = (bids) => {
   return {
-    type: SAVE_BLOCKS,
-    blocks
+    type: SAVE_BIDS,
+    bids
   }
 }
 
-export const clearBlocks = () => {
+export const clearBids = () => {
   return {
-    type: CLEAR_BLOCKS
+    type: CLEAR_BIDS
   }
 }
 
-export const deleteBlock = (block) => {
+export const getBids = (bids) => {
   return {
-    type: DELETE_BLOCKS,
-    block
+    type: GET_BIDS,
+    bids
+  }
+}
+
+export const createBid = (bid) => {
+  return {
+    type: CREATE_BID,
+    bid
+  }
+}
+
+export const deleteBid = (bid) => {
+  return {
+    type: DELETE_BID,
+    bid
+  }
+}
+
+
+export const getCountries = () => {
+  return {
+    type: GET_COUNTRIES
+  }
+}
+
+export const addCoutnry = (country) => {
+  return {
+    type: ADD_COUNTRY,
+    country
+  }
+}
+
+export const deleteDelete = (country) => {
+  return {
+    type: DELETE_COUNTRY,
+    country
   }
 }
 

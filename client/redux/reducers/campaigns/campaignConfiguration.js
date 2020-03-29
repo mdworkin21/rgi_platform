@@ -1,4 +1,4 @@
-import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES, SAVE_BLOCKS, CLEAR_BLOCKS, DELETE_BLOCK } from '../../actions/campaigns/campaignConfiguration'
+import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES, SAVE_BIDS, CLEAR_BIDS, DELETE_BID, GET_BIDS } from '../../actions/campaigns/campaignConfiguration'
 
 
 const initialState = {
@@ -41,7 +41,8 @@ const initialState = {
   },
   headlines: [{counter: 0, value: ''}],
   images: [],
-  blocks: [{publisher_id: '', country: ''}]
+  bids: [{publisher_id: '', country: ''}],
+  countries: [{}]
 }
 
 export default function campaignConfigurationReducer(state = initialState, action){
@@ -80,19 +81,21 @@ export default function campaignConfigurationReducer(state = initialState, actio
         } else {
           return {...state, images: images}
         }
-    case SAVE_BLOCKS:
-      return {...state, blocks: [...blocks, action.blocks]}
-    case CLEAR_BLOCKS:
-      return {...state, blocks: initialState.blocks}
-    case DELETE_BLOCK:
-      let blocks =  state.blocks.filter((el, i) => {
-        return i !== action.block })
+    case SAVE_BIDS:
+      return {...state, bids: [...bids, action.bids]}
+    case CLEAR_BIDS:
+      return {...state, bids: initialState.bids}
+    case DELETE_BID:
+      let bids =  state.bids.filter((el, i) => {
+        return i !== action.bid })
 
-        if (blocks.length === 0){
-          return {...state, blocks: initialState.blocks}
+        if (bids.length === 0){
+          return {...state, bids: initialState.bids}
         } else {
-          return {...state, block: blocks}
+          return {...state, bid: bids}
         }
+    case GET_BIDS:
+      return {...state, bids: action.bids}
     default: 
       return state
   }
