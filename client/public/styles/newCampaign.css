@@ -5,14 +5,22 @@
   height: 100%;
   width: 100%;
   position: relative;
-  left: 0vw;
+  left: 10%;
   font-family: "Arial", Gadget, sans-serif;
+}
+
+
+#campaign-config-heading {
+  position: relative;
+  display: flex;
+  left: 50%;
+  font-size: 300%;
+  top: 15%;
 }
 
 #campaign-configuration {
   position: relative;
-  left: 15.5vw;
-  top: 8vh;
+  left: 4%;
   display: inline-flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
@@ -82,12 +90,7 @@
 /* Platform Configuration */
 #platform-setting-container {
   position: relative;
-  display: inline-flex;
-  flex-direction: row;
-  width: 50%;
-  top: 34%;
-  right: 17vw;
-  height: 50vh;
+  top: 7%;
 }
 
 #tab-platform-specific {
@@ -154,10 +157,15 @@
 
 /* Logos */
 .platform-logos {
-  position: relative;
+  /* position: relative;
   height: 48%;
   width: 35%;
   margin-left: 33%;
+  margin-top: 3%;
+  margin-bottom: 0%; */
+  position: relative;
+  height: 3%;
+  margin-left: 15%;
   margin-top: 3%;
   margin-bottom: 0%;
 }
@@ -169,10 +177,11 @@
 /* img#Taboola{}
 img#Outbrain{}
 img#Yahoo{} */
-img#Rev-Content{
-  height: 80%;
-  width: 52%;
-  margin-left: 21%;
+
+img#Rev-Content {
+  height: 15%;
+  width: 40%;
+  margin-left: 1%;
   margin-top: 0%;
   margin-bottom: 0%;
   padding-bottom: 0%;
@@ -216,10 +225,11 @@ img#Rev-Content{
   height: 25%;
 }
 
-#platform-config-device {
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: flex-start;
+#platform-config-table {
+  position: relative;
+  margin-left: 7%;
+  top: 34%;
+  width: 60%;
 }
 
 .cpc-label{
@@ -230,6 +240,8 @@ img#Rev-Content{
 .campaign-type{
   top: 0vh;
   height: 1vh;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .campaign-cpc {
@@ -277,8 +289,8 @@ img#Rev-Content{
 /* Campaign Buttons */
 .button-container {
   position: absolute;
-  top: 86vh;
-  left: 35.50vw;
+  top: 83%;
+  left: 28%;
   display: flex;
   flex-direction: row;
   height: 12vh;
@@ -306,33 +318,41 @@ img#Rev-Content{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Laptop Screen */
 @media (max-width: 1500px){
+  .form-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: 12%;
+    font-family: "Arial", Gadget, sans-serif;
+  }
+
   #campaign-configuration {
     position: relative;
-    left: 15.5vw;
-    top: 5.5vh;
+    left: 5%;
     display: inline-flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     padding: 8px;
     height: 24vh;
     width: 43vw;
-}
+  }
+
+  #campaign-config-heading {
+    position: relative;
+    display: flex;
+    left: 53%;
+    top: 14%;
+    font-size: 300%;
+  }
+
+  #platform-config-table {
+    position: relative;
+    margin-left: 1.5%;
+    top: 34%;
+    width: 60%;
+  }
 
   #country {
     position: relative;
@@ -378,21 +398,17 @@ img#Rev-Content{
     right: 4vw;
     height: 1vh;
 }
+
   #platform-setting-container {
     position: relative;
-    display: inline-flex;
-    flex-direction: row;
-    width: 50%;
-    top: 34%;
-    right: 24.5vw;
-    height: 50vh;
-}
+    top: 6.5%;
+  }
 
   /* Campaignn Buttons */
   .button-container {
       position: absolute;
-      top: 84vh;
-      left: 38.5vw;
+      top: 90%;
+      left: 25%;
       display: flex;
       flex-direction: row;
       height: 12vh;

@@ -10,7 +10,8 @@
     "start": "nodemon index.js",
     "seed": "node scripts/seed.js",
     "postinstall": "webpack -p",
-    "start-dev": "NODE_ENV='development' webpack -w & nodemon"
+    "open": "open http://localhost:3000",
+    "start-dev": "(sleep 5 && npm run open) & NODE_ENV='development' webpack -w & nodemon"
   },
   "keywords": [],
   "author": "",
@@ -53,6 +54,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^2.1.0",
     "gulp": "^4.0.0",
+    "http-server": "^0.12.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"

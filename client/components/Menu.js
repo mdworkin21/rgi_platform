@@ -9,7 +9,7 @@ const dropMenuConfig = {
       {to: '/manageusers', id: 'manage-users', name: 'Manage Users', icon: 'big users icon link icon'},
       {to: '/adduser', id: 'add-user', name: 'Add User', icon: 'big add user basic icon'},
       {to: '/profile', id: 'profile', name: 'Profile'},
-      {to: '/create-campaigns', id: 'create-campaigns', name: 'Create Campaigns'},
+      {to: '/new-campaign', id: 'new-campaign', name: 'New Campaign'},
       {to: '/creatives', id: 'creatives', name: 'Creatives'},
       {to: '/bids', id: 'bids', name: 'Bids'},
       {to: '/dragdrop', id: 'dragdrop', name: 'Drag Drop'}

@@ -8,7 +8,7 @@ import ManageUsers from './ManageUsers'
 import AddUser from './AddUser';
 import Profile from './Profile'
 import PrivateRoute from './PrivateRoute'
-import CreateCampaigns from './CreateCampaigns';
+import NewCampaign from './NewCampaign'
 import CreativeAssets from './CreativeAssets'
 import Bids from './Bids'
 import {getUserFromPassport} from '../redux/thunks/users'
@@ -31,7 +31,7 @@ class App extends Component {
           <PrivateRoute exact path='/manageusers' component={ManageUsers} authed={this.props.auth} />
           <PrivateRoute exact path='/adduser' component={AddUser} authed={this.props.auth}/>
           <PrivateRoute exact path='/profile' component={Profile} authed={this.props.auth}/>
-          <PrivateRoute exact path='/create-campaigns' component={CreateCampaigns} authed={this.props.auth}/>
+          <PrivateRoute exact path='/new-campaign' component={NewCampaign} authed={this.props.auth}/>
           <PrivateRoute exact path='/creatives' component={CreativeAssets} authed={this.props.auth}/>
           <PrivateRoute exact path='/bids' component={Bids} authed={this.props.auth}/>
           <PrivateRoute exact path='/dragdrop' component={DragDrop} authed={this.props.auth}/>

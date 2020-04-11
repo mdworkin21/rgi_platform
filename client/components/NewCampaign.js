@@ -35,24 +35,24 @@ const platformConfiguration = [
       devices: [
         {
           device: 'Desktop',
+          CPC: {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_taboola_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_taboola_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
+          CPC:  {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_taboola_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_taboola_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
+          CPC: {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_taboola_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_taboola_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
@@ -65,8 +65,8 @@ const platformConfiguration = [
       devices:[
         {
           device: 'Desktop',
+          CPC:  {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_outbrain_desktop_msn', label: 'msn', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_desktop_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
@@ -74,16 +74,16 @@ const platformConfiguration = [
         },
         {
           device: 'Tablet',
+          CPC: {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_outbrain_tablet_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
+          CPC: {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_outbrain_mobile_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
@@ -96,24 +96,24 @@ const platformConfiguration = [
       devices:[
         {
           device: 'Desktop',
-          fields: [
-            {value: 'cpc_yahoo_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+          CPC: {value: 'cpc_yahoo_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+          fields: [   
             {value: 'type_yahoo_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_yahoo_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
-          fields: [
-            {value: 'cpc_yahoo_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+          CPC:  {value: 'cpc_yahoo_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
+          fields: [          
             {value: 'type_yahoo_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_yahoo_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
+          CPC: {value: 'cpc_yahoo_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_yahoo_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_yahoo_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_yahoo_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
@@ -126,24 +126,24 @@ const platformConfiguration = [
       devices:[
         {
           device: 'Desktop',
+          CPC: {value: 'cpc_revContent_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_revContent_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_revContent_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_revContent_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
+          CPC: {value: 'cpc_revContent_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_revContent_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_revContent_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_revContent_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
+          CPC: {value: 'cpc_revContent_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'cpc_revContent_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
             {value: 'type_revContent_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
             {value: 'type_revContent_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
@@ -205,31 +205,10 @@ class NewCampaign extends Component {
     OutbrainSelectAll: false
   }
 
+  //Methods are in alphabetical order (except render)
   componentDidMount = () => {
     const campaignConfig = this.props.campaignConfiguration
     this.setState(campaignConfig)
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  handleSave = () => {
-    this.props.saveCampaignConfig(this.state)
-  }
-
-  handleClear = async () => {
-    await this.props.clearCampaignConfig()
-    const campaignConfig = this.props.campaignConfiguration
-    this.setState(campaignConfig)
-  }
-
-  handleCheckBox = (event) => {
-    this.setState({
-      [event.target.name]: !this.state[event.target.name]
-    })
   }
 
   handleActivatePlatformConfig = (event) => {
@@ -238,10 +217,22 @@ class NewCampaign extends Component {
     })
   }
 
-  handleSelectCountry = (event) => {
+  handleChange = (event) => {
     this.setState({
-      country: event.currentTarget.textContent
+      [event.target.name]: event.target.value
     })
+  }
+
+  handleCheckBox = (event) => {
+    this.setState({
+      [event.target.name]: !this.state[event.target.name]
+    })
+  }
+
+  handleClear = async () => {
+    await this.props.clearCampaignConfig()
+    const campaignConfig = this.props.campaignConfiguration
+    this.setState(campaignConfig)
   }
 
   handleRadio = (event) => {
@@ -250,6 +241,10 @@ class NewCampaign extends Component {
       [event.target.name]: !this.state[event.target.name]
 
     })
+  }
+
+  handleSave = () => {
+    this.props.saveCampaignConfig(this.state)
   }
 
   handleSelectAllCheckBox = (event) => {
@@ -262,6 +257,13 @@ class NewCampaign extends Component {
       })
     }
   }
+
+  handleSelectCountry = (event) => {
+    this.setState({
+      country: event.currentTarget.textContent
+    })
+  }
+
 
   handleSubmitCampaign = async (event) => {
     try {
@@ -284,8 +286,82 @@ class NewCampaign extends Component {
       }
     } catch(e){}
   }
+ 
+  renderPlatformConfigure = () => {
+      return (
+        <table className="ui celled table" id='platform-config-table'>
+          <thead>
+            <tr>
+              <th colSpan="1">Platform</th>
+              <th colSpan="2">Desktop</th>
+              <th colSpan="2">Tablet</th>
+              <th colSpan="2">Mobile</th>
+              <th colSpan="1">Platform Specific Config</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th colSpan="1">CPC</th>
+              <th colSpan="1">Mode</th>
+              <th>CPC</th>
+              <th>Mode</th>
+              <th>CPC</th>
+              <th>Mode</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {platformConfiguration.map(platform => {
+              //This map returns a row
+              return (
+                <tr key={platform.platform}>
+                  <td className='left aligned logo-container'>
+                    <img src={platform.logo}  className='platform-logos' id={platform.platform} />
+                  </td>
+                  {platform.devices.map(device => {
+                    //This map returns device column
+                    return (
+                      <React.Fragment key={device.CPC.value}>
+                        <td className='center aligned'>
+                        <input 
+                          type='number' 
+                          name={device.CPC.value}
+                          value={this.state[device.CPC.value]} 
+                          onChange={this.handleChange}
+                          className='platform-input'
+                          />
+                        </td>
+                        <td className='left aligned'>
+                          {device.fields.map(mode => {
+                            //This map returns checkboxes per device
+                            console.log('MODE', mode.classes)
+                            return (
+                              <div key={mode.value} className={`ui checkbox ${mode.classes}`}>
+                                <input                     
+                                  type="checkbox" 
+                                  name={mode.value}
+                                  onChange={this.handleCheckBox} 
+                                  checked={this.state[`${mode.value}`]}
+                                  className='ui checkbox'
+                                  />
+                                  <label>{mode.label}</label>
+                              </div>
+                            )}
+                          )}
+                        </td>
+                      </React.Fragment>
+                    )}
+                  )}
+                <td>{this.renderPlatformSpecificConfig(platform)}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      ) 
+  }
 
   renderPlatformSpecificConfig = (platformObj) => {
+    console.log()
     if (platformObj.platform === 'Taboola'){
       return (
       <div className='ui segment platform-obj' id='tab-platform-specific'>
@@ -336,80 +412,12 @@ class NewCampaign extends Component {
         )
     }
   }
- 
-  renderPlatformConfigure = () => {
-      return (
-        <div id='platform-config-device'>
-          {platformConfiguration.map(platform => {
-            return (
-              <div key={platform.platform} className='platform-obj-container'>
-                <div className='logo-container' >
-                  <img src={platform.logo}  className='platform-logos' id={platform.platform}/>
-                </div>
-                <div key={platform.platform} className='select-all-checkbox'>
-                  <label>Select All: </label>
-                  <input 
-                  type="checkbox" 
-                  name={platform.platform}
-                  onChange={this.handleSelectAllCheckBox} 
-                  checked={this.state[`${platform.platform}selectAll`]}
-                  className='ui checkbox'
-                  />
-                </div>
-                {platform.devices.map(config => {
-                  return(
-                    <div key={config.device} className='ui segment platform-obj'>
-                      <label className='platform-obj-device-elements'>{config.device}</label>
-                      <div className='platform-input-container'>
-                        {config.fields.map(field => {
-                          if (field.HTMLtype === 'text'){
-                            return (
-                              <div key={field.value} className={`${field.classes} platform-obj-device-elements`} id='platform-input-container'>
-                                <label className='cpc-label'> {field.label}</label>
-                                <input 
-                                type='text' 
-                                name={field.value}
-                                value={this.state[field.value]} 
-                                onChange={this.handleChange}
-                                className='platform-input'
-                                />
-                              </div>
-                            )
-                          } else if (field.HTMLtype === 'checkbox'){
-                              return (
-                                <div key={field.value} className={`ui checkbox ${field.classes}`} id={`type-${field.label}`}>
-                                  <input 
-                                  type="checkbox" 
-                                  name={field.value}
-                                  onChange={this.handleCheckBox} 
-                                  checked={this.state[field.value]}
-                                  />
-                                  <label>{field.label}</label>
-                                </div>
-                              )
-                            } 
-                          })}
-
-                      </div>
-                    </div>
-                  )
-                })}
-                 {this.renderPlatformSpecificConfig(platform)}
-              </div>
-              ) 
-            })
-          }
-          
-          </div>
-      )
-    
-  }
-
 
   render(){
     console.log('STATE ', this.state)
     return (
       <div className='form-container'>
+        <h1 id='campaign-config-heading'>Campaign Configuration</h1>
         <form id='campaign-configuration' className='ui form'>
           {generalConfiguration.map(config => {
 
