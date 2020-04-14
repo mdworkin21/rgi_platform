@@ -37,24 +37,24 @@ const platformConfiguration = [
           device: 'Desktop',
           CPC: {value: 'cpc_taboola_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_taboola_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_taboola_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_taboola_desktop_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_desktop', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
           CPC:  {value: 'cpc_taboola_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_taboola_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_taboola_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_taboola_tablet_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_tablet', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
           CPC: {value: 'cpc_taboola_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_taboola_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_taboola_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_taboola_mobile_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_taboola_mobile', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         }
       ]},
@@ -67,25 +67,25 @@ const platformConfiguration = [
           device: 'Desktop',
           CPC:  {value: 'cpc_outbrain_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_outbrain_desktop_msn', label: 'msn', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_outbrain_desktop_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_outbrain_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_outbrain_desktop_msn', label: 'MSN', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_desktop_premium', label: 'Premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_desktop', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
           CPC: {value: 'cpc_outbrain_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_outbrain_tablet_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_outbrain_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_outbrain_tablet_premium', label: 'Premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_tablet', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
           CPC: {value: 'cpc_outbrain_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_outbrain_mobile_premium', label: 'premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_outbrain_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_outbrain_mobile_premium', label: 'Premium', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_outbrain_mobile', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         }
       ]},
@@ -98,24 +98,24 @@ const platformConfiguration = [
           device: 'Desktop',
           CPC: {value: 'cpc_yahoo_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [   
-            {value: 'type_yahoo_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_yahoo_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_yahoo_desktop_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_desktop', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
           CPC:  {value: 'cpc_yahoo_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [          
-            {value: 'type_yahoo_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_yahoo_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_yahoo_tablet_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_tablet', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
           CPC: {value: 'cpc_yahoo_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_yahoo_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_yahoo_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_yahoo_mobile_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_yahoo_mobile', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         }
       ]},
@@ -128,24 +128,24 @@ const platformConfiguration = [
           device: 'Desktop',
           CPC: {value: 'cpc_revContent_desktop', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_revContent_desktop_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_revContent_desktop', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_revContent_desktop_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_desktop', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Tablet',
           CPC: {value: 'cpc_revContent_tablet', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_revContent_tablet_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_revContent_tablet', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_revContent_tablet_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_tablet', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         },
         {
           device: 'Mobile',
           CPC: {value: 'cpc_revContent_mobile', label: 'CPC', HTMLtype: 'text', classes: 'campaign-cpc'},
           fields: [
-            {value: 'type_revContent_mobile_safe', label: 'safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
-            {value: 'type_revContent_mobile', label: 'regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
+            {value: 'type_revContent_mobile_safe', label: 'Safe', HTMLtype: 'checkbox', classes: 'campaign-type'},
+            {value: 'type_revContent_mobile', label: 'Regular', HTMLtype: 'checkbox', classes: 'campaign-type'}
           ],
         }
       ]} 
@@ -292,21 +292,21 @@ class NewCampaign extends Component {
         <table className="ui celled table" id='platform-config-table'>
           <thead>
             <tr>
-              <th colSpan="1">Platform</th>
-              <th colSpan="2">Desktop</th>
-              <th colSpan="2">Tablet</th>
-              <th colSpan="2">Mobile</th>
-              <th colSpan="1">Platform Specific Config</th>
+              <th colSpan="1" className='center aligned'>Platform</th>
+              <th colSpan="2" className='center aligned'>Desktop</th>
+              <th colSpan="2" className='center aligned'>Tablet</th>
+              <th colSpan="2" className='center aligned'>Mobile</th>
+              <th colSpan="1" className='center aligned'>Platform Specific Config</th>
             </tr>
             <tr>
               <th></th>
-              <th colSpan="1">CPC</th>
-              <th colSpan="1">Mode</th>
-              <th>CPC</th>
-              <th>Mode</th>
-              <th>CPC</th>
-              <th>Mode</th>
-              <th>Options</th>
+              <th colSpan="1" className='center aligned'>CPC</th>
+              <th colSpan="1" className='center aligned'>Mode</th>
+              <th colSpan="1" className='center aligned'>CPC</th>
+              <th colSpan="1" className='center aligned'>Mode</th>
+              <th colSpan="1" className='center aligned'>CPC</th>
+              <th colSpan="1" className='center aligned'>Mode</th>
+              <th colSpan="1" className='center aligned'>Options</th>
             </tr>
           </thead>
           <tbody>
@@ -327,7 +327,7 @@ class NewCampaign extends Component {
                           name={device.CPC.value}
                           value={this.state[device.CPC.value]} 
                           onChange={this.handleChange}
-                          className='platform-input'
+                          id='platform-input'
                           />
                         </td>
                         <td className='left aligned'>
@@ -361,7 +361,6 @@ class NewCampaign extends Component {
   }
 
   renderPlatformSpecificConfig = (platformObj) => {
-    console.log()
     if (platformObj.platform === 'Taboola'){
       return (
       <div className='ui segment platform-obj' id='tab-platform-specific'>
@@ -405,7 +404,7 @@ class NewCampaign extends Component {
                   checked={this.state['ob_tag_enabled']}
                   id='ob-tag-checkbox'
                 />
-                <label>ob tag</label>
+                <label>OB Tag</label>
               </div>
             </form> 
           </div>

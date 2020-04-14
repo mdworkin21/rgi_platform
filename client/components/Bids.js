@@ -81,16 +81,16 @@ class Bids extends Component {
         <table className="ui celled table" id="bid-table-container">
           <thead >
               <tr className='bid-table-header-row'>
-                <th id='bid-table-head-row-name'>Bid</th>
-                <th id='bid-table-head-row-checkbox'>Modifier</th>
+                <th colSpan="1"id='bid-table-head-row-name'>Bid</th>
+                <th colSpan="1" id='bid-table-head-row-checkbox'>Modifier</th>
               </tr>
             </thead>
             <tbody>
               {this.state.bids.map((bid, i) => {
                 return (
                   <tr key={`${bid.publisher_id}_${bid.country}`} className='individual-bid'>
-                    <td data-label='Bid' className='bid-name'>{bid.publisher_id}</td>
-                    <td data-label='Modifier' className='bid-checkbox'>
+                    <td data-label='Bid' className='bid-name left aligned'>{bid.publisher_id}</td>
+                    <td data-label='Modifier' className='bid-checkbox right aligned'>
                       <div className='bid-table-head-row'>
                         <select type="ui dropdown"
                         value={this.state.bids[i].country} 

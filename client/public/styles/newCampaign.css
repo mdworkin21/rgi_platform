@@ -174,13 +174,36 @@
   height: 10%;
 }
 
-/* img#Taboola{}
-img#Outbrain{}
-img#Yahoo{} */
+img#Taboola{
+  width: 6vw;
+  height: 3vh;
+  margin-left: 1%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+}
+
+img#Outbrain{
+  width: 6vw;
+  height: 3vh;
+  margin-left: 1%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+}
+
+img#Yahoo{
+  width: 6vw;
+  height: 3vh;
+  margin-left: 1%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+} 
 
 img#Rev-Content {
-  height: 15%;
-  width: 40%;
+  width: 6vw;
+  height: 3vh;
   margin-left: 1%;
   margin-top: 0%;
   margin-bottom: 0%;
@@ -207,6 +230,10 @@ img#Rev-Content {
   position: relative;
   margin-top: 1vh;
 }
+#platform-input {
+  width: 3.5vw;
+  height: 3vw;
+}
 
 .platform-obj-device-elements{
   margin-bottom: 2%;
@@ -230,6 +257,7 @@ img#Rev-Content {
   margin-left: 7%;
   top: 34%;
   width: 60%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .cpc-label{
@@ -349,8 +377,8 @@ img#Rev-Content {
 
   #platform-config-table {
     position: relative;
-    margin-left: 1.5%;
-    top: 34%;
+    margin-left: 10%;
+    top: 32%;
     width: 60%;
   }
 
@@ -401,7 +429,7 @@ img#Rev-Content {
 
   #platform-setting-container {
     position: relative;
-    top: 6.5%;
+    top: 5.5%;
   }
 
   /* Campaignn Buttons */
