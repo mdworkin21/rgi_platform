@@ -72,50 +72,65 @@ class Bids extends Component {
     this.props.saveBids(this.state.bids)
   }  
 
+  renderBidTable = () => {
+    return (
+      <table className="ui celled table" id="bid-table-container" >
+          <thead>
+            <tr>
+              <th colSpan="6" className='center aligned' id='bid-table-header'>Taboola</th>
+            </tr>
+            <tr>
+              <th colSpan="1" className='center aligned' id='bid-table-header'>Publisher ID</th>
+              <th colSpan="1" className='center aligned' id='bid-table-header'>Country</th>
+              <th colSpan="1" className='center aligned' id='bid-table-header'>Blocks</th>
+              <th colSpan="1" className='center aligned' id='bid-table-header'>Enabled</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          {this.state.bids.map((bid, i) => {
+              return (
+                  <tr key={`${bid.publisher_id}_${bid.country}`} className='individual-bid'>
+                    <td data-label='Bid' className='bid-name left aligned'>{bid.publisher_id}</td>
+                    <td data-label='Modifier' className='bid-checkbox right aligned'>
+                      <select type="ui dropdown"
+                      value={this.state.bids[i].country} 
+                      onChange={this.handleSelectCountry(i)} 
+                      name={bid.country}
+                      className={`ui selection simple dropdown bid-checkbox `} 
+                      >{this.state.bids[i].country}
+                      {countries.map((nation) => {
+                        return (
+                          <option 
+                            name={nation.country} 
+                            value={nation.country} 
+                            key={nation.country} 
+                          >{nation.country}</option>
+                        )
+                      })} 
+                      </select>
+                    <label></label>
+                  </td>
+                  <td>{i}</td>
+                  <td>
+                    <input type='checkbox'/>
+                    <label></label>
+                  </td>
+                </tr>
+              )
+            })
+          }
+          </tbody>
+      </table>
+    )
+  }
+
   render(){
     console.log('ASDASD', this.state)
     return(
       <div id='bid-component-container'>
         <h1 id='campaign-config-heading'>Bids</h1>
         <div id='bid-container'>
-        <table className="ui celled table" id="bid-table-container">
-          <thead >
-              <tr className='bid-table-header-row'>
-                <th colSpan="1"id='bid-table-head-row-name'>Bid</th>
-                <th colSpan="1" id='bid-table-head-row-checkbox'>Modifier</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.bids.map((bid, i) => {
-                return (
-                  <tr key={`${bid.publisher_id}_${bid.country}`} className='individual-bid'>
-                    <td data-label='Bid' className='bid-name left aligned'>{bid.publisher_id}</td>
-                    <td data-label='Modifier' className='bid-checkbox right aligned'>
-                      <div className='bid-table-head-row'>
-                        <select type="ui dropdown"
-                        value={this.state.bids[i].country} 
-                        onChange={this.handleSelectCountry(i)} 
-                        name={bid.country}
-                        className={`ui selection simple dropdown bid-checkbox `} 
-                        >{this.state.bids[i].country}
-                        {countries.map((nation) => {
-                          return (
-                            <option 
-                              name={nation.country} 
-                              value={nation.country} 
-                              key={nation.country} 
-                            >{nation.country}</option>
-                          )
-                        })} 
-                        </select>
-                      </div>
-                      <label></label>
-                    </td>
-                  </tr>
-                )
-              })}
-          </tbody>
-          </table>
+          {this.renderBidTable()}
         </div>
 
         <CampaignBtns 
