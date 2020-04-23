@@ -19,6 +19,7 @@ export const CREATE_BID = 'CREATE_BID'
 export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const ADD_COUNTRY = 'ADD_COUNTRY'
 export const DELETE_COUNTRY = 'DELETE_COUNTRY'
+export const UPDATE_COUNTRY_IN_BID = 'UPDATE_COUNTRY_IN_BID'
 
 
 //Action Creators
@@ -123,14 +124,21 @@ export const deleteBid = (bid) => {
   }
 }
 
-
-export const getCountries = () => {
+export const updateCountryInBid = (bid) => {
   return {
-    type: GET_COUNTRIES
+    type: UPDATE_COUNTRY_IN_BID,
+    bid
   }
 }
 
-export const addCoutnry = (country) => {
+export const getCountries = (countries) => {
+  return {
+    type: GET_COUNTRIES,
+    countries
+  }
+}
+
+export const addCountry = (country) => {
   return {
     type: ADD_COUNTRY,
     country
@@ -143,5 +151,4 @@ export const deleteDelete = (country) => {
     country
   }
 }
-
 

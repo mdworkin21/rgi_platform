@@ -1,4 +1,4 @@
-import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES, SAVE_BIDS, CLEAR_BIDS, DELETE_BID, GET_BIDS } from '../../actions/campaigns/campaignConfiguration'
+import {SAVE_CAMPAIGN_SETTINGS, CLEAR_CAMPAIGN_SETTINGS, SUBMIT_CAMPAIGN_SETTINGS, GET_CAMPAIGN_SETTINGS, SAVE_HEADLINES, CLEAR_HEADLINES, DELETE_HEADLINE, CLEAR_IMAGES, DELETE_IMAGE, SAVE_IMAGES, SAVE_BIDS, CLEAR_BIDS, DELETE_BID, GET_BIDS, GET_COUNTRIES, UPDATE_COUNTRY_IN_BID } from '../../actions/campaigns/campaignConfiguration'
 
 
 const initialState = {
@@ -41,8 +41,8 @@ const initialState = {
   },
   headlines: [{counter: 0, value: ''}],
   images: [],
-  bids: [{publisher_id: '', country: ''}],
-  countries: [{}]
+  bids: [{publisher_id: '', country: '', blocks: 0, enabled: false}],
+  countries: [{country: 'All', }]
 }
 
 export default function campaignConfigurationReducer(state = initialState, action){
@@ -94,8 +94,19 @@ export default function campaignConfigurationReducer(state = initialState, actio
         } else {
           return {...state, bid: bids}
         }
+    case UPDATE_COUNTRY_IN_BID:
+      let updatedBid = state.bids.map(el => {
+        if (el.publisher_id === action.bid.publisher_id){
+          el = action.bid
+        }
+        return el
+      })
+      return {...state, bids: updatedBid}
+      
     case GET_BIDS:
       return {...state, bids: action.bids}
+    case GET_COUNTRIES:
+      return {...state, countries: action.countries}
     default: 
       return state
   }

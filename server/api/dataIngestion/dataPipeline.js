@@ -31,6 +31,17 @@ router.post('/uploadCountries', async (req, res, next) => {
 	}
 })
 
+
+router.post('/addCountry', async (req, res, next) => {
+	try {
+		console.log("HIT", 'ADD COUNTRY')
+    const country = await Country.create(req.body)
+		res.status(200).send(country)
+	} catch(e) {
+		next(e)
+	}
+})
+
 router.get('/getCountries', async (req, res, next) => {
 	try {
 		const countries = await Country.findAll()

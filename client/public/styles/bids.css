@@ -7,13 +7,13 @@
 
 #bid-container {
   position: relative;
-  height: 40vh;
+  height: 53vh;
   overflow: auto;
   margin-top: 20px;
-  top: 15%;
-  width: 61%;
+  top: 23%;
+  width: 71%;
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-  margin-left: 10%
+  margin-left: .5%;
 }
 
 
@@ -42,3 +42,16 @@ tbody > tr:nth-child(even) {
   background: rgb(248,249,250);
 }
 
+@media (max-width: 1500px){
+  #bid-container {
+    position: relative;
+    height: 64vh;
+    overflow: auto;
+    margin-top: 20px;
+    top: 18%;
+    width: 88%;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    margin-left: 2%;
+}
+
+}

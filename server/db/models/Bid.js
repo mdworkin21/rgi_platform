@@ -22,7 +22,14 @@ const Bid = db.define('bid', {
     validate: {
       notEmpty: true
     }
+  },
+  blocks: {
+    type: Sequelize.INTEGER
+  },
+
+  enabled: {
+    type: Sequelize.BOOLEAN
   }
-} )
+})
 
 module.exports = Bid

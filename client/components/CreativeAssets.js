@@ -193,7 +193,7 @@ class CreativeAssests extends Component {
             handleSubmitCampaign={this.handleSubmitCampaign}
             handleSave={this.handleSave} 
             handleClear={this.handleClear} 
-            link1={'/create-campaigns'} 
+            link1={'/new-campaign'} 
             link2={'/bids'}
             pageName1={'Campaigns'} 
             pageName2={'Bids'}
