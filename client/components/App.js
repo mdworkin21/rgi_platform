@@ -17,6 +17,7 @@ import DragDrop from './DragDrop';
 
 
 class App extends Component {
+  
   componentDidMount = async () => {
    await this.props.setUser() 
   }
@@ -35,9 +36,9 @@ class App extends Component {
           <PrivateRoute exact path='/creatives' component={CreativeAssets} authed={this.props.auth}/>
           <PrivateRoute exact path='/bids' component={Bids} authed={this.props.auth}/>
           <PrivateRoute exact path='/dragdrop' component={DragDrop} authed={this.props.auth}/>
-
         </div>
-      </Router>
+       </Router>
+
     )
   }
 }

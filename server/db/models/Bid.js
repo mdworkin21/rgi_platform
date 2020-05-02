@@ -11,6 +11,7 @@ const Bid = db.define('bid', {
   },
   country: {
     type: Sequelize.STRING,
+    defaultValue: 'All',
     allowNull: false,
     validate: {
       notEmpty: true
@@ -18,17 +19,18 @@ const Bid = db.define('bid', {
   },
   country_abbr: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: false
     }
   },
   blocks: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
 
   enabled: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 })
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {saveHeadlines, clearHeadlines, deleteHeadline, saveImages, clearImages, deleteImage} from '../redux/actions/campaigns/campaignConfiguration'

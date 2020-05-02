@@ -56,7 +56,8 @@ app.use('/api', require('./api'))
 
 // Redirects to homepage when no API reqs match
 app.get('*',  (req, res) => {
-  res.sendFile(path.join(__dirname, '..', '/client/public/'))
+  res.sendFile(path.join(__dirname, '..', '/client/public/index.html'))   
+
 })
 
 

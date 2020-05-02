@@ -3,6 +3,16 @@ const axios = require('axios')
 const {Bid, Country} = require('../../db/models')
 
 
+
+router.post('/addBid', async (req, res, next) => {
+	try {
+		const bid = await Bid.create(req.body)
+		res.status(200).send(bid)
+	} catch(e) {
+		next(e)
+	}
+})
+
 router.post('/uploadBids', async (req, res, next) => {
 	try {
     const bids = await Bid.bulkCreate(req.body)
@@ -34,7 +44,7 @@ router.post('/uploadCountries', async (req, res, next) => {
 
 router.post('/addCountry', async (req, res, next) => {
 	try {
-		console.log("HIT", 'ADD COUNTRY')
+		console.log("HIT", 'ADD COUNTRY', req.body)
     const country = await Country.create(req.body)
 		res.status(200).send(country)
 	} catch(e) {
@@ -50,5 +60,6 @@ router.get('/getCountries', async (req, res, next) => {
 		next(e)
 	}
 })
+
 
 module.exports = router

@@ -11,6 +11,7 @@ export const DELETE_HEADLINE = 'DELETE_HEADLINE'
 export const SAVE_IMAGES = 'SAVE_IMAGES'
 export const CLEAR_IMAGES = 'CLEAR_IMAGES'
 export const DELETE_IMAGE = 'DELETE_IMAGE'
+export const ADD_BID = 'ADD_BID'
 export const SAVE_BIDS = 'SAVE_BIDS'
 export const CLEAR_BIDS = 'CLEAR_BIDS'
 export const DELETE_BID = 'DELETE_BID'
@@ -87,6 +88,13 @@ export const deleteImage = (image) => {
   return {
     type: DELETE_IMAGE,
     image
+  }
+}
+
+export const addBid = (bid) => {
+  return {
+    type: ADD_BID,
+    bid
   }
 }
 

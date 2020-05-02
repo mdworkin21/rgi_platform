@@ -5,13 +5,15 @@ import CampaignBtns from './CampaignBtns'
 import DragDrop from './DragDrop'
 import {saveBids, clearBids, deleteBid, updateCountryInBid} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/bids.css'
-import { getAllBids, getAllCountries } from '../redux/thunks/campaigns/campaignConfiguration'
-
+import { getAllBids, getAllCountries, addSingleCountry, addPublisher } from '../redux/thunks/campaigns/campaignConfiguration'
+import AddBidData from './AddBidData'
 
 class Bids extends Component {
   state ={
     bids: [],
-    countries: []
+    countries: [],
+    newPublisher: '',
+    newCountry: ''
   }
 
   componentDidMount = async () => {
@@ -50,6 +52,16 @@ class Bids extends Component {
     })
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  
+  handleSave = () => {
+    this.props.saveBids(this.state.bids)
+  }  
+
   handleSelectCountry = (i) => (event) => {
     let bids = [...this.state.bids]
     bids[i].country = event.target.value
@@ -62,9 +74,31 @@ class Bids extends Component {
     })
   }
 
-  handleSave = () => {
-    this.props.saveBids(this.state.bids)
-  }  
+  handleSubmit = async (event) => {
+    event.preventDefault()
+    const newPublisher = this.state.newPublisher
+    const newCountry = this.state.newCountry
+
+    if (newPublisher){
+      await this.props.addPublisher(newPublisher)
+    }
+
+    if(newCountry){
+      await this.props.addCountry(newCountry)
+    }
+
+    let bids = await this.props.bids
+    let countries = await this.props.countries
+
+    this.setState({
+      bids: bids,
+      countries: countries,
+      newPublisher: '',
+      newCountry: ''
+    })
+
+  }
+
 
   renderBidTable = () => {
     return (
@@ -122,28 +156,35 @@ class Bids extends Component {
   render(){
     return(
       <div id='bid-component-container'>
+        <AddBidData 
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit}
+          newPublisher={this.state.newPublisher} 
+          newCountry={this.state.newCountry} 
+        />
+
         <h1 id='campaign-config-heading'>Bids</h1>
         <div id='bid-container'>
           {this.renderBidTable()}
         </div>
 
-        <CampaignBtns 
-        handleSubmitCampaign={this.handleSubmitCampaign}
-        // handleSave={this.props.saveBids} 
-        handleClear={this.handleClear} 
-        link1={'/creatives'} 
-        link2={'/new-campaign'}
-        pageName1={'Creatives'} 
-        pageName2={'Campaigns'}
-        styleClass={'button-container'}
-      />
+       
+        {/* <CampaignBtns 
+          handleSubmitCampaign={this.handleSubmitCampaign}
+          // handleSave={this.props.saveBids} 
+          handleClear={this.handleClear} 
+          link1={'/creatives'} 
+          link2={'/new-campaign'}
+          pageName1={'Creatives'} 
+          pageName2={'Campaigns'}
+          styleClass={'button-container'}
+        /> */}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-
   return {
     admin: state.user.user.isAdmin,
     headlines: state.campaignConfiguration.headlines,
@@ -157,10 +198,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
+    addPublisher: (bid) => dispatch(addPublisher(bid)),
     getBids: () => dispatch(getAllBids()),
     saveBids: (bids) => dispatch(saveBids(bids)),
     clearBids: () => dispatch(clearBids()),
-    deleteBid: (bid) => dispatch(deleteBid(bid)),  
+    deleteBid: (bid) => dispatch(deleteBid(bid)),
+    addCountry: (country) => dispatch(addSingleCountry(country)),  
     updateBidCountry: (bid) => dispatch(updateCountryInBid(bid)),
     getCountries: () => dispatch(getAllCountries())
   }
