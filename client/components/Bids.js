@@ -12,8 +12,18 @@ class Bids extends Component {
   state ={
     bids: [],
     countries: [],
-    newPublisher: '',
-    newCountry: ''
+    //New Publisher
+    publisherId: '',
+    publisherCountry: '',
+    publisherCountryAbbr: '',
+    publisherBlocks: 0,
+    publisherEnabled: false,
+    //New Country
+    newCountryName: '',
+    newCountryTabCode: '',
+    newCountryObCode: '',
+    newCountryYahooCode: '',
+    newCountryRcCode: ''
   }
 
   componentDidMount = async () => {
@@ -52,10 +62,18 @@ class Bids extends Component {
     })
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+  handleChange = (event) => {  
+
+    if (event.target.type === 'checkbox'){
+
+      this.setState({
+        [event.target.name]: !this.state[event.target.name]
+      })
+    } else {
+        this.setState({
+          [event.target.name]: event.target.value     
+        })
+    }
   }
   
   handleSave = () => {
@@ -76,20 +94,38 @@ class Bids extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
-    const newPublisher = this.state.newPublisher
-    const newCountry = this.state.newCountry
+    const newPublisher = {
+        publisher_id: this.state.publisherId,
+        country: this.state.publisherCountry,
+        country_abbr: this.state.publisherCountryAbbr,
+        blocks: this.state.publisherBlocks,
+        enabled: this.state.publisherEnabled,
+    }
+    const newCountry = {
+      country: this.state.newCountryName,
+      taboola_country_code: this.state.newCountryTabCode,
+      outbrain_country_code: this.state.newCountryObCode,
+      yahoo_country_code: this.state.newCountryYahooCode,
+      rev_content_country_code: this.state.newCountryRcCode
+    }
+    
+    
+    
+    this.state.newCountry
 
-    if (newPublisher){
+    if (newPublisher.publisher_id){
+      console.log("FIRE")
       await this.props.addPublisher(newPublisher)
     }
 
-    if(newCountry){
+    if(newCountry.country){
       await this.props.addCountry(newCountry)
     }
 
     let bids = await this.props.bids
     let countries = await this.props.countries
 
+    //NEED TO UPDATE THE NEW PUBLISHER
     this.setState({
       bids: bids,
       countries: countries,
@@ -152,24 +188,26 @@ class Bids extends Component {
       </table>
     )
   }
+ 
 
   render(){
+    console.log('STATE: ', this.state)
     return(
       <div id='bid-component-container'>
+        <h1 id='campaign-config-heading'>Bids</h1>
         <AddBidData 
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}
-          newPublisher={this.state.newPublisher} 
+          bidState={this.state} 
           newCountry={this.state.newCountry} 
         />
 
-        <h1 id='campaign-config-heading'>Bids</h1>
         <div id='bid-container'>
           {this.renderBidTable()}
         </div>
 
        
-        {/* <CampaignBtns 
+        <CampaignBtns 
           handleSubmitCampaign={this.handleSubmitCampaign}
           // handleSave={this.props.saveBids} 
           handleClear={this.handleClear} 
@@ -178,7 +216,7 @@ class Bids extends Component {
           pageName1={'Creatives'} 
           pageName2={'Campaigns'}
           styleClass={'button-container'}
-        /> */}
+        />
       </div>
     )
   }

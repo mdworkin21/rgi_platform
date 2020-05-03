@@ -6,7 +6,15 @@ const {Bid, Country} = require('../../db/models')
 
 router.post('/addBid', async (req, res, next) => {
 	try {
-		const bid = await Bid.create(req.body)
+		let newBid = req.body.publisher_id
+		
+		const bid = await Bid.create({
+			publisher_id: newBid.publisher_id,
+			country: newBid.country,
+			country_abbr: newBid.country_abbr,
+			blocks: newBid.blocks,
+			enabled: newBid.enabled
+		})
 		res.status(200).send(bid)
 	} catch(e) {
 		next(e)

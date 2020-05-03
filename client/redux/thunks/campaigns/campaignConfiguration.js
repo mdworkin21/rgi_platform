@@ -50,7 +50,7 @@ export const getAllCountries = () => {
 export const addSingleCountry = (country) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('api/dataIngestion/dataPipeline/addCountry', {country})
+      const response = await axios.post('api/dataIngestion/dataPipeline/addCountry', country)
       const newCountry = response.data
       const action = addCountry(newCountry)
       dispatch(action)
