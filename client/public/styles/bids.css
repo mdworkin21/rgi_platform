@@ -5,7 +5,7 @@
   height: 100%;
 }
 
-#bid-container {
+/* #bid-container {
   position: relative;
   height: 53vh;
   overflow: auto;
@@ -14,15 +14,23 @@
   width: 71%;
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   margin-left: .5%;
-}
+} */
 
+#bid-container {
+  position: absolute;
+  height: 53vh;
+  overflow: auto;
+  margin-top: 20px;
+  top: 20%;
+  width: 40%;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin-left: 41.5%;
+}
 
 #bid-table-container {
   position: relative;
   top: 0%;
-  margin-left: 0;
   width: 100%;
-  height: 80%;
 }
 #campaign-config-heading {
   position: relative;
@@ -44,14 +52,13 @@ tbody > tr:nth-child(even) {
 
 @media (max-width: 1500px){
   #bid-container {
-    position: relative;
-    height: 64vh;
+    position: absolute;
+    height: 53vh;
     overflow: auto;
     margin-top: 20px;
-    top: 18%;
-    width: 88%;
+    top: 20%;
+    width: 40%;
     box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-    margin-left: 2%;
-}
-
+    margin-left: 41.5%;
+  }
 }

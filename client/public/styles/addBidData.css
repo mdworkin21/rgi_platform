@@ -1,4 +1,32 @@
-#add-bid-data-form {
-  display: inline;
-  margin-left: 12%;
+#add-bid-data-form-container {
+  margin-left: 10%;
+  margin-top: 8%;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  width: 20%;
+}
+
+.add-bid-data-form {
+  position: relative;
+  left: 4%;
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  height: 26vh;
+  width: 39vw;
+}
+
+#add-country {
+  margin-top: 25px;
+  padding-bottom: 25px;
+}
+
+
+@media (max-width: 1500px){
+  #add-bid-data-form-container {
+    margin-left: 10%;
+    margin-top: 6%;
+    width: 18%;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  }
 }

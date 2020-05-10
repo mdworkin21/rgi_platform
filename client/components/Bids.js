@@ -109,12 +109,8 @@ class Bids extends Component {
       rev_content_country_code: this.state.newCountryRcCode
     }
     
-    
-    
-    this.state.newCountry
-
+  
     if (newPublisher.publisher_id){
-      console.log("FIRE")
       await this.props.addPublisher(newPublisher)
     }
 
@@ -129,8 +125,18 @@ class Bids extends Component {
     this.setState({
       bids: bids,
       countries: countries,
-      newPublisher: '',
-      newCountry: ''
+      //New Publisher
+      publisherId: '',
+      publisherCountry: '',
+      publisherCountryAbbr: '',
+      publisherBlocks: 0,
+      publisherEnabled: false,
+      //New Country
+      newCountryName: '',
+      newCountryTabCode: '',
+      newCountryObCode: '',
+      newCountryYahooCode: '',
+      newCountryRcCode: ''
     })
 
   }
