@@ -16,8 +16,8 @@ const AddBidData = (props) => {
       <input 
         className='ui checkbox'
         onChange={props.handleChange} 
-        type='checkbox' name='publisherEnabled' 
-        value={bidState.publisherEnabled}  
+        type='checkbox' 
+        name='publisherEnabled' 
         checked={bidState.publisherEnabled}
       />
       <label>Enabled</label>

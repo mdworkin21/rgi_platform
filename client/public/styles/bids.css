@@ -32,7 +32,8 @@
   top: 0%;
   width: 100%;
 }
-#campaign-config-heading {
+
+#bids-config-heading {
   position: relative;
   display: flex;
   left: 36%;

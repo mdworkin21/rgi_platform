@@ -4,14 +4,16 @@
   left: 33vw;
   width: 35vw;
   height: 33vh;
-  border: 2px solid black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 #add-btn {
   position: relative;
-  top: 4.8vh;
-  left: 7vw;
+  top: 3vh;
+  left: 22%;
   width: 20vw;
+  color: white;
+  background-color: rgb(196,49,39);
 }
 
 #add-input-email {
@@ -27,6 +29,6 @@
   left: 8vw;
 }
 
-.ui.negative.button{
+.ui.button{
   border-radius: 0px;
 }

@@ -50,7 +50,7 @@ class AddUser extends Component {
            </div>
 
         </form>
-           <button onClick={this.handleSubmit} className="ui negative button" id="add-btn" type="submit">Add User</button>
+           <button onClick={this.handleSubmit} className="ui button" id="add-btn" type="submit">Add User</button>
       </div>
     )
   }

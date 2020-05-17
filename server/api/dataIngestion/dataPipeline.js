@@ -32,7 +32,7 @@ router.post('/uploadBids', async (req, res, next) => {
 
 router.get('/getBids', async (req, res, next) => {
 	try {
-    const bids = await Bid.findAll()
+		const bids = await Bid.findAll()
 		res.status(200).send(bids)
 	} catch(e) {
 		next(e)

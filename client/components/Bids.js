@@ -43,10 +43,11 @@ class Bids extends Component {
       return {
         publisher_id: bid.publisher_id,
         country: bid.country,
-        country_abbr: bid.country_abbr
+        country_abbr: bid.country_abbr,
+        blocks: bid.blocks,
+        enabled: bid.enabled
       }
     })
-
 
     countries = this.props.countries.map(country => {
       return {
@@ -65,7 +66,7 @@ class Bids extends Component {
   handleChange = (event) => {  
 
     if (event.target.type === 'checkbox'){
-
+      console.log('CHANGE', event.target.name)
       this.setState({
         [event.target.name]: !this.state[event.target.name]
       })
@@ -74,6 +75,17 @@ class Bids extends Component {
           [event.target.name]: event.target.value     
         })
     }
+  }
+
+  handleBidEnabled = (i) => (event) => {
+    let bids = [...this.state.bids]
+    bids[i].enabled = !bids[i].enabled
+
+    //NEED TO UPDATE REDUX AND THEN SET STATE SAME AS COUNTRY
+
+    this.setState({
+      bids: bids
+    })
   }
   
   handleSave = () => {
@@ -181,9 +193,14 @@ class Bids extends Component {
                       </select>
                     <label></label>
                   </td>
-                  <td>{i}</td>
+                  <td>{bid.blocks}</td>
                   <td>
-                    <input type='checkbox'/>
+                    <input 
+                      className='ui checkbox'
+                      onChange={this.handleBidEnabled(i)} 
+                      type='checkbox' 
+                      checked={bid.enabled}
+                    />
                     <label></label>
                   </td>
                 </tr>
@@ -200,7 +217,7 @@ class Bids extends Component {
     console.log('STATE: ', this.state)
     return(
       <div id='bid-component-container'>
-        <h1 id='campaign-config-heading'>Bids</h1>
+        <h1 id='bids-config-heading'>Bids</h1>
         <AddBidData 
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}

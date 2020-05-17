@@ -38,7 +38,7 @@
 }
 @media only screen and (min-width: 40.063em) and (max-width: 64em) { 
   #menu-container{
-    width: 12%;
+    width: 10%;
     height: 100%;
   }
 
@@ -61,7 +61,7 @@
 /* Large Screens */
 @media only screen and (min-width: 64.063em) and (max-width: 90em) { 
   #menu-container{
-    width: 12%;
+    width: 10%;
     height: 100%;
   }
 
@@ -83,7 +83,7 @@
 /* Extra Large Screen */
 @media only screen and (min-width: 90.063em) { 
   #menu-container{
-    width: 10%;
+    width: 8%;
     height: 100%;
   }
 

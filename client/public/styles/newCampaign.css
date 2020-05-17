@@ -18,6 +18,7 @@
   top: 15%;
 }
 
+
 #campaign-configuration {
   position: relative;
   left: 4%;
@@ -96,7 +97,7 @@
 #tab-platform-specific {
   display: inline-flex;
   flex-direction: row;
-  height: 5.5vh;
+  height: 7.5vh;
 }
 
 #tab-accounts-container {
@@ -230,9 +231,10 @@ img#Rev-Content {
   position: relative;
   margin-top: 1vh;
 }
+
 #platform-input {
   width: 3.5vw;
-  height: 3vw;
+  height: 3.75vh;
 }
 
 .platform-obj-device-elements{
@@ -358,14 +360,14 @@ img#Rev-Content {
 
   #campaign-configuration {
     position: relative;
-    left: 5%;
+    left: 2%;
     display: inline-flex;
     flex-direction: column;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     padding: 8px;
     height: 24vh;
     width: 43vw;
-  }
+}
 
   #campaign-config-heading {
     position: relative;
@@ -377,10 +379,10 @@ img#Rev-Content {
 
   #platform-config-table {
     position: relative;
-    margin-left: 10%;
+    margin-left: 2%;
     top: 32%;
-    width: 60%;
-  }
+    width: 70%;
+}
 
   #country {
     position: relative;
