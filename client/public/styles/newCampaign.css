@@ -58,7 +58,7 @@
 
 #country{
   position: relative;
-  z-index: 1;
+  z-index: 3;
   flex-direction: column;
   width: 11vw;
   height: 1vh;
@@ -169,6 +169,10 @@
   margin-left: 15%;
   margin-top: 3%;
   margin-bottom: 0%;
+}
+
+.platform-logos:hover{
+  cursor: pointer;
 }
 
 .logo-container{
@@ -386,7 +390,7 @@ img#Rev-Content {
 
   #country {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     flex-direction: column;
     width: 11vw;
     height: 1vh;

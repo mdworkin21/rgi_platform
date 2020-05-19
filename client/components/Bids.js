@@ -66,7 +66,6 @@ class Bids extends Component {
   handleChange = (event) => {  
 
     if (event.target.type === 'checkbox'){
-      console.log('CHANGE', event.target.name)
       this.setState({
         [event.target.name]: !this.state[event.target.name]
       })
@@ -222,7 +221,6 @@ class Bids extends Component {
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}
           bidState={this.state} 
-          newCountry={this.state.newCountry} 
         />
 
         <div id='bid-container'>

@@ -187,7 +187,7 @@ class NewCampaign extends Component {
     type_taboola_mobile_safe: false,
     taboola_account: '',
     daily_cap_taboola: '',
-    TaboolaSelectAll: false,
+    taboolaSelectAll: false,
     //Outbrain
     daily_cap_outbrain: '',
     cpc_outbrain_desktop: '',
@@ -202,7 +202,7 @@ class NewCampaign extends Component {
     type_outbrain_desktop_msn: false,
     type_outbrain_desktop_premium: false,
     type_outbrain_mobile_premium: false,
-    OutbrainSelectAll: false
+    outbrainSelectAll: false
   }
 
   //Methods are in alphabetical order (except render)
@@ -249,13 +249,24 @@ class NewCampaign extends Component {
 
   handleSelectAllCheckBox = (event) => {
     let name = `type_${event.target.name.toLowerCase()}`
+    let selectedPlatform = `${event.target.name.toLowerCase()}SelectAll`
     let boxesToCheck = Object.keys(this.state).filter(key => key.indexOf(name) >-1)
 
     for (let i = 0; i < boxesToCheck.length; i++){
-      this.setState({
-        [boxesToCheck[i]]: !this.state[boxesToCheck[i]]
-      })
+      if (!this.state[selectedPlatform] && !this.state[boxesToCheck[i]]){
+        this.setState({
+          [boxesToCheck[i]]: true,
+        })
+      } else if (this.state[selectedPlatform]){
+        this.setState({
+          [boxesToCheck[i]]: false,
+        })
+      }
     }
+
+    this.setState({
+      [selectedPlatform]: !this.state[selectedPlatform]
+    })
   }
 
   handleSelectCountry = (event) => {
@@ -315,7 +326,7 @@ class NewCampaign extends Component {
               return (
                 <tr key={platform.platform}>
                   <td className='left aligned logo-container'>
-                    <img src={platform.logo}  className='platform-logos' id={platform.platform} />
+                    <img onClick={this.handleSelectAllCheckBox} name={platform.platform} src={platform.logo}  className='platform-logos' id={platform.platform} />
                   </td>
                   {platform.devices.map(device => {
                     //This map returns device column
