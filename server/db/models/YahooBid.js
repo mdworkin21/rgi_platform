@@ -1,7 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 
-const Bid = db.define('bid', {
+const YahooBid = db.define('yahooBids', {
   publisher_id: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -28,10 +28,9 @@ const Bid = db.define('bid', {
     defaultValue: 0
   },
 
-  enabled: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: true
+  modifier: {
+    type: Sequelize.STRING,
   }
 })
 
-module.exports = Bid
+module.exports = YahooBid

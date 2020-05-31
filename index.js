@@ -8,7 +8,7 @@ const seed = require('./scripts/seed')
 //Don't use in production, dangerous!
 db.sync() 
 // db.sync({force: true}) 
-  // .then(() => seed()) //uncomment this line for initial seeding comment out/delete after
+//   .then(() => seed()) //uncomment this line for initial seeding comment out/delete after
   .then(() => {
     console.log('db synced.')
     app.listen(PORT, () => {

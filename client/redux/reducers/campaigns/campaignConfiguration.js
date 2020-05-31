@@ -47,7 +47,11 @@ const initialState = {
   },
   headlines: [{counter: 0, value: ''}],
   images: [],
-  bids: [{publisher_id: '', country: '', blocks: 0, enabled: false}],
+  taboolabid: [{publisher_id: '', country: '', blocks: 0, enabled: false}],
+  outbrainbid: [{section_name: '', section_id: '', country: '', blocks: 0, enabled: false}],
+  yahoobid: [{publisher_id: '', country: '', blocks: 0, enabled: false}],
+  revcontentbid: [{publisher_id: '', country: '', blocks: 0, enabled: false}],
+  bidsAlreadyInStore: false,
   countries: [{country: 'All'}]
 }
 
@@ -102,7 +106,7 @@ export default function campaignConfigurationReducer(state = initialState, actio
     case ADD_BID:
       return {...state, bids: [...state.bids, action.bid]}
     case UPDATE_COUNTRY_IN_BID:
-      let updatedBid = state.bids.map(el => {
+      let updatedBid = state[action.platform].map(el => {
         if (el.publisher_id === action.bid.publisher_id){
           el = action.bid
         }
@@ -110,7 +114,7 @@ export default function campaignConfigurationReducer(state = initialState, actio
       })
       return {...state, bids: updatedBid}   
     case GET_BIDS:
-      return {...state, bids: action.bids}
+      return {...state, [action.platform]: action.bids, bidsAlreadyInStore: true}
     case ADD_COUNTRY:
       return {...state, countries: [...state.countries, action.country]}
     case GET_COUNTRIES:

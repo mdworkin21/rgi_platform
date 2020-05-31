@@ -1,7 +1,7 @@
 const db = require('../database')
 const Sequelize = require('sequelize')
 
-const CampaignConfig = db.define('CampaignConfigs', {
+const CampaignConfig = db.define('campaignConfigs', {
   taboolaID: {
     type: Sequelize.STRING,
     allowNull: false,

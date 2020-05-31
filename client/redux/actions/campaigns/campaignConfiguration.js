@@ -111,10 +111,11 @@ export const clearBids = () => {
   }
 }
 
-export const getBids = (bids) => {
+export const getBids = (bids, platform) => {
   return {
     type: GET_BIDS,
-    bids
+    bids,
+    platform
   }
 }
 
@@ -132,10 +133,11 @@ export const deleteBid = (bid) => {
   }
 }
 
-export const updateCountryInBid = (bid) => {
+export const updateCountryInBid = (bid, platform) => {
   return {
     type: UPDATE_COUNTRY_IN_BID,
-    bid
+    bid,
+    platform
   }
 }
 

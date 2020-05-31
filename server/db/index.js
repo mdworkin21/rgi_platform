@@ -1,7 +1,14 @@
 const db = require('./database')
 const Sequelize = require('sequelize')
-const User = require('../db/models')
-const {TaboolaCreative, TaboolaCampaign, TaboolaToken} = require('./models')
+const { User,
+  TaboolaCampaign,
+  TaboolaCreative,
+  TaboolaToken,
+  TaboolaBid,
+  OutbrainBid,
+  YahooBid,
+  RevContentBid,
+  Country} = require('./models')
 
 //Define your associations here
 TaboolaCampaign.hasMany(TaboolaCreative)
@@ -12,5 +19,11 @@ module.exports = {
   User,
   TaboolaCampaign,
   TaboolaCreative,
-  TaboolaToken
+  TaboolaToken,
+  TaboolaBid,
+  OutbrainBid,
+  YahooBid,
+  RevContentBid,
+  Country
+
 }

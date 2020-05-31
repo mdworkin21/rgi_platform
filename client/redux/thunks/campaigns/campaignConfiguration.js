@@ -5,12 +5,12 @@ import {getBids, getCountries, addCountry, addBid } from '../../actions/campaign
 //Thunks
 
 // Bids 
-export const getAllBids = () => {
+export const getAllBids = (platform) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('api/dataIngestion/dataPipeline/getBids')
+      const response = await axios.get(`api/dataIngestion/dataPipeline/getBids/${platform}`)
       const bids = response.data
-      const action = getBids(bids)
+      const action = getBids(bids, platform)
       dispatch(action)
     } catch(err) {
         console.log(err)

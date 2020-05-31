@@ -2,9 +2,12 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 const User = require('./User')
 const TaboolaCreative = require('./TaboolaCreatives')
-const TaboolaCampaign = require('./TaboolaCampaigns')
+const TaboolaCampaign = require('./TaboolaCampaign')
 const TaboolaToken = require('./TaboolaTokens')
-const Bid = require('./Bid')
+const TaboolaBid = require('./TaboolaBid')
+const OutbrainBid = require('./OutbrainBid')
+const YahooBid = require('./YahooBid')
+const RevContentBid= require('./RevContentBid')
 const Country = require('./Country')
 
 
@@ -14,6 +17,9 @@ module.exports = {
   TaboolaCreative,
   TaboolaCampaign,
   TaboolaToken,
-  Bid,
+  TaboolaBid,
+  OutbrainBid,
+  YahooBid,
+  RevContentBid,
   Country
 }

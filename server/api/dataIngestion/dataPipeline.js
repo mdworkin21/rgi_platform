@@ -1,8 +1,11 @@
 const router = require('express').Router()
 const axios = require('axios')
-const {Bid, Country} = require('../../db/models')
-
-
+const {  TaboolaBid,
+  OutbrainBid,
+  YahooBid,
+  RevContentBid,
+  Country} = require('../../db/models')
+const db = require('../../db/database')
 
 router.post('/addBid', async (req, res, next) => {
 	try {
@@ -21,20 +24,52 @@ router.post('/addBid', async (req, res, next) => {
 	}
 })
 
-router.post('/uploadBids', async (req, res, next) => {
+router.post('/uploadBids/:tableName', async (req, res, next) => {
 	try {
-    const bids = await Bid.bulkCreate(req.body)
+		let table = req.params.tableName
+		let bids; 
+
+		if (table === 'TaboolaBid'){
+			bids = await TaboolaBid.bulkCreate(req.body)
+		} else if (table === 'OutbrainBid'){
+			bids = await OutbrainBid.bulkCreate(req.body)
+		} else if (table === 'YahooBid'){
+			bids = await YahooBid.bulkCreate(req.body)
+		} else if (table === 'RevContentBid'){
+			bids = await RevContentBid.bulkCreate(req.body)
+		}
+
 		res.status(200).send(bids)
 	} catch(e) {
 		next(e)
 	}
 })
 
-router.get('/getBids', async (req, res, next) => {
+router.get('/getBids/:tableName', async (req, res, next) => {
 	try {
-		const bids = await Bid.findAll()
+
+		let table = req.params.tableName
+		let bids; 
+
+		if (table.indexOf('taboolabid') > -1){
+			bids = await TaboolaBid.findAll()
+		} else if (table.indexOf('outbrainbid') > -1){
+				bids = await OutbrainBid.findAll()
+		} else if (table.indexOf('yahoobid') > -1){
+				bids = await YahooBid.findAll()
+		} else if (table.indexOf('revcontentbid') > -1){
+				bids = await RevContentBid.findAll()
+		}
 		res.status(200).send(bids)
 	} catch(e) {
+		next(e)
+	}
+})
+
+router.get('/whatever', async (req, res, next) => {
+	try{
+		res.status(200).send(Object.keys(db.models))
+	} catch(e){
 		next(e)
 	}
 })

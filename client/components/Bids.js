@@ -1,18 +1,31 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import axios from 'axios'
 import CampaignBtns from './CampaignBtns'
-import DragDrop from './DragDrop'
 import {saveBids, clearBids, deleteBid, updateCountryInBid} from '../redux/actions/campaigns/campaignConfiguration'
 import '../public/styles/bids.css'
 import { getAllBids, getAllCountries, addSingleCountry, addPublisher } from '../redux/thunks/campaigns/campaignConfiguration'
 import AddBidData from './AddBidData'
+import BidTable from './BidTable'
+import OutbrainBidTable from './OutbrainBidTable'
+
+
+const platformToTable = {
+  taboolaBids: 'taboolabid',
+  outbrainBids: 'outbrainbid',
+  yahooBids: 'yahoobid',
+  revContentBids: 'revcontentbid'
+}
 
 class Bids extends Component {
   state ={
-    bids: [],
+    taboolaBids: [],
+    outbrainBids: [],
+    yahooBids: [],
+    revContentBids: [],
     countries: [],
+    bidsAlreadyInStore: false,
     //New Publisher
+    newPubPlatform: '',
     publisherId: '',
     publisherCountry: '',
     publisherCountryAbbr: '',
@@ -27,29 +40,30 @@ class Bids extends Component {
   }
 
   componentDidMount = async () => {
-    let bids
-    let countries
-
-    if (this.props.bids.length > 1){
-      bids = this.props.bids
-      countries = this.props.countries
+    let platforms = Object.keys(platformToTable)
+  
+    /*This condition is for a slight optimization, 
+    rather than pinging DB just take what's in store*/
+    if (this.props.bidsAlreadyInStore){
+      this.setState({
+        taboolaBids: this.props.taboolaBids,
+        outbrainBids: this.props.outbrainBids,
+        yahooBids: this.props.yahooBids,
+        revContentBids: this.props.revContentBids,
+        countries: this.props.countries,
+        bidsAlreadyInStore: true
+      })
+      return
     } else {
-      await this.props.getBids()
-      await this.props.getCountries()
+        for (let i = 0; i< platforms.length; i++){
+          await this.props.getBids(platformToTable[platforms[i]])
 
+          this.mapBidDataToState(platforms[i])
+        }
+        await this.props.getCountries()
     }
 
-    bids = this.props.bids.map(bid => {
-      return {
-        publisher_id: bid.publisher_id,
-        country: bid.country,
-        country_abbr: bid.country_abbr,
-        blocks: bid.blocks,
-        enabled: bid.enabled
-      }
-    })
-
-    countries = this.props.countries.map(country => {
+    let countries = this.props.countries.map(country => {
       return {
         country: country.country,
         taboola_country_code: country.taboola_country_code,
@@ -58,7 +72,6 @@ class Bids extends Component {
     })
 
     this.setState({
-      bids: bids,
       countries: countries
     })
   }
@@ -75,28 +88,17 @@ class Bids extends Component {
         })
     }
   }
-
-  handleBidEnabled = (i) => (event) => {
-    let bids = [...this.state.bids]
-    bids[i].enabled = !bids[i].enabled
-
-    //NEED TO UPDATE REDUX AND THEN SET STATE SAME AS COUNTRY
-
-    this.setState({
-      bids: bids
-    })
-  }
   
   handleSave = () => {
     this.props.saveBids(this.state.bids)
   }  
 
-  handleSelectCountry = (i) => (event) => {
-    let bids = [...this.state.bids]
+  handleSelectCountry = (i, platform) => (event) => {
+    let bids = [...this.state[platform]]
     bids[i].country = event.target.value
     bids[i].country_abbr = this.state.countries.filter(country => country.country === event.target.value)[0].taboola_country_code
 
-    this.props.updateBidCountry(bids[i])
+    this.props.updateBidCountry(bids[i], platform.toLowerCase().slice(0, -1))
 
     this.setState({
       bids: this.props.bids
@@ -110,7 +112,7 @@ class Bids extends Component {
         country: this.state.publisherCountry,
         country_abbr: this.state.publisherCountryAbbr,
         blocks: this.state.publisherBlocks,
-        enabled: this.state.publisherEnabled,
+        modifier: this.state.publisherEnabled,
     }
     const newCountry = {
       country: this.state.newCountryName,
@@ -132,7 +134,7 @@ class Bids extends Component {
     let bids = await this.props.bids
     let countries = await this.props.countries
 
-    //NEED TO UPDATE THE NEW PUBLISHER
+    //NEED TO UPDATE THE NEW PUBLISHER AND BID PLATFORMS
     this.setState({
       bids: bids,
       countries: countries,
@@ -152,66 +154,38 @@ class Bids extends Component {
 
   }
 
+  mapBidDataToState = (platform) => {
+    let bids
 
-  renderBidTable = () => {
-    return (
-      <table className="ui celled table" id="bid-table-container" >
-          <thead>
-            <tr>
-              <th colSpan="6" className='center aligned' id='bid-table-header'>Taboola</th>
-            </tr>
-            <tr>
-              <th colSpan="1" className='center aligned' id='bid-table-header'>Publisher ID</th>
-              <th colSpan="1" className='center aligned' id='bid-table-header'>Country</th>
-              <th colSpan="1" className='center aligned' id='bid-table-header'>Blocks</th>
-              <th colSpan="1" className='center aligned' id='bid-table-header'>Enabled</th>
-            </tr>
-          </thead>
-          <tbody id="table-body">
-          {this.state.bids.map((bid, i) => {
-              return (
-                  <tr key={`${bid.publisher_id}_${bid.country}`} className='individual-bid'>
-                    <td data-label='Bid' className='bid-name left aligned'>{bid.publisher_id}</td>
-                    <td data-label='Modifier' className='bid-checkbox right aligned'>
-                      <select type="ui dropdown"
-                      defaultValue={this.state.bids[i].country} 
-
-                      onChange={this.handleSelectCountry(i)} 
-                      name={bid.country}
-                      className={`ui selection simple dropdown bid-checkbox `} 
-                      >
-                      {this.state.countries.map((nation) => {
-                        return (
-                          <option 
-                            name={nation.country} 
-                            value={nation.country} 
-                            key={nation.country} 
-                          >{nation.country}</option>
-                        )
-                      })} 
-                      </select>
-                    <label></label>
-                  </td>
-                  <td>{bid.blocks}</td>
-                  <td>
-                    <input 
-                      className='ui checkbox'
-                      onChange={this.handleBidEnabled(i)} 
-                      type='checkbox' 
-                      checked={bid.enabled}
-                    />
-                    <label></label>
-                  </td>
-                </tr>
-              )
-            })
+    if (platform !== 'outbrainBids'){
+      bids = this.props[platform].map(bid => {
+        return {
+          publisher_id: bid.publisher_id,
+          country: bid.country,
+          country_abbr: bid.country_abbr,
+          blocks: bid.blocks,
+          modifier: bid.modifier
+        }
+      })
+    } else {
+        bids = this.props[platform].map(bid => {
+          return {
+            section_name: bid.section_name,
+            section_id: bid.section_id,
+            country: bid.country,
+            country_abbr: bid.country_abbr,
+            blocks: bid.blocks,
+            modifier: bid.modifier
           }
-          </tbody>
-      </table>
-    )
+        })
+    }
+
+    this.setState({
+      [platform]: bids
+    })
+
   }
  
-
   render(){
     console.log('STATE: ', this.state)
     return(
@@ -224,7 +198,33 @@ class Bids extends Component {
         />
 
         <div id='bid-container'>
-          {this.renderBidTable()}
+          <BidTable 
+            bids={this.state.taboolaBids} 
+            handleSelectCountry={this.handleSelectCountry} 
+            countries={this.state.countries}
+            platform={'taboolaBids'}
+          />
+
+          <OutbrainBidTable 
+            bids={this.state.outbrainBids} 
+            handleSelectCountry={this.handleSelectCountry} 
+            countries={this.state.countries}
+            platform={'outbrainBids'}
+          />
+
+          <BidTable 
+            bids={this.state.yahooBids} 
+            handleSelectCountry={this.handleSelectCountry} 
+            countries={this.state.countries}
+            platform={'yahooBids'}
+          />
+
+          <BidTable 
+            bids={this.state.revContentBids} 
+            handleSelectCountry={this.handleSelectCountry} 
+            countries={this.state.countries}
+            platform={'revContentBids'}
+          />
         </div>
 
        
@@ -249,21 +249,24 @@ const mapStateToProps = (state) => {
     headlines: state.campaignConfiguration.headlines,
     images: state.campaignConfiguration.images,
     campaignConfiguration: state.campaignConfiguration.campaignConfig,
-    bids: state.campaignConfiguration.bids,
-    countries: state.campaignConfiguration.countries
+    taboolaBids: state.campaignConfiguration.taboolabid,
+    outbrainBids: state.campaignConfiguration.outbrainbid,
+    yahooBids: state.campaignConfiguration.yahoobid,
+    revContentBids: state.campaignConfiguration.revcontentbid,
+    countries: state.campaignConfiguration.countries,
+    bidsAlreadyInStore: state.campaignConfiguration.bidsAlreadyInStore
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-
   return {
     addPublisher: (bid) => dispatch(addPublisher(bid)),
-    getBids: () => dispatch(getAllBids()),
+    getBids: (platform) => dispatch(getAllBids(platform)),
     saveBids: (bids) => dispatch(saveBids(bids)),
     clearBids: () => dispatch(clearBids()),
     deleteBid: (bid) => dispatch(deleteBid(bid)),
     addCountry: (country) => dispatch(addSingleCountry(country)),  
-    updateBidCountry: (bid) => dispatch(updateCountryInBid(bid)),
+    updateBidCountry: (bid, platform) => dispatch(updateCountryInBid(bid, platform)),
     getCountries: () => dispatch(getAllCountries())
   }
 }
