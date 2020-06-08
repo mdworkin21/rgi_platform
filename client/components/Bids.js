@@ -24,6 +24,8 @@ class Bids extends Component {
     revContentBids: [],
     countries: [],
     bidsAlreadyInStore: false,
+    bidTableToRender: 'taboolaBids',
+    showBidAddForm: false,
     //New Publisher
     newPubPlatform: '',
     publisherId: '',
@@ -73,6 +75,12 @@ class Bids extends Component {
 
     this.setState({
       countries: countries
+    })
+  }
+
+  handleBidSelect = (event) => {
+    this.setState({
+      bidTableToRender: event.target.name
     })
   }
 
@@ -131,13 +139,14 @@ class Bids extends Component {
       await this.props.addCountry(newCountry)
     }
 
+    //NEED TO UPDATE THE NEW PUBLISHER AND BID PLATFORMS
     let bids = await this.props.bids
     let countries = await this.props.countries
 
-    //NEED TO UPDATE THE NEW PUBLISHER AND BID PLATFORMS
     this.setState({
       bids: bids,
       countries: countries,
+      showBidAddForm: false,
       //New Publisher
       publisherId: '',
       publisherCountry: '',
@@ -183,48 +192,82 @@ class Bids extends Component {
     this.setState({
       [platform]: bids
     })
-
   }
+
+  renderBidTable = (platform) => {
+    let name = platform.replace('Bids', '')
+    let formattedName = name.replace(/^./, name[0].toUpperCase())
+
+    //handle change needs to be its own custom thing. Replace
+    if (platform === 'outbrainBids'){
+      return(
+        <OutbrainBidTable 
+          bids={this.state.outbrainBids} 
+          handleSelectCountry={this.handleSelectCountry} 
+          countries={this.state.countries}
+          platform={'outbrainBids'}
+          handleChange={this.handleChange}
+          sortColumn={this.sortColumn}
+        />
+      )  
+    } 
+    
+    return (
+      <BidTable 
+        bids={this.state[platform]} 
+        handleSelectCountry={this.handleSelectCountry} 
+        countries={this.state.countries}
+        platform={platform}
+        name={formattedName}
+        handleChange={this.handleChange}
+        sortColumn={this.sortColumn}
+      />
+    )
+  }
+
+  showBid = () => {
+    this.setState({
+      showBidAddForm: true
+    })
+  }
+
+  sortColumn = (event) => {    
+    let sortBy = event.target.getAttribute('name')
+    let tableCopy = [...this.state[this.state.bidTableToRender]]
+
+    tableCopy.sort((a, b) => {
+      let sortByA = a[sortBy]
+      let sortByB = b[sortBy]
+      
+      if (sortByA < sortByB) {
+        return -1;
+      }
+  
+      if (sortByA > sortByB) {
+        return 1;
+      }
+  
+      // sortBys must be equal
+      return 0;
+  })
+    this.setState({
+      [this.state.bidTableToRender]: tableCopy
+    })
+  }
+
  
   render(){
-    console.log('STATE: ', this.state)
     return(
       <div id='bid-component-container'>
         <h1 id='bids-config-heading'>Bids</h1>
-        <AddBidData 
-          handleChange={this.handleChange} 
-          handleSubmit={this.handleSubmit}
-          bidState={this.state} 
-        />
-
+        {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state}/>: ''}
+        <button name='taboolaBids' onClick={this.handleBidSelect}>Taboola</button>
+        <button name='outbrainBids' onClick={this.handleBidSelect}>Outbrain</button>
+        <button name='yahooBids' onClick={this.handleBidSelect}>Yahoo</button>
+        <button name='revContentBids' onClick={this.handleBidSelect}>RevContent</button>
+        <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
         <div id='bid-container'>
-          <BidTable 
-            bids={this.state.taboolaBids} 
-            handleSelectCountry={this.handleSelectCountry} 
-            countries={this.state.countries}
-            platform={'taboolaBids'}
-          />
-
-          <OutbrainBidTable 
-            bids={this.state.outbrainBids} 
-            handleSelectCountry={this.handleSelectCountry} 
-            countries={this.state.countries}
-            platform={'outbrainBids'}
-          />
-
-          <BidTable 
-            bids={this.state.yahooBids} 
-            handleSelectCountry={this.handleSelectCountry} 
-            countries={this.state.countries}
-            platform={'yahooBids'}
-          />
-
-          <BidTable 
-            bids={this.state.revContentBids} 
-            handleSelectCountry={this.handleSelectCountry} 
-            countries={this.state.countries}
-            platform={'revContentBids'}
-          />
+          {this.renderBidTable(this.state.bidTableToRender)}
         </div>
 
        

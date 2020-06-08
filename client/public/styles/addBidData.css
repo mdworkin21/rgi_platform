@@ -3,6 +3,7 @@
   margin-top: 8%;
   box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
   width: 20%;
+  z-index: 2;
 }
 
 .add-bid-data-form {
@@ -14,6 +15,7 @@
   padding: 8px;
   height: 26vh;
   width: 39vw;
+  z-index: 2;
 }
 
 #add-country {
