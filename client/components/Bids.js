@@ -26,6 +26,7 @@ class Bids extends Component {
     bidsAlreadyInStore: false,
     bidTableToRender: 'taboolaBids',
     showBidAddForm: false,
+    formToShow: '',
     //New Publisher
     newPubPlatform: '',
     publisherId: '',
@@ -147,6 +148,7 @@ class Bids extends Component {
       bids: bids,
       countries: countries,
       showBidAddForm: false,
+      formToShow: '',
       //New Publisher
       publisherId: '',
       publisherCountry: '',
@@ -225,9 +227,11 @@ class Bids extends Component {
     )
   }
 
-  showBid = () => {
+  showBid = (event) => {
+    console.log('EVENT', event.target.name)
     this.setState({
-      showBidAddForm: true
+      showBidAddForm: true,
+      formToShow: event.target.name
     })
   }
 
@@ -260,12 +264,14 @@ class Bids extends Component {
     return(
       <div id='bid-component-container'>
         <h1 id='bids-config-heading'>Bids</h1>
-        {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state}/>: ''}
+        {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state} formType={this.state.formToShow}/> : ''}
         <button name='taboolaBids' onClick={this.handleBidSelect}>Taboola</button>
         <button name='outbrainBids' onClick={this.handleBidSelect}>Outbrain</button>
         <button name='yahooBids' onClick={this.handleBidSelect}>Yahoo</button>
         <button name='revContentBids' onClick={this.handleBidSelect}>RevContent</button>
         <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
+        <button name='showAddCountryForm' onClick={this.showBid}>Add Country</button> 
+
         <div id='bid-container'>
           {this.renderBidTable(this.state.bidTableToRender)}
         </div>
