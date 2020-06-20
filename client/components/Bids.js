@@ -26,6 +26,7 @@ class Bids extends Component {
     countries: [],
     bidsAlreadyInStore: false,
     bidTableToRender: 'taboolaBids',
+    sortOrder: true,
     //Add Data
     showBidAddForm: false,
     formToShow: '',
@@ -264,7 +265,8 @@ class Bids extends Component {
     })
   }
 
-  sortColumn = (event) => {    
+  sortColumn = (event) => {  
+    //If this.state.sortOrder === True the DESC, False === DESC  
     let sortBy = event.target.getAttribute('name')
     let tableCopy = this.state.searchResults.length > 0 ? [...this.state.searchResults] : [...this.state[this.state.bidTableToRender]]
 
@@ -272,13 +274,13 @@ class Bids extends Component {
     tableCopy.sort((a, b) => {
       let sortByA = a[sortBy]
       let sortByB = b[sortBy]
-      
+
       if (sortByA < sortByB) {
-        return -1;
+        return this.state.sortOrder ? -1 : 1
       }
   
       if (sortByA > sortByB) {
-        return 1;
+        return this.state.sortOrder ? 1 : -1
       }
   
       // sortBys must be equal
@@ -288,7 +290,8 @@ class Bids extends Component {
     let tableToUpdate = this.state.searchResults.length > 0 ? 'searchResults' : this.state.bidTableToRender
 
     this.setState({
-      [tableToUpdate]: tableCopy
+      [tableToUpdate]: tableCopy,
+      sortOrder: !this.state.sortOrder
     })
 
   }
