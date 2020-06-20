@@ -27,6 +27,8 @@ class Bids extends Component {
     bidTableToRender: 'taboolaBids',
     showBidAddForm: false,
     formToShow: '',
+    searchTerm: '',
+    searchResults: [],
     //New Publisher
     newPubPlatform: '',
     publisherId: '',
@@ -101,6 +103,23 @@ class Bids extends Component {
   handleSave = () => {
     this.props.saveBids(this.state.bids)
   }  
+
+  handleSearch = (event) => {
+    this.handleChange(event)
+   
+    let searchResults = this.state[this.state.bidTableToRender].filter(el => {
+      if (this.state.bidTableToRender === 'outbrainBids') {
+        return el.section_name.indexOf(event.target.value) > -1
+      }
+
+      return el.publisher_id.indexOf(event.target.value) > -1
+    })
+
+    this.setState({
+      searchResults: searchResults
+    })
+
+  }
 
   handleSelectCountry = (i, platform) => (event) => {
     let bids = [...this.state[platform]]
@@ -199,12 +218,14 @@ class Bids extends Component {
   renderBidTable = (platform) => {
     let name = platform.replace('Bids', '')
     let formattedName = name.replace(/^./, name[0].toUpperCase())
+    let bids = this.state.searchTerm === '' ? this.state[platform] : this.state.searchResults 
 
-    //handle change needs to be its own custom thing. Replace
     if (platform === 'outbrainBids'){
+      bids = this.state.searchTerm === '' ? this.state.outbrainBids : this.state.searchResults
+
       return(
         <OutbrainBidTable 
-          bids={this.state.outbrainBids} 
+          bids={bids} 
           handleSelectCountry={this.handleSelectCountry} 
           countries={this.state.countries}
           platform={'outbrainBids'}
@@ -216,7 +237,7 @@ class Bids extends Component {
     
     return (
       <BidTable 
-        bids={this.state[platform]} 
+        bids={bids} 
         handleSelectCountry={this.handleSelectCountry} 
         countries={this.state.countries}
         platform={platform}
@@ -227,6 +248,7 @@ class Bids extends Component {
     )
   }
 
+  //This can be named better
   showBid = (event) => {
     console.log('EVENT', event.target.name)
     this.setState({
@@ -258,7 +280,6 @@ class Bids extends Component {
       [this.state.bidTableToRender]: tableCopy
     })
   }
-
  
   render(){
     return(
@@ -271,7 +292,15 @@ class Bids extends Component {
         <button name='revContentBids' onClick={this.handleBidSelect}>RevContent</button>
         <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
         <button name='showAddCountryForm' onClick={this.showBid}>Add Country</button> 
-
+        <form onSubmit={this.submitSearch}>
+          <input 
+              className='ui input'
+              value={this.state.searchTerm}
+              name='searchTerm'
+              onChange={this.handleSearch} 
+              type='text' 
+            />        
+        </form>
         <div id='bid-container'>
           {this.renderBidTable(this.state.bidTableToRender)}
         </div>
