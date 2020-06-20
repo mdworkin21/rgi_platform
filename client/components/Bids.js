@@ -266,8 +266,9 @@ class Bids extends Component {
 
   sortColumn = (event) => {    
     let sortBy = event.target.getAttribute('name')
-    let tableCopy = [...this.state[this.state.bidTableToRender]]
+    let tableCopy = this.state.searchResults.length > 0 ? [...this.state.searchResults] : [...this.state[this.state.bidTableToRender]]
 
+    //Sorts in ASC
     tableCopy.sort((a, b) => {
       let sortByA = a[sortBy]
       let sortByB = b[sortBy]
@@ -283,9 +284,13 @@ class Bids extends Component {
       // sortBys must be equal
       return 0;
   })
+
+    let tableToUpdate = this.state.searchResults.length > 0 ? 'searchResults' : this.state.bidTableToRender
+
     this.setState({
-      [this.state.bidTableToRender]: tableCopy
+      [tableToUpdate]: tableCopy
     })
+
   }
  
   render(){
