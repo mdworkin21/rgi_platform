@@ -16,7 +16,7 @@ router.post('/addBid', async (req, res, next) => {
 			country: newBid.country,
 			country_abbr: newBid.country_abbr,
 			blocks: newBid.blocks,
-			enabled: newBid.enabled
+			modifier: newBid.modifier
 		})
 		res.status(200).send(bid)
 	} catch(e) {

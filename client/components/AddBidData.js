@@ -15,14 +15,15 @@ const AddBidData = (props) => {
           <input onChange={props.handleChange} type='text' name='publisherCountryAbbr' value={bidState.publisherCountryAbbr}  placeholder='Country Abbr.'/>
           <input onChange={props.handleChange} type='number' name='publisherBlocks' value={bidState.publisherBlocks}  placeholder='Blocks'/>
           <input 
-            className='ui checkbox'
+            className='ui input'
             onChange={props.handleChange} 
-            type='checkbox' 
-            name='publisherEnabled' 
-            checked={bidState.publisherEnabled}
+            type='text' 
+            name='publisherModifier' 
+            checked={bidState.publisherModifier}
           />
-          <label>Enabled</label>
+          <label>Modifier</label>
           <button type='submit'>Add</button>
+          <button onClick={props.closeForm}>Close</button>
         </form> 
         </div>
 
@@ -39,6 +40,7 @@ const AddBidData = (props) => {
             <input onChange={props.handleChange} type='text' name='newCountryYahooCode' placeholder='Yahoo Code' value={props.newCountryYahooCode}/>
             <input onChange={props.handleChange} type='text' name='newCountryRcCode' placeholder='Rev Content Code' value={props.newCountryRcCode}/>
             <button type='submit'>Add</button>
+            <button onClick={props.closeForm}>Close</button>
           </form>
         </div>
       )

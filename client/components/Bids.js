@@ -18,6 +18,7 @@ const platformToTable = {
 
 class Bids extends Component {
   state ={
+    //Bid Data
     taboolaBids: [],
     outbrainBids: [],
     yahooBids: [],
@@ -25,8 +26,10 @@ class Bids extends Component {
     countries: [],
     bidsAlreadyInStore: false,
     bidTableToRender: 'taboolaBids',
+    //Add Data
     showBidAddForm: false,
     formToShow: '',
+    //Search Functionality
     searchTerm: '',
     searchResults: [],
     //New Publisher
@@ -35,7 +38,7 @@ class Bids extends Component {
     publisherCountry: '',
     publisherCountryAbbr: '',
     publisherBlocks: 0,
-    publisherEnabled: false,
+    publisherModifier: '',
     //New Country
     newCountryName: '',
     newCountryTabCode: '',
@@ -47,8 +50,7 @@ class Bids extends Component {
   componentDidMount = async () => {
     let platforms = Object.keys(platformToTable)
   
-    /*This condition is for a slight optimization, 
-    rather than pinging DB just take what's in store*/
+    /*This condition is for a slight optimization, rather than pinging DB just take what's in store */
     if (this.props.bidsAlreadyInStore){
       this.setState({
         taboolaBids: this.props.taboolaBids,
@@ -88,7 +90,6 @@ class Bids extends Component {
   }
 
   handleChange = (event) => {  
-
     if (event.target.type === 'checkbox'){
       this.setState({
         [event.target.name]: !this.state[event.target.name]
@@ -140,7 +141,7 @@ class Bids extends Component {
         country: this.state.publisherCountry,
         country_abbr: this.state.publisherCountryAbbr,
         blocks: this.state.publisherBlocks,
-        modifier: this.state.publisherEnabled,
+        modifier: this.state.publisherModifier,
     }
     const newCountry = {
       country: this.state.newCountryName,
@@ -160,11 +161,11 @@ class Bids extends Component {
     }
 
     //NEED TO UPDATE THE NEW PUBLISHER AND BID PLATFORMS
-    let bids = await this.props.bids
+    // let bids = await this.props.bids
     let countries = await this.props.countries
 
     this.setState({
-      bids: bids,
+      // bids: bids,
       countries: countries,
       showBidAddForm: false,
       formToShow: '',
@@ -173,7 +174,7 @@ class Bids extends Component {
       publisherCountry: '',
       publisherCountryAbbr: '',
       publisherBlocks: 0,
-      publisherEnabled: false,
+      publisherModifier: false,
       //New Country
       newCountryName: '',
       newCountryTabCode: '',
@@ -257,6 +258,12 @@ class Bids extends Component {
     })
   }
 
+  closeAddBidForm = () => {
+    this.setState({
+      showBidAddForm: false
+    })
+  }
+
   sortColumn = (event) => {    
     let sortBy = event.target.getAttribute('name')
     let tableCopy = [...this.state[this.state.bidTableToRender]]
@@ -285,22 +292,15 @@ class Bids extends Component {
     return(
       <div id='bid-component-container'>
         <h1 id='bids-config-heading'>Bids</h1>
-        {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state} formType={this.state.formToShow}/> : ''}
+        {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state} formType={this.state.formToShow} closeForm={this.closeAddBidForm}/> : ''}
         <button name='taboolaBids' onClick={this.handleBidSelect}>Taboola</button>
         <button name='outbrainBids' onClick={this.handleBidSelect}>Outbrain</button>
         <button name='yahooBids' onClick={this.handleBidSelect}>Yahoo</button>
         <button name='revContentBids' onClick={this.handleBidSelect}>RevContent</button>
         <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
         <button name='showAddCountryForm' onClick={this.showBid}>Add Country</button> 
-        <form onSubmit={this.submitSearch}>
-          <input 
-              className='ui input'
-              value={this.state.searchTerm}
-              name='searchTerm'
-              onChange={this.handleSearch} 
-              type='text' 
-            />        
-        </form>
+        <input className='ui input'value={this.state.searchTerm} name='searchTerm' onChange={this.handleSearch} type='text'/>
+        <label>Search</label>        
         <div id='bid-container'>
           {this.renderBidTable(this.state.bidTableToRender)}
         </div>
