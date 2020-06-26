@@ -7,7 +7,8 @@ import { getAllBids, getAllCountries, addSingleCountry, addPublisher } from '../
 import AddBidData from './AddBidData'
 import BidTable from './BidTable'
 import OutbrainBidTable from './OutbrainBidTable'
-
+import SelectTableBtn from './SelectTableBtn'
+import BidSearch from './BidSearch'
 
 const platformToTable = {
   taboolaBids: 'taboolabid',
@@ -33,6 +34,7 @@ class Bids extends Component {
     //Search Functionality
     searchTerm: '',
     searchResults: [],
+    searchBy: 'publisher_id',
     //New Publisher
     newPubPlatform: '',
     publisherId: '',
@@ -46,6 +48,12 @@ class Bids extends Component {
     newCountryObCode: '',
     newCountryYahooCode: '',
     newCountryRcCode: ''
+  }
+  
+  closeAddBidForm = () => {
+    this.setState({
+      showBidAddForm: false
+    })
   }
 
   componentDidMount = async () => {
@@ -108,19 +116,28 @@ class Bids extends Component {
 
   handleSearch = (event) => {
     this.handleChange(event)
+    let searchAttribute = this.state.searchBy 
    
     let searchResults = this.state[this.state.bidTableToRender].filter(el => {
+      //Might be able to get rid of this conditionn if you abstract logic to search Comp
       if (this.state.bidTableToRender === 'outbrainBids') {
-        return el.section_name.indexOf(event.target.value) > -1
+        return el[searchAttribute].toString().indexOf(event.target.value) > -1
       }
 
-      return el.publisher_id.indexOf(event.target.value) > -1
+      return el[searchAttribute].toString().indexOf(event.target.value) > -1
+
     })
 
     this.setState({
       searchResults: searchResults
     })
 
+  }
+
+  handleRadioSelect = (event) => {
+    this.setState({
+      searchBy: event.target.value
+    })
   }
 
   handleSelectCountry = (i, platform) => (event) => {
@@ -259,11 +276,6 @@ class Bids extends Component {
     })
   }
 
-  closeAddBidForm = () => {
-    this.setState({
-      showBidAddForm: false
-    })
-  }
 
   sortColumn = (event) => {  
     //If this.state.sortOrder === True the DESC, False === DESC  
@@ -297,18 +309,23 @@ class Bids extends Component {
   }
  
   render(){
+    console.log('TO REDE', this.state.bidTableToRender)
     return(
       <div id='bid-component-container'>
         <h1 id='bids-config-heading'>Bids</h1>
         {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state} formType={this.state.formToShow} closeForm={this.closeAddBidForm}/> : ''}
-        <button name='taboolaBids' onClick={this.handleBidSelect}>Taboola</button>
-        <button name='outbrainBids' onClick={this.handleBidSelect}>Outbrain</button>
-        <button name='yahooBids' onClick={this.handleBidSelect}>Yahoo</button>
-        <button name='revContentBids' onClick={this.handleBidSelect}>RevContent</button>
+
+        <SelectTableBtn handleBidSelect={this.handleBidSelect}/>
+        <BidSearch 
+          handleRadioSelect={this.handleRadioSelect}
+          handleSearch={this.handleSearch}
+          searchTerm={this.state.searchTerm}
+          bidTableToRender={this.state.bidTableToRender}
+        />
+
         <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
         <button name='showAddCountryForm' onClick={this.showBid}>Add Country</button> 
-        <input className='ui input'value={this.state.searchTerm} name='searchTerm' onChange={this.handleSearch} type='text'/>
-        <label>Search</label>        
+
         <div id='bid-container'>
           {this.renderBidTable(this.state.bidTableToRender)}
         </div>
