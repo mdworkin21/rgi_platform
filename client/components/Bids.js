@@ -119,13 +119,7 @@ class Bids extends Component {
     let searchAttribute = this.state.searchBy 
    
     let searchResults = this.state[this.state.bidTableToRender].filter(el => {
-      //Might be able to get rid of this conditionn if you abstract logic to search Comp
-      if (this.state.bidTableToRender === 'outbrainBids') {
-        return el[searchAttribute].toString().indexOf(event.target.value) > -1
-      }
-
       return el[searchAttribute].toString().indexOf(event.target.value) > -1
-
     })
 
     this.setState({
