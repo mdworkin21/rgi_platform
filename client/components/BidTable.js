@@ -51,7 +51,7 @@ const BidTable = (props) => {
                       className='ui input'
                       value={bid.modifier}
                       name={bid.modifier}
-                      onChange={props.handleChange} 
+                      onChange={props.handleUpdateModifier(i, props.platform)} 
                       type='text' 
                     />
                   </td>

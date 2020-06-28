@@ -7,12 +7,11 @@ const tableRenderButtons = [
   {table: 'revContentBids', label: 'RevContent'},
 ]
 
-
 const SelectTableBtn = (props) => {
   return (
-    <div>
+    <div id='select-bid-btn-container'>
       {tableRenderButtons.map(el => {
-        return (<button key={el.table} name={el.table} onClick={props.handleBidSelect}>{el.label}</button>)
+        return (<button className='ui button' key={el.table} name={el.table} onClick={props.handleBidSelect}>{el.label}</button>)
       })}
     </div>
   )

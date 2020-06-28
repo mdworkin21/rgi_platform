@@ -98,7 +98,8 @@ class Bids extends Component {
     })
   }
 
-  handleChange = (event) => {  
+  handleChange = (event) => {
+    //Check whther checkox condition is still relevant
     if (event.target.type === 'checkbox'){
       this.setState({
         [event.target.name]: !this.state[event.target.name]
@@ -111,6 +112,7 @@ class Bids extends Component {
   }
   
   handleSave = () => {
+    //This.state.bids no longer on state, needs updating
     this.props.saveBids(this.state.bids)
   }  
 
@@ -133,7 +135,7 @@ class Bids extends Component {
       searchBy: event.target.value
     })
   }
-
+// See if this ad updateModifier can be combined
   handleSelectCountry = (i, platform) => (event) => {
     let bids = [...this.state[platform]]
     bids[i].country = event.target.value
@@ -141,6 +143,7 @@ class Bids extends Component {
 
     this.props.updateBidCountry(bids[i], platform.toLowerCase().slice(0, -1))
 
+    //THIS IS OUT OF DATE NO MORE bids Obj on state -- See handleUpdateMod
     this.setState({
       bids: this.props.bids
     })
@@ -197,6 +200,16 @@ class Bids extends Component {
 
   }
 
+  handleUpdateModifier = (i, platform) => (event) => {
+    let bids = [...this.state[platform]]
+    bids[i].modifier = event.target.value
+
+    //Sets on state but does not update DB, see handleCountry as example (dispatch etc)
+    this.setState({
+      [bids[i].modifier]: bids
+    })
+  }
+
   mapBidDataToState = (platform) => {
     let bids
 
@@ -242,7 +255,7 @@ class Bids extends Component {
           handleSelectCountry={this.handleSelectCountry} 
           countries={this.state.countries}
           platform={'outbrainBids'}
-          handleChange={this.handleChange}
+          handleUpdateModifier={this.handleUpdateModifier}
           sortColumn={this.sortColumn}
         />
       )  
@@ -255,15 +268,14 @@ class Bids extends Component {
         countries={this.state.countries}
         platform={platform}
         name={formattedName}
-        handleChange={this.handleChange}
+        handleUpdateModifier={this.handleUpdateModifier}
         sortColumn={this.sortColumn}
       />
     )
   }
 
   //This can be named better
-  showBid = (event) => {
-    console.log('EVENT', event.target.name)
+  showBidDataAddForm = (event) => {
     this.setState({
       showBidAddForm: true,
       formToShow: event.target.name
@@ -303,22 +315,21 @@ class Bids extends Component {
   }
  
   render(){
-    console.log('TO REDE', this.state.bidTableToRender)
     return(
       <div id='bid-component-container'>
         <h1 id='bids-config-heading'>Bids</h1>
         {this.state.showBidAddForm ?  <AddBidData handleChange={this.handleChange} handleSubmit={this.handleSubmit} bidState={this.state} formType={this.state.formToShow} closeForm={this.closeAddBidForm}/> : ''}
+        <button className='add-forms ui button' name='showAddBidForm' onClick={this.showBidDataAddForm}>Add Bid</button> 
+        <button className='add-forms ui button' name='showAddCountryForm' onClick={this.showBidDataAddForm}>Add Country</button> 
 
-        <SelectTableBtn handleBidSelect={this.handleBidSelect}/>
         <BidSearch 
           handleRadioSelect={this.handleRadioSelect}
           handleSearch={this.handleSearch}
           searchTerm={this.state.searchTerm}
           bidTableToRender={this.state.bidTableToRender}
         />
+        <SelectTableBtn handleBidSelect={this.handleBidSelect}/>
 
-        <button name='showAddBidForm' onClick={this.showBid}>Add Bid</button> 
-        <button name='showAddCountryForm' onClick={this.showBid}>Add Country</button> 
 
         <div id='bid-container'>
           {this.renderBidTable(this.state.bidTableToRender)}
@@ -327,8 +338,8 @@ class Bids extends Component {
        
         <CampaignBtns 
           handleSubmitCampaign={this.handleSubmitCampaign}
-          // handleSave={this.props.saveBids} 
-          handleClear={this.handleClear} 
+          // handleSave={this.props.saveBids} //When this method is updated, uncommet?
+          handleClear={this.handleClear} //Not sure this is relevant in this comp
           link1={'/creatives'} 
           link2={'/new-campaign'}
           pageName1={'Creatives'} 
@@ -359,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addPublisher: (bid) => dispatch(addPublisher(bid)),
     getBids: (platform) => dispatch(getAllBids(platform)),
-    saveBids: (bids) => dispatch(saveBids(bids)),
+    saveBids: (bids) => dispatch(saveBids(bids)), //This may need to be updated in other files
     clearBids: () => dispatch(clearBids()),
     deleteBid: (bid) => dispatch(deleteBid(bid)),
     addCountry: (country) => dispatch(addSingleCountry(country)),  

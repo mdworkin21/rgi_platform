@@ -25,10 +25,8 @@ const AddBidData = (props) => {
           <button type='submit'>Add</button>
           <button onClick={props.closeForm}>Close</button>
         </form> 
-        </div>
-
-        )
-
+      </div>
+    )
   } else if (props.formType === 'showAddCountryForm'){
       return (
         <div id='add-bid-data-form-container'>

@@ -69,14 +69,28 @@ th:hover{
   cursor: pointer;
 }
 
+/* Take out z-index */
+.add-forms {
+  position: relative;
+  left: 76%;
+  top: 0%;
+  z-index: 4;
+  display: inline-block;
+}
+
+#select-bid-btn-container {
+  position: relative;
+}
+
+
 /*  */
 @media (max-width: 1500px){
   #bid-container {
     overflow: auto;
     position: absolute;
-    height: 70%;
+    height: 60%;
     margin: 50px auto 50px auto;
-    top: 10%;
+    top: 24%;
     width: 88%;
     box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
     margin-left: 0.5%;
