@@ -167,6 +167,7 @@ class Bids extends Component {
     }
     
   
+    //Need to update for Platform...not just OB
     if (newPublisher.publisher_id){
       await this.props.addPublisher(newPublisher)
     }
@@ -381,3 +382,14 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bids)
+
+
+// To Do
+// 1. Address comments above
+// 2. Fix this warning from console: [Violation] 'click' handler took 176ms (slow response to clicks due to taboola data size, same with onChange)
+// 3. Fix this warning from console: Form submission canceled because the form is not connected (occurs when closing Add forms)
+// 4. More styling all aroud
+// 5. Refactor to dry out code, optimize
+// 6. Responsive design for other sizes
+// 7. Add platform options to add Bid form, also add Outbrain alternative
+// 8. Add delete Bid? (maybe an admin command)

@@ -15,6 +15,7 @@ const BidTable = (props) => {
               <th colSpan="6" className='center aligned' id='bid-table-header'>{props.name}</th>
             </tr>
             <tr>
+              <th colSpan="1" name='row_num' className='center aligned' id='bid-table-header'></th>
               <th colSpan="1" onClick={props.sortColumn} name='publisher_id' className='center aligned' id='bid-table-header' >Publisher ID</th>
               <th onClick={props.sortColumn}  name='country' colSpan="1" className='center aligned' id='bid-table-header'>Country</th>
               <th onClick={props.sortColumn}  name='blocks'colSpan="1" className='center aligned' id='bid-table-header'>Blocks</th>
@@ -24,7 +25,8 @@ const BidTable = (props) => {
           <tbody id="table-body">
           {props.bids.map((bid, i) => {
               return (
-                  <tr key={`${bid.publisher_id}_${bid.country}_${i}`} className='individual-bid'>
+                <tr key={`${bid.publisher_id}_${bid.country}_${i}`} className='individual-bid'>
+                    <td data-label='Bid' className='bid-name left aligned'>{i + 1}</td>
                     <td data-label='Bid' className='bid-name left aligned'>{bid.publisher_id}</td>
                     <td data-label='Modifier' className='bid-checkbox right aligned'>
                       <select type="ui dropdown"

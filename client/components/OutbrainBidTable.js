@@ -13,6 +13,7 @@ const OutbrainBidTable = (props) => {
               <th colSpan="6" className='center aligned' id='bid-table-header'>Outbrain</th>
             </tr>
             <tr>
+            <th colSpan="1" name='row_num' className='center aligned' id='bid-table-header'></th>
               <th colSpan="1" onClick={props.sortColumn} name='section_name' className='center aligned' id='bid-table-header'>Section Name</th>
               <th colSpan="1" onClick={props.sortColumn}  name='section_id' className='center aligned' id='bid-table-header'>Section ID</th>
               <th colSpan="1" onClick={props.sortColumn}  name='country' className='center aligned' id='bid-table-header'>Country</th>
@@ -22,9 +23,9 @@ const OutbrainBidTable = (props) => {
           </thead>
           <tbody id="table-body">
           {props.bids.map((bid, i) => {
-            // console.log("HMMMM", props.bids[i].country)
               return (
                   <tr key={`${bid.publisher_id}_${bid.country}_${i}`} className='individual-bid'>
+                    <td data-label='Bid' className='bid-name left aligned'>{i + 1}</td>
                     <td data-label='Bid' className='bid-name left aligned'>{bid.section_name}</td>
                     <td data-label='Bid' className='bid-name left aligned'>{bid.section_id}</td>
                     <td data-label='Modifier' className='bid-checkbox right aligned'>

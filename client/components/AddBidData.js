@@ -19,7 +19,6 @@ const AddBidData = (props) => {
             onChange={props.handleChange} 
             type='text' 
             name='publisherModifier' 
-            checked={bidState.publisherModifier}
           />
           <label>Modifier</label>
           <button type='submit'>Add</button>
